@@ -34,5 +34,5 @@ extension UIFont {
     class func appleSemiBold(size: CGFloat) -> UIFont {
         return UIFont(name: "AppleSDGothicNeo-SemiBold", size: size)!
     }
-    
+     
 }
