@@ -7,6 +7,10 @@
 
 import UIKit
 
+// 설명 : Font 사용 시 일일히 Font Name과 size를 기재하지 않기 위한 Extension
+// 사용법 : 버튼, 라벨 등등 Text가 있는 곳은 아무곳이나 사용 가능!
+// explainLabel.font = UIFont.appleBold(size: 22)
+
 extension UIFont {
     
     // MARK: AppleSDGothicNeo Font
