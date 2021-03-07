@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2x5-xG-9cD">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main HomeVC-->
+        <scene sceneID="Meb-21-cGf">
+            <objects>
+                <viewController id="2x5-xG-9cD" customClass="MainHomeVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Ek-qn-pLe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0t-FE-q3I">
+                                <rect key="frame" x="0.0" y="44" width="414" height="131"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xI6-hw-NVu">
+                                        <rect key="frame" x="345" y="80" width="45" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="show">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="JcL-B3-04p"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan  15th, Friday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djg-Cb-H43">
+                                        <rect key="frame" x="24" y="80" width="167.5" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.094117647058823528" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="xI6-hw-NVu" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="top" constant="80" id="Gd8-Mz-7W0"/>
+                                    <constraint firstAttribute="trailing" secondItem="xI6-hw-NVu" secondAttribute="trailing" constant="24" id="Ne7-t9-z56"/>
+                                    <constraint firstAttribute="height" constant="131" id="uYD-T1-2Bs"/>
+                                    <constraint firstItem="Djg-Cb-H43" firstAttribute="leading" secondItem="V0t-FE-q3I" secondAttribute="leading" constant="24" id="whi-UI-Ma5"/>
+                                    <constraint firstItem="Djg-Cb-H43" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="top" constant="80" id="yjh-6z-Xjo"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRm-yg-E9r">
+                                <rect key="frame" x="0.0" y="175" width="414" height="0.0"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="idF-iT-GcO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BHq-2A-wUT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="V0t-FE-q3I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="3W8-Zm-1Q9"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="uRm-yg-E9r" secondAttribute="trailing" id="9lO-rq-Rlt"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="V0t-FE-q3I" secondAttribute="trailing" id="cAE-TR-7WG"/>
+                            <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
+                            <constraint firstItem="V0t-FE-q3I" firstAttribute="top" secondItem="BHq-2A-wUT" secondAttribute="top" id="ltP-Vw-o64"/>
+                            <constraint firstItem="uRm-yg-E9r" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="bottom" id="v1H-sR-irE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="expendedHeader" destination="uRm-yg-E9r" id="j0q-cf-jjE"/>
+                        <outlet property="foldingBtn" destination="xI6-hw-NVu" id="qCT-hb-3Fs"/>
+                        <outlet property="header" destination="V0t-FE-q3I" id="RaP-sI-de5"/>
+                        <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWn-rM-XAH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1328.985507246377" y="-723.21428571428567"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

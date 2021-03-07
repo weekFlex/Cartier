@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
+		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
 		9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAF725EEB9D1007D04D0 /* AppDelegate.swift */; };
 		9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAF925EEB9D1007D04D0 /* SceneDelegate.swift */; };
 		9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAFB25EEB9D1007D04D0 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
+		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
 		9EC0DAF425EEB9D1007D04D0 /* WeekFlex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeekFlex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC0DAF725EEB9D1007D04D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EC0DAF925EEB9D1007D04D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EAD6A1225F25E8C001BD490 /* MainHome */ = {
+			isa = PBXGroup;
+			children = (
+				0EAD6A1425F26D1A001BD490 /* ViewController */,
+				0EAD6A1325F26D0A001BD490 /* Storyboard */,
+			);
+			path = MainHome;
+			sourceTree = "<group>";
+		};
+		0EAD6A1325F26D0A001BD490 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0EAD6A1525F26D45001BD490 /* MainHome.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		0EAD6A1425F26D1A001BD490 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9EC0DAEB25EEB9D1007D04D0 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +135,7 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				0EAD6A1225F25E8C001BD490 /* MainHome */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -170,6 +200,7 @@
 				9EC0DB0425EEB9D4007D04D0 /* LaunchScreen.storyboard in Resources */,
 				9EC0DB0125EEB9D4007D04D0 /* Assets.xcassets in Resources */,
 				9EC0DAFF25EEB9D1007D04D0 /* Main.storyboard in Resources */,
+				0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EC0DB1125EEBA5E007D04D0 /* UILabel+Extension.swift in Sources */,
+				0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */,
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */,
@@ -332,7 +364,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WFRFQ5S6AR;
-				INFOPLIST_FILE = WeekFlex/Info.plist;
+				INFOPLIST_FILE = WeekFlex/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,7 +383,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WFRFQ5S6AR;
-				INFOPLIST_FILE = WeekFlex/Info.plist;
+				INFOPLIST_FILE = WeekFlex/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
