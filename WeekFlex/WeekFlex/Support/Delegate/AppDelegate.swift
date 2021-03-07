@@ -5,6 +5,7 @@
 //  Created by 선민승 on 2021/03/03.
 //
 
+import AuthenticationServices
 import UIKit
 
 @main
@@ -14,6 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+            appleIDProvider.getCredentialState(forUserID: "") { (credentialState, error) in
+                switch credentialState {
+                case .authorized:
+                    break // The Apple ID credential is valid.
+                case .revoked, .notFound:
+                    print("revoked or notfound")
+                    break
+                default:
+                    break
+                }
+            }
         return true
     }
 
