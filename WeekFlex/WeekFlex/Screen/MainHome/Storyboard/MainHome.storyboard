@@ -26,7 +26,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
-                                            <action selector="buttonTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="JcL-B3-04p"/>
+                                            <action selector="buttonDidTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="Wom-jv-PsL"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan  15th, Friday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djg-Cb-H43">
@@ -51,6 +51,38 @@
                                     <constraint firstAttribute="height" id="idF-iT-GcO"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="J32-5J-fAC">
+                                <rect key="frame" x="330" y="680" width="60" height="60"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A7-3W-ASI">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="BLj-2t-ZFP"/>
+                                            <constraint firstAttribute="height" constant="60" id="VOF-jv-RXl"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-S9-pfO">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Q52-Br-VtO"/>
+                                            <constraint firstAttribute="height" constant="60" id="mxb-9X-eIj"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46A-Y5-8i9">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="HUg-g9-VLJ"/>
+                                            <constraint firstAttribute="width" constant="60" id="SFZ-oH-6Ct"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="floatingBtnDidTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="emG-SV-ZM6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BHq-2A-wUT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -58,16 +90,22 @@
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="3W8-Zm-1Q9"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="uRm-yg-E9r" secondAttribute="trailing" id="9lO-rq-Rlt"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="V0t-FE-q3I" secondAttribute="trailing" id="cAE-TR-7WG"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="122" id="eI4-MT-lf9"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="J32-5J-fAC" secondAttribute="trailing" constant="24" id="kRW-nk-Qzn"/>
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="top" secondItem="BHq-2A-wUT" secondAttribute="top" id="ltP-Vw-o64"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="bottom" id="v1H-sR-irE"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addTaskBtn" destination="BEY-S9-pfO" id="VK6-SH-6Rg"/>
                         <outlet property="expendedHeader" destination="uRm-yg-E9r" id="j0q-cf-jjE"/>
+                        <outlet property="floatingStackView" destination="J32-5J-fAC" id="lSW-sz-sAJ"/>
                         <outlet property="foldingBtn" destination="xI6-hw-NVu" id="qCT-hb-3Fs"/>
+                        <outlet property="getRoutineBtn" destination="4A7-3W-ASI" id="wWX-MR-TgG"/>
                         <outlet property="header" destination="V0t-FE-q3I" id="RaP-sI-de5"/>
                         <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
+                        <outlet property="showFloatingBtn" destination="46A-Y5-8i9" id="BIc-49-e3U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWn-rM-XAH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
