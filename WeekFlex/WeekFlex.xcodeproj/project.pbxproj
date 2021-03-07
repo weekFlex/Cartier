@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E6760C925F0BF8900436D5C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6760C825F0BF8900436D5C /* Login.storyboard */; };
+		9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6760CB25F0BF9900436D5C /* LoginVC.swift */; };
 		9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */; };
 		9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAF725EEB9D1007D04D0 /* AppDelegate.swift */; };
 		9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAF925EEB9D1007D04D0 /* SceneDelegate.swift */; };
@@ -18,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E6760C425F0BD0900436D5C /* WeekFlex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeekFlex.entitlements; sourceTree = "<group>"; };
+		9E6760C825F0BF8900436D5C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		9E6760CB25F0BF9900436D5C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		9EC0DAF425EEB9D1007D04D0 /* WeekFlex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeekFlex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC0DAF725EEB9D1007D04D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +46,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E6760C525F0BF6B00436D5C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9E6760C725F0BF7800436D5C /* ViewController */,
+				9E6760C625F0BF7100436D5C /* Storyboard */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9E6760C625F0BF7100436D5C /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				9E6760C825F0BF8900436D5C /* Login.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		9E6760C725F0BF7800436D5C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9E6760CB25F0BF9900436D5C /* LoginVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9EC0DAEB25EEB9D1007D04D0 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +90,7 @@
 		9EC0DAF625EEB9D1007D04D0 /* WeekFlex */ = {
 			isa = PBXGroup;
 			children = (
+				9E6760C425F0BD0900436D5C /* WeekFlex.entitlements */,
 				9EC0DB0525EEB9D4007D04D0 /* Info.plist */,
 				9EC0DB1325EEBAED007D04D0 /* Screen */,
 				9EC0DB0E25EEBA23007D04D0 /* Global */,
@@ -109,6 +140,7 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				9E6760C525F0BF6B00436D5C /* Login */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -170,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E6760C925F0BF8900436D5C /* Login.storyboard in Resources */,
 				9EC0DB0425EEB9D4007D04D0 /* LaunchScreen.storyboard in Resources */,
 				9EC0DB0125EEB9D4007D04D0 /* Assets.xcassets in Resources */,
 				9EC0DAFF25EEB9D1007D04D0 /* Main.storyboard in Resources */,
@@ -188,6 +221,7 @@
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */,
+				9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WFRFQ5S6AR;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
@@ -353,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WFRFQ5S6AR;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
