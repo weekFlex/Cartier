@@ -50,7 +50,7 @@ class MainHomeVC: UIViewController {
         if shouldCollaps {
             animateView(isCollaps: false,  height: 0)
         }else {
-            animateView(isCollaps: true,  height: 104)
+            animateView(isCollaps: true,  height: 110)
         }
     }
     
@@ -91,9 +91,10 @@ extension MainHomeVC {
         shouldCollaps = isCollaps
         headerHeight.constant = CGFloat(height)
         foldingBtn.setImage(buttonImg, for: .normal)
-        UIView.animate(withDuration: 0.3){
+        UIView.animate(withDuration: 0.2){
             self.view.layoutIfNeeded()
         }
+       
     }
     
     
