@@ -12,11 +12,22 @@ class MainHomeVC: UIViewController {
     
     //MARK: Variable
     
-    private var shouldCollaps = false
+    private var shouldCollaps = true
     var isFloating = false
-    lazy var floatings: [UIButton] = [self.addTaskBtn, self.getRoutineBtn]
-   
+    //lazy var floatings: [UIButton] = [self.addTaskBtn, self.getRoutineBtn]
+    lazy var floatingStacks:[UIStackView] = [self.getRoutineStack, self.addTaskStack]
+    lazy var dimView: UIView = {
+        let view = UIView(frame: self.view.frame)
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.alpha = 0
+        view.isHidden = true
 
+        self.view.insertSubview(view, belowSubview: self.floatingStackView)
+
+        return view
+    }()
+    
+    
     
     //MARK: IBOutlet
     
@@ -28,6 +39,8 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var showFloatingBtn: UIButton!
     @IBOutlet weak var addTaskBtn: UIButton!
     @IBOutlet weak var getRoutineBtn: UIButton!
+    @IBOutlet weak var getRoutineStack: UIStackView!
+    @IBOutlet weak var addTaskStack: UIStackView!
     
     
     
@@ -40,6 +53,7 @@ class MainHomeVC: UIViewController {
             animateView(isCollaps: true,  height: 104)
         }
     }
+    
     @IBAction func floatingBtnDidTap(_ sender: Any) {
         if isFloating {
             hideFloating()
@@ -48,9 +62,7 @@ class MainHomeVC: UIViewController {
         }
         
         isFloating = !isFloating
-        UIView.animate(withDuration: 0.3) {
-            showFloatingBtn.transform = roatation
-                }
+        
     }
     
     //MARK: Life Cycle
@@ -70,38 +82,53 @@ extension MainHomeVC {
     
     //MARK: function
     
-    var buttonTitle: String {
-        return shouldCollaps ? "hide" : "show"
+    var buttonImg: UIImage {
+        return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }
+
     
     private func animateView(isCollaps:Bool ,  height:Double){
         shouldCollaps = isCollaps
         headerHeight.constant = CGFloat(height)
-        foldingBtn.setTitle(buttonTitle, for: .normal)
+        foldingBtn.setImage(buttonImg, for: .normal)
         UIView.animate(withDuration: 0.3){
             self.view.layoutIfNeeded()
         }
     }
     
+    
+    
+    
     private func hideFloating(){
-        floatings.reversed().forEach { button in
-            UIView.animate(withDuration: 0.3) {
-                button.isHidden = true
+        floatingStacks.reversed().forEach { stack in
+            UIView.animate(withDuration: 0.2) {
+                stack.isHidden = true
                 self.view.layoutIfNeeded()
             }
-            
+        }
+        
+        UIView.animate(withDuration: 0.2) {
+            self.dimView.alpha = 0
+            self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
         }
     }
     
     private func showFloating(){
-        floatings.forEach { [weak self] button in
-            button.isHidden = false
-            button.alpha = 0
+        floatingStacks.forEach { [weak self] stack in
+            stack.isHidden = false
+            stack.alpha = 0
             
-            UIView.animate(withDuration: 0.3) {
-                button.alpha = 1
+            UIView.animate(withDuration: 0.2) {
+                stack.alpha = 1
                 self?.view.layoutIfNeeded()
             }
+        }
+        
+        UIView.animate(withDuration: 0.2) {
+            self.dimView.isHidden = false
+            self.dimView.alpha = 1
+            self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))
+            
         }
     }
 }

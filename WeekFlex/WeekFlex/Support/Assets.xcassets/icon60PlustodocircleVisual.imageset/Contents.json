@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "icon60PlustodocircleVisual.png",
+      "scale" : "1x",
+      "idiom" : "universal"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "icon60PlustodocircleVisual@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "icon60PlustodocircleVisual@3x.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

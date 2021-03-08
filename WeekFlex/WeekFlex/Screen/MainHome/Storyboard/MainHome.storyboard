@@ -20,9 +20,9 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="131"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xI6-hw-NVu">
-                                        <rect key="frame" x="345" y="80" width="45" height="35"/>
+                                        <rect key="frame" x="358" y="80" width="32" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="show">
+                                        <state key="normal" image="icon32UpWhite">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -45,43 +45,82 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRm-yg-E9r">
-                                <rect key="frame" x="0.0" y="175" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="175" width="414" height="104"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" id="idF-iT-GcO"/>
+                                    <constraint firstAttribute="height" constant="104" id="idF-iT-GcO"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="J32-5J-fAC">
-                                <rect key="frame" x="330" y="680" width="60" height="60"/>
+                                <rect key="frame" x="220" y="680" width="170" height="60"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A7-3W-ASI">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="vIo-xE-tHQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="루틴 추가하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmJ-ay-OlC">
+                                                <rect key="frame" x="0.0" y="0.0" width="97" height="60"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A7-3W-ASI">
+                                                <rect key="frame" x="110" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="BLj-2t-ZFP"/>
+                                                    <constraint firstAttribute="height" constant="60" id="VOF-jv-RXl"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="icon60ImportcircleVisual"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="Ivo-U0-JyT">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할 일 추가하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gw-ut-h2r">
+                                                <rect key="frame" x="0.0" y="0.0" width="97" height="60"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-S9-pfO">
+                                                <rect key="frame" x="110" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="Q52-Br-VtO"/>
+                                                    <constraint firstAttribute="height" constant="60" id="mxb-9X-eIj"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="icon60PlustodocircleVisual"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpA-ML-jVE">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoD-SA-gY3">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="60"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46A-Y5-8i9">
+                                                <rect key="frame" x="110" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="HUg-g9-VLJ"/>
+                                                    <constraint firstAttribute="width" constant="60" id="ScC-hW-K1G"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="icon60PluscircleVisual"/>
+                                                <connections>
+                                                    <action selector="floatingBtnDidTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="emG-SV-ZM6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="BLj-2t-ZFP"/>
-                                            <constraint firstAttribute="height" constant="60" id="VOF-jv-RXl"/>
+                                            <constraint firstAttribute="trailing" secondItem="46A-Y5-8i9" secondAttribute="trailing" id="uOB-wj-g1Q"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-S9-pfO">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="Q52-Br-VtO"/>
-                                            <constraint firstAttribute="height" constant="60" id="mxb-9X-eIj"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46A-Y5-8i9">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="HUg-g9-VLJ"/>
-                                            <constraint firstAttribute="width" constant="60" id="SFZ-oH-6Ct"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="floatingBtnDidTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="emG-SV-ZM6"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="vIo-xE-tHQ" secondAttribute="trailing" id="bkf-gM-PKN"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BHq-2A-wUT"/>
@@ -99,10 +138,12 @@
                     </view>
                     <connections>
                         <outlet property="addTaskBtn" destination="BEY-S9-pfO" id="VK6-SH-6Rg"/>
+                        <outlet property="addTaskStack" destination="Ivo-U0-JyT" id="YkD-QI-MBB"/>
                         <outlet property="expendedHeader" destination="uRm-yg-E9r" id="j0q-cf-jjE"/>
                         <outlet property="floatingStackView" destination="J32-5J-fAC" id="lSW-sz-sAJ"/>
                         <outlet property="foldingBtn" destination="xI6-hw-NVu" id="qCT-hb-3Fs"/>
                         <outlet property="getRoutineBtn" destination="4A7-3W-ASI" id="wWX-MR-TgG"/>
+                        <outlet property="getRoutineStack" destination="vIo-xE-tHQ" id="TWz-L4-FEs"/>
                         <outlet property="header" destination="V0t-FE-q3I" id="RaP-sI-de5"/>
                         <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
                         <outlet property="showFloatingBtn" destination="46A-Y5-8i9" id="BIc-49-e3U"/>
@@ -114,6 +155,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon32UpWhite" width="32" height="32"/>
+        <image name="icon60ImportcircleVisual" width="60" height="60"/>
+        <image name="icon60PluscircleVisual" width="60" height="60"/>
+        <image name="icon60PlustodocircleVisual" width="60" height="60"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
