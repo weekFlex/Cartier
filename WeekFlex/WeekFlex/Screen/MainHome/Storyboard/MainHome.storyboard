@@ -319,6 +319,28 @@
                         <outlet property="header" destination="V0t-FE-q3I" id="RaP-sI-de5"/>
                         <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
                         <outlet property="showFloatingBtn" destination="46A-Y5-8i9" id="BIc-49-e3U"/>
+                        <outlet property="today" destination="Djg-Cb-H43" id="beo-aq-4Zl"/>
+                        <outletCollection property="stars" destination="YmF-57-WIN" collectionClass="NSMutableArray" id="NSD-qr-p6i"/>
+                        <outletCollection property="stars" destination="yQQ-4p-Vbm" collectionClass="NSMutableArray" id="wlv-wM-6rF"/>
+                        <outletCollection property="stars" destination="0Ip-Io-vQQ" collectionClass="NSMutableArray" id="a1j-3B-VtW"/>
+                        <outletCollection property="stars" destination="aSD-Tb-jrU" collectionClass="NSMutableArray" id="P7f-sv-JsC"/>
+                        <outletCollection property="stars" destination="E9f-ph-4cF" collectionClass="NSMutableArray" id="KAQ-oG-URb"/>
+                        <outletCollection property="stars" destination="nyX-AX-3r7" collectionClass="NSMutableArray" id="mYe-wK-Qgl"/>
+                        <outletCollection property="stars" destination="6qB-hQ-dmQ" collectionClass="NSMutableArray" id="7Rk-ae-bRD"/>
+                        <outletCollection property="days" destination="4Pf-Nh-rIN" collectionClass="NSMutableArray" id="EZ9-wg-qvA"/>
+                        <outletCollection property="days" destination="DqN-MZ-vph" collectionClass="NSMutableArray" id="NvK-sT-ZT3"/>
+                        <outletCollection property="days" destination="3iz-xd-FfP" collectionClass="NSMutableArray" id="ajU-5M-OGf"/>
+                        <outletCollection property="days" destination="XZ9-Ob-Itf" collectionClass="NSMutableArray" id="QjD-OX-h7x"/>
+                        <outletCollection property="days" destination="nWR-QQ-kbF" collectionClass="NSMutableArray" id="JM0-xN-Zaf"/>
+                        <outletCollection property="days" destination="b4V-G2-mnj" collectionClass="NSMutableArray" id="nNw-IP-fTQ"/>
+                        <outletCollection property="days" destination="dVM-Z0-7wl" collectionClass="NSMutableArray" id="7af-Rb-xnv"/>
+                        <outletCollection property="dates" destination="eaJ-s2-PtP" collectionClass="NSMutableArray" id="87d-ua-xVV"/>
+                        <outletCollection property="dates" destination="X7g-cC-9mY" collectionClass="NSMutableArray" id="oVt-Hf-zQd"/>
+                        <outletCollection property="dates" destination="GyW-hs-ohc" collectionClass="NSMutableArray" id="PF0-rv-iAt"/>
+                        <outletCollection property="dates" destination="17d-nh-nUP" collectionClass="NSMutableArray" id="020-sH-jHz"/>
+                        <outletCollection property="dates" destination="ZMS-PC-R3w" collectionClass="NSMutableArray" id="0HL-Do-aeL"/>
+                        <outletCollection property="dates" destination="blG-3I-dqy" collectionClass="NSMutableArray" id="B8G-X5-CA9"/>
+                        <outletCollection property="dates" destination="nD2-Zi-PdY" collectionClass="NSMutableArray" id="i8w-7w-k8w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWn-rM-XAH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

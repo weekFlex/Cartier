@@ -13,8 +13,8 @@ class MainHomeVC: UIViewController {
     //MARK: Variable
     
     private var shouldCollaps = true
+    let weekDays: [String] = ["월","화","수","목","금","토","일"]
     var isFloating = false
-    //lazy var floatings: [UIButton] = [self.addTaskBtn, self.getRoutineBtn]
     lazy var floatingStacks:[UIStackView] = [self.getRoutineStack, self.addTaskStack]
     lazy var dimView: UIView = {
         let view = UIView(frame: self.view.frame)
@@ -42,6 +42,12 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var getRoutineStack: UIStackView!
     @IBOutlet weak var addTaskStack: UIStackView!
     
+    @IBOutlet weak var today: UILabel!
+    @IBOutlet var days: [UILabel]!
+    @IBOutlet var stars: [UIImageView]!
+    @IBOutlet var dates: [UILabel]!
+    
+    
     
     
     //MARK: IBAction
@@ -60,27 +66,44 @@ class MainHomeVC: UIViewController {
         }else{
             showFloating()
         }
-        
         isFloating = !isFloating
-        
     }
     
     //MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setWeekly()
     }
-    
-    
-    
-    
 }
 
 
 extension MainHomeVC {
     
     //MARK: function
+    
+    private func setWeekly(){
+        today.text = "Jan 15th, Friday"
+        
+        //일주일 시작 요일 받기
+        var i = 0
+        for day in days {
+            day.text = weekDays[i]
+            i += 1
+        }
+        
+        //일주일 시작 날짜 받기
+        var j = 0
+        for date in dates {
+            date.text = String(j+1)
+            j += 1
+        }
+        
+        for star in stars {
+            //가장 많은 카테고리 배열 받기
+            star.image = UIImage(named: "icon24StarN1")
+        }
+    }
     
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
@@ -94,10 +117,7 @@ extension MainHomeVC {
         UIView.animate(withDuration: 0.2){
             self.view.layoutIfNeeded()
         }
-       
     }
-    
-    
     
     
     private func hideFloating(){
@@ -113,6 +133,7 @@ extension MainHomeVC {
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
         }
     }
+    
     
     private func showFloating(){
         floatingStacks.forEach { [weak self] stack in
