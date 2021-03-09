@@ -99,9 +99,17 @@ extension MainHomeVC {
             j += 1
         }
         
+        //가장 많은 카테고리 배열 받기
+        let array:[String] = ["1","3","3","8","1","0","0"]
+        var k = 0
         for star in stars {
-            //가장 많은 카테고리 배열 받기
-            star.image = UIImage(named: "icon24StarN1")
+            if(array[k] == "0"){
+                star.alpha = 0
+            }else{
+                star.image = UIImage(named: "icon24StarN"+array[k])
+            }
+            
+            k += 1
         }
     }
     
