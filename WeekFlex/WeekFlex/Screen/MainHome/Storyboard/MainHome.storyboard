@@ -44,6 +44,10 @@
                                     <constraint firstItem="Djg-Cb-H43" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="top" constant="80" id="yjh-6z-Xjo"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="55M-bn-jjY">
+                                <rect key="frame" x="0.0" y="285" width="414" height="577"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRm-yg-E9r">
                                 <rect key="frame" x="0.0" y="175" width="414" height="110"/>
                                 <subviews>
@@ -229,10 +233,10 @@
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="vIo-xE-tHQ">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="루틴 추가하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmJ-ay-OlC">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="루틴 가져오기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmJ-ay-OlC">
                                                 <rect key="frame" x="0.0" y="0.0" width="97" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A7-3W-ASI">
@@ -251,7 +255,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할 일 추가하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gw-ut-h2r">
                                                 <rect key="frame" x="0.0" y="0.0" width="97" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEY-S9-pfO">
@@ -300,7 +304,11 @@
                         <constraints>
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="3W8-Zm-1Q9"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="uRm-yg-E9r" secondAttribute="trailing" id="9lO-rq-Rlt"/>
+                            <constraint firstItem="55M-bn-jjY" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="MlR-9Y-lPp"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="55M-bn-jjY" secondAttribute="trailing" id="Q1h-yc-Wl2"/>
+                            <constraint firstItem="55M-bn-jjY" firstAttribute="top" secondItem="uRm-yg-E9r" secondAttribute="bottom" id="aXc-Vj-9c4"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="V0t-FE-q3I" secondAttribute="trailing" id="cAE-TR-7WG"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="55M-bn-jjY" secondAttribute="bottom" id="cVa-VL-h1v"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="122" id="eI4-MT-lf9"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="J32-5J-fAC" secondAttribute="trailing" constant="24" id="kRW-nk-Qzn"/>
@@ -319,6 +327,7 @@
                         <outlet property="header" destination="V0t-FE-q3I" id="RaP-sI-de5"/>
                         <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
                         <outlet property="showFloatingBtn" destination="46A-Y5-8i9" id="BIc-49-e3U"/>
+                        <outlet property="table" destination="55M-bn-jjY" id="VJm-It-enx"/>
                         <outlet property="today" destination="Djg-Cb-H43" id="beo-aq-4Zl"/>
                         <outletCollection property="stars" destination="YmF-57-WIN" collectionClass="NSMutableArray" id="NSD-qr-p6i"/>
                         <outletCollection property="stars" destination="yQQ-4p-Vbm" collectionClass="NSMutableArray" id="wlv-wM-6rF"/>

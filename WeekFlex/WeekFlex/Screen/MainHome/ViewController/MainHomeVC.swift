@@ -10,6 +10,7 @@ import UIKit
 
 class MainHomeVC: UIViewController {
     
+    
     //MARK: Variable
     
     private var shouldCollaps = true
@@ -46,6 +47,7 @@ class MainHomeVC: UIViewController {
     @IBOutlet var days: [UILabel]!
     @IBOutlet var stars: [UIImageView]!
     @IBOutlet var dates: [UILabel]!
+    @IBOutlet weak var table: UITableView!
     
     
     
@@ -73,11 +75,25 @@ class MainHomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.table.dataSource = self
+        self.table.delegate = self
+        let nibcell = UINib(nibName: "TableViewCell", bundle: nil)
+        table.register(nibcell, forCellReuseIdentifier: "routineCell")
         setWeekly()
     }
 }
 
-
+extension MainHomeVC: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    
+}
 extension MainHomeVC {
     
     //MARK: function
