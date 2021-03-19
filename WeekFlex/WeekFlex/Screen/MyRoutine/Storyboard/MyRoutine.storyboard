@@ -81,6 +81,10 @@
                     <navigationItem key="navigationItem" id="26l-Rg-kiU"/>
                     <connections>
                         <outlet property="backButton" destination="JeI-wr-cH7" id="pv9-ED-3rF"/>
+                        <outlet property="headerLabel" destination="tu5-aJ-Q8e" id="b0E-lw-8QF"/>
+                        <outlet property="routineCreateButton" destination="kpl-B9-HGh" id="N2i-c3-Ulk"/>
+                        <outlet property="routineTableView" destination="RNI-KK-WMH" id="MxC-Nh-wo1"/>
+                        <outlet property="subLabel" destination="szJ-7A-nf3" id="FfV-Um-KwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLb-YO-SnH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
