@@ -43,8 +43,8 @@ class MyRoutineListItemTableViewCell: UITableViewCell {
     /// - Returns: void
     func configure(withViewModel viewModel: MyRoutineListItemPresentable, index: Int) -> (Void) {
         routineImage.image = UIImage(named: routineImageArray[index%3])
-        routineTitleLabel.setLabel(text: viewModel.routineTitle!, color: .white, font: .metroBold(size: 20))
-        routineElementsLabel.setLabel(text: viewModel.routineElements!, color: .gray2, font: .appleRegular(size: 13))
+        routineTitleLabel.setLabel(text: viewModel.routineTitle!, color: .white, font: .metroBold(size: 20), letterSpacing: -0.2)
+        routineElementsLabel.setLabel(text: viewModel.routineElements!, color: .gray2, font: .appleRegular(size: 13), letterSpacing: -0.13)
     }
     
     func setLayout() {
