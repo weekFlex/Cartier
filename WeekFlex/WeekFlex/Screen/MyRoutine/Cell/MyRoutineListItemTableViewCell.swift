@@ -9,6 +9,10 @@ import UIKit
 
 class MyRoutineListItemTableViewCell: UITableViewCell {
 
+    // MARK: Variable
+
+    var routineImageArray = ["icon24StarN1", "icon24StarN3", "icon24StarN8"]
+
     // MARK: IBOutlet
 
     @IBOutlet var routineImage: UIImageView!
@@ -30,8 +34,8 @@ class MyRoutineListItemTableViewCell: UITableViewCell {
 
     /// configure cell using view model
     /// - Returns: void
-    func configure(withViewModel viewModel: MyRoutineListItemPresentable) -> (Void) {
-        routineImage.image = UIImage(named: viewModel.routineImage ?? "icon24StarN8")
+    func configure(withViewModel viewModel: MyRoutineListItemPresentable, index: Int) -> (Void) {
+        routineImage.image = UIImage(named: routineImageArray[index%3])
         routineTitleLabel.text = viewModel.routineTitle
         routineElementsLabel.text = viewModel.routineElements
     }

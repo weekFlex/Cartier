@@ -76,7 +76,7 @@ extension MyRoutineListVC: UITableViewDataSource {
         
         guard let itemViewModel = viewModel?.items[indexPath.row] else { return UITableViewCell() }
         
-        cell.configure(withViewModel: itemViewModel)
+        cell.configure(withViewModel: itemViewModel, index: indexPath.row)
         
         return cell
     }

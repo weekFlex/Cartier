@@ -12,7 +12,7 @@ protocol MyRoutineListItemPresentable {
 }
 
 struct MyRoutineListItemViewModel: MyRoutineListItemPresentable {
-    var routineImage: String? = "icon24StarN1"
+    var routineImage: String?
     var routineTitle: String?
     var routineElements: String?
 }
