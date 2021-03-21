@@ -31,6 +31,8 @@
 		9E5FD6FD26073996008EB927 /* Metropolis-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6EB26073996008EB927 /* Metropolis-ExtraLight.otf */; };
 		9E5FD6FE26073996008EB927 /* Metropolis-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6EC26073996008EB927 /* Metropolis-SemiBoldItalic.otf */; };
 		9E5FD6FF26073996008EB927 /* Metropolis-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6ED26073996008EB927 /* Metropolis-BoldItalic.otf */; };
+		9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD70226078C06008EB927 /* MyRoutineListViewModel.swift */; };
+		9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD7062607979C008EB927 /* MyRoutineListItemTableViewCell.swift */; };
 		9E6760C925F0BF8900436D5C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6760C825F0BF8900436D5C /* Login.storyboard */; };
 		9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6760CB25F0BF9900436D5C /* LoginVC.swift */; };
 		9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAF725EEB9D1007D04D0 /* AppDelegate.swift */; };
@@ -69,6 +71,8 @@
 		9E5FD6EB26073996008EB927 /* Metropolis-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-ExtraLight.otf"; sourceTree = "<group>"; };
 		9E5FD6EC26073996008EB927 /* Metropolis-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-SemiBoldItalic.otf"; sourceTree = "<group>"; };
 		9E5FD6ED26073996008EB927 /* Metropolis-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-BoldItalic.otf"; sourceTree = "<group>"; };
+		9E5FD70226078C06008EB927 /* MyRoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListViewModel.swift; sourceTree = "<group>"; };
+		9E5FD7062607979C008EB927 /* MyRoutineListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListItemTableViewCell.swift; sourceTree = "<group>"; };
 		9E6760C425F0BD0900436D5C /* WeekFlex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeekFlex.entitlements; sourceTree = "<group>"; };
 		9E6760C825F0BF8900436D5C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		9E6760CB25F0BF9900436D5C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 		9E5FD5FE25F4CABB008EB927 /* MyRoutine */ = {
 			isa = PBXGroup;
 			children = (
+				9E5FD7052607977E008EB927 /* Cell */,
+				9E5FD70126078BF3008EB927 /* ViewModel */,
 				9E5FD60025F4CAC6008EB927 /* ViewController */,
 				9E5FD5FF25F4CAC1008EB927 /* Storyboard */,
 			);
@@ -163,6 +169,22 @@
 				9E5FD6E526073995008EB927 /* Metropolis-ThinItalic.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		9E5FD70126078BF3008EB927 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9E5FD70226078C06008EB927 /* MyRoutineListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9E5FD7052607977E008EB927 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9E5FD7062607979C008EB927 /* MyRoutineListItemTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9E6760C525F0BF6B00436D5C /* Login */ = {
@@ -405,8 +427,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EC0DB1125EEBA5E007D04D0 /* UILabel+Extension.swift in Sources */,
+				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
+				9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,

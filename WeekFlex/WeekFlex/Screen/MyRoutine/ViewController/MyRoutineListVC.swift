@@ -10,6 +10,11 @@ import UIKit
 class MyRoutineListVC: UIViewController {
 
     // MARK: IBOutlet
+
+    var viewModel : MyRoutineListViewModel?
+    let identifier = "MyRoutineListItemTableViewCell"
+    
+    // MARK: IBOutlet
     
     @IBOutlet var backButton: UIButton!
     @IBOutlet var headerLabel: UILabel!
@@ -26,7 +31,10 @@ class MyRoutineListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegate()
         setLayout()
+        // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
+        viewModel = MyRoutineListViewModel()
     }
     
 }
@@ -52,6 +60,26 @@ extension MyRoutineListVC {
     }
     
     func setDelegate() {
+        routineTableView.dataSource = self
         
     }
+}
+
+extension MyRoutineListVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let count = viewModel?.items.count else { return 0 }
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? MyRoutineListItemTableViewCell else { return UITableViewCell() }
+        
+        guard let itemViewModel = viewModel?.items[indexPath.row] else { return UITableViewCell() }
+        
+        cell.configure(withViewModel: itemViewModel)
+        
+        return cell
+    }
+    
+    
 }
