@@ -48,6 +48,10 @@ extension MyRoutineListVC {
         // new routine button
         routineCreateButtonView.setBorder(borderColor: .black, borderWidth: 3)
         routinCreateImageView.image = UIImage(named: "icon24PlusVisual")
-        routineCreateLabel.setLabel(text: "New Routine", color: .black, font: .appleBold(size: 20))
+        routineCreateLabel.setLabel(text: "New Routine", color: .black, font: .metroBold(size: 20))
+    }
+    
+    func setDelegate() {
+        
     }
 }
