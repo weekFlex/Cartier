@@ -60,8 +60,7 @@ extension MyRoutineListVC {
         // table view
         routineTableView.separatorStyle = .none
         let count = viewModel?.items.count ?? 0
-        routineTableViewHeight.constant = CGFloat(count*90)
-        print(count)
+        routineTableViewHeight.constant = CGFloat(count*98)
         
         // new routine button
         routineCreateButtonView.setBorder(borderColor: .black, borderWidth: 3)
