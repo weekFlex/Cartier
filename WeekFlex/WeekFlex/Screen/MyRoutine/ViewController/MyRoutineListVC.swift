@@ -16,10 +16,14 @@ class MyRoutineListVC: UIViewController {
     
     // MARK: IBOutlet
     
+    // header
     @IBOutlet var backButton: UIButton!
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var subLabel: UILabel!
+    
+    // table view
     @IBOutlet var routineTableView: UITableView!
+    @IBOutlet var routineTableViewHeight: NSLayoutConstraint!
     
     // new routine button
     @IBOutlet var routineCreateButtonView: UIView!
@@ -31,10 +35,10 @@ class MyRoutineListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegate()
-        setLayout()
-        // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
         viewModel = MyRoutineListViewModel()
+        setLayout()
+        setDelegate()
+        // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
     }
     
 }
@@ -52,6 +56,12 @@ extension MyRoutineListVC {
         backButton.setImage(UIImage(named: "icon32BackBlack"), for: .normal)
         headerLabel.setLabel(text: "나의 루틴", color: .black, font: .appleBold(size: 24))
         subLabel.setLabel(text: "루틴 카드로 쉽게 할 일을 추가하세요", color: .gray5, font: .appleRegular(size: 16))
+       
+        // table view
+        routineTableView.separatorStyle = .none
+        let count = viewModel?.items.count ?? 0
+        routineTableViewHeight.constant = CGFloat(count*90)
+        print(count)
         
         // new routine button
         routineCreateButtonView.setBorder(borderColor: .black, borderWidth: 3)
@@ -68,6 +78,7 @@ extension MyRoutineListVC {
 extension MyRoutineListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = viewModel?.items.count else { return 0 }
+
         return count
     }
     

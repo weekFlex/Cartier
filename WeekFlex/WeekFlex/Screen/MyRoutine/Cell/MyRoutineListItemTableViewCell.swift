@@ -24,19 +24,33 @@ class MyRoutineListItemTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setLayout()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace: CGFloat = 8
+        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
+    }
+    
     // MARK: Function
 
     /// configure cell using view model
     /// - Returns: void
     func configure(withViewModel viewModel: MyRoutineListItemPresentable, index: Int) -> (Void) {
         routineImage.image = UIImage(named: routineImageArray[index%3])
-        routineTitleLabel.text = viewModel.routineTitle
-        routineElementsLabel.text = viewModel.routineElements
+        routineTitleLabel.setLabel(text: viewModel.routineTitle!, color: .white, font: .metroBold(size: 20))
+        routineElementsLabel.setLabel(text: viewModel.routineElements!, color: .gray2, font: .appleRegular(size: 13))
     }
+    
+    func setLayout() {
+        contentView.backgroundColor = .black
+        contentView.setRounded(radius: 3)
+    }
+    
+    
 }
