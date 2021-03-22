@@ -39,4 +39,42 @@ extension UIFont {
         return UIFont(name: "AppleSDGothicNeo-SemiBold", size: size)!
     }
      
+    // MARK: Metropolis Font
+
+    class func metroBold(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-Bold", size: size)!
+    }
+    
+    class func metroBlack(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-Black", size: size)!
+    }
+    
+    class func metroExtraBold(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-ExtraBold", size: size)!
+    }
+    
+    class func metroExtraLight(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-ExtraLight", size: size)!
+    }
+    
+    class func metroLight(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-Light", size: size)!
+    }
+    
+    class func metroMedium(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-Medium", size: size)!
+    }
+    
+    class func metroRegular(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-Regular", size: size)!
+    }
+    
+    class func metroSemiBold(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-SemiBold", size: size)!
+    }
+    
+    class func metroThin(size: CGFloat) -> UIFont {
+        return UIFont(name: "Metropolis-Thin", size: size)!
+    }
+    
 }
