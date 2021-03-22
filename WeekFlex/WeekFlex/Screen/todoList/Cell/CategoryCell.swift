@@ -32,9 +32,9 @@ class CategoryCell: UICollectionViewCell {
         nameLabel.textColor = UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1.0)
     }
     
-    func set(_ list: CategoryList) {
-        nameLabel.text = list.name
-        colorImage.image = UIImage(named: list.color)
+    func configure(with viewModel: CategoryListItemPresentable) {
+        nameLabel.text = viewModel.categoryName
+        colorImage.image = UIImage(named: viewModel.categoryColor!)
     }
     
 }

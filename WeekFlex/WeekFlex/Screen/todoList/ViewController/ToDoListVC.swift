@@ -11,7 +11,7 @@ class ToDoListVC: UIViewController {
     
     // MARK: Variable Part
     
-    private var categoryList: [CategoryList] = []
+    var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
     private var routineList: [RoutineList] = []
     
     // MARK: IBOutlet
@@ -37,7 +37,6 @@ class ToDoListVC: UIViewController {
         setButton()
         setLabel()
         setView()
-        setCategory()
         setRoutine()
         // Do any additional setup after loading the view.
     }
@@ -84,15 +83,6 @@ extension ToDoListVC {
         
     }
     
-    private func setCategory() {
-        
-        let category1 = CategoryList(categoryName: "운동", categoryColor: "icon12StarN3")
-        let category2 = CategoryList(categoryName: "공부", categoryColor: "icon12StarN3")
-        let category3 = CategoryList(categoryName: "개발", categoryColor: "icon12StarN3")
-        categoryList = [category1,category2,category3]
-        
-    }
-    
     private func setRoutine() {
         
         let rountine1 = RoutineList(routineName: "원서 읽기", routineTime: "월, 수 10:00am-11:00am", pick: true)
@@ -129,6 +119,7 @@ extension ToDoListVC: UITextFieldDelegate {
 extension ToDoListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
+        
         if collectionView == categoryCollectionView {
             return CGSize(width: 50, height: collectionView.frame.height)
         } else {
@@ -137,28 +128,36 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         if collectionView == categoryCollectionView {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         } else {
             return UIEdgeInsets(top: 24, left: 16, bottom: 10, right: 16)
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
         if collectionView == categoryCollectionView {
             return 0
         } else {
             return 9
         }
+        
     }
     
 }
 extension ToDoListVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         if collectionView == categoryCollectionView {
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            cell.set(categoryList[indexPath.row])
+            let itemViewModel = categoryViewModel.items[indexPath.row]
+            cell.configure(with: itemViewModel)
             return cell
+            
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
             cell.set(routineList[indexPath.row])
@@ -168,24 +167,19 @@ extension ToDoListVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
-            return categoryList.count
+            return categoryViewModel.items.count
         } else {
             return routineList.count
         }
     }
-}
-
-
-
-struct CategoryList {
-    var name: String
-    var color: String
     
-    init(categoryName: String, categoryColor: String) {
-        self.name = categoryName
-        self.color = categoryColor
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            routineCollectionView.reloadData()
+        }
     }
 }
+
 
 struct RoutineList {
     var name: String
