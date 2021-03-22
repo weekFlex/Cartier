@@ -10,9 +10,9 @@ import UIKit
 class ToDoListVC: UIViewController {
     
     // MARK: Variable Part
-    
+    var indexs = 0
     var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
-    private var routineList: [RoutineList] = []
+    var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
     
     // MARK: IBOutlet
     
@@ -37,7 +37,6 @@ class ToDoListVC: UIViewController {
         setButton()
         setLabel()
         setView()
-        setRoutine()
         // Do any additional setup after loading the view.
     }
     
@@ -80,15 +79,6 @@ extension ToDoListVC {
         categoryCollectionView.dataSource = self
         routineCollectionView.delegate = self
         routineCollectionView.dataSource = self
-        
-    }
-    
-    private func setRoutine() {
-        
-        let rountine1 = RoutineList(routineName: "원서 읽기", routineTime: "월, 수 10:00am-11:00am", pick: true)
-        let rountine2 = RoutineList(routineName: "스피킹", routineTime: "화, 목 10:00am-1:00pm", pick: true)
-        let rountine3 = RoutineList(routineName: "문제집 풀기", routineTime: "월, 수, 금", pick: false)
-        routineList = [rountine1,rountine2,rountine3]
         
     }
 }
@@ -160,7 +150,16 @@ extension ToDoListVC: UICollectionViewDataSource {
             
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
-            cell.set(routineList[indexPath.row])
+            if indexs == 0 {
+                let itemViewModel = todolistViewModel.firstItems[indexPath.row]
+                cell.configure(with: itemViewModel)
+            } else if indexs == 1{
+                let itemViewModel = todolistViewModel.secondeItems[indexPath.row]
+                cell.configure(with: itemViewModel)
+            } else {
+                let itemViewModel = todolistViewModel.thirdItems[indexPath.row]
+                cell.configure(with: itemViewModel)
+            }
             return cell
         }
     }
@@ -169,26 +168,20 @@ extension ToDoListVC: UICollectionViewDataSource {
         if collectionView == categoryCollectionView {
             return categoryViewModel.items.count
         } else {
-            return routineList.count
+            if indexs == 0 {
+                return todolistViewModel.firstItems.count
+            } else if indexs == 1 {
+                return todolistViewModel.secondeItems.count
+            } else {
+                return todolistViewModel.thirdItems.count
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
+            indexs = indexPath.row
             routineCollectionView.reloadData()
         }
-    }
-}
-
-
-struct RoutineList {
-    var name: String
-    var time: String
-    var check: Bool
-    
-    init(routineName: String, routineTime: String, pick: Bool) {
-        self.name = routineName
-        self.time = routineTime
-        self.check = pick
     }
 }

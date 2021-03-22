@@ -38,10 +38,10 @@ class RoutineCell: UICollectionViewCell {
         timeLabel?.textColor = UIColor(red: 164/255, green: 164/255, blue: 169/255, alpha: 1.0)
     }
     
-    func set(_ list: RoutineList) {
-        routineNameLabel.text = list.name
-        timeLabel.text = list.time
-        if list.check {
+    func configure(with viewModel: ToDoListItemPresentable) {
+        routineNameLabel.text = viewModel.listName
+        timeLabel.text = viewModel.listTime
+        if viewModel.bookmarkCheck! {
             bookmarkImage.image = UIImage(systemName: "bookmark.fill")
         } else {
             bookmarkImage.image = UIImage(systemName: "bookmark")

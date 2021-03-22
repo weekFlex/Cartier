@@ -11,6 +11,7 @@
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E847260884E800EC9969 /* RoutineCell.swift */; };
 		9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */; };
+		9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */; };
 		9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */; };
 		9BC81AA025FA80CB001B1D83 /* ToDoList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC81A9F25FA80CB001B1D83 /* ToDoList.storyboard */; };
 		9E6760C925F0BF8900436D5C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6760C825F0BF8900436D5C /* Login.storyboard */; };
@@ -29,6 +30,7 @@
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9B56E847260884E800EC9969 /* RoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCell.swift; sourceTree = "<group>"; };
 		9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		9BC81A9F25FA80CB001B1D83 /* ToDoList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ToDoList.storyboard; sourceTree = "<group>"; };
 		9E6760C425F0BD0900436D5C /* WeekFlex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeekFlex.entitlements; sourceTree = "<group>"; };
@@ -73,13 +75,22 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		9B56E84D26089FCD00EC9969 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */,
+				9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		9BC81A9D25FA80AD001B1D83 /* todoList */ = {
 			isa = PBXGroup;
 			children = (
+				9B56E84D26089FCD00EC9969 /* ViewModel */,
 				9B1041A526076B7C00746FCF /* Cell */,
 				9B1041902607591900746FCF /* ViewController */,
 				9BC81A9E25FA80B2001B1D83 /* Storyboard */,
-				9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */,
 			);
 			path = todoList;
 			sourceTree = "<group>";
@@ -272,6 +283,7 @@
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
+				9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */,
 				9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */,
 				9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */,
 			);
