@@ -107,10 +107,11 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-            view.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+            view.heightAnchor.constraint(equalToConstant: 63).isActive = true
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
-            
             cell.stackView.addArrangedSubview(view)
+            
+            
             //            let item = viewModel.data[indexPath.row].todos[i]
             //            var taskView = TaskListView(frame: self.view.frame)
             //
@@ -121,10 +122,30 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             //            self.view.addSubview(taskView)
             
         }
+        
+        
+        
+        cell.selectionStyle = .none
+        
+        cell.layer.cornerRadius = 10
+        cell.contentView.layer.masksToBounds = true
+        
+        cell.layer.shadowColor = UIColor.black.cgColor
+        
+        cell.layer.shadowOffset = CGSize(width: 20, height: 0)
+        
+        cell.layer.shadowRadius = 15.0
+        
+        cell.layer.shadowOpacity = 0.4
+        
+        cell.layer.masksToBounds = false
+        
+        cell.layer.shadowPath = UIBezierPath(roundedRect:         cell.contentView.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+        
         return cell
     }
     
-   
+    
     
     
     

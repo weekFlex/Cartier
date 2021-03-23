@@ -17,23 +17,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHa-0U-0yj">
-                        <rect key="frame" x="0.0" y="10" width="320" height="20.5"/>
+                        <rect key="frame" x="20" y="10" width="280" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="YYm-lp-b2T">
-                        <rect key="frame" x="0.0" y="40.5" width="320" height="33.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="YYm-lp-b2T">
+                        <rect key="frame" x="20" y="40.5" width="280" height="53.5"/>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="YYm-lp-b2T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="K5S-9G-fqe"/>
-                    <constraint firstAttribute="bottom" secondItem="YYm-lp-b2T" secondAttribute="bottom" constant="30" id="PXd-5z-d5h"/>
+                    <constraint firstItem="YYm-lp-b2T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="5AT-qb-zK5"/>
+                    <constraint firstAttribute="trailing" secondItem="YYm-lp-b2T" secondAttribute="trailing" constant="20" id="Il4-dq-cTn"/>
+                    <constraint firstAttribute="bottom" secondItem="YYm-lp-b2T" secondAttribute="bottom" constant="10" id="PXd-5z-d5h"/>
                     <constraint firstItem="hHa-0U-0yj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Ubn-p8-fvp"/>
-                    <constraint firstAttribute="trailing" secondItem="YYm-lp-b2T" secondAttribute="trailing" id="hca-xm-KhA"/>
                     <constraint firstItem="YYm-lp-b2T" firstAttribute="top" secondItem="hHa-0U-0yj" secondAttribute="bottom" constant="10" id="leh-ee-72T"/>
-                    <constraint firstItem="hHa-0U-0yj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ouP-kH-3Ic"/>
-                    <constraint firstAttribute="trailing" secondItem="hHa-0U-0yj" secondAttribute="trailing" id="qqA-4F-mzC"/>
+                    <constraint firstItem="hHa-0U-0yj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ouP-kH-3Ic"/>
+                    <constraint firstAttribute="trailing" secondItem="hHa-0U-0yj" secondAttribute="trailing" constant="20" id="qqA-4F-mzC"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
