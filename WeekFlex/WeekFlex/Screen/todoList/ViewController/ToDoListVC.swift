@@ -10,9 +10,15 @@ import UIKit
 class ToDoListVC: UIViewController {
     
     // MARK: Variable Part
-    var indexs = 0
+    
     var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
     var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
+    
+    // 검색 할 text
+    var searchText: String? = nil
+    
+    // 카테고리의 첫번째가 항상 default로 보여지게 만들기 위한 변수
+    var categoryIndex: Int = 0
     
     // MARK: IBOutlet
     
@@ -38,6 +44,11 @@ class ToDoListVC: UIViewController {
         setLabel()
         setView()
         // Do any additional setup after loading the view.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // 뷰 클릭 시 키보드 내리기
+        view.endEditing(true)
     }
     
     
@@ -77,10 +88,32 @@ extension ToDoListVC {
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
+        // 첫번째 카테고리 선택을 default로 만듦
+        categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
+        
         routineCollectionView.delegate = self
         routineCollectionView.dataSource = self
         
+        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        // TextField가 수정될 때 마다 실행
+        
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // TextField가 수정될 때 마다 실행 될 함수
+        
+        // 카테고리 선택을 취소
+        categoryCollectionView.deselectItem(at: [0,categoryIndex], animated: false)
+        
+        if textField.text == "" {
+            searchText = nil
+            categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
+        } else {
+            searchText = textField.text
+        }
+        routineCollectionView.reloadData()
+    }
+    
 }
 
 extension ToDoListVC: UITextFieldDelegate {
@@ -107,11 +140,12 @@ extension ToDoListVC: UITextFieldDelegate {
 }
 
 extension ToDoListVC: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
         
         if collectionView == categoryCollectionView {
-            return CGSize(width: 50, height: collectionView.frame.height)
+            return CGSize(width: 50, height: 50)
         } else {
             return CGSize(width: collectionView.frame.width-32, height: 52)
         }
@@ -148,16 +182,24 @@ extension ToDoListVC: UICollectionViewDataSource {
             cell.configure(with: itemViewModel)
             return cell
             
-        } else {
+        }
+        
+        else {
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
-            if indexs == 0 {
-                let itemViewModel = todolistViewModel.firstItems[indexPath.row]
-                cell.configure(with: itemViewModel)
-            } else if indexs == 1{
-                let itemViewModel = todolistViewModel.secondeItems[indexPath.row]
+            
+            if searchText != nil {
+                // 검색중이라면?
+                
+                let itemViewModel = todolistViewModel.items.filter { $0.listName?.contains(searchText!) == true }[indexPath.row]
+                // 검색 단어로 필터링
+                
                 cell.configure(with: itemViewModel)
             } else {
-                let itemViewModel = todolistViewModel.thirdItems[indexPath.row]
+                // 검색중이 아니라면 == 카테고리를 선택해서 보고있다면
+                
+                let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }[indexPath.row]
+                // 선택한 카테고리로 필터링
                 cell.configure(with: itemViewModel)
             }
             return cell
@@ -165,22 +207,34 @@ extension ToDoListVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if collectionView == categoryCollectionView {
             return categoryViewModel.items.count
-        } else {
-            if indexs == 0 {
-                return todolistViewModel.firstItems.count
-            } else if indexs == 1 {
-                return todolistViewModel.secondeItems.count
+        }
+        
+        else {
+            if searchText != nil {
+                // 검색중이라면?
+                let itemViewModel = todolistViewModel.items.filter { $0.listName?.contains(searchText!) == true }
+                return itemViewModel.count
+                
             } else {
-                return todolistViewModel.thirdItems.count
+                // 검색중이 아니라면 == 카테고리를 선택해서 보고있다면
+                let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }
+                return itemViewModel.count
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-            indexs = indexPath.row
+            
+            categoryIndex = indexPath.row
+            
+            searchText = nil
+            searchTextField.text = nil
+            // 검색어가 있는 상태에서 카테고리를 선택했다면 검색어 제거
+            
             routineCollectionView.reloadData()
         }
     }
