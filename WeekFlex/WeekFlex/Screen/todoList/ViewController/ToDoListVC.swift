@@ -11,6 +11,7 @@ class ToDoListVC: UIViewController {
     
     // MARK: Variable Part
     
+    var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
     var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
     var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
     
@@ -25,8 +26,10 @@ class ToDoListVC: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var selectRoutineView: UIView!
+    @IBOutlet weak var selectedCollectionView: UICollectionView!
+    
     @IBOutlet weak var routineNameLabel: UILabel!
-    @IBOutlet weak var explainLabel: UILabel!
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var textFieldView: UIView!
@@ -74,7 +77,7 @@ extension ToDoListVC {
         
         routineNameLabel.setLabel(text: "English Master :-)", color: .white, font: .metroBold(size: 24))
         
-        explainLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: UIFont.appleRegular(size: 16))
+//        explainLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: UIFont.appleRegular(size: 16))
         
         searchTextField.placeholder = "원하는 할 일을 찾을 수 있어요"
         searchTextField.returnKeyType = .done
@@ -85,6 +88,9 @@ extension ToDoListVC {
     
     func setView() {
 
+        selectRoutineView.backgroundColor = .clear
+        selectedCollectionView.backgroundColor = .clear
+        
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         // 첫번째 카테고리 선택을 default로 만듦
@@ -92,6 +98,12 @@ extension ToDoListVC {
         
         routineCollectionView.delegate = self
         routineCollectionView.dataSource = self
+        
+        selectedCollectionView.delegate = self
+        selectedCollectionView.dataSource = self
+        let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.scrollDirection = .horizontal
+        // 가로 스크롤 고정
         
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         // TextField가 수정될 때 마다 실행
@@ -143,7 +155,10 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
         
-        if collectionView == categoryCollectionView {
+        if collectionView == selectedCollectionView {
+            return CGSize(width: 100, height: collectionView.frame.height)
+        }
+        else if collectionView == categoryCollectionView {
             return CGSize(width: 50, height: 50)
         } else {
             return CGSize(width: collectionView.frame.width-32, height: 52)
@@ -152,16 +167,23 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if collectionView == categoryCollectionView {
+        if collectionView == selectedCollectionView {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        } else {
+        }
+        else if collectionView == categoryCollectionView {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+        else {
             return UIEdgeInsets(top: 24, left: 16, bottom: 10, right: 16)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        if collectionView == categoryCollectionView {
+        if collectionView == selectedCollectionView {
+            return 9
+        }
+        else if collectionView == categoryCollectionView {
             return 0
         } else {
             return 9
@@ -174,7 +196,13 @@ extension ToDoListVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == categoryCollectionView {
+        if collectionView == selectedCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedRoutineCell.identifier, for: indexPath) as? SelectedRoutineCell else { return UICollectionViewCell() }
+            let itemViewModel = selectedViewModel.items[indexPath.row]
+            cell.configure(with: itemViewModel)
+            return cell
+        }
+        else if collectionView == categoryCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             let itemViewModel = categoryViewModel.items[indexPath.row]
@@ -207,7 +235,11 @@ extension ToDoListVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == categoryCollectionView {
+        if collectionView == selectedCollectionView {
+            return selectedViewModel.items.count
+        }
+        
+        else if collectionView == categoryCollectionView {
             return categoryViewModel.items.count
         }
         
@@ -226,6 +258,7 @@ extension ToDoListVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if collectionView == categoryCollectionView {
             
             categoryIndex = indexPath.row
@@ -236,5 +269,20 @@ extension ToDoListVC: UICollectionViewDataSource {
             
             routineCollectionView.reloadData()
         }
+        else if collectionView == routineCollectionView {
+            
+            let cells = collectionView.cellForItem(at: indexPath) as? RoutineCell
+            listItemAdded(value: (cells?.routineNameLabel.text)!)
+            selectedCollectionView.reloadData()
+        }
     }
+}
+
+extension ToDoListVC: SelectedItemViewDelegate {
+    
+    func listItemAdded(value: String) {
+        let item = SelectedCellItemViewModel(listName: value)
+        selectedViewModel.items.insert(item, at: 0)
+    }
+    
 }
