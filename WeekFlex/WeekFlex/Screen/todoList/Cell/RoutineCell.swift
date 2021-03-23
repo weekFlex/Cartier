@@ -23,7 +23,7 @@ class RoutineCell: UICollectionViewCell {
       didSet {
         if isSelected {
             if contentView.backgroundColor == .clear {
-                contentView.backgroundColor = .gray
+                contentView.backgroundColor = .bgSelected
             } else {
                 contentView.backgroundColor = .clear
             }
@@ -35,7 +35,7 @@ class RoutineCell: UICollectionViewCell {
         contentView.backgroundColor = .clear
         routineNameLabel.font = UIFont.appleMedium(size: 16)
         timeLabel?.font = UIFont.appleRegular(size: 12)
-        timeLabel?.textColor = UIColor(red: 164/255, green: 164/255, blue: 169/255, alpha: 1.0)
+        timeLabel?.textColor = UIColor.gray3
     }
     
     func configure(with viewModel: ToDoListItemPresentable) {

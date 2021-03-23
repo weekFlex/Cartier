@@ -67,25 +67,24 @@ extension ToDoListVC {
         
         nextButton.setTitle("다음", for: .normal)
         nextButton.titleLabel?.font = UIFont.appleMedium(size: 16)
-        nextButton.tintColor = UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1.0)
+        nextButton.tintColor = UIColor.gray4
     }
     
     func setLabel() {
         
-        explainLabel.text = "루틴에 추가할 할 일을 선택하세요"
-        explainLabel.font = UIFont.appleRegular(size: 16)
-        explainLabel.textColor = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1.0)
+        routineNameLabel.setLabel(text: "English Master :-)", color: .white, font: .metroBold(size: 24))
+        
+        explainLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: UIFont.appleRegular(size: 16))
         
         searchTextField.placeholder = "원하는 할 일을 찾을 수 있어요"
         searchTextField.returnKeyType = .done
         searchTextField.font = UIFont.appleRegular(size: 14)
+        textFieldView.backgroundColor = .gray1
         searchTextField.delegate = self
     }
     
     func setView() {
-        
-        textFieldView.backgroundColor = .gray
-        
+
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         // 첫번째 카테고리 선택을 default로 만듦
@@ -120,7 +119,7 @@ extension ToDoListVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
-        textFieldView.backgroundColor = .gray
+        textFieldView.backgroundColor = .gray1
         return true
     }
     
@@ -133,7 +132,7 @@ extension ToDoListVC: UITextFieldDelegate {
         if textField.text != "" {
         } else {
             textField.placeholder = "원하는 할 일을 찾을 수 있어요"
-            textFieldView.backgroundColor = .gray
+            textFieldView.backgroundColor = .gray1
         }
         return true
     }

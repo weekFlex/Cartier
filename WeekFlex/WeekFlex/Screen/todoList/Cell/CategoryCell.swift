@@ -22,14 +22,14 @@ class CategoryCell: UICollectionViewCell {
     override var isSelected: Bool {
         willSet {
             statusBarView.isHidden = newValue ? false : true
-            nameLabel.textColor = newValue ? UIColor.black : UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1.0)
+            nameLabel.textColor = newValue ? UIColor.black : .gray4
         }
     }
     
     override func awakeFromNib() {
         statusBarView.isHidden = true
         nameLabel.font = UIFont.appleRegular(size: 14)
-        nameLabel.textColor = UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1.0)
+        nameLabel.textColor = .gray4
     }
     
     func configure(with viewModel: CategoryListItemPresentable) {
