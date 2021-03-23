@@ -9,24 +9,25 @@ import Foundation
 import UIKit
 import RxCocoa
 import RxSwift
+import RxDataSources
 
 class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
-    
-    private var shouldCollaps = true
+    let viewModel = MainHomeVM()
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
+    let categories:[String] = ["1","3","3","8","1","0","0"]
+    var shouldCollaps = true
     var isFloating = false
+    let bag = DisposeBag()
     lazy var floatingStacks:[UIStackView] = [self.getRoutineStack, self.addTaskStack]
     lazy var dimView: UIView = {
         let view = UIView(frame: self.view.frame)
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         view.alpha = 0
         view.isHidden = true
-
         self.view.insertSubview(view, belowSubview: self.floatingStackView)
-
         return view
     }()
     
@@ -49,7 +50,8 @@ class MainHomeVC: UIViewController {
     @IBOutlet var days: [UILabel]!
     @IBOutlet var stars: [UIImageView]!
     @IBOutlet var dates: [UILabel]!
-    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    
     
     
     
@@ -76,30 +78,78 @@ class MainHomeVC: UIViewController {
     //MARK: Life Cycle
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.table.dataSource = self
-        self.table.delegate = self
-        let nibcell = UINib(nibName: "TableViewCell", bundle: nil)
-        table.register(nibcell, forCellReuseIdentifier: "routineCell")
+        
         setWeekly()
+        tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
+        //        bindTableView()
+        super.viewDidLoad()
     }
 }
 
-extension MainHomeVC: UITableViewDelegate, UITableViewDataSource{
+extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        return viewModel.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
+        cell.title.text = "\(viewModel.data[indexPath.row].routineName)"
+        let num = viewModel.data[indexPath.row].todos.count
+        
+        for i in 0..<num {
+            let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
+            view.frame = cell.bounds
+            view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+            view.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+            cell.stackView.translatesAutoresizingMaskIntoConstraints = false
+            
+            cell.stackView.addArrangedSubview(view)
+            //            let item = viewModel.data[indexPath.row].todos[i]
+            //            var taskView = TaskListView(frame: self.view.frame)
+            //
+            //            taskView.star.image = UIImage(named: "icon24StarN" + "\(item.category)")
+            //            taskView.taskTitle.text = item.todoTitle
+            //            taskView.time.text = "\(String(describing: item.startTime))" + "-" + "\(String(describing: item.endTime))"
+            //            print(self.view)
+            //            self.view.addSubview(taskView)
+            
+        }
+        return cell
     }
+    
+   
+    
     
     
 }
+
 extension MainHomeVC {
+    
+    
     
     //MARK: function
     
+    
+    
+    //    private func bindTableView(){
+    //        let cities = ["London", "Vienna", "Lisbon"]
+    //
+    //        let citiesOb: Observable<[String]> = Observable.of(cities)
+    //
+    //        citiesOb.bind(to: tableView.rx.items(cellIdentifier: "routineCell", cellType: RoutineCell.self)) { index, model, cell in
+    //            cell.title.text = model
+    //
+    //        }.disposed(by: bag)
+    //
+    //    }
+    //
     private func setWeekly(){
         today.text = "Jan 15th, Friday"
         
@@ -118,13 +168,13 @@ extension MainHomeVC {
         }
         
         //가장 많은 카테고리 배열 받기
-        let array:[String] = ["1","3","3","8","1","0","0"]
+        
         var k = 0
         for star in stars {
-            if(array[k] == "0"){
+            if(categories[k] == "0"){
                 star.alpha = 0
             }else{
-                star.image = UIImage(named: "icon24StarN"+array[k])
+                star.image = UIImage(named: "icon24StarN"+categories[k])
             }
             
             k += 1
@@ -134,7 +184,7 @@ extension MainHomeVC {
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }
-
+    
     
     private func animateView(isCollaps:Bool ,  height:Double){
         shouldCollaps = isCollaps

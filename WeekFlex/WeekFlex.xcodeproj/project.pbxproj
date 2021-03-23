@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26212025F8CB14007D28F0 /* TableViewCell.swift */; };
 		0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26212125F8CB14007D28F0 /* TableViewCell.xib */; };
 		0E26212725F8D92E007D28F0 /* MainHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26212625F8D92E007D28F0 /* MainHomeModel.swift */; };
+		0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26216026014B0B007D28F0 /* TaskListView.xib */; };
+		0E26216426014B23007D28F0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26216326014B23007D28F0 /* TaskListView.swift */; };
 		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
 		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
 		0EAD6A2925F4D018001BD490 /* MainHomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A2825F4D018001BD490 /* MainHomeVM.swift */; };
@@ -30,6 +32,8 @@
 		0E26212025F8CB14007D28F0 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		0E26212125F8CB14007D28F0 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		0E26212625F8D92E007D28F0 /* MainHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeModel.swift; sourceTree = "<group>"; };
+		0E26216026014B0B007D28F0 /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
+		0E26216326014B23007D28F0 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
 		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
 		0EAD6A2825F4D018001BD490 /* MainHomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVM.swift; sourceTree = "<group>"; };
@@ -68,6 +72,8 @@
 			children = (
 				0E26212025F8CB14007D28F0 /* TableViewCell.swift */,
 				0E26212125F8CB14007D28F0 /* TableViewCell.xib */,
+				0E26216026014B0B007D28F0 /* TaskListView.xib */,
+				0E26216326014B23007D28F0 /* TaskListView.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -122,7 +128,6 @@
 				1AB73C2DF9638EC5DBB72909 /* Pods-WeekFlex.debug.xcconfig */,
 				745B55B0FF0A339F557856FF /* Pods-WeekFlex.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -300,6 +305,7 @@
 				9EC0DB0425EEB9D4007D04D0 /* LaunchScreen.storyboard in Resources */,
 				9EC0DB0125EEB9D4007D04D0 /* Assets.xcassets in Resources */,
 				9EC0DAFF25EEB9D1007D04D0 /* Main.storyboard in Resources */,
+				0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */,
 				0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +362,7 @@
 				9EC0DB1125EEBA5E007D04D0 /* UILabel+Extension.swift in Sources */,
 				0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */,
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
+				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
 				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				0EAD6A2925F4D018001BD490 /* MainHomeVM.swift in Sources */,

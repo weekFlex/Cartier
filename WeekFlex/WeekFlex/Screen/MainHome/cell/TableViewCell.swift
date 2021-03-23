@@ -7,12 +7,18 @@
 
 import UIKit
 
+
 class TableViewCell: UITableViewCell {
 
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var title: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if let a = title.text{
+            print(a)
+        }
+        
         // Initialization code
     }
 

@@ -47,6 +47,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="55M-bn-jjY">
                                 <rect key="frame" x="0.0" y="285" width="414" height="577"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="2x5-xG-9cD" id="VUt-pE-Ixj"/>
+                                    <outlet property="delegate" destination="2x5-xG-9cD" id="vzp-JW-1HN"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRm-yg-E9r">
                                 <rect key="frame" x="0.0" y="175" width="414" height="110"/>
@@ -327,7 +331,7 @@
                         <outlet property="header" destination="V0t-FE-q3I" id="RaP-sI-de5"/>
                         <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
                         <outlet property="showFloatingBtn" destination="46A-Y5-8i9" id="BIc-49-e3U"/>
-                        <outlet property="table" destination="55M-bn-jjY" id="VJm-It-enx"/>
+                        <outlet property="tableView" destination="55M-bn-jjY" id="wYA-ui-XWy"/>
                         <outlet property="today" destination="Djg-Cb-H43" id="beo-aq-4Zl"/>
                         <outletCollection property="stars" destination="YmF-57-WIN" collectionClass="NSMutableArray" id="NSD-qr-p6i"/>
                         <outletCollection property="stars" destination="yQQ-4p-Vbm" collectionClass="NSMutableArray" id="wlv-wM-6rF"/>

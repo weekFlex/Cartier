@@ -8,5 +8,7 @@ target 'WeekFlex' do
   # Pods for WeekFlex
 pod 'RxSwift'
 pod 'RxCocoa'
+pod 'RxDataSources'
+
 
 end
