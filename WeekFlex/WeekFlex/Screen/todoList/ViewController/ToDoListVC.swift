@@ -274,11 +274,19 @@ extension ToDoListVC: UICollectionViewDataSource {
             let cells = collectionView.cellForItem(at: indexPath) as? RoutineCell
             listItemAdded(value: (cells?.routineNameLabel.text)!)
             selectedCollectionView.reloadData()
+        } else {
+            listItemRemovede(value: indexPath.row)
+            selectedCollectionView.reloadData()
         }
     }
 }
 
 extension ToDoListVC: SelectedItemViewDelegate {
+
+    func listItemRemovede(value: Int) {
+        selectedViewModel.items.remove(at: value)
+    }
+    
     
     func listItemAdded(value: String) {
         let item = SelectedCellItemViewModel(listName: value)
