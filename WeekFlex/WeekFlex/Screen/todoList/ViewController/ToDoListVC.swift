@@ -46,6 +46,7 @@ class ToDoListVC: UIViewController {
         setButton()
         setLabel()
         setView()
+        setDelegate()
         // Do any additional setup after loading the view.
     }
     
@@ -77,37 +78,41 @@ extension ToDoListVC {
         
         routineNameLabel.setLabel(text: "English Master :-)", color: .white, font: .metroBold(size: 24))
         
-//        explainLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: UIFont.appleRegular(size: 16))
-        
         searchTextField.placeholder = "원하는 할 일을 찾을 수 있어요"
         searchTextField.returnKeyType = .done
         searchTextField.font = UIFont.appleRegular(size: 14)
-        textFieldView.backgroundColor = .gray1
-        searchTextField.delegate = self
+        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        // TextField가 수정될 때 마다 실행
+
     }
     
     func setView() {
 
+        textFieldView.backgroundColor = .gray1
+        
         selectRoutineView.backgroundColor = .clear
         selectedCollectionView.backgroundColor = .clear
         
-        categoryCollectionView.delegate = self
-        categoryCollectionView.dataSource = self
         // 첫번째 카테고리 선택을 default로 만듦
         categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
+    
+        let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.scrollDirection = .horizontal
+        // 가로 스크롤 고정
+    }
+    
+    func setDelegate() {
+        
+        searchTextField.delegate = self
+        
+        categoryCollectionView.delegate = self
+        categoryCollectionView.dataSource = self
         
         routineCollectionView.delegate = self
         routineCollectionView.dataSource = self
         
         selectedCollectionView.delegate = self
         selectedCollectionView.dataSource = self
-        let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.scrollDirection = .horizontal
-        // 가로 스크롤 고정
-        
-        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        // TextField가 수정될 때 마다 실행
-        
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -117,11 +122,15 @@ extension ToDoListVC {
         categoryCollectionView.deselectItem(at: [0,categoryIndex], animated: false)
         
         if textField.text == "" {
+            // 검색어 비워두기
             searchText = nil
+            // 자동을 첫번째 카테고리 선택하기
             categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
+            
         } else {
             searchText = textField.text
         }
+        
         routineCollectionView.reloadData()
     }
     
@@ -160,7 +169,8 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
         }
         else if collectionView == categoryCollectionView {
             return CGSize(width: 50, height: 50)
-        } else {
+        }
+        else {
             return CGSize(width: collectionView.frame.width-32, height: 52)
         }
     }
@@ -181,7 +191,7 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         if collectionView == selectedCollectionView {
-            return 9
+            return 8
         }
         else if collectionView == categoryCollectionView {
             return 0
@@ -202,6 +212,7 @@ extension ToDoListVC: UICollectionViewDataSource {
             cell.configure(with: itemViewModel)
             return cell
         }
+        
         else if collectionView == categoryCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
@@ -210,7 +221,6 @@ extension ToDoListVC: UICollectionViewDataSource {
             return cell
             
         }
-        
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
@@ -222,12 +232,34 @@ extension ToDoListVC: UICollectionViewDataSource {
                 // 검색 단어로 필터링
                 
                 cell.configure(with: itemViewModel)
+                
+                if selectedViewModel.items.count > 0 {
+                    for i in 0...selectedViewModel.items.count-1 {
+                        if itemViewModel.listName == selectedViewModel.items[i].listName {
+                            // 만약에 내가 선택한 루틴이라면?
+                            cell.selected()
+                            // 배경 컬러 주기
+                            break
+                        }
+                    }
+                }
+                
             } else {
-                // 검색중이 아니라면 == 카테고리를 선택해서 보고있다면
+                // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
                 
                 let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }[indexPath.row]
                 // 선택한 카테고리로 필터링
                 cell.configure(with: itemViewModel)
+                if selectedViewModel.items.count > 0 {
+                    for i in 0...selectedViewModel.items.count-1 {
+                        if itemViewModel.listName == selectedViewModel.items[i].listName {
+                            // 만약에 내가 선택한 루틴이라면?
+                            cell.selected()
+                            // 배경 컬러주기
+                            break
+                        }
+                    }
+                }
             }
             return cell
         }
@@ -235,7 +267,20 @@ extension ToDoListVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        
         if collectionView == selectedCollectionView {
+            selectRoutineView.reloadInputViews()
+            let labelFrame = CGRect(x: 0, y: 0, width: view.frame.width-48, height: 23)
+            let labels: UILabel = UILabel(frame: labelFrame)
+            
+            if selectedViewModel.items.count != 0 {
+                labels.removeFromSuperview()
+                selectRoutineView.reloadInputViews()
+            } else {
+                labels.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: .appleRegular(size: 16))
+                selectRoutineView.addSubview(labels)
+            }
+            
             return selectedViewModel.items.count
         }
         
@@ -250,7 +295,7 @@ extension ToDoListVC: UICollectionViewDataSource {
                 return itemViewModel.count
                 
             } else {
-                // 검색중이 아니라면 == 카테고리를 선택해서 보고있다면
+                // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
                 let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }
                 return itemViewModel.count
             }
@@ -258,6 +303,13 @@ extension ToDoListVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == selectedCollectionView {
+            // x 버튼 클릭 시
+
+            listItemRemovede(value: indexPath.row)
+            selectedCollectionView.reloadData()
+            routineCollectionView.reloadData()
+        }
         
         if collectionView == categoryCollectionView {
             
@@ -269,26 +321,51 @@ extension ToDoListVC: UICollectionViewDataSource {
             
             routineCollectionView.reloadData()
         }
-        else if collectionView == routineCollectionView {
+        
+        else {
             
             let cells = collectionView.cellForItem(at: indexPath) as? RoutineCell
-            listItemAdded(value: (cells?.routineNameLabel.text)!)
-            selectedCollectionView.reloadData()
-        } else {
-            listItemRemovede(value: indexPath.row)
-            selectedCollectionView.reloadData()
+            
+            if selectedViewModel.items.count > 0 {
+                // selectedViewModel이 비어있다면?
+                
+                var check = false
+                for i in 0...selectedViewModel.items.count-1 {
+                    // 이미 추가 된 루틴인지 검사하는 과정이 필요 (중복 추가를 막기 위해)
+                    if cells?.routineNameLabel.text == selectedViewModel.items[i].listName {
+                        check = true
+                        break
+                    }
+                }
+                if check == false {
+                    // 추가 안된 루틴이라면 -> 추가
+                    listItemAdded(value: (cells?.routineNameLabel.text)!)
+                    selectedCollectionView.reloadData()
+                    routineCollectionView.reloadData()
+                }
+                
+            } else {
+                // selectedViewModel이 비어있다면? -> 무조건 추가
+                listItemAdded(value: (cells?.routineNameLabel.text)!)
+                selectedCollectionView.reloadData()
+                routineCollectionView.reloadData()
+            }
+            
         }
+        
     }
 }
 
 extension ToDoListVC: SelectedItemViewDelegate {
 
     func listItemRemovede(value: Int) {
+        // 리스트에서 지우기
         selectedViewModel.items.remove(at: value)
     }
     
     
     func listItemAdded(value: String) {
+        // 리스트에 추가하기
         let item = SelectedCellItemViewModel(listName: value)
         selectedViewModel.items.insert(item, at: 0)
     }

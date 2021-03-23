@@ -21,13 +21,13 @@ class RoutineCell: UICollectionViewCell {
 
     override var isSelected: Bool {
       didSet {
-        if isSelected {
-            if contentView.backgroundColor == .clear {
-                contentView.backgroundColor = .bgSelected
-            } else {
-                contentView.backgroundColor = .clear
-            }
-        }
+//        if isSelected {
+//            if contentView.backgroundColor == .clear {
+//                contentView.backgroundColor = .bgSelected
+//            } else {
+//                contentView.backgroundColor = .clear
+//            }
+//        }
       }
     }
     
@@ -46,7 +46,12 @@ class RoutineCell: UICollectionViewCell {
         } else {
             bookmarkImage.image = UIImage(systemName: "bookmark")
         }
+        contentView.backgroundColor = .clear
         
+    }
+    
+    func selected() {
+        contentView.backgroundColor = .bgSelected
     }
 
 }
