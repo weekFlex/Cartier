@@ -25,6 +25,8 @@ class ToDoListVC: UIViewController {
     
     // MARK: IBOutlet
     
+    
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
@@ -34,6 +36,7 @@ class ToDoListVC: UIViewController {
     
     @IBOutlet weak var routineNameLabel: UILabel!
     
+    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var textFieldView: UIView!
     
@@ -106,6 +109,16 @@ extension ToDoListVC {
     }
     
     func setView() {
+        
+        self.view.backgroundColor = .white
+        headerView.backgroundColor = .black
+        
+        // category 밑에 그림자 추가
+        shadowView.layer.masksToBounds = false
+        shadowView.layer.shadowOffset = CGSize(width: 0,height: 6)
+        shadowView.layer.shadowRadius = 3
+        shadowView.layer.shadowOpacity = 0.10
+        shadowView.layer.shadowColor = UIColor.gray2.cgColor
 
         textFieldView.backgroundColor = .gray1
         
@@ -204,7 +217,7 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
         else {
-            return UIEdgeInsets(top: 24, left: 16, bottom: 10, right: 16)
+            return UIEdgeInsets(top: 14, left: 16, bottom: 10, right: 16)
         }
     }
     

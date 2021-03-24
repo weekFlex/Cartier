@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fh-Ba-zXs">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="341"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Tz-Tc-Fty">
                                 <rect key="frame" x="16" y="49" width="35.5" height="35.5"/>
                                 <constraints>
@@ -147,7 +151,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NWc-2E-t4g">
-                                <rect key="frame" x="0.0" y="341" width="414" height="555"/>
+                                <rect key="frame" x="0.0" y="351" width="414" height="545"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0ld-ji-f0M">
                                     <size key="itemSize" width="410" height="138"/>
@@ -281,15 +285,17 @@
                         <viewLayoutGuide key="safeArea" id="mxy-Dt-pBH"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="3Fh-Ba-zXs" firstAttribute="top" secondItem="7yg-fr-fW0" secondAttribute="top" id="4fc-nK-K5x"/>
                             <constraint firstItem="MTN-1v-mO3" firstAttribute="top" secondItem="0Tz-Tc-Fty" secondAttribute="bottom" constant="48" id="5Gp-W1-vZC"/>
                             <constraint firstItem="lYA-Ti-s0D" firstAttribute="leading" secondItem="MTN-1v-mO3" secondAttribute="leading" id="7g9-mw-nqn"/>
-                            <constraint firstItem="NWc-2E-t4g" firstAttribute="top" secondItem="1xq-Mt-uWb" secondAttribute="bottom" id="Aiz-35-nTy"/>
+                            <constraint firstItem="NWc-2E-t4g" firstAttribute="top" secondItem="1xq-Mt-uWb" secondAttribute="bottom" constant="10" id="Aiz-35-nTy"/>
                             <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="1xq-Mt-uWb" secondAttribute="trailing" id="BM4-hT-XRO"/>
                             <constraint firstItem="1xq-Mt-uWb" firstAttribute="leading" secondItem="mxy-Dt-pBH" secondAttribute="leading" id="Kfc-A5-VNF"/>
                             <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="NWc-2E-t4g" secondAttribute="trailing" id="MkJ-5T-NYp"/>
                             <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="lYA-Ti-s0D" secondAttribute="trailing" constant="24" id="Qe5-92-TCT"/>
                             <constraint firstAttribute="bottom" secondItem="NWc-2E-t4g" secondAttribute="bottom" id="TkS-hc-vJh"/>
                             <constraint firstItem="0Tz-Tc-Fty" firstAttribute="leading" secondItem="mxy-Dt-pBH" secondAttribute="leading" constant="16" id="UML-UI-rM8"/>
+                            <constraint firstItem="1xq-Mt-uWb" firstAttribute="bottom" secondItem="3Fh-Ba-zXs" secondAttribute="bottom" id="UmJ-3h-TIU"/>
                             <constraint firstItem="NWc-2E-t4g" firstAttribute="leading" secondItem="mxy-Dt-pBH" secondAttribute="leading" id="VNt-N4-lnt"/>
                             <constraint firstItem="lgu-nc-62Z" firstAttribute="centerY" secondItem="0Tz-Tc-Fty" secondAttribute="centerY" id="XCT-bm-qBD"/>
                             <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="lgu-nc-62Z" secondAttribute="trailing" constant="22" id="fFf-vw-nIF"/>
@@ -297,7 +303,9 @@
                             <constraint firstItem="0Tz-Tc-Fty" firstAttribute="width" secondItem="7yg-fr-fW0" secondAttribute="width" multiplier="32/375" id="lBZ-bI-krN"/>
                             <constraint firstItem="MTN-1v-mO3" firstAttribute="leading" secondItem="mxy-Dt-pBH" secondAttribute="leading" constant="24" id="niN-Bf-fFo"/>
                             <constraint firstItem="1xq-Mt-uWb" firstAttribute="top" secondItem="lYA-Ti-s0D" secondAttribute="bottom" constant="39" id="oob-ix-WJC"/>
+                            <constraint firstItem="3Fh-Ba-zXs" firstAttribute="leading" secondItem="mxy-Dt-pBH" secondAttribute="leading" id="pdH-lE-QW8"/>
                             <constraint firstItem="lYA-Ti-s0D" firstAttribute="top" secondItem="MTN-1v-mO3" secondAttribute="bottom" constant="12" id="rna-qD-GMJ"/>
+                            <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="3Fh-Ba-zXs" secondAttribute="trailing" id="rnh-aU-pjz"/>
                             <constraint firstItem="0Tz-Tc-Fty" firstAttribute="top" secondItem="7yg-fr-fW0" secondAttribute="top" constant="49" id="uvz-7V-XOK"/>
                         </constraints>
                     </view>
@@ -306,12 +314,14 @@
                         <outlet property="categoryCollectionView" destination="SHc-Us-Jem" id="HuA-3C-LXf"/>
                         <outlet property="collectionLayout" destination="MaL-bz-xXV" id="cjp-N3-Qht"/>
                         <outlet property="emptyLabel" destination="cwi-kb-rq7" id="fdB-Hi-WfK"/>
+                        <outlet property="headerView" destination="3Fh-Ba-zXs" id="edu-ZS-9oL"/>
                         <outlet property="nextButton" destination="lgu-nc-62Z" id="fHu-CX-bb2"/>
                         <outlet property="routineCollectionView" destination="NWc-2E-t4g" id="Hxp-Tf-JlT"/>
                         <outlet property="routineNameLabel" destination="MTN-1v-mO3" id="ccq-Dh-gW9"/>
                         <outlet property="searchTextField" destination="rAt-0V-0dp" id="p1S-uM-VWr"/>
                         <outlet property="selectRoutineView" destination="lYA-Ti-s0D" id="mNx-rF-6yc"/>
                         <outlet property="selectedCollectionView" destination="eaK-Ld-d7E" id="NdV-bE-N6h"/>
+                        <outlet property="shadowView" destination="1xq-Mt-uWb" id="2qT-9u-MY0"/>
                         <outlet property="textFieldView" destination="wFq-r0-JTg" id="uk4-X9-EXN"/>
                     </connections>
                 </viewController>
