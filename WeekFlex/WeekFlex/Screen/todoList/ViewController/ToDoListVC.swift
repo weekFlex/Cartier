@@ -62,6 +62,7 @@ class ToDoListVC: UIViewController {
         setLabel()
         setView()
         setDelegate()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -124,9 +125,6 @@ extension ToDoListVC {
         
         selectRoutineView.backgroundColor = .clear
         selectedCollectionView.backgroundColor = .clear
-        
-        // 첫번째 카테고리 선택을 default로 만듦
-        categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
     
         let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .horizontal
@@ -145,7 +143,9 @@ extension ToDoListVC {
         
         selectedCollectionView.delegate = self
         selectedCollectionView.dataSource = self
-//        selectedCollectionView.wid
+        
+        // 첫번째 카테고리 선택을 default로 만듦
+        categoryCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: .right)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

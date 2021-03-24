@@ -27,7 +27,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0Tz-Tc-Fty" secondAttribute="height" multiplier="1:1" id="Avg-BB-0dZ"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="루틴 Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTN-1v-mO3">
                                 <rect key="frame" x="24" y="132.5" width="366" height="21"/>
