@@ -21,6 +21,7 @@ class CategoryCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         willSet {
+            // 한 카테고리만 선택되어 있을 수 있고 , 다른 카테고리가 선택된다면 style이 바껴야함
             statusBarView.isHidden = newValue ? false : true
             nameLabel.textColor = newValue ? UIColor.black : .gray4
         }

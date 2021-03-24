@@ -30,16 +30,20 @@ class RoutineCell: UICollectionViewCell {
     func configure(with viewModel: ToDoListItemPresentable) {
         routineNameLabel.text = viewModel.listName
         timeLabel.text = viewModel.listTime
+        
         if viewModel.bookmarkCheck! {
+            // 북마크가 되어있는 지
             bookmarkImage.image = UIImage(named: "icon16BookmarkActive")
         } else {
             bookmarkImage.image = UIImage(named: "icon16BookmarkInactive")
         }
+        
         contentView.backgroundColor = .clear
         
     }
     
     func selected() {
+        // 선택되어 있다면?
         contentView.backgroundColor = .bgSelected
     }
 
