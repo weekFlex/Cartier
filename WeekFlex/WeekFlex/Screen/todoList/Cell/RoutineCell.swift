@@ -19,18 +19,7 @@ class RoutineCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var bookmarkImage: UIImageView!
 
-    override var isSelected: Bool {
-      didSet {
-//        if isSelected {
-//            if contentView.backgroundColor == .clear {
-//                contentView.backgroundColor = .bgSelected
-//            } else {
-//                contentView.backgroundColor = .clear
-//            }
-//        }
-      }
-    }
-    
+
     override func awakeFromNib() {
         contentView.backgroundColor = .clear
         routineNameLabel.font = UIFont.appleMedium(size: 16)
@@ -42,9 +31,9 @@ class RoutineCell: UICollectionViewCell {
         routineNameLabel.text = viewModel.listName
         timeLabel.text = viewModel.listTime
         if viewModel.bookmarkCheck! {
-            bookmarkImage.image = UIImage(systemName: "bookmark.fill")
+            bookmarkImage.image = UIImage(named: "icon16BookmarkActive")
         } else {
-            bookmarkImage.image = UIImage(systemName: "bookmark")
+            bookmarkImage.image = UIImage(named: "icon16BookmarkInactive")
         }
         contentView.backgroundColor = .clear
         

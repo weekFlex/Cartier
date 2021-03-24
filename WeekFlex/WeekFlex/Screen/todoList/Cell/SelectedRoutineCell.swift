@@ -18,6 +18,9 @@ class SelectedRoutineCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     override func awakeFromNib() {
+        
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
         nameLabel.font = UIFont.appleRegular(size: 14)
         self.contentView.backgroundColor = .white
         nameLabel.textColor = .black

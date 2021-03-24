@@ -11,6 +11,8 @@ class ToDoListVC: UIViewController {
     
     // MARK: Variable Part
     
+    var routineName: String?
+    
     var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
     var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
     var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
@@ -28,6 +30,7 @@ class ToDoListVC: UIViewController {
     
     @IBOutlet weak var selectRoutineView: UIView!
     @IBOutlet weak var selectedCollectionView: UICollectionView!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     @IBOutlet weak var routineNameLabel: UILabel!
     
@@ -36,6 +39,15 @@ class ToDoListVC: UIViewController {
     
     @IBOutlet weak var routineCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
+        didSet {
+            
+            collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            // 동적 사이즈를 주기 위해 estimatedItemSize 를 사용했다. 대략적인 셀의 크기를 먼저 조정한 후에 셀이 나중에 AutoLayout 될 때, 셀의 크기가 변경된다면 그 값이 다시 UICollectionViewFlowLayout에 전달되어 최종 사이즈가 결정되게 된다.
+        }
+    }
     
     // MARK: IBAction
     
@@ -76,13 +88,20 @@ extension ToDoListVC {
     
     func setLabel() {
         
-        routineNameLabel.setLabel(text: "English Master :-)", color: .white, font: .metroBold(size: 24))
+        if let routineName = routineName {
+            // 이전뷰에서 루틴 이름을 설정해서 받아 올 예정
+            routineNameLabel.setLabel(text: routineName, color: .white, font: .metroBold(size: 24))
+        } else {
+            routineNameLabel.setLabel(text: "English Master :-)", color: .white, font: .metroBold(size: 24))
+        }
         
         searchTextField.placeholder = "원하는 할 일을 찾을 수 있어요"
         searchTextField.returnKeyType = .done
         searchTextField.font = UIFont.appleRegular(size: 14)
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         // TextField가 수정될 때 마다 실행
+        
+        emptyLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: .appleRegular(size: 16))
 
     }
     
@@ -113,6 +132,7 @@ extension ToDoListVC {
         
         selectedCollectionView.delegate = self
         selectedCollectionView.dataSource = self
+//        selectedCollectionView.wid
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -165,7 +185,7 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
                             indexPath: IndexPath) -> CGSize {
         
         if collectionView == selectedCollectionView {
-            return CGSize(width: 100, height: collectionView.frame.height)
+            return CGSize(width: 300, height: self.selectRoutineView.frame.height)
         }
         else if collectionView == categoryCollectionView {
             return CGSize(width: 50, height: 50)
@@ -195,7 +215,8 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
         }
         else if collectionView == categoryCollectionView {
             return 0
-        } else {
+        }
+        else {
             return 9
         }
         
@@ -269,18 +290,21 @@ extension ToDoListVC: UICollectionViewDataSource {
         
         
         if collectionView == selectedCollectionView {
-            selectRoutineView.reloadInputViews()
-            let labelFrame = CGRect(x: 0, y: 0, width: view.frame.width-48, height: 23)
-            let labels: UILabel = UILabel(frame: labelFrame)
-            
+
             if selectedViewModel.items.count != 0 {
-                labels.removeFromSuperview()
-                selectRoutineView.reloadInputViews()
+                emptyLabel.isHidden = true
+                nextButton.isEnabled = true
+                nextButton.tintColor = .white
+                // 다음 버튼 활성화
+                
             } else {
-                labels.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: .appleRegular(size: 16))
-                selectRoutineView.addSubview(labels)
+                
+                emptyLabel.isHidden = false
+                nextButton.isEnabled = false
+                nextButton.tintColor = .gray4
+                // 다음버튼 비활성화
+                
             }
-            
             return selectedViewModel.items.count
         }
         
@@ -304,14 +328,14 @@ extension ToDoListVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == selectedCollectionView {
-            // x 버튼 클릭 시
-
+            // x 버튼 클릭 시 ( 선택 해제 )
+            
             listItemRemovede(value: indexPath.row)
             selectedCollectionView.reloadData()
             routineCollectionView.reloadData()
         }
         
-        if collectionView == categoryCollectionView {
+        else if collectionView == categoryCollectionView {
             
             categoryIndex = indexPath.row
             
@@ -339,6 +363,7 @@ extension ToDoListVC: UICollectionViewDataSource {
                 }
                 if check == false {
                     // 추가 안된 루틴이라면 -> 추가
+                    
                     listItemAdded(value: (cells?.routineNameLabel.text)!)
                     selectedCollectionView.reloadData()
                     routineCollectionView.reloadData()
@@ -346,6 +371,7 @@ extension ToDoListVC: UICollectionViewDataSource {
                 
             } else {
                 // selectedViewModel이 비어있다면? -> 무조건 추가
+                
                 listItemAdded(value: (cells?.routineNameLabel.text)!)
                 selectedCollectionView.reloadData()
                 routineCollectionView.reloadData()
