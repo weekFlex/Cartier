@@ -25,7 +25,6 @@ class ToDoListVC: UIViewController {
     
     // MARK: IBOutlet
     
-    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -46,7 +45,6 @@ class ToDoListVC: UIViewController {
     
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
         didSet {
-            
             collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
             // 동적 사이즈를 주기 위해 estimatedItemSize 를 사용했다. 대략적인 셀의 크기를 먼저 조정한 후에 셀이 나중에 AutoLayout 될 때, 셀의 크기가 변경된다면 그 값이 다시 UICollectionViewFlowLayout에 전달되어 최종 사이즈가 결정되게 된다.
         }
@@ -157,7 +155,7 @@ extension ToDoListVC {
         if textField.text == "" {
             // 검색어 비워두기
             searchText = nil
-            // 자동을 첫번째 카테고리 선택하기
+            // 자동으로 첫번째 카테고리 선택하기
             categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
             
         } else {
@@ -343,7 +341,7 @@ extension ToDoListVC: UICollectionViewDataSource {
         if collectionView == selectedCollectionView {
             // x 버튼 클릭 시 ( 선택 해제 )
             
-            listItemRemovede(value: indexPath.row)
+            listItemRemoved(value: indexPath.row)
             selectedCollectionView.reloadData()
             routineCollectionView.reloadData()
         }
@@ -397,7 +395,7 @@ extension ToDoListVC: UICollectionViewDataSource {
 
 extension ToDoListVC: SelectedItemViewDelegate {
 
-    func listItemRemovede(value: Int) {
+    func listItemRemoved(value: Int) {
         // 리스트에서 지우기
         selectedViewModel.items.remove(at: value)
     }

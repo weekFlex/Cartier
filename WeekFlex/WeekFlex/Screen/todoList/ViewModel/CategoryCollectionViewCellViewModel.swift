@@ -9,7 +9,8 @@ import Foundation
 
 protocol CategoryListItemPresentable {
     var categoryName: String? { get }
-    var categoryColor: String? { get }}
+    var categoryColor: String? { get }
+}
 
 struct CategoryCellItemViewModel: CategoryListItemPresentable {
     var categoryName: String?

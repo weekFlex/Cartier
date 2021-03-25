@@ -13,7 +13,7 @@ protocol SelectedItemPresentable {
 
 protocol SelectedItemViewDelegate {
     func listItemAdded(value: String)
-    func listItemRemovede(value: Int)
+    func listItemRemoved(value: Int)
 }
 
 struct SelectedCellItemViewModel: SelectedItemPresentable {
