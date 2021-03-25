@@ -10,16 +10,18 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var title: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        if let a = title.text{
-            print(a)
-        }
         
-        // Initialization code
+        self.view.layer.cornerRadius = 5
+        self.view.layer.masksToBounds = false
+        self.view.layer.borderWidth = 0.5
+        self.view.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).cgColor
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

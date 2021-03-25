@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import RxCocoa
+
 import RxSwift
 import RxDataSources
 
@@ -81,12 +81,25 @@ class MainHomeVC: UIViewController {
         
         setWeekly()
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
-        //        bindTableView()
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
         super.viewDidLoad()
     }
 }
 
 extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            
+            if editingStyle == .delete {
+                
+                viewModel.data.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+            } else if editingStyle == .insert {
+                
+            }
+        }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -103,7 +116,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         cell.title.text = "\(viewModel.data[indexPath.row].routineName)"
         let num = viewModel.data[indexPath.row].todos.count
         
-        for i in 0..<num {
+        for _ in 0..<num {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
@@ -123,24 +136,15 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             
         }
         
-        
-        
         cell.selectionStyle = .none
         
-        cell.layer.cornerRadius = 10
-        cell.contentView.layer.masksToBounds = true
         
-        cell.layer.shadowColor = UIColor.black.cgColor
+        let w = cell.stackView.frame.size.height
+        let h = cell.stackView.frame.size.height
         
-        cell.layer.shadowOffset = CGSize(width: 20, height: 0)
         
-        cell.layer.shadowRadius = 15.0
+        print(indexPath.row, " = ", h)
         
-        cell.layer.shadowOpacity = 0.4
-        
-        cell.layer.masksToBounds = false
-        
-        cell.layer.shadowPath = UIBezierPath(roundedRect:         cell.contentView.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
         
         return cell
     }
