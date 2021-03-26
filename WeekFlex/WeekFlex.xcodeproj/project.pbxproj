@@ -661,7 +661,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DUQE66MABG;
+				DEVELOPMENT_TEAM = WFRFQ5S6AR;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -683,7 +683,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DUQE66MABG;
+				DEVELOPMENT_TEAM = WFRFQ5S6AR;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -70,11 +70,12 @@ extension MyRoutineListVC {
     
     func setDelegate() {
         routineTableView.dataSource = self
-        
+        routineTableView.delegate = self
     }
 }
 
 extension MyRoutineListVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = viewModel?.items.count else { return 0 }
 
@@ -90,6 +91,30 @@ extension MyRoutineListVC: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension MyRoutineListVC: UITableViewDelegate {
     
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(named: "icon40DeleteWhite")
+        deleteAction.backgroundColor = .color1
+        
+        
+        let editAction = UIContextualAction(style: .normal, title: nil) { (_, _, completionHandler) in
+            completionHandler(true)
+        }
+        editAction.image = UIImage(named: "icon32Edit")
+        editAction.backgroundColor = .lightSalmon
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        
+        return configuration
+    }
 }
