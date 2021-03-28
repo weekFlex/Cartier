@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+<<<<<<< HEAD
       "filename" : "icon24StarN8.png",
       "idiom" : "universal",
       "scale" : "1x"
@@ -14,6 +15,10 @@
       "idiom" : "universal",
       "scale" : "3x",
       "filename" : "icon24StarN8@3x.png"
+=======
+      "filename" : "icon24StarN8.pdf",
+      "idiom" : "universal"
+>>>>>>> master
     }
   ],
   "info" : {

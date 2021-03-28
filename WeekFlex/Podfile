@@ -6,9 +6,7 @@ target 'WeekFlex' do
   use_frameworks!
 
   # Pods for WeekFlex
-pod 'RxSwift'
-pod 'RxCocoa'
-pod 'RxDataSources'
-
-
+  pod "RxSwift"
+  pod "RxCocoa"
+  pod 'Moya', '~> 14.0'
 end
