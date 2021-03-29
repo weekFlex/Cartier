@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B1041922607594800746FCF /* SelectRoutineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* SelectRoutineVC.swift */; };
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
+		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
 		9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E847260884E800EC9969 /* RoutineCell.swift */; };
 		9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */; };
 		9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */; };
@@ -57,6 +58,7 @@
 		45A572E8848738C512AB106E /* Pods-WeekFlex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.debug.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.debug.xcconfig"; sourceTree = "<group>"; };
 		9B1041912607594800746FCF /* SelectRoutineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoutineVC.swift; sourceTree = "<group>"; };
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineNameVC.swift; sourceTree = "<group>"; };
 		9B56E847260884E800EC9969 /* RoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCell.swift; sourceTree = "<group>"; };
 		9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				9B1041912607594800746FCF /* SelectRoutineVC.swift */,
+				9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				9B1041922607594800746FCF /* SelectRoutineVC.swift in Sources */,
 				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
+				9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
