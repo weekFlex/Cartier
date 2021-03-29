@@ -9,6 +9,14 @@ import UIKit
 
 class MakeRoutineNameVC: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var checkButton: UIButton!
+    
+    @IBOutlet weak var explainLabel: UILabel!
+    @IBOutlet weak var routineNameTextField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
