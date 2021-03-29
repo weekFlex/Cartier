@@ -7,15 +7,13 @@
 
 import Foundation
 import UIKit
-
 import RxSwift
-import RxDataSources
 
 class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
-    let viewModel = MainHomeVM()
+    var routineViewModel: MainRoutineListViewModel = MainRoutineListViewModel()
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
     let categories:[String] = ["1","3","3","8","1","0","0"]
     var shouldCollaps = true
@@ -93,7 +91,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             
             if editingStyle == .delete {
                 
-                viewModel.data.remove(at: indexPath.row)
+                routineViewModel.lists.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
             } else if editingStyle == .insert {
@@ -107,14 +105,14 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.data.count
+        return routineViewModel.lists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
-        cell.title.text = "\(viewModel.data[indexPath.row].routineName)"
-        let num = viewModel.data[indexPath.row].todos.count
+        cell.title.text = "\(routineViewModel.lists[indexPath.row].routineName)"
+        let num = routineViewModel.lists[indexPath.row].tasks.count
         
         for _ in 0..<num {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
@@ -125,7 +123,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             cell.stackView.addArrangedSubview(view)
             
             
-            //            let item = viewModel.data[indexPath.row].todos[i]
+            //            let item = routineViewModel.lists[indexPath.row].todos[i]
             //            var taskView = TaskListView(frame: self.view.frame)
             //
             //            taskView.star.image = UIImage(named: "icon24StarN" + "\(item.category)")

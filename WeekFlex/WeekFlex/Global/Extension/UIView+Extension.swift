@@ -2,31 +2,11 @@
 //  UIView+Extension.swift
 //  WeekFlex
 //
-<<<<<<< HEAD
-//  Created by dohan on 2021/03/24.
-=======
 //  Created by 선민승 on 2021/03/21.
->>>>>>> master
 //
 
 import UIKit
 
-
-<<<<<<< HEAD
-extension UIView {
-
-  func dropShadow(scale: Bool = true) {
-    layer.masksToBounds = false
-    layer.shadowColor = UIColor.black.cgColor
-    layer.shadowOpacity = 0.5
-    layer.shadowOffset = CGSize(width: 0, height: 0)
-    layer.shadowRadius = 2
-    layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-    layer.shouldRasterize = true
-    layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-  }
-
-=======
 
 extension UIView {
     
@@ -69,5 +49,19 @@ extension UIView {
         }
         
     }
->>>>>>> master
+    
+    //설명: UIView 사용 시 그림자 효과
+    //myView.dropShadow()
+    
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 2
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
 }

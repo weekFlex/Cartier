@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct TodoStruct {
     var todoTitle: String
     var category: Int
