@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2x5-xG-9cD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -332,7 +333,7 @@
                         <outlet property="headerHeight" destination="idF-iT-GcO" id="jeb-a6-TSD"/>
                         <outlet property="showFloatingBtn" destination="46A-Y5-8i9" id="BIc-49-e3U"/>
                         <outlet property="tableView" destination="55M-bn-jjY" id="wYA-ui-XWy"/>
-                        <outlet property="today" destination="Djg-Cb-H43" id="beo-aq-4Zl"/>
+                        <outlet property="todayLabel" destination="Djg-Cb-H43" id="izR-vm-Drf"/>
                         <outletCollection property="stars" destination="YmF-57-WIN" collectionClass="NSMutableArray" id="NSD-qr-p6i"/>
                         <outletCollection property="stars" destination="yQQ-4p-Vbm" collectionClass="NSMutableArray" id="wlv-wM-6rF"/>
                         <outletCollection property="stars" destination="0Ip-Io-vQQ" collectionClass="NSMutableArray" id="a1j-3B-VtW"/>

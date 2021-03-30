@@ -8,12 +8,15 @@
 import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
+    
     var routineViewModel: MainRoutineListViewModel = MainRoutineListViewModel()
+    var today: [String]!
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
     let categories:[String] = ["1","3","3","8","1","0","0"]
     var shouldCollaps = true
@@ -44,7 +47,7 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var getRoutineStack: UIStackView!
     @IBOutlet weak var addTaskStack: UIStackView!
     
-    @IBOutlet weak var today: UILabel!
+    @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet var days: [UILabel]!
     @IBOutlet var stars: [UIImageView]!
     @IBOutlet var dates: [UILabel]!
@@ -76,16 +79,21 @@ class MainHomeVC: UIViewController {
     //MARK: Life Cycle
     
     override func viewDidLoad() {
-        
+        print("start")
+        setDate()
         setWeekly()
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
         
         super.viewDidLoad()
     }
 }
 
+
+
 extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
+    //main table view
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             
@@ -148,9 +156,6 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     }
     
     
-    
-    
-    
 }
 
 extension MainHomeVC {
@@ -158,23 +163,26 @@ extension MainHomeVC {
     
     
     //MARK: function
+    private func setDate(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM-dd-e-EEEE"
+        let day = formatter.string(from:Date())
+        today = day.components(separatedBy: "-") // [0] = MMM, [1] = dd, [2] = e(1), [3] = EEEE(Monday)
+        print("setDate()")
+    }
     
     
-    
-    //    private func bindTableView(){
-    //        let cities = ["London", "Vienna", "Lisbon"]
-    //
-    //        let citiesOb: Observable<[String]> = Observable.of(cities)
-    //
-    //        citiesOb.bind(to: tableView.rx.items(cellIdentifier: "routineCell", cellType: RoutineCell.self)) { index, model, cell in
-    //            cell.title.text = model
-    //
-    //        }.disposed(by: bag)
-    //
-    //    }
-    //
     private func setWeekly(){
-        today.text = "Jan 15th, Friday"
+        if(today[1] == "1") {
+            todayLabel.text = today[0] + " " + today[1] + "st, " + today[3]
+        }else if(today[1] == "2") {
+            todayLabel.text = today[0] + " " + today[1] + "nd, " + today[3]
+        }else {
+            todayLabel.text = today![0] + " " + today[1] + "th, " + today[3]
+        }
+        
+        print("setWeekly()")
+        
         
         //일주일 시작 요일 받기
         var i = 0
