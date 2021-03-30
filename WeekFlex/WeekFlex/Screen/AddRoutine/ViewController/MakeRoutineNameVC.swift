@@ -91,6 +91,15 @@ extension MakeRoutineNameVC {
             checkButton.isEnabled = true
         }
         
+        if let count = textField.text?.count {
+            if count > 25 {
+                // 루틴 이름이 최대인 25글자를 넘는다면?
+                
+                textField.deleteBackward()
+                // 그 뒤에 글자들은 쳐져도 삭제된다
+            }
+        }
+        
     }
     
 }
