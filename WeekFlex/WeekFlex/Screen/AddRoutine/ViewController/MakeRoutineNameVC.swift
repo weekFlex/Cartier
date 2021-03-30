@@ -23,6 +23,17 @@ class MakeRoutineNameVC: UIViewController {
     
     // MARK: IBAction
     
+    
+    @IBAction func checkButtonDidTap(_ sender: Any) {
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SelectRoutineVC") as? SelectRoutineVC else {
+            return
+        }
+        
+        nextVC.routineName = self.routineNameTextField.text
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
