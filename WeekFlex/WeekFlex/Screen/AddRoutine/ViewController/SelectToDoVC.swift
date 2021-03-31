@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectRoutineVC: UIViewController {
+class SelectToDoVC: UIViewController {
     
     // MARK: Variable Part
     
@@ -74,7 +74,7 @@ class SelectRoutineVC: UIViewController {
 
 // MARK: Extension
 
-extension SelectRoutineVC {
+extension SelectToDoVC {
     
     // MARK: Function
     
@@ -166,7 +166,7 @@ extension SelectRoutineVC {
     
 }
 
-extension SelectRoutineVC: UITextFieldDelegate {
+extension SelectToDoVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
@@ -189,7 +189,7 @@ extension SelectRoutineVC: UITextFieldDelegate {
     }
 }
 
-extension SelectRoutineVC: UICollectionViewDelegateFlowLayout {
+extension SelectToDoVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
@@ -233,7 +233,7 @@ extension SelectRoutineVC: UICollectionViewDelegateFlowLayout {
     }
     
 }
-extension SelectRoutineVC: UICollectionViewDataSource {
+extension SelectToDoVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -427,7 +427,7 @@ extension SelectRoutineVC: UICollectionViewDataSource {
     }
 }
 
-extension SelectRoutineVC: SelectedItemViewDelegate {
+extension SelectToDoVC: SelectedItemViewDelegate {
 
     func listItemRemoved(value: Int) {
         // 리스트에서 지우기

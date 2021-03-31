@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Select RoutineVC-->
+        <!--Select To DoVC-->
         <scene sceneID="TSV-bZ-ZzS">
             <objects>
-                <viewController storyboardIdentifier="SelectRoutineVC" id="84J-78-AmK" customClass="SelectRoutineVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectToDoVC" id="84J-78-AmK" customClass="SelectToDoVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7yg-fr-fW0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
