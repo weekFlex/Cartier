@@ -27,7 +27,7 @@ class MakeRoutineNameVC: UIViewController {
     @IBAction func checkButtonDidTap(_ sender: Any) {
     // check Button 클릭 시 Action
         
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SelectRoutineVC") as? SelectRoutineVC else {
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SelectToDoVC") as? SelectToDoVC else {
             return
         }
         
