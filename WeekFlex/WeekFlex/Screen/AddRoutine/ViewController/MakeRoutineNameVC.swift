@@ -23,6 +23,22 @@ class MakeRoutineNameVC: UIViewController {
     
     // MARK: IBAction
     
+    
+    @IBAction func checkButtonDidTap(_ sender: Any) {
+    // check Button 클릭 시 Action
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SelectRoutineVC") as? SelectRoutineVC else {
+            return
+        }
+        
+        nextVC.routineName = self.routineNameTextField.text
+        // 루틴 이름을 넘겨줌
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        // navigationController를 이용해 다음 뷰로 이동
+        
+    }
+    
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {

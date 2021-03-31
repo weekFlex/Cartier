@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LaX-Bm-Gag">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fIX-jk-IgO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -27,6 +27,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0Tz-Tc-Fty" secondAttribute="height" multiplier="1:1" id="Avg-BB-0dZ"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="backButtonDidTap:" destination="84J-78-AmK" eventType="touchUpInside" id="iNb-fk-wqM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="루틴 Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTN-1v-mO3">
                                 <rect key="frame" x="24" y="132.5" width="366" height="21"/>
@@ -326,7 +329,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cI9-lT-7f8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127.53623188405798" y="73.660714285714278"/>
+            <point key="canvasLocation" x="2645" y="-16"/>
         </scene>
         <!--Make Routine NameVC-->
         <scene sceneID="mbo-S8-y6E">
@@ -352,6 +355,9 @@
                                             <constraint firstAttribute="width" secondItem="bRn-cx-I6P" secondAttribute="height" multiplier="1:1" id="hoB-hd-o9B"/>
                                         </constraints>
                                         <state key="normal" image="icon32CheckInactive"/>
+                                        <connections>
+                                            <action selector="checkButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="XWN-Mj-f5X"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GB-UK-YR7">
                                         <rect key="frame" x="48" y="5.5" width="318" height="21"/>
@@ -400,6 +406,7 @@
                             <constraint firstItem="e4I-cq-X3y" firstAttribute="leading" secondItem="VUk-fr-pgD" secondAttribute="leading" id="wOL-uy-n3R"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aZT-DS-HRx"/>
                     <connections>
                         <outlet property="backButton" destination="duX-xj-s7F" id="aeC-wA-JGP"/>
                         <outlet property="checkButton" destination="bRn-cx-I6P" id="7kx-go-KqW"/>
@@ -410,7 +417,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOg-E3-lBF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1016" y="-16"/>
+            <point key="canvasLocation" x="1926.0869565217392" y="-16.071428571428569"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="375-Py-KbL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="fIX-jk-IgO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oXW-2r-D2W">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LaX-Bm-Gag" kind="relationship" relationship="rootViewController" id="2eG-sI-rP0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vux-cs-Rp6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1015.9420289855074" y="-16.071428571428569"/>
         </scene>
     </scenes>
     <resources>
