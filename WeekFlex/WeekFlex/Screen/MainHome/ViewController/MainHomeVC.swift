@@ -14,9 +14,13 @@ class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
-    
+    var mainViewModel: MainHomeViewModel = MainHomeViewModel()
     var routineViewModel: MainRoutineListViewModel = MainRoutineListViewModel()
-    var today: [String]!
+    var today: [String]!    //mmm-dd-e-eeee
+//    var startDayString: [String]! //mmm-dd-e-eeee
+//    var startDay: Date!
+    
+    
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
     let categories:[String] = ["1","3","3","8","1","0","0"]
     var shouldCollaps = true
@@ -167,8 +171,13 @@ extension MainHomeVC {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM-dd-e-EEEE"
         let day = formatter.string(from:Date())
-        today = day.components(separatedBy: "-") // [0] = MMM, [1] = dd, [2] = e(1), [3] = EEEE(Monday)
-        print("setDate()")
+        today = day.components(separatedBy: "-") // [0] = MMM, [1] = dd, [2] = e(1), [3] = EEEE(Sunday)
+        guard let interval = Double(today[2]) else{ return }
+//        startDay = Date(timeIntervalSinceNow: -(86400 * (interval-1))) //1은 시작요일
+//        startDayString = formatter.string(from: startDay).components(separatedBy: "-")
+        
+//        print("start: ", startDayString)
+        print(today[0],today[1],today[2],today[3])
     }
     
     
@@ -181,20 +190,22 @@ extension MainHomeVC {
             todayLabel.text = today![0] + " " + today[1] + "th, " + today[3]
         }
         
-        print("setWeekly()")
-        
-        
         //일주일 시작 요일 받기
         var i = 0
         for day in days {
-            day.text = weekDays[i]
+            day.text = weekDays[i%7]
             i += 1
         }
         
         //일주일 시작 날짜 받기
         var j = 0
+//        let ddFormatter = DateFormatter()
+//        ddFormatter.dateFormat = "dd"
+        
         for date in dates {
-            date.text = String(j+1)
+            let arr = mainViewModel.lists[0].date.components(separatedBy: "-")
+            date.text = arr[1]
+//            date.text = ddFormatter.string(from: Date(timeInterval: Double(86400 * j), since: startDay))
             j += 1
         }
         
