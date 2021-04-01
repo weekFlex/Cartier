@@ -11,14 +11,14 @@ protocol CalendarItemPresentable {
     var date: String { get }
     var day: Int { get }
     var representCategory: String? { get }
-    var routines: [MainRoutineItemViewModel]? { get }
+    var routines: [MainRoutineItemViewModel] { get }
 }
 
 struct CalendarItemViewModel: CalendarItemPresentable {
     var date: String
     var day: Int
     var representCategory: String?
-    var routines: [MainRoutineItemViewModel]?
+    var routines: [MainRoutineItemViewModel]
 }
 
 struct MainHomeViewModel {

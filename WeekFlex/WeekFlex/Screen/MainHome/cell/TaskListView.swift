@@ -9,9 +9,10 @@ import UIKit
 
 class TaskListView: UIView {
     private let xibName = "TaskListView"
-    @IBOutlet weak var star: UIImageView!
     @IBOutlet weak var taskTitle: UILabel!
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var star: UIButton!
+    
     
     
     override init(frame: CGRect) {

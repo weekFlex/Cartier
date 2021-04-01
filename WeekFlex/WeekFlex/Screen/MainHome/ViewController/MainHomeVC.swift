@@ -17,6 +17,7 @@ class MainHomeVC: UIViewController {
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
     var routineViewModel: MainRoutineListViewModel = MainRoutineListViewModel()
     var today: [String]!    //mmm-dd-e-eeee
+    var currentDay: Int!
 //    var startDayString: [String]! //mmm-dd-e-eeee
 //    var startDay: Date!
     
@@ -83,7 +84,7 @@ class MainHomeVC: UIViewController {
     //MARK: Life Cycle
     
     override func viewDidLoad() {
-        print("start")
+        
         setDate()
         setWeekly()
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
@@ -95,10 +96,10 @@ class MainHomeVC: UIViewController {
 }
 
 
-
+//MARK: TableView
 extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
-    //main table view
     
+    //스와이프 삭제 액션
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             
             if editingStyle == .delete {
@@ -111,38 +112,35 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             }
         }
     
+    //셀 높이가 내용에 따라 동적으로 변하도록
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return routineViewModel.lists.count
+        return mainViewModel.lists[currentDay].routines.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
-        cell.title.text = "\(routineViewModel.lists[indexPath.row].routineName)"
-        let num = routineViewModel.lists[indexPath.row].tasks.count
         
-        for _ in 0..<num {
+        //루틴이름
+        var cellData = mainViewModel.lists[currentDay].routines[indexPath.row]
+        cell.title.text = "\(cellData.routineName)"
+        let num = cellData.tasks.count
+        
+        for i in 0..<num {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
+            view.star.setImage(UIImage(named:cellData.tasks[i].category ), for: .normal)
+            view.taskTitle.text = cellData.tasks[i].taskTitle
+            view.time.text = cellData.tasks[i].time
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
-            
-            
-            //            let item = routineViewModel.lists[indexPath.row].todos[i]
-            //            var taskView = TaskListView(frame: self.view.frame)
-            //
-            //            taskView.star.image = UIImage(named: "icon24StarN" + "\(item.category)")
-            //            taskView.taskTitle.text = item.todoTitle
-            //            taskView.time.text = "\(String(describing: item.startTime))" + "-" + "\(String(describing: item.endTime))"
-            //            print(self.view)
-            //            self.view.addSubview(taskView)
             
         }
         
@@ -172,11 +170,7 @@ extension MainHomeVC {
         formatter.dateFormat = "MMM-dd-e-EEEE"
         let day = formatter.string(from:Date())
         today = day.components(separatedBy: "-") // [0] = MMM, [1] = dd, [2] = e(1), [3] = EEEE(Sunday)
-        guard let interval = Double(today[2]) else{ return }
-//        startDay = Date(timeIntervalSinceNow: -(86400 * (interval-1))) //1은 시작요일
-//        startDayString = formatter.string(from: startDay).components(separatedBy: "-")
-        
-//        print("start: ", startDayString)
+        currentDay = (Int(today[2]) ?? 2 + 5) % 7
         print(today[0],today[1],today[2],today[3])
     }
     
