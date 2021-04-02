@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ToDoListVC: UIViewController {
+class SelectToDoVC: UIViewController {
     
     // MARK: Variable Part
     
@@ -52,6 +52,12 @@ class ToDoListVC: UIViewController {
     
     // MARK: IBAction
     
+    @IBAction func backButtonDidTap(_ sender: Any) {
+    // 뒤로가기 버튼 클릭 시 Action
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
@@ -74,7 +80,7 @@ class ToDoListVC: UIViewController {
 
 // MARK: Extension
 
-extension ToDoListVC {
+extension SelectToDoVC {
     
     // MARK: Function
     
@@ -149,14 +155,13 @@ extension ToDoListVC {
     @objc func textFieldDidChange(_ textField: UITextField) {
         // TextField가 수정될 때 마다 실행 될 함수
         
-        // 카테고리 선택을 취소
-        categoryCollectionView.deselectItem(at: [0,categoryIndex], animated: false)
+        // 전체 카테고리로 이동
+        categoryIndex = 0
+        categoryCollectionView.selectItem(at: [0,categoryIndex], animated: false, scrollPosition: .right)
         
         if textField.text == "" {
             // 검색어 비워두기
             searchText = nil
-            // 자동으로 첫번째 카테고리 선택하기
-            categoryCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .right)
             
         } else {
             searchText = textField.text
@@ -167,7 +172,7 @@ extension ToDoListVC {
     
 }
 
-extension ToDoListVC: UITextFieldDelegate {
+extension SelectToDoVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
@@ -190,7 +195,7 @@ extension ToDoListVC: UITextFieldDelegate {
     }
 }
 
-extension ToDoListVC: UICollectionViewDelegateFlowLayout {
+extension SelectToDoVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
@@ -234,7 +239,7 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
     }
     
 }
-extension ToDoListVC: UICollectionViewDataSource {
+extension SelectToDoVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -279,20 +284,43 @@ extension ToDoListVC: UICollectionViewDataSource {
             } else {
                 // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
                 
-                let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }[indexPath.row]
-                // 선택한 카테고리로 필터링
-                cell.configure(with: itemViewModel)
-                if selectedViewModel.items.count > 0 {
-                    for i in 0...selectedViewModel.items.count-1 {
-                        if itemViewModel.listName == selectedViewModel.items[i].listName {
-                            // 만약에 내가 선택한 루틴이라면?
-                            cell.selected()
-                            // 배경 컬러주기
-                            break
+                if categoryIndex == 0 {
+                    // 전체 카테고리라면?
+                    
+                    let itemViewModel = todolistViewModel.items[indexPath.row]
+                    cell.configure(with: itemViewModel)
+                    if selectedViewModel.items.count > 0 {
+                        for i in 0...selectedViewModel.items.count-1 {
+                            if itemViewModel.listName == selectedViewModel.items[i].listName {
+                                // 만약에 내가 선택한 루틴이라면?
+                                cell.selected()
+                                // 배경 컬러주기
+                                break
+                            }
                         }
                     }
+                    
+                } else {
+                    // 특정 카테고리를 보고있다면?
+                    
+                    let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }[indexPath.row]
+                    // 선택한 카테고리로 필터링
+                    
+                    cell.configure(with: itemViewModel)
+                    if selectedViewModel.items.count > 0 {
+                        for i in 0...selectedViewModel.items.count-1 {
+                            if itemViewModel.listName == selectedViewModel.items[i].listName {
+                                // 만약에 내가 선택한 루틴이라면?
+                                cell.selected()
+                                // 배경 컬러주기
+                                break
+                            }
+                        }
+                    }
+                    
                 }
             }
+            
             return cell
         }
     }
@@ -331,8 +359,13 @@ extension ToDoListVC: UICollectionViewDataSource {
                 
             } else {
                 // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
-                let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }
-                return itemViewModel.count
+                if categoryIndex == 0 {
+                    return todolistViewModel.items.count
+                } else {
+                    let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }
+                    return itemViewModel.count
+                }
+
             }
         }
     }
@@ -350,9 +383,16 @@ extension ToDoListVC: UICollectionViewDataSource {
             
             categoryIndex = indexPath.row
             
+            // // 검색어가 있는 상태에서 카테고리를 선택했다면? 경우
+            
             searchText = nil
+            // 검색어 제거
             searchTextField.text = nil
-            // 검색어가 있는 상태에서 카테고리를 선택했다면 검색어 제거
+            // 텍스트 필드 비워두기
+            textFieldView.backgroundColor = .gray1
+            searchTextField.endEditing(false)
+            // 키보드 내리기
+            
             
             routineCollectionView.reloadData()
         }
@@ -393,7 +433,7 @@ extension ToDoListVC: UICollectionViewDataSource {
     }
 }
 
-extension ToDoListVC: SelectedItemViewDelegate {
+extension SelectToDoVC: SelectedItemViewDelegate {
 
     func listItemRemoved(value: Int) {
         // 리스트에서 지우기

@@ -23,11 +23,12 @@ struct CategoryCollectionViewCellViewModel {
     
     init () {
         
+        let item0 = CategoryCellItemViewModel(categoryName: "전체", categoryColor: "icon12StarN3")
         let item1 = CategoryCellItemViewModel(categoryName: "운동", categoryColor: "icon12StarN3")
         let item2 = CategoryCellItemViewModel(categoryName: "공부", categoryColor: "icon12StarN3")
         let item3 = CategoryCellItemViewModel(categoryName: "개발", categoryColor: "icon12StarN3")
         
-        items.append(contentsOf: [item1, item2, item3])
+        items.append(contentsOf: [item0, item1, item2, item3])
     }
     
 }
