@@ -23,7 +23,6 @@ class MyRoutineListVC: UIViewController {
     
     // table view
     @IBOutlet var routineTableView: UITableView!
-    @IBOutlet var routineTableViewHeight: NSLayoutConstraint!
     
     // new routine button
     @IBOutlet var routineCreateButtonView: UIView!
@@ -59,8 +58,6 @@ extension MyRoutineListVC {
         
         // table view
         routineTableView.separatorStyle = .none
-        let count = viewModel?.items.count ?? 0
-        routineTableViewHeight.constant = CGFloat(count*98)
         
         // new routine button
         routineCreateButtonView.setBorder(borderColor: .black, borderWidth: 3)
@@ -82,19 +79,19 @@ extension MyRoutineListVC: UITableViewDataSource {
     }
     
     // pacing between sections
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 8
     }
     
     // section header 를 투명하게 해준다.
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 각 섹션에 대해서 하나의 아이템만 넣어준다. 
+        // 각 섹션에 대해서 하나의 아이템만 넣어준다.
         return 1
     }
     
