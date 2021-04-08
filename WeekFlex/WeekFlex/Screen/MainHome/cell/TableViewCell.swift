@@ -23,6 +23,15 @@ class TableViewCell: UITableViewCell {
         self.view.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).cgColor
         
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for subview in stackView.subviews {
+                stackView.removeArrangedSubview(subview)
+                NSLayoutConstraint.deactivate(subview.constraints)
+                subview.removeFromSuperview()
+            }
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

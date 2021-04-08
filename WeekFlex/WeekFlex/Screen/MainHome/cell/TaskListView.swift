@@ -26,9 +26,6 @@ class TaskListView: UIView {
         
     }
     private func loadView() {
-//        let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
-//        view.frame = bounds
-//        addSubview(view)
         
     }
     

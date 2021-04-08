@@ -21,6 +21,7 @@ struct TaskItemViewModel: TaskItemPresentable {
     var category: String
     var time: String?
     var done: Bool?
+    var loaded: Bool
 }
 
 
@@ -33,6 +34,7 @@ protocol MainRoutineItemPresentable {
 struct MainRoutineItemViewModel: MainRoutineItemPresentable {
     var routineName: String
     var tasks: [TaskItemViewModel]
+    
 }
 
 
@@ -41,19 +43,23 @@ struct MainRoutineItemViewModel: MainRoutineItemPresentable {
 
 struct MainRoutineListViewModel {
     var lists: [MainRoutineItemViewModel] = []
+    var lists2: [MainRoutineItemViewModel] = []
     
     init() {
         let routine1 = MainRoutineItemViewModel(routineName: "영어마스터", tasks:[
-            TaskItemViewModel(taskTitle: "영어원서 읽기", category: "icon24StarN1", time: "9:00am - 10:00am" ),
-            TaskItemViewModel(taskTitle: "영드보기", category: "icon24StarN3", time: "10:20am - 11:00am" ),
-            TaskItemViewModel(taskTitle: "단어외우기", category: "icon24StarN3" , time: "10:00am - 11:00am")
+            TaskItemViewModel(taskTitle: "영어원서 읽기", category: "icon24StarN1", time: "9:00am - 10:00am", loaded: false ),
+            TaskItemViewModel(taskTitle: "영드보기", category: "icon24StarN3", time: "10:20am - 11:00am", loaded: false ),
+            TaskItemViewModel(taskTitle: "단어외우기", category: "icon24StarN3" , time: "10:00am - 11:00am", loaded: false)
         ])
         
         let routine2 = MainRoutineItemViewModel(routineName: "시험공부", tasks:[
-            TaskItemViewModel(taskTitle: "전공1", category: "icon24StarN3", time: "2:00pm - 3:00pm" ),
-            TaskItemViewModel(taskTitle: "교양", category: "icon24StarN8", time: nil )
+            TaskItemViewModel(taskTitle: "전공1", category: "icon24StarN3", time: "2:00pm - 3:00pm", loaded: false ),
+            TaskItemViewModel(taskTitle: "교양", category: "icon24StarN8", time: nil, loaded: false )
         ])
         
         lists.append(contentsOf: [routine1, routine2])
+        
+        lists2.append(contentsOf: [routine1,routine2,routine1])
+        
     }
 }

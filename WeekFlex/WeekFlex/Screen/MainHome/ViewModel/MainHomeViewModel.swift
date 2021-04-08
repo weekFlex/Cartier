@@ -25,12 +25,12 @@ struct MainHomeViewModel {
     var lists: [CalendarItemViewModel] = []
     init(){
         let routineList = MainRoutineListViewModel()
-        let day1 = CalendarItemViewModel(date: "Mar-29-Monday", day: 2, representCategory: "icon12StarN1", routines: routineList.lists)
-        let day2 = CalendarItemViewModel(date: "Mar-30-Tuesday", day: 3, representCategory: "icon12StarN3", routines: routineList.lists)
-        let day3 = CalendarItemViewModel(date: "Mar-31-Wednesday", day: 4, representCategory: "icon12StarN8", routines: routineList.lists)
-        let day4 = CalendarItemViewModel(date: "Apr-01-Thursday", day: 5, representCategory: nil, routines: routineList.lists)
+        let day1 = CalendarItemViewModel(date: "Mar-29-Monday", day: 2, representCategory: "icon24StarN1", routines: routineList.lists)
+        let day2 = CalendarItemViewModel(date: "Mar-30-Tuesday", day: 3, representCategory: "icon24StarN3", routines: routineList.lists2)
+        let day3 = CalendarItemViewModel(date: "Mar-31-Wednesday", day: 4, representCategory: "icon24StarN8", routines: routineList.lists)
+        let day4 = CalendarItemViewModel(date: "Apr-01-Thursday", day: 5, representCategory: "icon24StarN3", routines: routineList.lists2)
         let day5 = CalendarItemViewModel(date: "Apr-02-Friday", day: 6, representCategory: nil, routines: routineList.lists)
-        let day6 = CalendarItemViewModel(date: "Apr-03-Saturday", day: 7, representCategory: nil, routines: routineList.lists)
+        let day6 = CalendarItemViewModel(date: "Apr-03-Saturday", day: 7, representCategory: nil, routines: routineList.lists2)
         let day7 = CalendarItemViewModel(date: "Apr-04-Sunday", day: 1, representCategory: nil, routines: routineList.lists)
         
         lists.append(contentsOf: [day1,day2,day3,day4,day5,day6,day7])
