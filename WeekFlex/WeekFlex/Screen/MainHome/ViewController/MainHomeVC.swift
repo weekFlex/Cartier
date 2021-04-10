@@ -20,6 +20,7 @@ class MainHomeVC: UIViewController {
     var currentDay: Int = 0 {
         didSet {
             changeDate()
+            tableView.reloadData()
         }
     }
     
@@ -187,6 +188,10 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         let width = calendarCollectionView.frame.width / 7
         return CGSize(width: width, height: self.calendarCollectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        currentDay = indexPath.row
     }
     
     
