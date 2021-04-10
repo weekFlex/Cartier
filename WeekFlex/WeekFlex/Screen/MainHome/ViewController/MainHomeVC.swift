@@ -51,13 +51,9 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var getRoutineBtn: UIButton!
     @IBOutlet weak var getRoutineStack: UIStackView!
     @IBOutlet weak var addTaskStack: UIStackView!
-    @IBOutlet var calendarItems: [UIStackView]!
     
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var todayLabel: UILabel!
-    @IBOutlet var days: [UILabel]!
-    @IBOutlet var stars: [UIImageView]!
-    @IBOutlet var dates: [UILabel]!
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -105,8 +101,20 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         
         if editingStyle == .delete {
             
-            routineViewModel.lists.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let alert = UIAlertController(title: "이번주의 해당 루틴 전체가 삭제됩니다.", message: "이대로 삭제를 진행할까요?", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "그만두기", style: .default, handler : nil)
+            let delete = UIAlertAction(title: "삭제하기", style: .cancel) { (action) in
+                self.mainViewModel.lists[self.currentDay].routines.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(delete)
+            present(alert,animated: false, completion: nil)
+
+            
+            
             
         } else if editingStyle == .insert {
             
