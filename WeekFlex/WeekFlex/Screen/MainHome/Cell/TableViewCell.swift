@@ -9,7 +9,9 @@ import UIKit
 
 
 class TableViewCell: UITableViewCell {
-
+    
+    //MARK: Variable
+    
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var title: UILabel!
@@ -38,5 +40,6 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     
 }

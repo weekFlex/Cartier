@@ -61,17 +61,17 @@
                                         <rect key="frame" x="20" y="10" width="374" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="tH9-SK-L8c">
-                                            <size key="itemSize" width="40" height="95"/>
+                                            <size key="itemSize" width="94" height="74"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="calendarCell" id="0oI-Qy-o6z" customClass="CalendarCell" customModule="WeekFlex" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2.5" width="94" height="95"/>
+                                                <rect key="frame" x="0.0" y="13" width="94" height="74"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bz7-WM-aTp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="95"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="74"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcn-Fg-LmE">
@@ -93,18 +93,29 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95l-ai-frq">
+                                                            <rect key="frame" x="40" y="66.5" width="14" height="2"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="2" id="FGL-gu-bbd"/>
+                                                                <constraint firstAttribute="width" constant="14" id="skt-am-qRU"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Gfp-jH-shz" firstAttribute="top" secondItem="4s3-2L-Zpv" secondAttribute="bottom" constant="2" id="4qb-6Y-fUs"/>
                                                         <constraint firstItem="Gfp-jH-shz" firstAttribute="centerX" secondItem="Bz7-WM-aTp" secondAttribute="centerX" id="51v-rl-y4q"/>
+                                                        <constraint firstItem="95l-ai-frq" firstAttribute="centerX" secondItem="Bz7-WM-aTp" secondAttribute="centerX" id="7DB-oy-yPe"/>
                                                         <constraint firstItem="kcn-Fg-LmE" firstAttribute="centerX" secondItem="Bz7-WM-aTp" secondAttribute="centerX" id="NLk-fC-4nG"/>
                                                         <constraint firstItem="kcn-Fg-LmE" firstAttribute="top" secondItem="Bz7-WM-aTp" secondAttribute="top" constant="10" id="Q3V-wq-uaV"/>
+                                                        <constraint firstItem="95l-ai-frq" firstAttribute="top" secondItem="Gfp-jH-shz" secondAttribute="bottom" constant="2" id="TSo-xV-avT"/>
                                                         <constraint firstItem="4s3-2L-Zpv" firstAttribute="centerX" secondItem="Bz7-WM-aTp" secondAttribute="centerX" id="UVu-oD-Ugp"/>
                                                         <constraint firstItem="4s3-2L-Zpv" firstAttribute="top" secondItem="kcn-Fg-LmE" secondAttribute="bottom" constant="2" id="xrQ-z5-Mq4"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
-                                                <size key="customSize" width="94" height="95"/>
+                                                <size key="customSize" width="94" height="74"/>
                                                 <connections>
+                                                    <outlet property="bar" destination="95l-ai-frq" id="Jas-si-iao"/>
                                                     <outlet property="date" destination="Gfp-jH-shz" id="GeZ-xC-44q"/>
                                                     <outlet property="day" destination="kcn-Fg-LmE" id="GCE-zM-eoa"/>
                                                     <outlet property="star" destination="4s3-2L-Zpv" id="jun-yU-NVc"/>

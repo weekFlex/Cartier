@@ -21,6 +21,7 @@ class MainHomeVC: UIViewController {
         didSet {
             changeDate()
             tableView.reloadData()
+            calendarCollectionView.reloadData()
         }
     }
     
@@ -85,7 +86,7 @@ class MainHomeVC: UIViewController {
     override func viewDidLoad() {
         setDate()
         setWeekly()
-
+        
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -113,7 +114,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             alert.addAction(cancel)
             alert.addAction(delete)
             present(alert,animated: false, completion: nil)
-
+            
             
             
             
@@ -137,23 +138,23 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
         
         //루틴이름
-        var cellData = mainViewModel.lists[currentDay].routines[indexPath.row]
+        let cellData = mainViewModel.lists[currentDay].routines[indexPath.row]
         cell.title.text = "\(cellData.routineName)"
         let num = cellData.tasks.count
         print("cell: ", indexPath.row, num)
         for i in 0..<num {
+            let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
+            view.cellIndex = indexPath.row
+            view.viewIndex = i
+            view.delegate = self
+            view.frame = cell.bounds
+            view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+            view.heightAnchor.constraint(equalToConstant: 63).isActive = true
+            view.configure(with: cellData.tasks[i])
             
-                let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
-                view.frame = cell.bounds
-                view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-                view.heightAnchor.constraint(equalToConstant: 63).isActive = true
-                view.star.setImage(UIImage(named:cellData.tasks[i].category ), for: .normal)
-                view.taskTitle.text = cellData.tasks[i].taskTitle
-                view.time.text = cellData.tasks[i].time
-                cell.stackView.translatesAutoresizingMaskIntoConstraints = false
-                cell.stackView.addArrangedSubview(view)
-                cellData.tasks[i].loaded = true
-           
+            cell.stackView.translatesAutoresizingMaskIntoConstraints = false
+            cell.stackView.addArrangedSubview(view)
+            
             
             
         }
@@ -163,6 +164,19 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         
         
         return cell
+    }
+    
+    
+}
+
+extension MainHomeVC: TaskListViewDelegate {
+    func didTabbedStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
+//        mainViewModel.lists[currentDay].routines[cellIndex].tasks[viewIndex].done = isDone
+//        tableView.reloadData()
+    }
+    
+    func didTabbedMeatballs(cellIndex: Int, viewIndex: Int) {
+        
     }
     
     
@@ -179,6 +193,11 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         let itemViewModel = mainViewModel.lists[indexPath.row]
         cell.configure(with: itemViewModel)
         cell.day.text = weekDays[indexPath.row]
+        if currentDay == indexPath.row {
+            cell.bar.layer.opacity = 1
+        }else{
+            cell.bar.layer.opacity = 0
+        }
         return cell
     }
     
@@ -192,6 +211,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currentDay = indexPath.row
+        self.calendarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
     
     
@@ -242,48 +262,48 @@ extension MainHomeVC {
         
         
         //일주일 시작 요일 받기
-//        var i = 0
-//        for day in days {
-//            day.text = weekDays[i%7]
-//            i += 1
-//        }
-//
-//        //일주일 시작 날짜 받기
-//        var j = 0
-//        for date in dates {
-//            let arr = mainViewModel.lists[j].date.components(separatedBy: "-")
-//            date.text = arr[1]
-//            j += 1
-//        }
-//
-//        //가장 많은 카테고리 배열 받기
-//
-//        var k = 0
-//        for star in stars {
-//            if(mainViewModel.lists[k].representCategory == nil) {
-//                star.alpha = 0
-//            } else {
-//                guard let represent = mainViewModel.lists[k].representCategory else { return }
-//                star.image = UIImage(named: represent)
-//            }
-//            k += 1
-//        }
+        //        var i = 0
+        //        for day in days {
+        //            day.text = weekDays[i%7]
+        //            i += 1
+        //        }
+        //
+        //        //일주일 시작 날짜 받기
+        //        var j = 0
+        //        for date in dates {
+        //            let arr = mainViewModel.lists[j].date.components(separatedBy: "-")
+        //            date.text = arr[1]
+        //            j += 1
+        //        }
+        //
+        //        //가장 많은 카테고리 배열 받기
+        //
+        //        var k = 0
+        //        for star in stars {
+        //            if(mainViewModel.lists[k].representCategory == nil) {
+        //                star.alpha = 0
+        //            } else {
+        //                guard let represent = mainViewModel.lists[k].representCategory else { return }
+        //                star.image = UIImage(named: represent)
+        //            }
+        //            k += 1
+        //        }
     }
     
-//    private func binding() {
-//        let calendarTapGestureListener = UITapGestureRecognizer(target: self, action: #selector(itemTapped))
-//        for i in 0..<calendarItems.count {
-//            stars[i].isUserInteractionEnabled = true
-//            stars[i].addGestureRecognizer(calendarTapGestureListener)
-//        }
-//        todayLabel.isUserInteractionEnabled = true
-//        todayLabel.addGestureRecognizer(calendarTapGestureListener)
-//    }
-//
-//    @objc private func itemTapped(){
-//        print("tapped!")
-//    }
-//
+    //    private func binding() {
+    //        let calendarTapGestureListener = UITapGestureRecognizer(target: self, action: #selector(itemTapped))
+    //        for i in 0..<calendarItems.count {
+    //            stars[i].isUserInteractionEnabled = true
+    //            stars[i].addGestureRecognizer(calendarTapGestureListener)
+    //        }
+    //        todayLabel.isUserInteractionEnabled = true
+    //        todayLabel.addGestureRecognizer(calendarTapGestureListener)
+    //    }
+    //
+    //    @objc private func itemTapped(){
+    //        print("tapped!")
+    //    }
+    //
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }

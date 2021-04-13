@@ -135,7 +135,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E26211F25F8CAC1007D28F0 /* cell */ = {
+		0E26211F25F8CAC1007D28F0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				0E26212025F8CB14007D28F0 /* TableViewCell.swift */,
@@ -144,7 +144,7 @@
 				0E26216326014B23007D28F0 /* TaskListView.swift */,
 				0E795357261F6D0900345659 /* CalendarCell.swift */,
 			);
-			path = cell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		0E7953072611CF2400345659 /* Recovered References */ = {
@@ -157,7 +157,7 @@
 		0EAD6A1225F25E8C001BD490 /* MainHome */ = {
 			isa = PBXGroup;
 			children = (
-				0E26211F25F8CAC1007D28F0 /* cell */,
+				0E26211F25F8CAC1007D28F0 /* Cell */,
 				0EAD6A2725F4D004001BD490 /* ViewModel */,
 				0EAD6A1425F26D1A001BD490 /* ViewController */,
 				0EAD6A1325F26D0A001BD490 /* Storyboard */,

@@ -16,6 +16,7 @@ class CalendarCell: UICollectionViewCell {
     @IBOutlet weak var day: UILabel!
     @IBOutlet weak var star: UIImageView!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var bar: UIView!
     
     
     //MARK: LifeCycle
