@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Foundation
 
-//MARK: Protocol
-protocol TaskListViewDelegate: AnyObject {
-    func didTabbedStar(cellIndex: Int, viewIndex:Int, isDone:Bool)
-    func didTabbedMeatballs(cellIndex: Int, viewIndex:Int)
+
+protocol TaskListCellDelegate: class {
+    func didTabStar(cellIndex: Int, viewIndex: Int, isDone:Bool)
+    func didTabMeatBall(cellIndex: Int, viewIndex: Int)
 }
 
 
@@ -21,7 +22,7 @@ class TaskListView: UIView {
     private let xibName = "TaskListView"
     var cellIndex = 0   //이 view가 속한 cell의 index
     var viewIndex = 0   //이 view의 index
-    var delegate: TaskListViewDelegate?
+    weak var delegate: TaskListCellDelegate?
     var category = ""
     var isDone: Bool = false {
         didSet{
@@ -47,12 +48,11 @@ class TaskListView: UIView {
     @IBAction func starTabbed(_ sender: Any) {
         isDone = !isDone
         print(isDone)
-        self.delegate?.didTabbedStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
+        self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
     }
     
     @IBAction func meatBallTabbed(_ sender: Any) {
-        
-        self.delegate?.didTabbedMeatballs(cellIndex: cellIndex, viewIndex: viewIndex)
+        self.delegate?.didTabMeatBall(cellIndex: cellIndex, viewIndex: viewIndex)
     }
     
     
@@ -66,6 +66,7 @@ class TaskListView: UIView {
     }
     
     func configure(with viewModel: TaskItemPresentable) {
+        
         taskTitle.text = viewModel.taskTitle
         time.text = viewModel.time
         isDone = viewModel.done

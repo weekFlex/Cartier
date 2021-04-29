@@ -9,28 +9,28 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import CoreData
+
 
 class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
-    var routineViewModel: MainRoutineListViewModel = MainRoutineListViewModel()
     var today: [String]!    //mmm-dd-e-eeee
-    var currentDay: Int = 0 {
+    var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
-            changeDate()
+            changeDate()    //상단 날짜표시
             tableView.reloadData()
             calendarCollectionView.reloadData()
         }
     }
-    
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
     var shouldCollaps = true
     var isFloating = false
     let bag = DisposeBag()
     lazy var floatingStacks:[UIStackView] = [self.getRoutineStack, self.addTaskStack]
-    lazy var dimView: UIView = {
+    lazy var dimView: UIView = {    //플로팅버튼 배경
         let view = UIView(frame: self.view.frame)
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         view.alpha = 0
@@ -144,6 +144,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         print("cell: ", indexPath.row, num)
         for i in 0..<num {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
+            
             view.cellIndex = indexPath.row
             view.viewIndex = i
             view.delegate = self
@@ -154,8 +155,6 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
-            
-            
             
         }
         
@@ -169,20 +168,41 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
 }
 
-extension MainHomeVC: TaskListViewDelegate {
-    func didTabbedStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
-//        mainViewModel.lists[currentDay].routines[cellIndex].tasks[viewIndex].done = isDone
-//        tableView.reloadData()
-    }
+extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate{
     
-    func didTabbedMeatballs(cellIndex: Int, viewIndex: Int) {
+    func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
+        print("star")
+        
         
     }
     
+    func didTabMeatBall(cellIndex: Int, viewIndex: Int) {
+        print("meatBall") 
+        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else {
+                    return
+                }
+        popupVC.delegate = self
+        popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
+        popupVC.cellIndex = cellIndex
+        popupVC.viewIndex = viewIndex
+        popupVC.modalPresentationStyle = .overCurrentContext
+
+        self.present(popupVC, animated: true, completion: nil)
+    }
     
+    func didTabEdit(cellIndex: Int, viewIndex: Int) {
+        print("edit")
+    }
+    
+    func didTabDelete(cellIndex: Int, viewIndex: Int) {
+        print("delete")
+        
+    }
 }
 
-extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7

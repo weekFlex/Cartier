@@ -11,9 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskListView" customModule="WeekFlex" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="TaskListView" customModule="WeekFlex" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="359" height="63"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="TaskListView" customModule="WeekFlex" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="63"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jis-bk-aqH">
                     <rect key="frame" x="24" y="15" width="36" height="17"/>
@@ -22,7 +21,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-FD-T1B">
-                    <rect key="frame" x="343" y="12.5" width="16" height="22"/>
+                    <rect key="frame" x="374" y="12.5" width="16" height="22"/>
                     <state key="normal" image="icon16More"/>
                     <connections>
                         <action selector="meatBallTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xpe-kc-pW7"/>
@@ -65,7 +64,7 @@
                 <outlet property="taskTitle" destination="jis-bk-aqH" id="67I-v9-NFZ"/>
                 <outlet property="time" destination="X4t-xz-ZPH" id="wAH-7D-Ejq"/>
             </connections>
-            <point key="canvasLocation" x="232.60869565217394" y="-230.69196428571428"/>
+            <point key="canvasLocation" x="126" y="-201"/>
         </view>
     </objects>
     <resources>

@@ -39,12 +39,12 @@ struct MainRoutineItemViewModel: MainRoutineItemPresentable {
 
 //list 구조체
 
-
 struct MainRoutineListViewModel {
     var lists: [MainRoutineItemViewModel] = []
     var lists2: [MainRoutineItemViewModel] = []
     
     init() {
+        //날짜별로 구분위해 두개 생성!
         let routine1 = MainRoutineItemViewModel(routineName: "영어마스터", tasks:[
             TaskItemViewModel(taskTitle: "영어원서 읽기", category: "icon24StarN1", time: "9:00am - 10:00am", done: false ),
             TaskItemViewModel(taskTitle: "영드보기", category: "icon24StarN3", time: "10:20am - 11:00am", done: false ),
@@ -57,7 +57,6 @@ struct MainRoutineListViewModel {
         ])
         
         lists.append(contentsOf: [routine1, routine2])
-        
         lists2.append(contentsOf: [routine1,routine2,routine1])
         
     }
