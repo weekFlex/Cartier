@@ -28,6 +28,9 @@ class EditPopUpVC: UIViewController {
     @IBAction func deleteButton(_ sender: Any) {
         delegate?.didTabDelete(cellIndex: cellIndex, viewIndex: viewIndex)
     }
+    @IBAction func cancelButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     
@@ -35,6 +38,10 @@ class EditPopUpVC: UIViewController {
         super.viewDidLoad()
         setLayout()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { super.touchesBegan(touches, with: event)
+        if let touch = touches.first , touch.view == self.view { self.dismiss(animated: true, completion: nil) } }
+
 }
 
 extension EditPopUpVC {

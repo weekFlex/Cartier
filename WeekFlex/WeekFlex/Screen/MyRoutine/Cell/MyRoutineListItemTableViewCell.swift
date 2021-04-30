@@ -31,11 +31,11 @@ class MyRoutineListItemTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let bottomSpace: CGFloat = 8
-        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        let bottomSpace: CGFloat = 8
+//        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
+//    }
     
     // MARK: Function
 
