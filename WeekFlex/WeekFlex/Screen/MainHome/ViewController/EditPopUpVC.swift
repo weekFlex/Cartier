@@ -14,14 +14,21 @@ protocol EditPopUpDelegate: AnyObject {
 }
 class EditPopUpVC: UIViewController {
     
+    //MARK: Variable
+    
     var cellIndex: Int = 0
     var viewIndex: Int = 0
     var taskTitle: String = ""
     weak var delegate: EditPopUpDelegate?
     
+    //MARK: IBOutlet
+    
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var taskLabel: UILabel!
 
+    
+    //MARK: IBAction
+    
     @IBAction func editButton(_ sender: Any) {
         delegate?.didTabEdit(cellIndex: cellIndex, viewIndex: viewIndex)
     }
@@ -33,6 +40,7 @@ class EditPopUpVC: UIViewController {
     }
     
     
+    //MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

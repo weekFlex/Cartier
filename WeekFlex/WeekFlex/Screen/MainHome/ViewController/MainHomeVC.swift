@@ -64,7 +64,7 @@ class MainHomeVC: UIViewController {
     
     //MARK: IBAction
     
-    @IBAction func buttonDidTap(_ sender: UIButton) {
+    @IBAction func buttonDidTap(_ sender: UIButton) {       //Expended Header 펼치는 버튼
         if shouldCollaps {
             animateView(isCollaps: false,  height: 0)
         }else {
@@ -72,7 +72,7 @@ class MainHomeVC: UIViewController {
         }
     }
     
-    @IBAction func floatingBtnDidTap(_ sender: Any) {
+    @IBAction func floatingBtnDidTap(_ sender: Any) {       //우측 하단 플로팅 버튼
         if isFloating {
             hideFloating()
         }else{
@@ -85,8 +85,6 @@ class MainHomeVC: UIViewController {
     
     override func viewDidLoad() {
         setDate()
-        setWeekly()
-        
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -100,7 +98,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
     //스와이프 삭제 액션
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
+    
         if editingStyle == .delete {
             
             let alert = UIAlertController(title: "이번주의 해당 루틴 전체가 삭제됩니다.", message: "이대로 삭제를 진행할까요?", preferredStyle: .alert)
@@ -114,11 +112,6 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             alert.addAction(cancel)
             alert.addAction(delete)
             present(alert,animated: false, completion: nil)
-            
-            
-            
-            
-        } else if editingStyle == .insert {
             
         }
     }
@@ -134,7 +127,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("tableView load<<<<<<")
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
         
         //루틴이름
@@ -142,6 +135,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         cell.title.text = "\(cellData.routineName)"
         let num = cellData.tasks.count
         print("cell: ", indexPath.row, num)
+        //셀(루틴) 안에 커스텀 뷰 추가(할일들)
         for i in 0..<num {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
             
@@ -152,7 +146,6 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
             view.configure(with: cellData.tasks[i])
-            
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
             
@@ -160,33 +153,27 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         
         cell.selectionStyle = .none
         
-        
-        
         return cell
     }
     
     
 }
 
-extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate{
+extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
         print("star")
-        
-        
     }
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int) {
         print("meatBall")
-        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else {
-                    return
-                }
+        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.delegate = self
         popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
         popupVC.modalPresentationStyle = .overCurrentContext
-
+        //모달 화면 띄우기
         self.present(popupVC, animated: true, completion: nil)
     }
     
@@ -202,8 +189,6 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate{
 
 extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }
@@ -212,6 +197,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         guard let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath)as? CalendarCell else { return CalendarCell()}
         let itemViewModel = mainViewModel.lists[indexPath.row]
         cell.configure(with: itemViewModel)
+        //상단 날짜 표시 라벨과 날짜 하단 흰색 바
         cell.day.text = weekDays[indexPath.row]
         if currentDay == indexPath.row {
             cell.bar.layer.opacity = 1
@@ -224,7 +210,6 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
-        
         let width = calendarCollectionView.frame.width / 7
         return CGSize(width: width, height: self.calendarCollectionView.frame.height)
     }
@@ -233,8 +218,6 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         currentDay = indexPath.row
         self.calendarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
-    
-    
     
     
 }
@@ -277,53 +260,8 @@ extension MainHomeVC {
         }
     }
     
+  
     
-    private func setWeekly(){
-        
-        
-        //일주일 시작 요일 받기
-        //        var i = 0
-        //        for day in days {
-        //            day.text = weekDays[i%7]
-        //            i += 1
-        //        }
-        //
-        //        //일주일 시작 날짜 받기
-        //        var j = 0
-        //        for date in dates {
-        //            let arr = mainViewModel.lists[j].date.components(separatedBy: "-")
-        //            date.text = arr[1]
-        //            j += 1
-        //        }
-        //
-        //        //가장 많은 카테고리 배열 받기
-        //
-        //        var k = 0
-        //        for star in stars {
-        //            if(mainViewModel.lists[k].representCategory == nil) {
-        //                star.alpha = 0
-        //            } else {
-        //                guard let represent = mainViewModel.lists[k].representCategory else { return }
-        //                star.image = UIImage(named: represent)
-        //            }
-        //            k += 1
-        //        }
-    }
-    
-    //    private func binding() {
-    //        let calendarTapGestureListener = UITapGestureRecognizer(target: self, action: #selector(itemTapped))
-    //        for i in 0..<calendarItems.count {
-    //            stars[i].isUserInteractionEnabled = true
-    //            stars[i].addGestureRecognizer(calendarTapGestureListener)
-    //        }
-    //        todayLabel.isUserInteractionEnabled = true
-    //        todayLabel.addGestureRecognizer(calendarTapGestureListener)
-    //    }
-    //
-    //    @objc private func itemTapped(){
-    //        print("tapped!")
-    //    }
-    //
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }
