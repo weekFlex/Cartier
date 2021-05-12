@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26212025F8CB14007D28F0 /* TableViewCell.swift */; };
+		0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26212125F8CB14007D28F0 /* TableViewCell.xib */; };
+		0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26216026014B0B007D28F0 /* TaskListView.xib */; };
+		0E26216426014B23007D28F0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26216326014B23007D28F0 /* TaskListView.swift */; };
+		0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952D5260A65F500345659 /* UIView+Extension.swift */; };
+		0E7952EF2610B4A500345659 /* MainRoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */; };
+		0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7953302613B4E100345659 /* MainHomeViewModel.swift */; };
+		0E795358261F6D0900345659 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E795357261F6D0900345659 /* CalendarCell.swift */; };
+		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
+		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
+		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
+		9B1041922607594800746FCF /* ToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* ToDoListVC.swift */; };
 		9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* SelectToDoVC.swift */; };
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
@@ -21,7 +33,6 @@
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
 		9E5FD60C25F4CBD5008EB927 /* MyRoutineAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */; };
 		9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD66426045B0C008EB927 /* UIColor+Extension.swift */; };
-		9E5FD6C0260733DF008EB927 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD6BF260733DF008EB927 /* UIView+Extension.swift */; };
 		9E5FD6EE26073996008EB927 /* Metropolis-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6DC26073995008EB927 /* Metropolis-ExtraLightItalic.otf */; };
 		9E5FD6EF26073996008EB927 /* Metropolis-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6DD26073995008EB927 /* Metropolis-ExtraBoldItalic.otf */; };
 		9E5FD6F026073996008EB927 /* Metropolis-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6DE26073995008EB927 /* Metropolis-LightItalic.otf */; };
@@ -55,6 +66,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E26212025F8CB14007D28F0 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		0E26212125F8CB14007D28F0 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		0E26216026014B0B007D28F0 /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
+		0E26216326014B23007D28F0 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		0E7952D5260A65F500345659 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoutineListViewModel.swift; sourceTree = "<group>"; };
+		0E7953302613B4E100345659 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
+		0E795357261F6D0900345659 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
+		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
+		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
 		45A572E8848738C512AB106E /* Pods-WeekFlex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.debug.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.debug.xcconfig"; sourceTree = "<group>"; };
 		9B1041912607594800746FCF /* SelectToDoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectToDoVC.swift; sourceTree = "<group>"; };
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -70,7 +92,6 @@
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineAddVC.swift; sourceTree = "<group>"; };
 		9E5FD66426045B0C008EB927 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		9E5FD6BF260733DF008EB927 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9E5FD6DC26073995008EB927 /* Metropolis-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-ExtraLightItalic.otf"; sourceTree = "<group>"; };
 		9E5FD6DD26073995008EB927 /* Metropolis-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
 		9E5FD6DE26073995008EB927 /* Metropolis-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-LightItalic.otf"; sourceTree = "<group>"; };
@@ -119,6 +140,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E26211F25F8CAC1007D28F0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0E26212025F8CB14007D28F0 /* TableViewCell.swift */,
+				0E26212125F8CB14007D28F0 /* TableViewCell.xib */,
+				0E26216026014B0B007D28F0 /* TaskListView.xib */,
+				0E26216326014B23007D28F0 /* TaskListView.swift */,
+				0E795357261F6D0900345659 /* CalendarCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0E7953072611CF2400345659 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		0EAD6A1225F25E8C001BD490 /* MainHome */ = {
+			isa = PBXGroup;
+			children = (
+				0E26211F25F8CAC1007D28F0 /* Cell */,
+				0EAD6A2725F4D004001BD490 /* ViewModel */,
+				0EAD6A1425F26D1A001BD490 /* ViewController */,
+				0EAD6A1325F26D0A001BD490 /* Storyboard */,
+			);
+			path = MainHome;
+			sourceTree = "<group>";
+		};
+		0EAD6A1325F26D0A001BD490 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0EAD6A1525F26D45001BD490 /* MainHome.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		0EAD6A1425F26D1A001BD490 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */,
+				0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0EAD6A2725F4D004001BD490 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */,
+				0E7953302613B4E100345659 /* MainHomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		5B0EC4BF602B2818AB901AEE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +362,7 @@
 				9EC0DAF525EEB9D1007D04D0 /* Products */,
 				5B0EC4BF602B2818AB901AEE /* Pods */,
 				89C830E0284170263E9F022C /* Frameworks */,
+				0E7953072611CF2400345659 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -344,7 +422,7 @@
 				9EC0DB1025EEBA5E007D04D0 /* UILabel+Extension.swift */,
 				9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */,
 				9E5FD66426045B0C008EB927 /* UIColor+Extension.swift */,
-				9E5FD6BF260733DF008EB927 /* UIView+Extension.swift */,
+				0E7952D5260A65F500345659 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -352,6 +430,8 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				0EAD6A1225F25E8C001BD490 /* MainHome */,
+				9BC81A9D25FA80AD001B1D83 /* todoList */,
 				9BC81A9D25FA80AD001B1D83 /* AddRoutine */,
 				9E5FD5FE25F4CABB008EB927 /* MyRoutine */,
 				9E6760C525F0BF6B00436D5C /* Login */,
@@ -425,6 +505,7 @@
 				9E5FD6F326073996008EB927 /* Metropolis-Black.otf in Resources */,
 				9E5FD6F626073996008EB927 /* Metropolis-RegularItalic.otf in Resources */,
 				9E6760C925F0BF8900436D5C /* Login.storyboard in Resources */,
+				0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */,
 				9EC0DB0425EEB9D4007D04D0 /* LaunchScreen.storyboard in Resources */,
 				9E5FD6F026073996008EB927 /* Metropolis-LightItalic.otf in Resources */,
 				9E5FD6F926073996008EB927 /* Metropolis-MediumItalic.otf in Resources */,
@@ -438,6 +519,8 @@
 				9E5FD6F126073996008EB927 /* Metropolis-Regular.otf in Resources */,
 				9E5FD6F426073996008EB927 /* Metropolis-BlackItalic.otf in Resources */,
 				9EC0DAFF25EEB9D1007D04D0 /* Main.storyboard in Resources */,
+				0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */,
+				0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */,
 				9E5FD6F226073996008EB927 /* Metropolis-ExtraBold.otf in Resources */,
 				9E5FD6EE26073996008EB927 /* Metropolis-ExtraLightItalic.otf in Resources */,
 				9E5FD6FB26073996008EB927 /* Metropolis-Thin.otf in Resources */,
@@ -495,25 +578,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EC0DB1125EEBA5E007D04D0 /* UILabel+Extension.swift in Sources */,
-				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
+				0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */,
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
+				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
+				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
+				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
+				0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */,
+				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
+				9B1041922607594800746FCF /* ToDoListVC.swift in Sources */,
+				0E795358261F6D0900345659 /* CalendarCell.swift in Sources */,
+				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
+				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
 				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
 				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
 				9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
+				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
+				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */,
-				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9E5FD60C25F4CBD5008EB927 /* MyRoutineAddVC.swift in Sources */,
+				0E7952EF2610B4A500345659 /* MainRoutineListViewModel.swift in Sources */,
 				9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */,
-				9E5FD6C0260733DF008EB927 /* UIView+Extension.swift in Sources */,
 				9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
