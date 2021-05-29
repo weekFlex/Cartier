@@ -47,7 +47,6 @@ class TaskListView: UIView {
     //MARK: IBAction
     @IBAction func starTabbed(_ sender: Any) {
         isDone = !isDone
-        print(isDone)
         self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
     }
     
