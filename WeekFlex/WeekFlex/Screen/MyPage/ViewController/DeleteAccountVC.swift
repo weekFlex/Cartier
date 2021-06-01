@@ -27,24 +27,9 @@ class DeleteAccountVC: UIViewController {
         didCheck()
     }
     
-//    @IBAction func didCheck(_ sender: UIButton) {
-//        sender.isSelected.toggle()
-//        isChecked.value = !isChecked.value
-//        print(isChecked.value)
-//        if(sender.isSelected){
-//            continueBtn.isSelected.toggle()
-//        }
-//    }
-    
-    
     func setLayout(){
-        
-//        continueBtn.setBackgroundColor(UIColor(displayP3Red: 24, green: 24, blue: 24, alpha: 1), for: .normal)
-//        continueBtn.setBackgroundColor(UIColor(displayP3Red: 24, green: 24, blue: 24, alpha: 1), for: .selected)
-//        continueBtn.setBackgroundColor(UIColor(displayP3Red: 204/255, green: 204/255, blue: 204/255, alpha: 1), for: .disabled)
         background.layer.cornerRadius = 5
         continueBtn.layer.cornerRadius = 5
-//
         continueBtn.isEnabled = false
         
     }
@@ -68,6 +53,7 @@ class DeleteAccountVC: UIViewController {
                 }
 
             }).disposed(by: bag)
-  
     }
+    
+    
 }
