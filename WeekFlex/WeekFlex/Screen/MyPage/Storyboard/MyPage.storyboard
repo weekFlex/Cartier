@@ -558,6 +558,9 @@
                                 <state key="normal" title="계정 탈퇴하기">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTabDeleteAccountBtn:" destination="2YC-Vs-U1Z" eventType="touchUpInside" id="SfH-o1-ai8"/>
+                                </connections>
                             </button>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yK9-Tx-N1Z">
                                 <rect key="frame" x="24" y="467.66666666666674" width="342" height="92"/>

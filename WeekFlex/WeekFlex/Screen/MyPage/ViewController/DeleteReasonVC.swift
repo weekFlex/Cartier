@@ -20,7 +20,7 @@ class DeleteReasonVC: UIViewController{
     @IBOutlet weak var textView: UITextView!
     
     
-    @IBAction func didCheckReason(_ sender: UIButton) {
+    @IBAction func didCheckReason(_ sender: UIButton) {         //기타 제외 다른 선택지 클릭
         for idx in 0..<reasonBtns.count {
             reasonBtns[idx].isSelected = false
         }
@@ -35,7 +35,7 @@ class DeleteReasonVC: UIViewController{
         })
     }
     
-    @IBAction func didCheckEtc(_ sender: UIButton) {
+    @IBAction func didCheckEtc(_ sender: UIButton) {            //기타 클릭
         for idx in 0..<reasonBtns.count {
             reasonBtns[idx].isSelected = false
         }
@@ -52,6 +52,22 @@ class DeleteReasonVC: UIViewController{
     @IBAction func didTabBackBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func didTabDeleteAccountBtn(_ sender: Any) {
+        let actionSheetController = UIAlertController(title: """
+                탈퇴하기를 누르면 되돌릴 수 없습니다.
+                정말 탈퇴 하시겠습니까?
+                """, message: nil, preferredStyle: .actionSheet )
+        
+        let actionDelete = UIAlertAction(title: "탈퇴하기" , style: .destructive, handler: {action in })
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        actionSheetController.addAction(actionDelete)
+        actionSheetController.addAction(cancel)
+        
+        self.present(actionSheetController, animated: true, completion: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +108,6 @@ class DeleteReasonVC: UIViewController{
                         """
                 textView.textColor = .gray3
             }
-        })
+        }).disposed(by: bag)
     }
 }
