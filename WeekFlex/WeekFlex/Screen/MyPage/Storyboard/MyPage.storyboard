@@ -362,6 +362,9 @@
                                     <constraint firstAttribute="height" constant="32" id="nda-kY-85K"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="icon32BackBlack"/>
+                                <connections>
+                                    <action selector="didTabBackbtn:" destination="O7j-yV-oM7" eventType="touchUpInside" id="yMT-jE-mqz"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tkT-va-Ths"/>
@@ -582,6 +585,9 @@
                                     <constraint firstAttribute="height" constant="32" id="Y7l-iB-e0g"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="icon32BackBlack"/>
+                                <connections>
+                                    <action selector="didTabBackBtn:" destination="2YC-Vs-U1Z" eventType="touchUpInside" id="cbV-o8-XcB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="l95-c7-Ste"/>

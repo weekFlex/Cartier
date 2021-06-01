@@ -20,6 +20,9 @@ class DeleteAccountVC: UIViewController {
     @IBOutlet weak var checkBtn: UIButton!
     @IBOutlet weak var continueBtn: UIButton!
     
+    @IBAction func didTabBackbtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +36,6 @@ class DeleteAccountVC: UIViewController {
         continueBtn.isEnabled = false
         
     }
-    
-    
-    
     
     func didCheck(){
         //유의사항 동의버튼
