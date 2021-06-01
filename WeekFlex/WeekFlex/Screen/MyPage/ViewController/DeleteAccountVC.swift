@@ -43,7 +43,7 @@ class DeleteAccountVC: UIViewController {
 //        continueBtn.setBackgroundColor(UIColor(displayP3Red: 24, green: 24, blue: 24, alpha: 1), for: .selected)
 //        continueBtn.setBackgroundColor(UIColor(displayP3Red: 204/255, green: 204/255, blue: 204/255, alpha: 1), for: .disabled)
         background.layer.cornerRadius = 5
-        continueBtn.layer.cornerRadius = 8
+        continueBtn.layer.cornerRadius = 5
 //
         continueBtn.isEnabled = false
         
@@ -61,10 +61,10 @@ class DeleteAccountVC: UIViewController {
                 self.checkBtn.isSelected = state
                 self.continueBtn.isEnabled = state
                 if(state){
-                    self.continueBtn.backgroundColor = UIColor(displayP3Red: 24/255, green: 24/255, blue: 24/255, alpha: 1)
+                    self.continueBtn.backgroundColor = .black
                     
                 }else{
-                    self.continueBtn.backgroundColor = UIColor(displayP3Red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
+                    self.continueBtn.backgroundColor = .gray2
                 }
 
             }).disposed(by: bag)
