@@ -17,8 +17,10 @@
 		0E795358261F6D0900345659 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E795357261F6D0900345659 /* CalendarCell.swift */; };
 		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
 		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
+		0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */; };
+		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
+		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
-		9B1041922607594800746FCF /* ToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* ToDoListVC.swift */; };
 		9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* SelectToDoVC.swift */; };
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
@@ -76,6 +78,9 @@
 		0E795357261F6D0900345659 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
 		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
+		0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReasonVC.swift; sourceTree = "<group>"; };
+		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
 		45A572E8848738C512AB106E /* Pods-WeekFlex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.debug.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.debug.xcconfig"; sourceTree = "<group>"; };
 		9B1041912607594800746FCF /* SelectToDoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectToDoVC.swift; sourceTree = "<group>"; };
@@ -194,6 +199,32 @@
 				0E7953302613B4E100345659 /* MainHomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0ED11289265FD4B200677330 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				0ED1129626623B0E00677330 /* ViewController */,
+				0ED1128A265FD4BC00677330 /* Storyboard */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		0ED1128A265FD4BC00677330 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0ED11293265FD56500677330 /* MyPage.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		0ED1129626623B0E00677330 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0ED1129726623B2800677330 /* DeleteAccountVC.swift */,
+				0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5B0EC4BF602B2818AB901AEE /* Pods */ = {
@@ -430,8 +461,8 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				0ED11289265FD4B200677330 /* MyPage */,
 				0EAD6A1225F25E8C001BD490 /* MainHome */,
-				9BC81A9D25FA80AD001B1D83 /* todoList */,
 				9BC81A9D25FA80AD001B1D83 /* AddRoutine */,
 				9E5FD5FE25F4CABB008EB927 /* MyRoutine */,
 				9E6760C525F0BF6B00436D5C /* Login */,
@@ -509,6 +540,7 @@
 				9EC0DB0425EEB9D4007D04D0 /* LaunchScreen.storyboard in Resources */,
 				9E5FD6F026073996008EB927 /* Metropolis-LightItalic.otf in Resources */,
 				9E5FD6F926073996008EB927 /* Metropolis-MediumItalic.otf in Resources */,
+				0ED11294265FD56500677330 /* MyPage.storyboard in Resources */,
 				9E5FD6FD26073996008EB927 /* Metropolis-ExtraLight.otf in Resources */,
 				9EC0DB0125EEB9D4007D04D0 /* Assets.xcassets in Resources */,
 				9E5FD6FC26073996008EB927 /* Metropolis-Bold.otf in Resources */,
@@ -582,10 +614,12 @@
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
 				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
 				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
+				0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
+				0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */,
 				0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */,
 				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
-				9B1041922607594800746FCF /* ToDoListVC.swift in Sources */,
+				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
 				0E795358261F6D0900345659 /* CalendarCell.swift in Sources */,
 				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,

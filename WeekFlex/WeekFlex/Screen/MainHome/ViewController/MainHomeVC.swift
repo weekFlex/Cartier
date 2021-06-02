@@ -134,7 +134,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         let cellData = mainViewModel.lists[currentDay].routines[indexPath.row]
         cell.title.text = "\(cellData.routineName)"
         let num = cellData.tasks.count
-        print("cell: ", indexPath.row, num)
+        
         //셀(루틴) 안에 커스텀 뷰 추가(할일들)
         for i in 0..<num {
             let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
@@ -249,7 +249,7 @@ extension MainHomeVC {
     }
     
     private func changeDate(){
-        print("changeDate()")
+        
         let selectedDate = mainViewModel.lists[currentDay].date.components(separatedBy: "-")
         if(selectedDate[1] == "1") {
             todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
