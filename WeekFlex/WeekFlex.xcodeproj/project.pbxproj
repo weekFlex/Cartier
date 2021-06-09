@@ -19,7 +19,7 @@
 		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
 		0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */; };
 		0EC381B4266D189A00438A74 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC381B3266D189A00438A74 /* Review.storyboard */; };
-		0EC381B7266D18C700438A74 /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC381B6266D18C700438A74 /* ReviewVC.swift */; };
+		0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */; };
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
@@ -82,7 +82,7 @@
 		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
 		0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReasonVC.swift; sourceTree = "<group>"; };
 		0EC381B3266D189A00438A74 /* Review.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Review.storyboard; sourceTree = "<group>"; };
-		0EC381B6266D18C700438A74 /* ReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
+		0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHomeVC.swift; sourceTree = "<group>"; };
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		0EC381B1266D187800438A74 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0EC381B6266D18C700438A74 /* ReviewVC.swift */,
+				0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -662,7 +662,7 @@
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
-				0EC381B7266D18C700438A74 /* ReviewVC.swift in Sources */,
+				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */,
