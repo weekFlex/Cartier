@@ -64,6 +64,10 @@
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="eFz-A3-vYp" id="1Cs-Sl-Dqt"/>
+                                    <outlet property="delegate" destination="eFz-A3-vYp" id="Yqw-m0-Nhg"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RZa-LK-xUZ"/>
@@ -81,6 +85,12 @@
                             <constraint firstItem="ifN-jg-tQS" firstAttribute="leading" secondItem="RZa-LK-xUZ" secondAttribute="leading" id="xU3-Ou-2jx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="month" destination="Gex-Si-WZk" id="4Fl-9I-EVq"/>
+                        <outlet property="nextButton" destination="M36-T2-V3S" id="Gte-pw-v2S"/>
+                        <outlet property="prevButton" destination="4So-Y7-fEd" id="3c2-dv-5QX"/>
+                        <outlet property="reviewList" destination="ifN-jg-tQS" id="2jH-3a-zey"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTp-FY-klc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

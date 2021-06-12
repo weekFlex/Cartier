@@ -10,13 +10,41 @@ import UIKit
 
 class ReviewHomeVC: UIViewController {
     
+    // MARK: Variable Part
+    
+    var reviewViewModel: ReviewCollectionViewCellViewModel = ReviewCollectionViewCellViewModel()
+    
+    
+    // MARK: IBOutlet
+    @IBOutlet weak var month: UILabel!
+    @IBOutlet weak var prevButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var reviewList: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
+        reviewList.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: "reviewCell")
         
     }
     
     func setLayout(){
         
     }
+}
+
+extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return reviewViewModel.items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = reviewList.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath) as! ReviewCell
+        let reviewItemViewModel = reviewViewModel.items[indexPath.row]
+        cell.configure(with: reviewItemViewModel)
+        
+        return cell
+    }
+    
+    
 }
