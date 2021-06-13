@@ -11,6 +11,7 @@ class ReviewCell: UICollectionViewCell {
     
     
 
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var reviewCharacter: UIImageView!
@@ -21,6 +22,7 @@ class ReviewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setLayout()
     }
     
     
@@ -30,6 +32,10 @@ class ReviewCell: UICollectionViewCell {
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
         
+    }
+    
+    func setLayout(){
+        self.view.layer.cornerRadius = 3
     }
 
 }

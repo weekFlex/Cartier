@@ -33,7 +33,7 @@ class ReviewHomeVC: UIViewController {
     }
 }
 
-extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource{
+extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return reviewViewModel.items.count
     }
@@ -44,6 +44,13 @@ extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource{
         cell.configure(with: reviewItemViewModel)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = reviewList.frame.width
+        
+        return CGSize(width: width, height: 160)
     }
     
     

@@ -29,9 +29,10 @@ struct ReviewCollectionViewCellViewModel {
         let item2 = ReviewItemViewModel(date: "12월 7일 ~ 12월 13일", title: "12월 둘째주", description: "하하tj설명내용설명회고내용")
         let item3 = ReviewItemViewModel(date: "12월 14일 ~ 12월 20일", title: "와아", description: "하하")
         let item4 = ReviewItemViewModel(date: "12월 21일 ~ 12월 27일", title: "클스마스", description: "great!")
+        let item5 = ReviewItemViewModel(date: "12월 28일 ~ 1월 4일", title: "새해첫해", description: "ㅏ아아아아아 ~~~~~!")
         
         
-        items.append(contentsOf: [item1, item2, item3, item4])
+        items.append(contentsOf: [item1, item2, item3, item4, item5])
         
     }
     

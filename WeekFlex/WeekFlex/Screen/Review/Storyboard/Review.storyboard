@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,9 +45,9 @@
                                 <state key="normal" image="icon-32-back-black"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ifN-jg-tQS">
-                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BQG-WQ-0Mw">
+                                <rect key="frame" x="16" y="131" width="382" height="731"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BQG-WQ-0Mw">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -76,13 +75,13 @@
                             <constraint firstItem="Gex-Si-WZk" firstAttribute="top" secondItem="RZa-LK-xUZ" secondAttribute="top" constant="30" id="30l-ry-QWM"/>
                             <constraint firstItem="M36-T2-V3S" firstAttribute="centerY" secondItem="4So-Y7-fEd" secondAttribute="centerY" id="5TU-gu-98v"/>
                             <constraint firstItem="Gex-Si-WZk" firstAttribute="centerX" secondItem="FbM-Nn-rD9" secondAttribute="centerX" id="7W0-pX-lWd"/>
-                            <constraint firstItem="RZa-LK-xUZ" firstAttribute="trailing" secondItem="ifN-jg-tQS" secondAttribute="trailing" id="CiH-f2-TpS"/>
+                            <constraint firstItem="RZa-LK-xUZ" firstAttribute="trailing" secondItem="ifN-jg-tQS" secondAttribute="trailing" constant="16" id="CiH-f2-TpS"/>
                             <constraint firstAttribute="trailing" secondItem="M36-T2-V3S" secondAttribute="trailing" constant="16" id="SbC-q4-spz"/>
                             <constraint firstItem="Gex-Si-WZk" firstAttribute="centerY" secondItem="4So-Y7-fEd" secondAttribute="centerY" id="hWA-BQ-kd4"/>
                             <constraint firstItem="4So-Y7-fEd" firstAttribute="leading" secondItem="RZa-LK-xUZ" secondAttribute="leading" constant="16" id="kiT-YI-E99"/>
                             <constraint firstItem="RZa-LK-xUZ" firstAttribute="bottom" secondItem="ifN-jg-tQS" secondAttribute="bottom" id="mCp-yo-OPi"/>
-                            <constraint firstItem="ifN-jg-tQS" firstAttribute="top" secondItem="Gex-Si-WZk" secondAttribute="bottom" id="wnC-mt-3vv"/>
-                            <constraint firstItem="ifN-jg-tQS" firstAttribute="leading" secondItem="RZa-LK-xUZ" secondAttribute="leading" id="xU3-Ou-2jx"/>
+                            <constraint firstItem="ifN-jg-tQS" firstAttribute="top" secondItem="Gex-Si-WZk" secondAttribute="bottom" constant="39" id="wnC-mt-3vv"/>
+                            <constraint firstItem="ifN-jg-tQS" firstAttribute="leading" secondItem="RZa-LK-xUZ" secondAttribute="leading" constant="16" id="xU3-Ou-2jx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -100,8 +99,5 @@
     <resources>
         <image name="icon-32-back-black" width="96" height="96"/>
         <image name="icon32BackBlack" width="32" height="32"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
