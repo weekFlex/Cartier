@@ -11,6 +11,9 @@
 		0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26212125F8CB14007D28F0 /* TableViewCell.xib */; };
 		0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26216026014B0B007D28F0 /* TaskListView.xib */; };
 		0E26216426014B23007D28F0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26216326014B23007D28F0 /* TaskListView.swift */; };
+		0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E47926737B380002EFDD /* ReviewCell.swift */; };
+		0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30E47A26737B380002EFDD /* ReviewCell.xib */; };
+		0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */; };
 		0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952D5260A65F500345659 /* UIView+Extension.swift */; };
 		0E7952EF2610B4A500345659 /* MainRoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */; };
 		0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7953302613B4E100345659 /* MainHomeViewModel.swift */; };
@@ -18,6 +21,8 @@
 		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
 		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
 		0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */; };
+		0EC381B4266D189A00438A74 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC381B3266D189A00438A74 /* Review.storyboard */; };
+		0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */; };
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
@@ -72,6 +77,9 @@
 		0E26212125F8CB14007D28F0 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		0E26216026014B0B007D28F0 /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
 		0E26216326014B23007D28F0 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		0E30E47926737B380002EFDD /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		0E30E47A26737B380002EFDD /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
+		0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModel.swift; sourceTree = "<group>"; };
 		0E7952D5260A65F500345659 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoutineListViewModel.swift; sourceTree = "<group>"; };
 		0E7953302613B4E100345659 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -79,6 +87,8 @@
 		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
 		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
 		0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReasonVC.swift; sourceTree = "<group>"; };
+		0EC381B3266D189A00438A74 /* Review.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Review.storyboard; sourceTree = "<group>"; };
+		0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHomeVC.swift; sourceTree = "<group>"; };
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
@@ -157,6 +167,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		0E30E474267379CD0002EFDD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0E30E47926737B380002EFDD /* ReviewCell.swift */,
+				0E30E47A26737B380002EFDD /* ReviewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0E30E47F2674926D0002EFDD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0E7953072611CF2400345659 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +226,33 @@
 				0E7953302613B4E100345659 /* MainHomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EC381B0266D185B00438A74 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				0E30E47F2674926D0002EFDD /* ViewModel */,
+				0E30E474267379CD0002EFDD /* Cell */,
+				0EC381B2266D188100438A74 /* Storyboard */,
+				0EC381B1266D187800438A74 /* ViewController */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		0EC381B1266D187800438A74 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0EC381B2266D188100438A74 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0EC381B3266D189A00438A74 /* Review.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		0ED11289265FD4B200677330 /* MyPage */ = {
@@ -461,6 +515,7 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				0EC381B0266D185B00438A74 /* Review */,
 				0ED11289265FD4B200677330 /* MyPage */,
 				0EAD6A1225F25E8C001BD490 /* MainHome */,
 				9BC81A9D25FA80AD001B1D83 /* AddRoutine */,
@@ -547,11 +602,13 @@
 				9E5FD6FE26073996008EB927 /* Metropolis-SemiBoldItalic.otf in Resources */,
 				9E5FD6F826073996008EB927 /* Metropolis-SemiBold.otf in Resources */,
 				9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */,
+				0EC381B4266D189A00438A74 /* Review.storyboard in Resources */,
 				9E5FD6FF26073996008EB927 /* Metropolis-BoldItalic.otf in Resources */,
 				9E5FD6F126073996008EB927 /* Metropolis-Regular.otf in Resources */,
 				9E5FD6F426073996008EB927 /* Metropolis-BlackItalic.otf in Resources */,
 				9EC0DAFF25EEB9D1007D04D0 /* Main.storyboard in Resources */,
 				0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */,
+				0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */,
 				0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */,
 				9E5FD6F226073996008EB927 /* Metropolis-ExtraBold.otf in Resources */,
 				9E5FD6EE26073996008EB927 /* Metropolis-ExtraLightItalic.otf in Resources */,
@@ -629,12 +686,15 @@
 				9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
+				0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */,
 				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
+				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
+				0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */,
 				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */,

@@ -88,26 +88,26 @@ class DeleteReasonVC: UIViewController{
     
     func textSetUp(){
         
-        textView.rx.didBeginEditing.subscribe(onNext: { [self] in
-            if(self.textView.text == """
+        textView.rx.didBeginEditing
+            .subscribe(onNext: { [self] in
+            if(textView.text == """
                         탈퇴 사유를 남겨주세요.
                         향후 서비스 개선을 위해 노력하겠습니다.
                         """ ){
-                self.textView.text = nil
-                self.textView.textColor = .gray5
-            }
-            
-        }).disposed(by: bag)
+                textView.text = nil
+                textView.textColor = .gray5
+                
+            }}).disposed(by: bag)
         
-        textView.rx.didEndEditing.subscribe(onNext: { [self] in
-            
+        textView.rx.didEndEditing
+            .subscribe(onNext: { [self] in
             if(textView.text == nil || textView.text == ""){
                 textView.text = """
                         탈퇴 사유를 남겨주세요.
                         향후 서비스 개선을 위해 노력하겠습니다.
                         """
                 textView.textColor = .gray3
-            }
-        }).disposed(by: bag)
+                
+            }}).disposed(by: bag)
     }
 }
