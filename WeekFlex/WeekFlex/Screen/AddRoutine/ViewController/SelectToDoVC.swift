@@ -16,6 +16,7 @@ class SelectToDoVC: UIViewController {
     var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
     var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
     var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
+    var allTaskViewModel: AllTaskCollectionViewCellViewModel = AllTaskCollectionViewCellViewModel()
     
     // 검색 할 text
     var searchText: String? = nil

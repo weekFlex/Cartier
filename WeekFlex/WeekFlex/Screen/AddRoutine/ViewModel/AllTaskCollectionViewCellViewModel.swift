@@ -7,24 +7,27 @@
 
 import Foundation
 
-protocol AllTaskItemPresentable {
+protocol AllTaskItemPresentable: Codable {
     
-    var category: GetCategoryItemPresentable? { get }
+    var category: GetCategoryCellItemViewModel? { get }
     var tasks: [GetTaskCellItemViewModel]? { get }
+    
 }
 
 struct AllTaskCellItemViewModel: AllTaskItemPresentable {
-    var category: GetCategoryItemPresentable?
+    var category: GetCategoryCellItemViewModel?
     var tasks: [GetTaskCellItemViewModel]?
+    
+    
 }
 
-protocol GetTaskItemPresentable {
+protocol GetTaskItemPresentable: Codable {
     
     var id: Int? { get }
     var category: String? { get }
     var name: String? { get }
     var isBookmarked: Bool? { get }
-    var days: [GetDaysItemPresentable]? { get }
+    var days: [GetDaysCellItemViewModel]? { get }
 }
 
 struct GetTaskCellItemViewModel: GetTaskItemPresentable {
@@ -32,10 +35,10 @@ struct GetTaskCellItemViewModel: GetTaskItemPresentable {
     var id: Int?
     var category, name: String?
     var isBookmarked: Bool?
-    var days: [GetDaysItemPresentable]?
+    var days: [GetDaysCellItemViewModel]?
 }
 
-protocol GetCategoryItemPresentable {
+protocol GetCategoryItemPresentable: Codable {
     
     var id: Int? { get }
     var name: String? { get }
@@ -49,7 +52,7 @@ struct GetCategoryCellItemViewModel: GetCategoryItemPresentable {
     var color: Int?
 }
 
-protocol GetDaysItemPresentable {
+protocol GetDaysItemPresentable: Codable {
     
     var name: String? { get }
     var startTime: String? { get }
@@ -67,11 +70,26 @@ struct GetDaysCellItemViewModel: GetDaysItemPresentable {
 
 struct AllTaskCollectionViewCellViewModel {
     
-    var items: [AllTaskItemPresentable] = []
+    var items: [AllTaskCellItemViewModel]
     
     init () {
-        // 서버 연결..?
+         //서버 연결..?
         
+        self.items = []
+        
+//        APIService.shared.getTask("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.8_T1pNCV9fDU00u7tdWNhe6VUh-G2HgkgYE3IOeXByI") { [self] result in
+//
+//            switch result {
+//
+//            case .success(let data):
+//               data = items
+//
+//            case .failure(let error):
+//                print(error)
+//
+//            }
+//
+//        }
     }
     
 }
