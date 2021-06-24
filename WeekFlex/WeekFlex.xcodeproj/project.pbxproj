@@ -37,6 +37,8 @@
 		9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */; };
 		9BC81AA025FA80CB001B1D83 /* AddRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC81A9F25FA80CB001B1D83 /* AddRoutine.storyboard */; };
 		9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFF12684D5D100E2FEDC /* NetworkResult.swift */; };
+		9BE0BFF52684D60000E2FEDC /* APITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFF42684D60000E2FEDC /* APITarget.swift */; };
+		9BE0BFF92684DE3700E2FEDC /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFF82684DE3700E2FEDC /* GenericResponse.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
 		9E5FD60C25F4CBD5008EB927 /* MyRoutineAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */; };
@@ -105,6 +107,8 @@
 		9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		9BC81A9F25FA80CB001B1D83 /* AddRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddRoutine.storyboard; sourceTree = "<group>"; };
 		9BE0BFF12684D5D100E2FEDC /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		9BE0BFF42684D60000E2FEDC /* APITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITarget.swift; sourceTree = "<group>"; };
+		9BE0BFF82684DE3700E2FEDC /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineAddVC.swift; sourceTree = "<group>"; };
@@ -352,8 +356,17 @@
 			isa = PBXGroup;
 			children = (
 				9BE0BFF12684D5D100E2FEDC /* NetworkResult.swift */,
+				9BE0BFF42684D60000E2FEDC /* APITarget.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		9BE0BFF72684DE1500E2FEDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9BE0BFF82684DE3700E2FEDC /* GenericResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9E5FD5FE25F4CABB008EB927 /* MyRoutine */ = {
@@ -506,6 +519,7 @@
 		9EC0DB0E25EEBA23007D04D0 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				9BE0BFF72684DE1500E2FEDC /* Model */,
 				9BE0BFF02684D5C100E2FEDC /* Service */,
 				9EC0DB0F25EEBA29007D04D0 /* Extension */,
 			);
@@ -688,6 +702,8 @@
 				0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */,
 				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
 				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
+				9BE0BFF52684D60000E2FEDC /* APITarget.swift in Sources */,
+				9BE0BFF92684DE3700E2FEDC /* GenericResponse.swift in Sources */,
 				0E795358261F6D0900345659 /* CalendarCell.swift in Sources */,
 				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
