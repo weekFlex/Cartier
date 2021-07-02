@@ -27,9 +27,9 @@ class RoutineCell: UICollectionViewCell {
         timeLabel?.textColor = UIColor.gray3
     }
     
-    func configure(with viewModel: ToDoListItemPresentable) {
-        routineNameLabel.text = viewModel.listName
-        timeLabel.text = viewModel.listTime
+    func configure(with viewModel: TaskViewModel) {
+        routineNameLabel.text = viewModel.name
+        timeLabel.text = viewModel.time
         
         if viewModel.bookmarkCheck! {
             // 북마크가 되어있는 지

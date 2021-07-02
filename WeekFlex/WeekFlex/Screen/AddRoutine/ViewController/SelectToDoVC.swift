@@ -14,8 +14,10 @@ class SelectToDoVC: UIViewController {
     var routineName: String?
     
     var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
-    var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
-    var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
+//    var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
+//    var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
+    private var categoryListVM: CategoryListViewModel!
+    private var taskListVM: TaskListViewModel!
     
     // 검색 할 text
     var searchText: String? = nil
@@ -53,7 +55,7 @@ class SelectToDoVC: UIViewController {
     // MARK: IBAction
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-    // 뒤로가기 버튼 클릭 시 Action
+        // 뒤로가기 버튼 클릭 시 Action
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -62,6 +64,7 @@ class SelectToDoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setData()
         setButton()
         setLabel()
         setView()
@@ -83,6 +86,13 @@ class SelectToDoVC: UIViewController {
 extension SelectToDoVC {
     
     // MARK: Function
+    
+    func setData() {
+        if let data = AddRoutineServices().getTask() {
+            self.taskListVM = TaskListViewModel(tasks: data.flatMap{$0.tasks})
+            self.categoryListVM = CategoryListViewModel(categories: data.flatMap{$0.category})
+        }
+    }
     
     func setButton() {
         
@@ -110,7 +120,7 @@ extension SelectToDoVC {
         // TextField가 수정될 때 마다 실행
         
         emptyLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: .appleRegular(size: 16))
-
+        
     }
     
     func setView() {
@@ -124,12 +134,12 @@ extension SelectToDoVC {
         shadowView.layer.shadowRadius = 3
         shadowView.layer.shadowOpacity = 0.10
         shadowView.layer.shadowColor = UIColor.gray2.cgColor
-
+        
         textFieldView.backgroundColor = .gray1
         
         selectRoutineView.backgroundColor = .clear
         selectedCollectionView.backgroundColor = .clear
-    
+        
         let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .horizontal
         // 가로 스크롤 고정
@@ -253,8 +263,8 @@ extension SelectToDoVC: UICollectionViewDataSource {
         else if collectionView == categoryCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            let itemViewModel = categoryViewModel.items[indexPath.row]
-            cell.configure(with: itemViewModel)
+            
+            cell.configure(with: categoryListVM.categoryAtIndex(indexPath.row))
             return cell
             
         }
@@ -264,15 +274,14 @@ extension SelectToDoVC: UICollectionViewDataSource {
             
             if searchText != nil {
                 // 검색중이라면?
-                
-                let itemViewModel = todolistViewModel.items.filter { $0.listName?.contains(searchText!) == true }[indexPath.row]
+                let itemViewModel = taskListVM.tasks.filter {$0.name.contains(searchText!) == true }[indexPath.row]
                 // 검색 단어로 필터링
                 
-                cell.configure(with: itemViewModel)
+                cell.configure(with: TaskViewModel(itemViewModel))
                 
                 if selectedViewModel.items.count > 0 {
                     for i in 0...selectedViewModel.items.count-1 {
-                        if itemViewModel.listName == selectedViewModel.items[i].listName {
+                        if itemViewModel.name == selectedViewModel.items[i].listName {
                             // 만약에 내가 선택한 루틴이라면?
                             cell.selected()
                             // 배경 컬러 주기
@@ -287,8 +296,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
                     
-                    let itemViewModel = todolistViewModel.items[indexPath.row]
-                    cell.configure(with: itemViewModel)
+                    cell.configure(with: taskListVM.taskAtIndex(indexPath.row))
                     if selectedViewModel.items.count > 0 {
                         for i in 0...selectedViewModel.items.count-1 {
                             if itemViewModel.listName == selectedViewModel.items[i].listName {
@@ -329,7 +337,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         
         
         if collectionView == selectedCollectionView {
-
+            
             if selectedViewModel.items.count != 0 {
                 emptyLabel.isHidden = true
                 nextButton.isEnabled = true
@@ -365,7 +373,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }
                     return itemViewModel.count
                 }
-
+                
             }
         }
     }
@@ -434,7 +442,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
 }
 
 extension SelectToDoVC: SelectedItemViewDelegate {
-
+    
     func listItemRemoved(value: Int) {
         // 리스트에서 지우기
         selectedViewModel.items.remove(at: value)

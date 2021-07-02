@@ -1,7 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "icon32CancleBlack.pdf",
+      "filename" : "icon32CancleBlack.png",
+      "scale" : "1x",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "icon32CancleBlack@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "icon32CancleBlack@3x.png",
+      "scale" : "3x",
       "idiom" : "universal"
     }
   ],

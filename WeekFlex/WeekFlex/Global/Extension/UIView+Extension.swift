@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 extension UIView {
     
     // 설명 : UIView 사용 시 모서리 둥글게 하는 처리 extension
@@ -61,4 +60,18 @@ extension UIView {
          mask.path = path.cgPath
          layer.mask = mask
      }
+    //설명: UIView 사용 시 그림자 효과
+    //myView.dropShadow()
+    
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 2
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
 }
