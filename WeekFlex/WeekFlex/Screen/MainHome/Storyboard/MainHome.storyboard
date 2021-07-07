@@ -46,6 +46,31 @@
                                     <constraint firstItem="Djg-Cb-H43" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="top" constant="80" id="yjh-6z-Xjo"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-AW-H8I">
+                                <rect key="frame" x="0.0" y="285" width="414" height="395"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="character132SadGray" translatesAutoresizingMaskIntoConstraints="NO" id="riI-ki-yvm">
+                                        <rect key="frame" x="141" y="148" width="132" height="132"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="132" id="1tq-Fh-TAq"/>
+                                            <constraint firstAttribute="width" constant="132" id="jXA-RL-ZkH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 목표를 추가해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86f-Rt-LK6">
+                                        <rect key="frame" x="120" y="280" width="174.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="86f-Rt-LK6" firstAttribute="top" secondItem="riI-ki-yvm" secondAttribute="bottom" id="Wes-tH-66m"/>
+                                    <constraint firstItem="riI-ki-yvm" firstAttribute="top" secondItem="fNw-AW-H8I" secondAttribute="top" constant="148" id="ZJx-MN-gyY"/>
+                                    <constraint firstItem="86f-Rt-LK6" firstAttribute="centerX" secondItem="fNw-AW-H8I" secondAttribute="centerX" id="dot-my-czV"/>
+                                    <constraint firstItem="riI-ki-yvm" firstAttribute="centerX" secondItem="fNw-AW-H8I" secondAttribute="centerX" id="fre-Mb-K8P"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="55M-bn-jjY">
                                 <rect key="frame" x="0.0" y="285" width="414" height="577"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -213,6 +238,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="3W8-Zm-1Q9"/>
+                            <constraint firstItem="fNw-AW-H8I" firstAttribute="top" secondItem="uRm-yg-E9r" secondAttribute="bottom" id="5ON-DU-pWA"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="uRm-yg-E9r" secondAttribute="trailing" id="9lO-rq-Rlt"/>
                             <constraint firstItem="55M-bn-jjY" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="MlR-9Y-lPp"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="55M-bn-jjY" secondAttribute="trailing" id="Q1h-yc-Wl2"/>
@@ -220,10 +246,13 @@
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="V0t-FE-q3I" secondAttribute="trailing" id="cAE-TR-7WG"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="55M-bn-jjY" secondAttribute="bottom" id="cVa-VL-h1v"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="122" id="eI4-MT-lf9"/>
+                            <constraint firstItem="fNw-AW-H8I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="fsj-hU-ADL"/>
+                            <constraint firstItem="J32-5J-fAC" firstAttribute="top" secondItem="fNw-AW-H8I" secondAttribute="bottom" id="iiN-aE-8Jw"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="J32-5J-fAC" secondAttribute="trailing" constant="24" id="kRW-nk-Qzn"/>
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="top" secondItem="BHq-2A-wUT" secondAttribute="top" id="ltP-Vw-o64"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="bottom" id="v1H-sR-irE"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="fNw-AW-H8I" secondAttribute="trailing" id="vcN-Ff-E8h"/>
                         </constraints>
                     </view>
                     <connections>
@@ -353,6 +382,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="character132SadGray" width="132" height="132"/>
         <image name="icon24DeleteBlack" width="72" height="72"/>
         <image name="icon24Edit" width="72" height="72"/>
         <image name="icon24StarDisabled" width="24" height="24"/>
