@@ -23,6 +23,13 @@ struct APIService {
         judgeObject(target, completion: completion)
         
     }
+    
+    func getCategory(_ token: String, completion: @escaping (NetworkResult<[AllTaskCellItemViewModel]>)->(Void)) {
+        
+        let target: APITarget = .getTask(token: token)
+        judgeObject(target, completion: completion)
+        
+    }
 
 }
 
