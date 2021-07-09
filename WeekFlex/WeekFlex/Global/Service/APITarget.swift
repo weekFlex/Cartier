@@ -11,12 +11,13 @@ import Moya
 enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
-    case getCategory(token: String) // 카테고리 불러오기
+    case getCategory(token: String) // 카테고리 리스트 API
 }
 
 // MARK: TargetType Protocol 구현
 
 extension APITarget: TargetType {
+    
     
     var baseURL: URL {
         // baseURL - 서버의 도메인

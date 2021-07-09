@@ -13,6 +13,7 @@ class SelectToDoVC: UIViewController {
     
     var routineName: String?
     var categoryData: [CategoryData] = []
+    var taskData: [TaskData] = []
     
     var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
     var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
@@ -67,7 +68,7 @@ class SelectToDoVC: UIViewController {
         setLabel()
         setView()
         setDelegate()
-        getCategory()
+        getTask()
         
         // Do any additional setup after loading the view.
     }
@@ -172,18 +173,19 @@ extension SelectToDoVC {
         routineCollectionView.reloadData()
     }
     
-    func getCategory() {
+    func getTask() {
+        // 서버 연결 후 Task 불러오기
         
         if NetworkState.isConnected() {
             // 네트워크 연결 시
             
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 
-                APIService.shared.getCategory(token) { [self] result in
+                APIService.shared.getTask(token) { [self] result in
                     switch result {
                     
                     case .success(let data):
-                        categoryData = data
+                        taskData = data
                         categoryCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드
                         
@@ -282,7 +284,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         else if collectionView == categoryCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            cell.configure(with: categoryData[indexPath.row])
+            cell.configure(with: taskData[indexPath.row])
             return cell
             
         }
@@ -376,7 +378,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         }
         
         else if collectionView == categoryCollectionView {
-            return categoryData.count
+            return taskData.count
         }
         
         else {
