@@ -33,9 +33,9 @@ class CategoryCell: UICollectionViewCell {
         nameLabel.textColor = .gray4
     }
     
-    func configure(with viewModel: CategoryListItemPresentable) {
-        nameLabel.text = viewModel.categoryName
-        colorImage.image = UIImage(named: viewModel.categoryColor!)
+    func configure(with viewModel: CategoryData) {
+        nameLabel.text = viewModel.name
+//        colorImage.image = UIImage(named: viewModel.categoryColor!)
     }
     
 }
