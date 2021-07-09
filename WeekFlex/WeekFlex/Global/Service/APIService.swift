@@ -17,9 +17,16 @@ struct APIService {
     let provider = MoyaProvider<APITarget>()
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
-    func getTask(_ token: String, completion: @escaping (NetworkResult<[AllTaskCellItemViewModel]>)->(Void)) {
+    func getTask(_ token: String, completion: @escaping (NetworkResult<[TaskData]>)->(Void)) {
         
         let target: APITarget = .getTask(token: token)
+        judgeObject(target, completion: completion)
+        
+    }
+    
+    func getCategory(_ token: String, completion: @escaping (NetworkResult<[CategoryData]>)->(Void)) {
+        
+        let target: APITarget = .getCategory(token: token)
         judgeObject(target, completion: completion)
         
     }
