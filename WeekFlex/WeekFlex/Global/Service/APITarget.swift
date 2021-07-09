@@ -11,6 +11,7 @@ import Moya
 enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
+    case getCategory(token: String) // 카테고리 불러오기
 }
 
 // MARK: TargetType Protocol 구현
@@ -29,6 +30,8 @@ extension APITarget: TargetType {
         switch self {
         case .getTask:
             return "api/v1/task/"
+        case .getCategory:
+            return "api/v1/category"
         }
     }
     
@@ -37,9 +40,8 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask:
+        case .getTask, .getCategory:
             return .get
-            
         }
     }
     
@@ -56,7 +58,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask:
+        case .getTask, .getCategory:
             return .requestPlain
             
         }
@@ -74,7 +76,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token):
+        case .getTask(let token), .getCategory(let token):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
         
