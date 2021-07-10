@@ -56,6 +56,7 @@ class MainHomeVC: UIViewController {
     
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var todayLabel: UILabel!
+    @IBOutlet weak var noDataView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -123,6 +124,12 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if mainViewModel.lists[currentDay].routines.count == 0 {
+            tableView.isHidden = true
+            noDataView.isHidden = false
+            return 0
+        }
+
         return mainViewModel.lists[currentDay].routines.count
     }
     
