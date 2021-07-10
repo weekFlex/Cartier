@@ -12,10 +12,12 @@ class SelectToDoVC: UIViewController {
     // MARK: Variable Part
     
     var routineName: String?
+    var categoryData: [CategoryData] = []
+    var taskData: [TaskData] = []
     
     var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
-    var categoryViewModel : CategoryCollectionViewCellViewModel = CategoryCollectionViewCellViewModel()
     var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
+    var allTaskViewModel: AllTaskCollectionViewCellViewModel = AllTaskCollectionViewCellViewModel()
     
     // 검색 할 text
     var searchText: String? = nil
@@ -66,6 +68,7 @@ class SelectToDoVC: UIViewController {
         setLabel()
         setView()
         setDelegate()
+        getTask()
         
         // Do any additional setup after loading the view.
     }
@@ -170,6 +173,34 @@ extension SelectToDoVC {
         routineCollectionView.reloadData()
     }
     
+    func getTask() {
+        // 서버 연결 후 Task 불러오기
+        
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                
+                APIService.shared.getTask(token) { [self] result in
+                    switch result {
+                    
+                    case .success(let data):
+                        taskData = data
+                        categoryCollectionView.reloadData()
+                        // 데이터 전달 후 다시 로드
+                        
+                    case .failure(let error):
+                        print(error)
+                        
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            
+        }
+    }
+    
 }
 
 extension SelectToDoVC: UITextFieldDelegate {
@@ -253,8 +284,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         else if collectionView == categoryCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            let itemViewModel = categoryViewModel.items[indexPath.row]
-            cell.configure(with: itemViewModel)
+            cell.configure(with: taskData[indexPath.row])
             return cell
             
         }
@@ -348,7 +378,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         }
         
         else if collectionView == categoryCollectionView {
-            return categoryViewModel.items.count
+            return taskData.count
         }
         
         else {

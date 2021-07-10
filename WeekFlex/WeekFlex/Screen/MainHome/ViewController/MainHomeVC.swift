@@ -127,7 +127,6 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         if mainViewModel.lists[currentDay].routines.count == 0 {
             tableView.isHidden = true
             noDataView.isHidden = false
-            
             return 0
         }
 
