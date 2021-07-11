@@ -206,7 +206,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath)as? CalendarCell else { return CalendarCell()}
-        let itemViewModel = mainViewModel.lists[indexPath.row]
+        let itemViewModel = weeklyData[indexPath.row]
         cell.configure(with: itemViewModel)
         //상단 날짜 표시 라벨과 날짜 하단 흰색 바
         cell.day.text = weekDays[indexPath.row]

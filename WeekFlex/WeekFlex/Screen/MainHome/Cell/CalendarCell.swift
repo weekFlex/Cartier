@@ -10,6 +10,7 @@ import UIKit
 class CalendarCell: UICollectionViewCell {
     
     //MARK: Variable
+    var representCategory = "icon24Star"
     
     
     //MARK: IBOutlet
@@ -25,9 +26,33 @@ class CalendarCell: UICollectionViewCell {
         
     }
     
-    func configure(with viewModel: TodoData) {
+    func configure(with viewModel: DailyData) {
         date.text = viewModel.date.components(separatedBy: "-")[1]
-        star.image = UIImage(named: viewModel.representCategory ?? "icon24starDisabled")
+        countCategory(data: viewModel)
+        star.image = UIImage(named: representCategory )
+        
+    }
+    
+    //대표 카테고리 계산
+    func countCategory(data: DailyData){
+        var categoryCounter = [Int](repeating: 0, count: 16)
+
+        
+        for index in 0 ..< data.items.count {
+            for todo in data.items[index].todos {
+                if todo.done == true {
+                    categoryCounter[todo.categoryColor] += 1
+                }
+            }
+            
+        }
+        
+        
+        if let max = categoryCounter.max(),let maxIdx = categoryCounter.firstIndex(of: max) {
+            if(max != 0){
+                representCategory += String(maxIdx)
+            }
+        }
         
     }
 

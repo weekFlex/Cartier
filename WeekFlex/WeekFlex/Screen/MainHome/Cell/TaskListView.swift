@@ -23,7 +23,7 @@ class TaskListView: UIView {
     var cellIndex = 0   //이 view가 속한 cell의 index
     var viewIndex = 0   //이 view의 index
     weak var delegate: TaskListCellDelegate?
-    var category = ""
+    var category = 0
     var isDone: Bool = false {
         didSet{
             if(isDone){
@@ -69,9 +69,9 @@ class TaskListView: UIView {
         taskTitle.text = viewModel.name
         time.text = viewModel.startTime + " - " + viewModel.endTime
         isDone = viewModel.done
-        category = viewModel.category
+        category = viewModel.categoryColor
         if(isDone){
-            star.setImage(UIImage(named:category ), for: .normal)
+            star.setImage(UIImage(named:"icon24Star" + String(category) ), for: .normal)
         }else{
             star.setImage(UIImage(named: "icon24StarDisabled"), for: .normal)
         }
