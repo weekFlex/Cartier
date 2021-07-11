@@ -25,7 +25,7 @@ class CalendarCell: UICollectionViewCell {
         
     }
     
-    func configure(with viewModel: CalendarItemPresentable) {
+    func configure(with viewModel: TodoData) {
         date.text = viewModel.date.components(separatedBy: "-")[1]
         star.image = UIImage(named: viewModel.representCategory ?? "icon24starDisabled")
         

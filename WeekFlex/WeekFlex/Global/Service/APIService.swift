@@ -30,6 +30,11 @@ struct APIService {
         judgeObject(target, completion: completion)
         
     }
+    
+    func getWeekly(_ token: String, completion: @escaping (NetworkResult<[DailyData]>)->(Void)){
+        let target: APITarget = .getWeekly(token: token)
+        judgeObject(target, completion: completion)
+    }
 
 }
 

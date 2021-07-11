@@ -12,6 +12,7 @@ enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
     case getCategory(token: String) // 카테고리 리스트 API
+    case getWeekly(token: String)   // 캘린더 일주일 할일 불러오기
 }
 
 // MARK: TargetType Protocol 구현
@@ -21,7 +22,6 @@ extension APITarget: TargetType {
     
     var baseURL: URL {
         // baseURL - 서버의 도메인
-        
         return URL(string: "http://dev.weekflex.com/")!
     }
     
@@ -33,6 +33,8 @@ extension APITarget: TargetType {
             return "api/v1/task/"
         case .getCategory:
             return "api/v1/category"
+        case .getWeekly:
+            return "/api/v1/calendar/week"
         }
     }
     
@@ -41,7 +43,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory:
+        case .getTask, .getCategory, .getWeekly:
             return .get
         }
     }
@@ -59,7 +61,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory:
+        case .getTask, .getCategory, .getWeekly:
             return .requestPlain
             
         }
@@ -77,7 +79,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token):
+        case .getTask(let token), .getCategory(let token), .getWeekly(let token):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
         

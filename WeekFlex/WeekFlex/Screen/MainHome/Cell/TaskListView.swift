@@ -64,10 +64,10 @@ class TaskListView: UIView {
         super.init(coder: coder)
     }
     
-    func configure(with viewModel: TaskItemPresentable) {
+    func configure(with viewModel: TodoData) {
         
-        taskTitle.text = viewModel.taskTitle
-        time.text = viewModel.time
+        taskTitle.text = viewModel.name
+        time.text = viewModel.startTime + " - " + viewModel.endTime
         isDone = viewModel.done
         category = viewModel.category
         if(isDone){

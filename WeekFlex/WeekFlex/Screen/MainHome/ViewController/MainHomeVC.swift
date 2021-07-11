@@ -12,10 +12,12 @@ import RxCocoa
 import CoreData
 
 
+
 class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
+    var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
     var today: [String]!    //mmm-dd-e-eeee
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
@@ -85,11 +87,13 @@ class MainHomeVC: UIViewController {
     //MARK: Life Cycle
     
     override func viewDidLoad() {
-        setDate()
+        super.viewDidLoad()
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        setDate()
+        getRoutines()
         
-        super.viewDidLoad()
+        
     }
 }
 
@@ -138,9 +142,9 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
         
         //루틴이름
-        let cellData = mainViewModel.lists[currentDay].routines[indexPath.row]
+        let cellData = weeklyData[currentDay].items[indexPath.row]
         cell.title.text = "\(cellData.routineName)"
-        let num = cellData.tasks.count
+        let num = cellData.todos.count
         
         //셀(루틴) 안에 커스텀 뷰 추가(할일들)
         for i in 0..<num {
@@ -152,7 +156,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
-            view.configure(with: cellData.tasks[i])
+            view.configure(with: cellData.todos[i])
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
             
@@ -235,6 +239,35 @@ extension MainHomeVC {
     
     
     //MARK: function
+    private func getRoutines(){
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                
+                APIService.shared.getWeekly(token) { [self] result in
+                    switch result {
+                    
+                    case .success(let data):
+                        weeklyData = data
+                        print(data)
+                        calendarCollectionView.reloadData()
+                        // 데이터 전달 후 다시 로드
+                        
+                    case .failure(let error):
+                        print(error)
+                        
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            
+        }
+    }
+    
+    
+    
+    
     private func setDate(){
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM-dd-e-EEEE"
