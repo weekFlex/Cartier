@@ -43,6 +43,8 @@
 		9E5FD6FF26073996008EB927 /* Metropolis-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD6ED26073996008EB927 /* Metropolis-BoldItalic.otf */; };
 		9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD70226078C06008EB927 /* MyRoutineListViewModel.swift */; };
 		9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD7062607979C008EB927 /* MyRoutineListItemTableViewCell.swift */; };
+		9E5FF5A9269A14D8000EAF7B /* SaveTimeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FF5A8269A14D8000EAF7B /* SaveTimeProtocol.swift */; };
+		9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E65113E2698AFFD00C60D15 /* ToDo.swift */; };
 		9E6760C925F0BF8900436D5C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6760C825F0BF8900436D5C /* Login.storyboard */; };
 		9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6760CB25F0BF9900436D5C /* LoginVC.swift */; };
 		9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0DAF725EEB9D1007D04D0 /* AppDelegate.swift */; };
@@ -97,6 +99,8 @@
 		9E5FD6ED26073996008EB927 /* Metropolis-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metropolis-BoldItalic.otf"; sourceTree = "<group>"; };
 		9E5FD70226078C06008EB927 /* MyRoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListViewModel.swift; sourceTree = "<group>"; };
 		9E5FD7062607979C008EB927 /* MyRoutineListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListItemTableViewCell.swift; sourceTree = "<group>"; };
+		9E5FF5A8269A14D8000EAF7B /* SaveTimeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTimeProtocol.swift; sourceTree = "<group>"; };
+		9E65113E2698AFFD00C60D15 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		9E6760C425F0BD0900436D5C /* WeekFlex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeekFlex.entitlements; sourceTree = "<group>"; };
 		9E6760C825F0BF8900436D5C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		9E6760CB25F0BF9900436D5C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -263,6 +267,22 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		9E5FF5A7269A0E20000EAF7B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				9E5FF5A8269A14D8000EAF7B /* SaveTimeProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		9E65113D2698AFED00C60D15 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9E65113E2698AFFD00C60D15 /* ToDo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9E6760C525F0BF6B00436D5C /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +363,7 @@
 		9EC0DB0E25EEBA23007D04D0 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				9E5FF5A7269A0E20000EAF7B /* Protocol */,
 				9EC0DB0F25EEBA29007D04D0 /* Extension */,
 			);
 			path = Global;
@@ -373,6 +394,7 @@
 		9EC2E0732631DD3000EF2F7E /* EditRoutine */ = {
 			isa = PBXGroup;
 			children = (
+				9E65113D2698AFED00C60D15 /* Model */,
 				9EC2E0802631E43800EF2F7E /* Cell */,
 				9EC2E07C2631DDAF00EF2F7E /* ViewModel */,
 				9EC2E0752631DD7E00EF2F7E /* Storyboard */,
@@ -561,6 +583,7 @@
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9EC2E07A2631DDAA00EF2F7E /* EditRoutineVC.swift in Sources */,
+				9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */,
@@ -569,6 +592,7 @@
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */,
+				9E5FF5A9269A14D8000EAF7B /* SaveTimeProtocol.swift in Sources */,
 				9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9E5FD60C25F4CBD5008EB927 /* MyRoutineAddVC.swift in Sources */,
