@@ -27,11 +27,11 @@ class RoutineCell: UICollectionViewCell {
         timeLabel?.textColor = UIColor.gray3
     }
     
-    func configure(with viewModel: ToDoListItemPresentable) {
-        routineNameLabel.text = viewModel.listName
-        timeLabel.text = viewModel.listTime
+    func configure(name: String, time: String, bookmarkCheck: Bool) {
+        routineNameLabel.text = name
+        timeLabel.text = time
         
-        if viewModel.bookmarkCheck! {
+        if bookmarkCheck {
             // 북마크가 되어있는 지
             bookmarkImage.image = UIImage(named: "icon16BookmarkActive")
         } else {

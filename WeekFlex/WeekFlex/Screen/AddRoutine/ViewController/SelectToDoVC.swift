@@ -13,11 +13,11 @@ class SelectToDoVC: UIViewController {
     
     var routineName: String?
     var categoryData: [CategoryData] = []
-    var taskData: [TaskData] = []
+    var taskData: [TaskData] = [] // 서
+    var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
+    var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
     
     var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
-    var todolistViewModel : ToDoListCollectionViewCellViewModel = ToDoListCollectionViewCellViewModel()
-    var allTaskViewModel: AllTaskCollectionViewCellViewModel = AllTaskCollectionViewCellViewModel()
     
     // 검색 할 text
     var searchText: String? = nil
@@ -186,7 +186,9 @@ extension SelectToDoVC {
                     
                     case .success(let data):
                         taskData = data
+                        
                         categoryCollectionView.reloadData()
+                        todoCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드
                         
                     case .failure(let error):
@@ -275,6 +277,8 @@ extension SelectToDoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == selectedCollectionView {
+            // 선택한 Todo
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedRoutineCell.identifier, for: indexPath) as? SelectedRoutineCell else { return UICollectionViewCell() }
             let itemViewModel = selectedViewModel.items[indexPath.row]
             cell.configure(with: itemViewModel)
@@ -302,14 +306,11 @@ extension SelectToDoVC: UICollectionViewDataSource {
             if searchText != nil {
                 // 검색중이라면?
                 
-                let itemViewModel = todolistViewModel.items.filter { $0.listName?.contains(searchText!) == true }[indexPath.row]
-                // 검색 단어로 필터링
-                
-                cell.configure(with: itemViewModel)
+                cell.configure(name: searchTask[indexPath.row].name, time: "", bookmarkCheck: searchTask[indexPath.row].isBookmarked )
                 
                 if selectedViewModel.items.count > 0 {
                     for i in 0...selectedViewModel.items.count-1 {
-                        if itemViewModel.listName == selectedViewModel.items[i].listName {
+                        if searchTask[indexPath.row].name == selectedViewModel.items[i].listName {
                             // 만약에 내가 선택한 루틴이라면?
                             cell.selected()
                             // 배경 컬러 주기
@@ -324,11 +325,10 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
                     
-                    let itemViewModel = todolistViewModel.items[indexPath.row]
-                    cell.configure(with: itemViewModel)
+                    cell.configure(name: allTask[indexPath.row].name, time: "", bookmarkCheck: allTask[indexPath.row].isBookmarked)
                     if selectedViewModel.items.count > 0 {
                         for i in 0...selectedViewModel.items.count-1 {
-                            if itemViewModel.listName == selectedViewModel.items[i].listName {
+                            if allTask[indexPath.row].name == selectedViewModel.items[i].listName {
                                 // 만약에 내가 선택한 루틴이라면?
                                 cell.selected()
                                 // 배경 컬러주기
@@ -340,13 +340,11 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 } else {
                     // 특정 카테고리를 보고있다면?
                     
-                    let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }[indexPath.row]
-                    // 선택한 카테고리로 필터링
+                    cell.configure(name: taskData[categoryIndex-1].tasks[indexPath.row].name, time: "", bookmarkCheck: taskData[categoryIndex-1].tasks[indexPath.row].isBookmarked)
                     
-                    cell.configure(with: itemViewModel)
                     if selectedViewModel.items.count > 0 {
                         for i in 0...selectedViewModel.items.count-1 {
-                            if itemViewModel.listName == selectedViewModel.items[i].listName {
+                            if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel.items[i].listName {
                                 // 만약에 내가 선택한 루틴이라면?
                                 cell.selected()
                                 // 배경 컬러주기
@@ -397,12 +395,11 @@ extension SelectToDoVC: UICollectionViewDataSource {
             if searchText != nil {
                 // 검색중이라면?
                 
-                var searchTask: [TaskListData] = []
+                searchTask = []
                 
                 for category in taskData {
                     searchTask += category.tasks.filter { $0.name.contains(searchText!) == true }
                 }
-                
                 return searchTask.count
                 
             } else {
@@ -410,15 +407,14 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
-                    
-                    var allTask = 0
+
+                    allTask = []
                     // 전체 Task 갯수
                     
                     for category in taskData {
-                        allTask += category.tasks.count
+                        allTask += category.tasks
                     }
-                    
-                    return allTask
+                    return allTask.count
                     
                 } else {
                     // 특장 카테고리라면?
