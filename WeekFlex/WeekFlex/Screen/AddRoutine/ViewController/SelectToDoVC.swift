@@ -284,8 +284,15 @@ extension SelectToDoVC: UICollectionViewDataSource {
         else if collectionView == categoryCollectionView {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            cell.configure(with: taskData[indexPath.row])
+            if indexPath.row == 0 {
+                cell.configure(name: "전체")
+            } else {
+                cell.configure(name: taskData[indexPath.row-1].category.name)
+            }
+            
             return cell
+        
+        
             
         }
         else {
@@ -378,7 +385,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         }
         
         else if collectionView == categoryCollectionView {
-            return taskData.count
+            return taskData.count+1
         }
         
         else {
