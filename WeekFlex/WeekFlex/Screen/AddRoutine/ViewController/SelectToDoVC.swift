@@ -41,7 +41,7 @@ class SelectToDoVC: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var textFieldView: UIView!
     
-    @IBOutlet weak var routineCollectionView: UICollectionView!
+    @IBOutlet weak var todoCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
     
@@ -145,8 +145,8 @@ extension SelectToDoVC {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         
-        routineCollectionView.delegate = self
-        routineCollectionView.dataSource = self
+        todoCollectionView.delegate = self
+        todoCollectionView.dataSource = self
         
         selectedCollectionView.delegate = self
         selectedCollectionView.dataSource = self
@@ -170,7 +170,7 @@ extension SelectToDoVC {
             searchText = textField.text
         }
         
-        routineCollectionView.reloadData()
+        todoCollectionView.reloadData()
     }
     
     func getTask() {
@@ -366,6 +366,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         
         
         if collectionView == selectedCollectionView {
+            // 클릭한 루틴 보여주는 CollectionView
 
             if selectedViewModel.items.count != 0 {
                 emptyLabel.isHidden = true
@@ -385,22 +386,44 @@ extension SelectToDoVC: UICollectionViewDataSource {
         }
         
         else if collectionView == categoryCollectionView {
+            // 카테고리 CollectionView (사용자 카테고리 + 전체)
+            
             return taskData.count+1
         }
         
         else {
+            // Task CollectionView
+            
             if searchText != nil {
                 // 검색중이라면?
-                let itemViewModel = todolistViewModel.items.filter { $0.listName?.contains(searchText!) == true }
-                return itemViewModel.count
+                
+                var searchTask: [TaskListData] = []
+                
+                for category in taskData {
+                    searchTask += category.tasks.filter { $0.name.contains(searchText!) == true }
+                }
+                
+                return searchTask.count
                 
             } else {
                 // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
+                
                 if categoryIndex == 0 {
-                    return todolistViewModel.items.count
+                    // 전체 카테고리라면?
+                    
+                    var allTask = 0
+                    // 전체 Task 갯수
+                    
+                    for category in taskData {
+                        allTask += category.tasks.count
+                    }
+                    
+                    return allTask
+                    
                 } else {
-                    let itemViewModel = todolistViewModel.items.filter { $0.category == CategoryCollectionViewCellViewModel().items[categoryIndex].categoryName }
-                    return itemViewModel.count
+                    // 특장 카테고리라면?
+
+                    return taskData[categoryIndex-1].tasks.count
                 }
 
             }
@@ -413,7 +436,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
             
             listItemRemoved(value: indexPath.row)
             selectedCollectionView.reloadData()
-            routineCollectionView.reloadData()
+            todoCollectionView.reloadData()
         }
         
         else if collectionView == categoryCollectionView {
@@ -431,7 +454,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
             // 키보드 내리기
             
             
-            routineCollectionView.reloadData()
+            todoCollectionView.reloadData()
         }
         
         else {
@@ -454,7 +477,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     
                     listItemAdded(value: (cells?.routineNameLabel.text)!)
                     selectedCollectionView.reloadData()
-                    routineCollectionView.reloadData()
+                    todoCollectionView.reloadData()
                 }
                 
             } else {
@@ -462,7 +485,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 
                 listItemAdded(value: (cells?.routineNameLabel.text)!)
                 selectedCollectionView.reloadData()
-                routineCollectionView.reloadData()
+                todoCollectionView.reloadData()
             }
             
         }

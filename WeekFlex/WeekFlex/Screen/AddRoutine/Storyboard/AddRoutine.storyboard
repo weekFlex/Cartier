@@ -318,13 +318,13 @@
                         <outlet property="emptyLabel" destination="cwi-kb-rq7" id="fdB-Hi-WfK"/>
                         <outlet property="headerView" destination="3Fh-Ba-zXs" id="edu-ZS-9oL"/>
                         <outlet property="nextButton" destination="lgu-nc-62Z" id="fHu-CX-bb2"/>
-                        <outlet property="routineCollectionView" destination="NWc-2E-t4g" id="Hxp-Tf-JlT"/>
                         <outlet property="routineNameLabel" destination="MTN-1v-mO3" id="ccq-Dh-gW9"/>
                         <outlet property="searchTextField" destination="rAt-0V-0dp" id="p1S-uM-VWr"/>
                         <outlet property="selectRoutineView" destination="lYA-Ti-s0D" id="mNx-rF-6yc"/>
                         <outlet property="selectedCollectionView" destination="eaK-Ld-d7E" id="NdV-bE-N6h"/>
                         <outlet property="shadowView" destination="1xq-Mt-uWb" id="2qT-9u-MY0"/>
                         <outlet property="textFieldView" destination="wFq-r0-JTg" id="uk4-X9-EXN"/>
+                        <outlet property="todoCollectionView" destination="NWc-2E-t4g" id="Hxp-Tf-JlT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cI9-lT-7f8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
