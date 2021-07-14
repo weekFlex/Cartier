@@ -9,8 +9,8 @@ import Foundation
 
 
 struct DailyData: Codable {
-    let date: String
-    let items: [RoutineData]
+    let date: String?
+    let items: [RoutineData]?
 }
 
 // MARK: - Routine
