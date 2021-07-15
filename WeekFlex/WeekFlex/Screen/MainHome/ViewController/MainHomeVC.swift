@@ -22,7 +22,7 @@ class MainHomeVC: UIViewController {
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
 
-    var weekDate: [String] = [String](repeating: "", count: 7)
+    var weekDate: [String] = [String](repeating: "", count: 7)      //
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
 //            changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
@@ -98,9 +98,6 @@ class MainHomeVC: UIViewController {
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         getRoutines()
         setDate()
-        
-        
-        
     }
 }
 
@@ -136,25 +133,32 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if weeklyData[currentDay].items.count == 0 {
-//
-//            tableView.isHidden = true
-//            noDataView.isHidden = false
-//            return 0
-//        }
-//
-//        return weeklyData[currentDay].items.count
-        return 0
+        guard var data = weeklyData[safe: currentDay] else {
+            tableView.isHidden = true
+            noDataView.isHidden = false
+            return 0
+        }
+        
+        if data.items?.count == 0 {
+            tableView.isHidden = true
+            noDataView.isHidden = false
+            return 0
+        }
+
+        return data.items?.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
         
         //루틴이름
-        let cellData = weeklyData[currentDay].items[indexPath.row]
-        cell.title.text = "\(cellData.routineName)"
-        let num = cellData.todos.count
+        let cellData = weeklyData[currentDay].items?[indexPath.row]
+        cell.title.text = "\(cellData?.routineName)"
+        guard let num = cellData?.todos.count else {
+            print("에러: cellData nill값")
+            return cell }
         
         //셀(루틴) 안에 커스텀 뷰 추가(할일들)
         for i in 0..<num {
@@ -166,7 +170,10 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
-            view.configure(with: cellData.todos[i])
+            guard let todo = cellData?.todos[i] else {
+                print("에러: cellData nill값")
+                return cell }
+            view.configure(with: todo )
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
         }
@@ -210,20 +217,24 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
 extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath)as? CalendarCell else { return CalendarCell()}
-        let itemViewModel = weeklyData[indexPath.row]
-        cell.configure(with: itemViewModel)
-        //상단 날짜 표시 라벨과 날짜 하단 흰색 바
         cell.day.text = weekDays[indexPath.row]
+        cell.date.text = weekDate[indexPath.row].components(separatedBy: "-")[1]
+        
         if currentDay == indexPath.row {
             cell.bar.layer.opacity = 1
         }else{
             cell.bar.layer.opacity = 0
         }
+        guard let itemViewModel = weeklyData[safe: indexPath.row] else { return cell }
+        cell.configure(with: itemViewModel)
+        //상단 날짜 표시 라벨과 날짜 하단 흰색 바
+        
+        
         return cell
     }
     
@@ -265,6 +276,7 @@ extension MainHomeVC {
                     case .success(let data):
                         print("성공!!")
                         weeklyData = data
+                        print("data: ", data)
                         calendarCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드
                         
@@ -287,15 +299,15 @@ extension MainHomeVC {
     
     private func setDate(){
         // 오늘 요일 계산해서 weekdate에 일주일 날짜 채워넣음
-        var startFormatter = DateFormatter()
+        let startFormatter = DateFormatter()
         startFormatter.dateFormat = "e"
-        let date: Int = Int(startFormatter.string(from: Date())) ?? 1
+        var date: Int = Int(startFormatter.string(from: Date())) ?? 1
         date -= 2
         currentDay = date
         //startDay = 그 주 월요일(Date type)
         let startDay = Calendar.current.date(byAdding: .day, value: -(date), to: Date())!
         
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "MMM-dd-EEEE"
         
         for i in 0..<7 {
@@ -313,11 +325,11 @@ extension MainHomeVC {
     private func changeDate(){
         
         
-        let selectedDate = weeklyDate[currentDay].components(separatedBy: "-")
+        let selectedDate = weekDate[currentDay].components(separatedBy: "-")
             
         if(selectedDate[1] == "1") {
             todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
-        }else if(today[1] == "2") {
+        }else if(selectedDate[1] == "2") {
             todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
         }else {
             todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]

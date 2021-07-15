@@ -65,7 +65,7 @@ extension APITarget: TargetType {
             return .requestPlain
             
         case .getWeekly(_, let date):
-            return .requestParameters(parameters: ["date": date],encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
         }
         
     }
