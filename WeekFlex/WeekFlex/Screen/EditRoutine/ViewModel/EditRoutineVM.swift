@@ -107,6 +107,18 @@ extension EditRoutineViewModel {
         }
         return "\(String(hourInt)):\(min)"
     }
+    
+    func compareStartEndTime(startTimeAsString: String, endTimeAsString: String) -> Bool {
+        let timeFormat = DateFormatter()
+        timeFormat.dateFormat = "HH:mm:"
+        let startTime = timeFormat.date(from: startTimeAsString)
+        let endTime = timeFormat.date(from: endTimeAsString)
+        if startTime! <= endTime! {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 // picker view 관련 메소드
