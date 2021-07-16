@@ -39,7 +39,7 @@
                         <constraint firstAttribute="width" constant="17" id="7KG-bh-8I5"/>
                         <constraint firstAttribute="height" constant="17" id="wna-Sd-wnL"/>
                     </constraints>
-                    <state key="normal" image="icon24Star"/>
+                    <state key="normal" image="icon-24-star-n"/>
                     <connections>
                         <action selector="starTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="oKD-Uy-7jt"/>
                     </connections>
@@ -68,8 +68,8 @@
         </view>
     </objects>
     <resources>
+        <image name="icon-24-star-n" width="24" height="24"/>
         <image name="icon16More" width="16" height="16"/>
-        <image name="icon24Star" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

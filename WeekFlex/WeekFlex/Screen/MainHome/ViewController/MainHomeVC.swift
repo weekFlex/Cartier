@@ -22,7 +22,7 @@ class MainHomeVC: UIViewController {
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
 
-    var weekDate: [String] = [String](repeating: "", count: 7)      //
+    var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
             print("currentDay: ",currentDay)
@@ -263,8 +263,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         currentDay = indexPath.row
         self.calendarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
-    
-    
+
 }
 
 

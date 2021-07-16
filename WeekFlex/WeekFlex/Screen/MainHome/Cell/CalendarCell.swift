@@ -10,7 +10,7 @@ import UIKit
 class CalendarCell: UICollectionViewCell {
     
     //MARK: Variable
-    var representCategory = "icon24Star"
+    var representCategory = "icon-24-star-n"
     
     
     //MARK: IBOutlet

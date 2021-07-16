@@ -105,7 +105,7 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon24Star" translatesAutoresizingMaskIntoConstraints="NO" id="4s3-2L-Zpv">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-24-star-n" translatesAutoresizingMaskIntoConstraints="NO" id="4s3-2L-Zpv">
                                                             <rect key="frame" x="35" y="24" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="tlW-VD-RlT"/>
@@ -384,9 +384,9 @@
     </scenes>
     <resources>
         <image name="character132SadGray" width="132" height="132"/>
+        <image name="icon-24-star-n" width="24" height="24"/>
         <image name="icon24DeleteBlack" width="72" height="72"/>
         <image name="icon24Edit" width="72" height="72"/>
-        <image name="icon24Star" width="24" height="24"/>
         <image name="icon32CancleBlack" width="32" height="32"/>
         <image name="icon32UpWhite" width="32" height="32"/>
         <image name="icon60ImportcircleVisual" width="60" height="60"/>

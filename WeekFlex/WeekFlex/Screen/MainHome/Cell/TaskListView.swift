@@ -27,9 +27,9 @@ class TaskListView: UIView {
     var isDone: Bool = false {
         didSet{
             if(isDone){
-                star.setImage(UIImage(named: "icon24Star" + String(category)),for: .normal)
+                star.setImage(UIImage(named: "icon-24-star-n" + String(category)),for: .normal)
             }else{
-                star.setImage(UIImage(named: "icon24Star"),for: .normal)
+                star.setImage(UIImage(named: "icon-24-star-n"),for: .normal)
             }
         }
     }
@@ -71,9 +71,9 @@ class TaskListView: UIView {
         isDone = viewModel.done
         category = viewModel.categoryColor
         if(isDone){
-            star.setImage(UIImage(named:"icon24Star" + String(category) ), for: .normal)
+            star.setImage(UIImage(named:"icon-24-star-n" + String(category) ), for: .normal)
         }else{
-            star.setImage(UIImage(named: "icon24Star"), for: .normal)
+            star.setImage(UIImage(named: "icon-24-star-n"), for: .normal)
         }
         
     }
