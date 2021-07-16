@@ -25,7 +25,7 @@ class MainHomeVC: UIViewController {
     var weekDate: [String] = [String](repeating: "", count: 7)      //
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
-//            changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
+            changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
             tableView.reloadData()  //바뀐 날짜로 테이블 리로드
             calendarCollectionView.reloadData()
         }
@@ -311,9 +311,8 @@ extension MainHomeVC {
         formatter.dateFormat = "MMM-dd-EEEE"
         
         for i in 0..<7 {
-            let temp = Calendar.current.date(byAdding: .day, value: i, to: startDay)
-            weekDate[i] = formatter.string(from: temp!)
-            
+            let temp = Calendar.current.date(byAdding: .day, value: i, to: startDay)!
+            weekDate[i] = formatter.string(from: temp)
         }
         
         changeDate()
@@ -322,17 +321,18 @@ extension MainHomeVC {
         
     }
     
+    //currentDay가 바뀔때마다 상단 날짜 라벨 text 바꿔줌
     private func changeDate(){
-        
-        
-        let selectedDate = weekDate[currentDay].components(separatedBy: "-")
+        if(weeklyData.count > 0){
+            let selectedDate = weekDate[currentDay].components(separatedBy: "-")
             
-        if(selectedDate[1] == "1") {
-            todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
-        }else if(selectedDate[1] == "2") {
-            todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
-        }else {
-            todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
+            if(selectedDate[1] == "1") {
+                todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
+            }else if(selectedDate[1] == "2") {
+                todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
+            }else {
+                todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
+            }
         }
     }
     
