@@ -46,7 +46,7 @@ class MakeRoutineNameVC: UIViewController {
         super.viewDidLoad()
         setView()
         setTextField()
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.8_T1pNCV9fDU00u7tdWNhe6VUh-G2HgkgYE3IOeXByI", forKey: "UserToken")
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", forKey: "UserToken")
         // Do any additional setup after loading the view.
     }
     
