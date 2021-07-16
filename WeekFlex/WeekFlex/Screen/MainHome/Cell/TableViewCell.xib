@@ -22,13 +22,13 @@
                         <rect key="frame" x="8" y="16" width="374" height="118"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHa-0U-0yj">
-                                <rect key="frame" x="16" y="16" width="33" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="16" width="36" height="22"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="YYm-lp-b2T">
-                                <rect key="frame" x="16" y="56.5" width="342" height="61.5"/>
+                                <rect key="frame" x="16" y="46" width="342" height="72"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -38,7 +38,7 @@
                             <constraint firstAttribute="trailing" secondItem="YYm-lp-b2T" secondAttribute="trailing" constant="16" id="e6x-s0-C5P"/>
                             <constraint firstItem="hHa-0U-0yj" firstAttribute="top" secondItem="nxf-rI-uNm" secondAttribute="top" constant="16" id="lTP-fR-Q7C"/>
                             <constraint firstAttribute="bottom" secondItem="YYm-lp-b2T" secondAttribute="bottom" id="nQh-Jz-H9N"/>
-                            <constraint firstItem="YYm-lp-b2T" firstAttribute="top" secondItem="hHa-0U-0yj" secondAttribute="bottom" constant="20" id="ujZ-Ca-v61"/>
+                            <constraint firstItem="YYm-lp-b2T" firstAttribute="top" secondItem="hHa-0U-0yj" secondAttribute="bottom" constant="8" id="ujZ-Ca-v61"/>
                         </constraints>
                     </view>
                 </subviews>

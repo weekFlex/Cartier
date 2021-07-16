@@ -27,9 +27,9 @@ class TaskListView: UIView {
     var isDone: Bool = false {
         didSet{
             if(isDone){
-                star.setImage(UIImage(named: "icon24StarDisabled" + String(category)),for: .normal)
+                star.setImage(UIImage(named: "icon24Star" + String(category)),for: .normal)
             }else{
-                star.setImage(UIImage(named: "icon24StarDisabled"),for: .normal)
+                star.setImage(UIImage(named: "icon24Star"),for: .normal)
             }
         }
     }
@@ -73,7 +73,7 @@ class TaskListView: UIView {
         if(isDone){
             star.setImage(UIImage(named:"icon24Star" + String(category) ), for: .normal)
         }else{
-            star.setImage(UIImage(named: "icon24StarDisabled"), for: .normal)
+            star.setImage(UIImage(named: "icon24Star"), for: .normal)
         }
         
     }

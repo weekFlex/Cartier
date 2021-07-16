@@ -25,6 +25,7 @@ class MainHomeVC: UIViewController {
     var weekDate: [String] = [String](repeating: "", count: 7)      //
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
+            print("currentDay: ",currentDay)
             changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
             tableView.reloadData()  //바뀐 날짜로 테이블 리로드
             calendarCollectionView.reloadData()
@@ -92,7 +93,14 @@ class MainHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad()")
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjIsXCJlbWFpbFwiOlwiYXNhc2FzQG5hdmVyLmNvbVwifSJ9.MI-AgwarD_MXC0t4A1piZLTYqx1PPQKtFpeZMVpeN1A", forKey: "UserToken")
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
+
+//        "accessToken": "exy.asdfgfafasfg",
+//        "code": "dsagvbfqwerdsaxc",
+//        "email": "hyerin@naver.com",
+//        "name": "김혜린",
+//        "signupType": "KAKAO"
+
         
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -139,13 +147,17 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             return 0
         }
         
-        if data.items?.count == 0 {
+        if data.items.count == 0 {
             tableView.isHidden = true
             noDataView.isHidden = false
             return 0
         }
+        
+        tableView.isHidden = false
+        noDataView.isHidden = true
+        
 
-        return data.items?.count ?? 0
+        return data.items.count ?? 0
         
     }
     
@@ -154,11 +166,12 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
         
         //루틴이름
-        let cellData = weeklyData[currentDay].items?[indexPath.row]
-        cell.title.text = "\(cellData?.routineName)"
-        guard let num = cellData?.todos.count else {
-            print("에러: cellData nill값")
-            return cell }
+        let cellData = weeklyData[currentDay].items[indexPath.row]
+        cell.title.text = "\(cellData.routineName)"
+        let num = cellData.todos.count
+//        guard let num = cellData.todos.count else {
+//            print("에러: cellData nill값")
+//            return cell }
         
         //셀(루틴) 안에 커스텀 뷰 추가(할일들)
         for i in 0..<num {
@@ -170,9 +183,10 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
-            guard let todo = cellData?.todos[i] else {
-                print("에러: cellData nill값")
-                return cell }
+            let todo = cellData.todos[i]
+//            guard let todo = cellData.todos[i] else {
+//                print("에러: cellData nill값")
+//                return cell }
             view.configure(with: todo )
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
@@ -274,10 +288,13 @@ extension MainHomeVC {
                     switch result {
                     
                     case .success(let data):
-                        print("성공!!")
                         weeklyData = data
-                        print("data: ", data)
+                        print(weeklyData)
                         calendarCollectionView.reloadData()
+                        tableView.reloadData()
+                        
+                        
+                        
                         // 데이터 전달 후 다시 로드
                         
                     case .failure(let error):
