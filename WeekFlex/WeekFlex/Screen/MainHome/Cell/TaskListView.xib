@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="63"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jis-bk-aqH">
-                    <rect key="frame" x="24" y="15" width="36" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <rect key="frame" x="24" y="15" width="31.5" height="17"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -28,8 +28,8 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-xz-ZPH">
-                    <rect key="frame" x="24" y="37" width="33" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <rect key="frame" x="24" y="37" width="29.5" height="16"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                     <color key="textColor" systemColor="systemGrayColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -39,7 +39,7 @@
                         <constraint firstAttribute="width" constant="17" id="7KG-bh-8I5"/>
                         <constraint firstAttribute="height" constant="17" id="wna-Sd-wnL"/>
                     </constraints>
-                    <state key="normal" image="icon24StarDisabled"/>
+                    <state key="normal" image="icon-24-star-n"/>
                     <connections>
                         <action selector="starTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="oKD-Uy-7jt"/>
                     </connections>
@@ -68,8 +68,8 @@
         </view>
     </objects>
     <resources>
+        <image name="icon-24-star-n" width="24" height="24"/>
         <image name="icon16More" width="16" height="16"/>
-        <image name="icon24StarDisabled" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

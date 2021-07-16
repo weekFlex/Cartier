@@ -12,16 +12,22 @@ import RxCocoa
 import CoreData
 
 
+
 class MainHomeVC: UIViewController {
     
     
     //MARK: Variable
+    
+    
+    var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
-    var today: [String]!    //mmm-dd-e-eeee
+
+    var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
-            changeDate()    //상단 날짜표시
-            tableView.reloadData()
+            print("currentDay: ",currentDay)
+            changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
+            tableView.reloadData()  //바뀐 날짜로 테이블 리로드
             calendarCollectionView.reloadData()
         }
     }
@@ -85,11 +91,21 @@ class MainHomeVC: UIViewController {
     //MARK: Life Cycle
     
     override func viewDidLoad() {
-        setDate()
+        super.viewDidLoad()
+        print("viewDidLoad()")
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
+
+//        "accessToken": "exy.asdfgfafasfg",
+//        "code": "dsagvbfqwerdsaxc",
+//        "email": "hyerin@naver.com",
+//        "name": "김혜린",
+//        "signupType": "KAKAO"
+
+        
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
-        super.viewDidLoad()
+        getRoutines()
+        setDate()
     }
 }
 
@@ -105,7 +121,8 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             let alert = UIAlertController(title: "이번주의 해당 루틴 전체가 삭제됩니다.", message: "이대로 삭제를 진행할까요?", preferredStyle: .alert)
             let cancel = UIAlertAction(title: "그만두기", style: .default, handler : nil)
             let delete = UIAlertAction(title: "삭제하기", style: .cancel) { (action) in
-                self.mainViewModel.lists[self.currentDay].routines.remove(at: indexPath.row)
+                
+//                self.mainViewModel.lists[self.currentDay].routines.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
             }
@@ -124,23 +141,37 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if mainViewModel.lists[currentDay].routines.count == 0 {
+        guard var data = weeklyData[safe: currentDay] else {
             tableView.isHidden = true
             noDataView.isHidden = false
             return 0
         }
+        
+        if data.items.count == 0 {
+            tableView.isHidden = true
+            noDataView.isHidden = false
+            return 0
+        }
+        
+        tableView.isHidden = false
+        noDataView.isHidden = true
+        
 
-        return mainViewModel.lists[currentDay].routines.count
+        return data.items.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as! TableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
         
         //루틴이름
-        let cellData = mainViewModel.lists[currentDay].routines[indexPath.row]
+        let cellData = weeklyData[currentDay].items[indexPath.row]
         cell.title.text = "\(cellData.routineName)"
-        let num = cellData.tasks.count
+        let num = cellData.todos.count
+//        guard let num = cellData.todos.count else {
+//            print("에러: cellData nill값")
+//            return cell }
         
         //셀(루틴) 안에 커스텀 뷰 추가(할일들)
         for i in 0..<num {
@@ -152,10 +183,13 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             view.frame = cell.bounds
             view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
-            view.configure(with: cellData.tasks[i])
+            let todo = cellData.todos[i]
+//            guard let todo = cellData.todos[i] else {
+//                print("에러: cellData nill값")
+//                return cell }
+            view.configure(with: todo )
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
-            
         }
         
         cell.selectionStyle = .none
@@ -176,7 +210,7 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
         print("meatBall")
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.delegate = self
-        popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
+//        popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
         popupVC.modalPresentationStyle = .overCurrentContext
@@ -202,15 +236,19 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "calendarCell", for: indexPath)as? CalendarCell else { return CalendarCell()}
-        let itemViewModel = mainViewModel.lists[indexPath.row]
-        cell.configure(with: itemViewModel)
-        //상단 날짜 표시 라벨과 날짜 하단 흰색 바
         cell.day.text = weekDays[indexPath.row]
+        cell.date.text = weekDate[indexPath.row].components(separatedBy: "-")[1]
+        
         if currentDay == indexPath.row {
             cell.bar.layer.opacity = 1
         }else{
             cell.bar.layer.opacity = 0
         }
+        guard let itemViewModel = weeklyData[safe: indexPath.row] else { return cell }
+        cell.configure(with: itemViewModel)
+        //상단 날짜 표시 라벨과 날짜 하단 흰색 바
+        
+        
         return cell
     }
     
@@ -225,8 +263,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         currentDay = indexPath.row
         self.calendarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
-    
-    
+
 }
 
 
@@ -234,36 +271,84 @@ extension MainHomeVC {
     
     
     
+    
     //MARK: function
+    private func getRoutines(){
+        print("getRoutines()")
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        let date = dateFormat.string(from:Date())
+        print(date)
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                
+                APIService.shared.getWeekly(token,date: date) { [self] result in
+                    switch result {
+                    
+                    case .success(let data):
+                        weeklyData = data
+                        print(weeklyData)
+                        calendarCollectionView.reloadData()
+                        tableView.reloadData()
+                        
+                        
+                        
+                        // 데이터 전달 후 다시 로드
+                        
+                    case .failure(let error):
+                        print(error)
+                        print("오류!!")
+                        
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            print("네트워크 미연결")
+        }
+        print("먼대")
+    }
+    
+    
+    
+    
     private func setDate(){
+        // 오늘 요일 계산해서 weekdate에 일주일 날짜 채워넣음
+        let startFormatter = DateFormatter()
+        startFormatter.dateFormat = "e"
+        var date: Int = Int(startFormatter.string(from: Date())) ?? 1
+        date -= 2
+        currentDay = date
+        //startDay = 그 주 월요일(Date type)
+        let startDay = Calendar.current.date(byAdding: .day, value: -(date), to: Date())!
+        
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM-dd-e-EEEE"
-        let day = formatter.string(from:Date())
-        today = day.components(separatedBy: "-") // [0] = MMM, [1] = dd, [2] = e(1), [3] = EEEE(Sunday)
+        formatter.dateFormat = "MMM-dd-EEEE"
         
-        if(today[1] == "1") {
-            todayLabel.text = today[0] + " " + today[1] + "st, " + today[3]
-        }else if(today[1] == "2") {
-            todayLabel.text = today[0] + " " + today[1] + "nd, " + today[3]
-        }else {
-            todayLabel.text = today![0] + " " + today[1] + "th, " + today[3]
+        for i in 0..<7 {
+            let temp = Calendar.current.date(byAdding: .day, value: i, to: startDay)!
+            weekDate[i] = formatter.string(from: temp)
         }
         
-        if let a = Int(today[2]) {
-            currentDay = ( a + 5 ) % 7
-        }
+        changeDate()
+
+        
         
     }
     
+    //currentDay가 바뀔때마다 상단 날짜 라벨 text 바꿔줌
     private func changeDate(){
-        
-        let selectedDate = mainViewModel.lists[currentDay].date.components(separatedBy: "-")
-        if(selectedDate[1] == "1") {
-            todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
-        }else if(today[1] == "2") {
-            todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
-        }else {
-            todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
+        if(weeklyData.count > 0){
+            let selectedDate = weekDate[currentDay].components(separatedBy: "-")
+            
+            if(selectedDate[1] == "1") {
+                todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
+            }else if(selectedDate[1] == "2") {
+                todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
+            }else {
+                todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
+            }
         }
     }
     
