@@ -10,6 +10,7 @@ import UIKit
 class CalendarCell: UICollectionViewCell {
     
     //MARK: Variable
+    var representCategory = "icon-24-star-n"
     
     
     //MARK: IBOutlet
@@ -25,10 +26,20 @@ class CalendarCell: UICollectionViewCell {
         
     }
     
-    func configure(with viewModel: CalendarItemPresentable) {
-        date.text = viewModel.date.components(separatedBy: "-")[1]
-        star.image = UIImage(named: viewModel.representCategory ?? "icon24starDisabled")
+    func configure(with viewModel: DailyData) {
+        countCategory(data: viewModel)
+        star.image = UIImage(named: representCategory )
         
+    }
+    
+    //대표 카테고리 계산
+    func countCategory(data: DailyData){
+        var categoryCounter = [Int](repeating: 0, count: 16)
+        
+     
+        
+        
+
     }
 
 }
