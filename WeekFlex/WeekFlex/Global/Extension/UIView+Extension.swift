@@ -64,4 +64,15 @@ extension UIView {
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
     
+    // 설명 : UIView 사용 시 특정 부분에만 radius 를 적용하고 싶을 때 사용합니다!
+    // 사용법 : UIView 에 사용합니다!
+    // editUIView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+    
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    
 }
