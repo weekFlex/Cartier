@@ -250,7 +250,7 @@ extension SelectToDoVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 300, height: self.selectRoutineView.frame.height)
         }
         else if collectionView == categoryCollectionView {
-            return CGSize(width: 50, height: 50)
+            return CGSize(width: 50, height: categoryCollectionView.frame.height)
         }
         else {
             return CGSize(width: collectionView.frame.width-32, height: 52)
