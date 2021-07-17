@@ -17,7 +17,7 @@ class SelectToDoVC: UIViewController {
     var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
     var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
     
-    var selectedViewModel : SelectedCollectionViewCellViewModel = SelectedCollectionViewCellViewModel()
+    var selectedViewModel : [TaskListData] = []
     
     // 검색 할 text
     var searchText: String? = nil
@@ -69,6 +69,7 @@ class SelectToDoVC: UIViewController {
         
         nextVC.routineName = routineNameLabel.text
         // 루틴 이름을 넘겨줌
+        nextVC.routineList = selectedViewModel
         
         self.navigationController?.pushViewController(nextVC, animated: true)
         // navigationController를 이용해 다음 뷰로 이동
@@ -308,8 +309,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
             // 선택한 Todo
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedRoutineCell.identifier, for: indexPath) as? SelectedRoutineCell else { return UICollectionViewCell() }
-            let itemViewModel = selectedViewModel.items[indexPath.row]
-            cell.configure(with: itemViewModel)
+            cell.configure(listName: selectedViewModel[indexPath.row].name)
             return cell
         }
         
@@ -334,11 +334,11 @@ extension SelectToDoVC: UICollectionViewDataSource {
             if searchText != nil {
                 // 검색중이라면?
                 
-                cell.configure(name: searchTask[indexPath.row].name, time: searchTask[indexPath.row].days, bookmarkCheck: searchTask[indexPath.row].isBookmarked)
+                cell.configure(data: searchTask[indexPath.row])
                 
-                if selectedViewModel.items.count > 0 {
-                    for i in 0...selectedViewModel.items.count-1 {
-                        if searchTask[indexPath.row].name == selectedViewModel.items[i].listName {
+                if selectedViewModel.count > 0 {
+                    for i in 0...selectedViewModel.count-1 {
+                        if searchTask[indexPath.row].name == selectedViewModel[i].name {
                             // 만약에 내가 선택한 루틴이라면?
                             cell.selected()
                             // 배경 컬러 주기
@@ -353,10 +353,10 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
                     
-                    cell.configure(name: allTask[indexPath.row].name, time: allTask[indexPath.row].days, bookmarkCheck: allTask[indexPath.row].isBookmarked)
-                    if selectedViewModel.items.count > 0 {
-                        for i in 0...selectedViewModel.items.count-1 {
-                            if allTask[indexPath.row].name == selectedViewModel.items[i].listName {
+                    cell.configure(data: allTask[indexPath.row])
+                    if selectedViewModel.count > 0 {
+                        for i in 0...selectedViewModel.count-1 {
+                            if allTask[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 cell.selected()
                                 // 배경 컬러주기
@@ -368,11 +368,11 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 } else {
                     // 특정 카테고리를 보고있다면?
                     
-                    cell.configure(name: taskData[categoryIndex-1].tasks[indexPath.row].name, time: taskData[categoryIndex-1].tasks[indexPath.row].days, bookmarkCheck: taskData[categoryIndex-1].tasks[indexPath.row].isBookmarked)
+                    cell.configure(data: taskData[categoryIndex-1].tasks[indexPath.row])
                     
-                    if selectedViewModel.items.count > 0 {
-                        for i in 0...selectedViewModel.items.count-1 {
-                            if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel.items[i].listName {
+                    if selectedViewModel.count > 0 {
+                        for i in 0...selectedViewModel.count-1 {
+                            if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 cell.selected()
                                 // 배경 컬러주기
@@ -394,7 +394,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         if collectionView == selectedCollectionView {
             // 클릭한 루틴 보여주는 CollectionView
             
-            if selectedViewModel.items.count != 0 {
+            if selectedViewModel.count != 0 {
                 emptyLabel.isHidden = true
                 nextButton.isEnabled = true
                 nextButton.tintColor = .white
@@ -408,7 +408,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 // 다음버튼 비활성화
                 
             }
-            return selectedViewModel.items.count
+            return selectedViewModel.count
         }
         
         else if collectionView == categoryCollectionView {
@@ -482,16 +482,17 @@ extension SelectToDoVC: UICollectionViewDataSource {
         }
         
         else {
+            // Task CollectionView
             
             let cells = collectionView.cellForItem(at: indexPath) as? RoutineCell
             
-            if selectedViewModel.items.count > 0 {
-                // selectedViewModel이 비어있다면?
+            if selectedViewModel.count > 0 {
+                // selectedViewModel이 비어있지 않다면?
                 
                 var check = false
-                for i in 0...selectedViewModel.items.count-1 {
+                for i in 0...selectedViewModel.count-1 {
                     // 이미 추가 된 루틴인지 검사하는 과정이 필요 (중복 추가를 막기 위해)
-                    if cells?.routineNameLabel.text == selectedViewModel.items[i].listName {
+                    if cells?.routineNameLabel.text == selectedViewModel[i].name {
                         check = true
                         break
                     }
@@ -499,7 +500,10 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 if check == false {
                     // 추가 안된 루틴이라면 -> 추가
                     
-                    listItemAdded(value: (cells?.routineNameLabel.text)!)
+                    if let value = cells?.routine {
+                        listItemAdded(value: value)
+                    }
+                    
                     selectedCollectionView.reloadData()
                     todoCollectionView.reloadData()
                 }
@@ -507,7 +511,9 @@ extension SelectToDoVC: UICollectionViewDataSource {
             } else {
                 // selectedViewModel이 비어있다면? -> 무조건 추가
                 
-                listItemAdded(value: (cells?.routineNameLabel.text)!)
+                if let value = cells?.routine {
+                    listItemAdded(value: value)
+                }
                 selectedCollectionView.reloadData()
                 todoCollectionView.reloadData()
             }
@@ -519,16 +525,16 @@ extension SelectToDoVC: UICollectionViewDataSource {
 
 extension SelectToDoVC: SelectedItemViewDelegate {
     
-    func listItemRemoved(value: Int) {
-        // 리스트에서 지우기
-        selectedViewModel.items.remove(at: value)
+    func listItemAdded(value: TaskListData) {
+        // 리스트에 추가하기
+        
+        selectedViewModel.insert(value, at: 0)
     }
     
     
-    func listItemAdded(value: String) {
-        // 리스트에 추가하기
-        let item = SelectedCellItemViewModel(listName: value)
-        selectedViewModel.items.insert(item, at: 0)
+    func listItemRemoved(value: Int) {
+        // 리스트에서 지우기
+        selectedViewModel.remove(at: value)
     }
     
 }

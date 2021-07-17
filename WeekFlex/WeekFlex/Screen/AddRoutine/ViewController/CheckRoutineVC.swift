@@ -13,6 +13,7 @@ class CheckRoutineVC: UIViewController {
     // MARK: Variable Part
     
     var routineName: String?
+    var routineList: [TaskListData]?
     
     // MARK: IBOutlet
     
@@ -60,6 +61,7 @@ extension CheckRoutineVC {
         if let routineName = routineName {
             routineNameTextField.text = routineName
         }
+        
         explainLabel.setLabel(text: "짜잔! 마지막으로 루틴을 확인해 주세요:)", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
         
         routineNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -72,6 +74,10 @@ extension CheckRoutineVC {
 
         saveButton.setButton(text: "저장하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
         saveButton.setRounded(radius: 3)
+        
+        if let list = routineList {
+            print(list)
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
