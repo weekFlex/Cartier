@@ -9,3 +9,5 @@ import Foundation
 
 // EditRoutine 에서
 protocol SaveTimeProtocol { func saveTimeProtocol(savedTimeData: Todo) }
+
+protocol HideViewProtocol { func hideViewProtocol() }

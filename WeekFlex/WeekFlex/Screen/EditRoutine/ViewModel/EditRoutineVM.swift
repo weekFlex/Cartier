@@ -119,6 +119,13 @@ extension EditRoutineViewModel {
             return false
         }
     }
+    
+    func addOneHour(timeAsString: String) -> String {
+        let timeFormat = DateFormatter()
+        timeFormat.dateFormat = "HH:mm:"
+        let oneHourAddedTime = timeFormat.date(from: timeAsString)!.addingTimeInterval(60*60)
+        return timeFormat.string(from: oneHourAddedTime)
+    }
 }
 
 // picker view 관련 메소드

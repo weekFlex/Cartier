@@ -33,6 +33,7 @@ class EditRoutineVC: UIViewController {
     @IBOutlet var endTimeSubLabel: UILabel!
     @IBOutlet var startTimeLabel: UILabel!
     @IBOutlet var endTimeLabel: UILabel!
+    @IBOutlet var topLayerUIView: UIView!
     
     // MARK: - IBAction
 
@@ -41,9 +42,11 @@ class EditRoutineVC: UIViewController {
         if timeSwitch.isOn { // switch on
             // show time labels
             showTimeLabel()
+            topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            view.bringSubviewToFront(topLayerUIView)
             // move to editRoutinTimeVC
             guard let editRoutineTimeVC = self.storyboard?.instantiateViewController(identifier: "EditRoutineTimeVC") as? EditRoutineTimeVC else { return }
-            editRoutineTimeVC.modalTransitionStyle = .crossDissolve
+            editRoutineTimeVC.modalTransitionStyle = .coverVertical
             editRoutineTimeVC.modalPresentationStyle = .custom
             // pass time data
             // if there's no time data in routine, give dummy data
@@ -54,6 +57,7 @@ class EditRoutineVC: UIViewController {
             editRoutineTimeVC.editRoutineViewModel = EditRoutineViewModel(self.editRouineViewModel.todo, days: self.editRouineViewModel.days)
             // connect delegate
             editRoutineTimeVC.saveTimeDelegate = self
+            editRoutineTimeVC.hideViewDelegate = self
             self.present(editRoutineTimeVC, animated: true, completion: .none)
         } else { // switch off
             hideTimeLabel()
@@ -77,7 +81,12 @@ class EditRoutineVC: UIViewController {
 
 // MARK: - Extension for Protocol
 
-extension EditRoutineVC: SaveTimeProtocol {
+extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
+    func hideViewProtocol() {
+        view.sendSubviewToBack(topLayerUIView)
+        topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.0)
+    }
+    
     // receive newly saved time data from EditRoutineTimeVC
     func saveTimeProtocol(savedTimeData: Todo) {
         editRouineViewModel = EditRoutineViewModel(savedTimeData, days: ["월":1, "화":1, "수":1, "목":0, "금":0, "토":0, "일":0])
@@ -88,6 +97,7 @@ extension EditRoutineVC: SaveTimeProtocol {
     
     func setLayout() {
         // background
+        topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.0)
         view.backgroundColor = UIColor(white: 0, alpha: 0.5)
         editUIView.backgroundColor = .white
         topConstraint.constant = 330/896*self.view.bounds.height

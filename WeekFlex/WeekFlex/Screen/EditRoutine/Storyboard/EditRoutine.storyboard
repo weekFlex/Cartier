@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTQ-oE-dAE">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YQR-Qy-NSJ">
                                 <rect key="frame" x="0.0" y="374" width="414" height="522"/>
                                 <subviews>
@@ -159,9 +163,13 @@
                         <viewLayoutGuide key="safeArea" id="mVq-a3-7Kw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bTQ-oE-dAE" firstAttribute="leading" secondItem="mVq-a3-7Kw" secondAttribute="leading" id="1mR-FV-pe5"/>
                             <constraint firstItem="YQR-Qy-NSJ" firstAttribute="trailing" secondItem="mVq-a3-7Kw" secondAttribute="trailing" id="61D-C5-4HA"/>
                             <constraint firstAttribute="bottom" secondItem="YQR-Qy-NSJ" secondAttribute="bottom" id="7ft-dX-Ek4"/>
                             <constraint firstItem="YQR-Qy-NSJ" firstAttribute="leading" secondItem="mVq-a3-7Kw" secondAttribute="leading" id="D1l-wt-Aed"/>
+                            <constraint firstItem="mVq-a3-7Kw" firstAttribute="trailing" secondItem="bTQ-oE-dAE" secondAttribute="trailing" id="EOi-Vx-fl0"/>
+                            <constraint firstAttribute="bottom" secondItem="bTQ-oE-dAE" secondAttribute="bottom" id="cue-do-zDX"/>
+                            <constraint firstItem="bTQ-oE-dAE" firstAttribute="top" secondItem="rjw-u8-Lwz" secondAttribute="top" id="kwC-EE-v7u"/>
                             <constraint firstItem="YQR-Qy-NSJ" firstAttribute="top" secondItem="mVq-a3-7Kw" secondAttribute="top" constant="330" id="xny-9J-BlY"/>
                         </constraints>
                     </view>
@@ -179,6 +187,7 @@
                         <outlet property="timeHeaderLabel" destination="5X2-H4-aQQ" id="j1p-qp-xq0"/>
                         <outlet property="timeSwitch" destination="xNJ-FI-UuK" id="Wjq-qT-66F"/>
                         <outlet property="topConstraint" destination="xny-9J-BlY" id="QL1-9K-5Jr"/>
+                        <outlet property="topLayerUIView" destination="bTQ-oE-dAE" id="and-In-qeZ"/>
                         <outlet property="weekCollectionView" destination="CM1-dl-8kl" id="Ud7-jb-lKS"/>
                     </connections>
                 </viewController>

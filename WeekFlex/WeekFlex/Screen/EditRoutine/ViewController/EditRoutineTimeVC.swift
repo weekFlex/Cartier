@@ -13,6 +13,7 @@ class EditRoutineTimeVC: UIViewController {
     
     // sends modified start, end time data from EdiRoutineTimeVC to EditRouineVC
     var saveTimeDelegate: SaveTimeProtocol?
+    var hideViewDelegate: HideViewProtocol?
     // View Model
     var editRoutineViewModel : EditRoutineViewModel!
     // Variables for Time Picker
@@ -45,11 +46,13 @@ class EditRoutineTimeVC: UIViewController {
     
     // 취소 button
     @IBAction func cancleButtonDidTap(_ sender: Any) {
+        self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
     }
     // 확인 button
     @IBAction func confirmButtonDidTap(_ sender: Any) {
         self.saveTimeDelegate?.saveTimeProtocol(savedTimeData: editRoutineViewModel.todo)
+        self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -79,7 +82,7 @@ extension EditRoutineTimeVC {
     }
     func setLayout() {
         // Layout
-        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.0)
         editUIView.backgroundColor = .white
         topConstraint.constant = 454/896*self.view.bounds.height
         // left side time section
@@ -130,16 +133,14 @@ extension EditRoutineTimeVC {
     }
     // preselect start time, end time - gets time data from previous view using vm
     func setStartTimeData() {
-        startTimeMeridiemLabel.setLabel(text: editRoutineViewModel.startTimeMeridiem, color: .black, font: .appleBold(size: 20))
-        startTimeHourLabel.setLabel(text: editRoutineViewModel.startTimeHour, color: .black, font: .metroBold(size: 20))
-        startTimeMinuteLabel.setLabel(text: editRoutineViewModel.startTimeMin, color: .black, font: .metroBold(size: 20))
-        startTimeMiddleLabel.setLabel(text: ":", color: .black, font: .metroBold(size: 20))
+        startTimeMeridiemLabel.text = editRoutineViewModel.startTimeMeridiem
+        startTimeHourLabel.text = editRoutineViewModel.startTimeHour
+        startTimeMinuteLabel.text = editRoutineViewModel.startTimeMin
     }
     func setEndTimeData() {
-        endTimeMeridiemLabel.setLabel(text: editRoutineViewModel.endTimeMeridiem, color: .black, font: .appleBold(size: 20))
-        endTimeHourLabel.setLabel(text: editRoutineViewModel.endTimeHour, color: .black, font: .metroBold(size: 20))
-        endTimeMiddleLabel.setLabel(text: ":", color: .black, font: .metroBold(size: 20))
-        endTimeMinuteLabel.setLabel(text: editRoutineViewModel.endTimeMin, color: .black, font: .metroBold(size: 20))
+        endTimeMeridiemLabel.text = editRoutineViewModel.endTimeMeridiem
+        endTimeHourLabel.text = editRoutineViewModel.endTimeHour
+        endTimeMinuteLabel.text = editRoutineViewModel.endTimeMin
     }
     
     // changes label color at each state : disabled state & enabled state
@@ -244,7 +245,7 @@ extension EditRoutineTimeVC: UIPickerViewDelegate {
             mer = meridiem[row] // saves hour data
             break
         case 1: // 시간
-            hourLabel.text = hours[row]
+            hourLabel.text = String(Int(hours[row])!)
             hour = hours[row] // saves hour data
             break
         case 2: // 분
@@ -258,16 +259,11 @@ extension EditRoutineTimeVC: UIPickerViewDelegate {
         case true:
             // check if start time is faster than the end time
             let editedStartTime = editRoutineViewModel.mergePickerIntoTime(mer: mer, hour: hour, min: min)
-            if editRoutineViewModel.compareStartEndTime(startTimeAsString: editedStartTime, endTimeAsString: editRoutineViewModel.todo.endTime!) {
-                // 통과하면,
-                // update START time vm with newly saved time data
-                editRoutineViewModel.updateStartTime(startTime: editRoutineViewModel.mergePickerIntoTime(mer: mer, hour: hour, min: min))
-            } else {
-                // set time picker data to state before editing
-                timePicker.selectRow(editRoutineViewModel.startHourRow, inComponent: 1, animated: true)
-                timePicker.selectRow(editRoutineViewModel.startMinRow, inComponent: 2, animated: true)
-                timePicker.selectRow(editRoutineViewModel.startTimeMerRow, inComponent: 0, animated: true)
-                setStartTimeData()
+            editRoutineViewModel.updateStartTime(startTime: editRoutineViewModel.mergePickerIntoTime(mer: mer, hour: hour, min: min))
+            if !editRoutineViewModel.compareStartEndTime(startTimeAsString: editedStartTime, endTimeAsString: editRoutineViewModel.todo.endTime!) {
+                let addedOneHourEndTime = editRoutineViewModel.addOneHour(timeAsString: editRoutineViewModel.mergePickerIntoTime(mer: mer, hour: hour, min: min))
+                editRoutineViewModel.updateEndTime(endTime: addedOneHourEndTime)
+                setEndTimeData()
             }
         case false:
             // check if end time is later than the start time
@@ -278,6 +274,7 @@ extension EditRoutineTimeVC: UIPickerViewDelegate {
                 // update END time vm with newly saved time data
                 editRoutineViewModel.updateEndTime(endTime: editRoutineViewModel.mergePickerIntoTime(mer: mer, hour: hour, min: min))
             } else {
+                editRoutineViewModel.updateEndTime(endTime: editRoutineViewModel.todo.startTime!)
                 // set time picker data to state before editing
                 timePicker.selectRow(editRoutineViewModel.endHourRow, inComponent: 1, animated: true)
                 timePicker.selectRow(editRoutineViewModel.endMinRow, inComponent: 2, animated: true)
