@@ -61,6 +61,21 @@ class SelectToDoVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func nextButtonDidTap(_ sender: UIButton) {
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "CheckRoutineVC") as? CheckRoutineVC else {
+            return
+        }
+        
+        nextVC.routineName = routineNameLabel.text
+        // 루틴 이름을 넘겨줌
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        // navigationController를 이용해 다음 뷰로 이동
+        
+    }
+    
+    
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {

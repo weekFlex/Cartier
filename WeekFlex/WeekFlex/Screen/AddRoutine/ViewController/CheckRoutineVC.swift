@@ -12,6 +12,8 @@ class CheckRoutineVC: UIViewController {
     
     // MARK: Variable Part
     
+    var routineName: String?
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var routineNameTextField: UITextField!
@@ -54,7 +56,10 @@ extension CheckRoutineVC {
     func setView() {
         
         routineNameTextField.font = .metroBold(size: 24)
-        routineNameTextField.text = "mini🤗"
+        
+        if let routineName = routineName {
+            routineNameTextField.text = routineName
+        }
         explainLabel.setLabel(text: "짜잔! 마지막으로 루틴을 확인해 주세요:)", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
         
         routineNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -74,8 +79,12 @@ extension CheckRoutineVC {
         if textField.text?.count == 0 || textField.text == nil {
             // Text가 존재하지 않을 때 저장하기 버튼 비활성화
             
+            saveButton.isEnabled = false
+            
         } else {
             // Text가 존재할 때 저장하기 버튼 활성화
+            
+            saveButton.isEnabled = true
             
         }
         
