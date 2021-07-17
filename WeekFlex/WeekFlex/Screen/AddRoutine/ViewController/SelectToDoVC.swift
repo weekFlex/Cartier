@@ -34,6 +34,7 @@ class SelectToDoVC: UIViewController {
     @IBOutlet weak var selectRoutineView: UIView!
     @IBOutlet weak var selectedCollectionView: UICollectionView!
     @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var selectedRoutineViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var routineNameLabel: UILabel!
     
@@ -55,7 +56,7 @@ class SelectToDoVC: UIViewController {
     // MARK: IBAction
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-    // 뒤로가기 버튼 클릭 시 Action
+        // 뒤로가기 버튼 클릭 시 Action
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -113,7 +114,7 @@ extension SelectToDoVC {
         // TextField가 수정될 때 마다 실행
         
         emptyLabel.setLabel(text: "루틴에 추가할 할 일을 선택하세요", color: .gray2, font: .appleRegular(size: 16))
-
+        
     }
     
     func setView() {
@@ -127,15 +128,15 @@ extension SelectToDoVC {
         shadowView.layer.shadowRadius = 3
         shadowView.layer.shadowOpacity = 0.10
         shadowView.layer.shadowColor = UIColor.gray2.cgColor
-
+        
         textFieldView.backgroundColor = .gray1
         
         selectRoutineView.backgroundColor = .clear
         selectedCollectionView.backgroundColor = .clear
-    
+        
         let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.scrollDirection = .horizontal
-        // 가로 스크롤 고정
+        layout.scrollDirection = .vertical
+        
     }
     
     func setDelegate() {
@@ -150,6 +151,18 @@ extension SelectToDoVC {
         
         selectedCollectionView.delegate = self
         selectedCollectionView.dataSource = self
+        
+        let customLayout = LeftAlignFlowLayout()
+        // Cell 왼쪽정렬
+        
+        customLayout.updateCell = { num in
+            // selectedCollectionView 높이 변경
+            
+            self.selectedRoutineViewHeightConstraint.constant = (num+1) * 32
+        }
+        
+        selectedCollectionView.collectionViewLayout = customLayout
+        customLayout.estimatedItemSize = CGSize(width: 41, height: 41)
         
         // 첫번째 카테고리 선택을 default로 만듦
         categoryCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: .right)
@@ -189,8 +202,8 @@ extension SelectToDoVC {
                         
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
-                        // 데이터 전달 후 다시 로드
-                        
+                    // 데이터 전달 후 다시 로드
+                    
                     case .failure(let error):
                         print(error)
                         
@@ -295,8 +308,8 @@ extension SelectToDoVC: UICollectionViewDataSource {
             }
             
             return cell
-        
-        
+            
+            
             
         }
         else {
@@ -365,7 +378,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         
         if collectionView == selectedCollectionView {
             // 클릭한 루틴 보여주는 CollectionView
-
+            
             if selectedViewModel.items.count != 0 {
                 emptyLabel.isHidden = true
                 nextButton.isEnabled = true
@@ -407,7 +420,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
-
+                    
                     allTask = []
                     // 전체 Task 갯수
                     
@@ -418,10 +431,10 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     
                 } else {
                     // 특장 카테고리라면?
-
+                    
                     return taskData[categoryIndex-1].tasks.count
                 }
-
+                
             }
         }
     }
@@ -490,7 +503,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
 }
 
 extension SelectToDoVC: SelectedItemViewDelegate {
-
+    
     func listItemRemoved(value: Int) {
         // 리스트에서 지우기
         selectedViewModel.items.remove(at: value)
