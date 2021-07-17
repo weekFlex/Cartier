@@ -32,8 +32,6 @@
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
 		9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E847260884E800EC9969 /* RoutineCell.swift */; };
-		9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */; };
-		9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */; };
 		9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */; };
 		9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */; };
 		9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9EEFEE2698920E00FA0B5C /* CategoryData.swift */; };
@@ -45,7 +43,6 @@
 		9BE0BFF92684DE3700E2FEDC /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFF82684DE3700E2FEDC /* GenericResponse.swift */; };
 		9BE0BFFD2684DFFD00E2FEDC /* SimpleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFFC2684DFFD00E2FEDC /* SimpleResponse.swift */; };
 		9BE0C0002684E19F00E2FEDC /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFFF2684E19F00E2FEDC /* APIService.swift */; };
-		9BE0C0112684E3A200E2FEDC /* AllTaskCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0C0102684E3A200E2FEDC /* AllTaskCollectionViewCellViewModel.swift */; };
 		9BEFD54826A2AE1B00FD9112 /* LeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
@@ -110,8 +107,6 @@
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineNameVC.swift; sourceTree = "<group>"; };
 		9B56E847260884E800EC9969 /* RoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCell.swift; sourceTree = "<group>"; };
-		9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
-		9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRoutineCell.swift; sourceTree = "<group>"; };
 		9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		9B9EEFEE2698920E00FA0B5C /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
@@ -123,7 +118,6 @@
 		9BE0BFF82684DE3700E2FEDC /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
 		9BE0BFFC2684DFFD00E2FEDC /* SimpleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleResponse.swift; sourceTree = "<group>"; };
 		9BE0BFFF2684E19F00E2FEDC /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		9BE0C0102684E3A200E2FEDC /* AllTaskCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignFlowLayout.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -343,10 +337,7 @@
 		9B56E84D26089FCD00EC9969 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				9B56E84A260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift */,
-				9B56E84E26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift */,
 				9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */,
-				9BE0C0102684E3A200E2FEDC /* AllTaskCollectionViewCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -731,15 +722,12 @@
 				9BE0BFF92684DE3700E2FEDC /* GenericResponse.swift in Sources */,
 				0E795358261F6D0900345659 /* CalendarCell.swift in Sources */,
 				9B9EEFF326989FA800FA0B5C /* TaskData.swift in Sources */,
-				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
 				9BE0BFFD2684DFFD00E2FEDC /* SimpleResponse.swift in Sources */,
 				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
-				9B56E84B260892BB00EC9969 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
 				9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */,
 				9BE0C0002684E19F00E2FEDC /* APIService.swift in Sources */,
-				9BE0C0112684E3A200E2FEDC /* AllTaskCollectionViewCellViewModel.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */,
@@ -750,7 +738,6 @@
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
-				9B56E84F26089FDD00EC9969 /* ToDoListCollectionViewCellViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* MyRoutineListViewModel.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
 				9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */,
