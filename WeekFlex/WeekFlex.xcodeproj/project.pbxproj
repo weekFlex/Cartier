@@ -44,6 +44,7 @@
 		9BE0BFFD2684DFFD00E2FEDC /* SimpleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFFC2684DFFD00E2FEDC /* SimpleResponse.swift */; };
 		9BE0C0002684E19F00E2FEDC /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0BFFF2684E19F00E2FEDC /* APIService.swift */; };
 		9BEFD54826A2AE1B00FD9112 /* LeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */; };
+		9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
 		9E5FD60C25F4CBD5008EB927 /* MyRoutineAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */; };
@@ -119,6 +120,7 @@
 		9BE0BFFC2684DFFD00E2FEDC /* SimpleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleResponse.swift; sourceTree = "<group>"; };
 		9BE0BFFF2684E19F00E2FEDC /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignFlowLayout.swift; sourceTree = "<group>"; };
+		9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineVC.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineAddVC.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			children = (
 				9B1041912607594800746FCF /* SelectToDoVC.swift */,
 				9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */,
+				9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
 				9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */,
 				0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */,
+				9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */,
 				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */,
