@@ -30,6 +30,11 @@ struct APIService {
         judgeObject(target, completion: completion)
         
     }
+    
+    func getWeekly(_ token: String, date: String,  completion: @escaping (NetworkResult<[DailyData]>)->(Void)){
+        let target: APITarget = .getWeekly(token: token, date: date)
+        judgeObject(target, completion: completion)
+    }
 
 }
 
@@ -51,6 +56,7 @@ extension APIService {
                     print("구조체를 확인해보세요")
                 }
             case .failure(let error):
+                print("error.errorDescription:  ",error.errorDescription)
                 completion(.failure(error.response?.statusCode ?? 100))
             }
         }

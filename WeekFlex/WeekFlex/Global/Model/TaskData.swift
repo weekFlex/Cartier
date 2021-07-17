@@ -15,7 +15,7 @@ struct TaskData: Codable {
 // MARK: - Task
 struct TaskListData: Codable {
     let category: String
-    let days: [Day]
+    let days: [Day]?
     let id: Int
     let isBookmarked: Bool
     let name: String
