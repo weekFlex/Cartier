@@ -180,8 +180,6 @@ extension SelectToDoVC {
         selectedCollectionView.collectionViewLayout = customLayout
         customLayout.estimatedItemSize = CGSize(width: 41, height: 41)
         
-        // 첫번째 카테고리 선택을 default로 만듦
-        categoryCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: .right)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -219,6 +217,9 @@ extension SelectToDoVC {
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
                     // 데이터 전달 후 다시 로드
+                    
+                        // 첫번째 카테고리 선택을 default로 만듦
+                        categoryCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: .right)
                     
                     case .failure(let error):
                         print(error)

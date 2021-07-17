@@ -77,10 +77,12 @@ extension CheckRoutineVC {
         
         if let list = routineList {
             print(list)
+            taskTableView.reloadData()
         }
         
         taskTableView.delegate = self
         taskTableView.dataSource = self
+        taskTableView.separatorStyle = .none
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -159,10 +161,19 @@ extension CheckRoutineVC: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CheckRoutineCell.identifier, for: indexPath) as? CheckRoutineCell else { return UITableViewCell() }
         
+        cell.selectionStyle = .none
+        
         if let data = routineList {
             
+            cell.configure(data: data[indexPath.row])
+            
+            if indexPath.row == (data.count-1) {
+                cell.lineView.isHidden = true
+            } else {
+                cell.lineView.isHidden = false
+            }
+            
         }
-        
         
         return cell
         
