@@ -65,6 +65,8 @@ extension CheckRoutineVC {
          
          */
 
+        saveButton.setButton(text: "저장하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
+        saveButton.setRounded(radius: 3)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

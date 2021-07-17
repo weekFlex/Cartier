@@ -21,7 +21,7 @@ extension UIButton {
         self.layer.masksToBounds = true
     }
     
-    func setButton(text: String, color: UIColor = .boardBlack, font: UIFont, backgroundColor: UIColor = .clear) {
+    func setButton(text: String, color: UIColor = .black, font: UIFont, backgroundColor: UIColor = .clear) {
         // setButton : 내용, 폰트, 컬러, background 컬러까지 한번에 설정
         
         self.setTitle(text, for: .normal)
