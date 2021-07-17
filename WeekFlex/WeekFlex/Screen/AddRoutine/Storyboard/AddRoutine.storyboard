@@ -443,6 +443,9 @@
                                     <constraint firstAttribute="width" secondItem="lL4-sH-LCx" secondAttribute="height" multiplier="327:52" id="e4i-Rq-RZV"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="saveButtonDidTap:" destination="saV-Zh-zQ6" eventType="touchUpInside" id="4ax-T1-lPB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SXE-LN-PDN"/>

@@ -26,6 +26,17 @@ class CheckRoutineVC: UIViewController {
     // MARK: IBAction
     
     
+    @IBAction func saveButtonDidTap(_ sender: UIButton) {
+        // 저장하기 버튼 클릭 Event
+        
+        /*
+         경우에 따라
+         1. 루틴 생성 api
+         2. 루틴 수정 api
+         로 구분해줘야함
+         */
+    }
+    
     @IBAction func backButtonDidTap(_ sender: Any) {
         // 뒤로가기 버튼 클릭 Event
         
@@ -76,7 +87,6 @@ extension CheckRoutineVC {
         saveButton.setRounded(radius: 3)
         
         if let list = routineList {
-            print(list)
             taskTableView.reloadData()
         }
         
