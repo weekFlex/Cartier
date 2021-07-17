@@ -24,8 +24,8 @@ class SelectedRoutineCell: UICollectionViewCell {
         nameLabel.textColor = .black
     }
     
-    func configure(with viewModel: SelectedItemPresentable) {
-        nameLabel.text = viewModel.listName
+    func configure(listName: String) {
+        nameLabel.text = listName
     }
     
     

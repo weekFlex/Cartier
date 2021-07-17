@@ -12,6 +12,7 @@ class RoutineCell: UICollectionViewCell {
     // MARK: Variable Part
     
     static let identifier = "RoutineCell"
+    var routine: TaskListData?
     
     // MARK: IBOutlet
     
@@ -27,17 +28,20 @@ class RoutineCell: UICollectionViewCell {
         timeLabel?.textColor = UIColor.gray3
     }
     
-    func configure(name: String, time: [Day]?, bookmarkCheck: Bool) {
-        routineNameLabel.text = name
+    func configure(data: TaskListData) {
         
-        if time != nil {
-            // 시간이 들어왔다면? (@민승)
+        routine = data
+        
+        routineNameLabel.text = data.name
+        
+        if data.days != nil {
+            // 시간이 들어왔다면? (민승이가 넘겨줘씅ㄹ 때)
             
         } else {
             timeLabel.text = ""
         }
         
-        if bookmarkCheck {
+        if data.isBookmarked {
             // 북마크가 되어있는 지
             bookmarkImage.image = UIImage(named: "icon16BookmarkActive")
         } else {

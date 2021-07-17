@@ -12,7 +12,7 @@ protocol SelectedItemPresentable {
 }
 
 protocol SelectedItemViewDelegate {
-    func listItemAdded(value: String)
+    func listItemAdded(value: TaskListData)
     func listItemRemoved(value: Int)
 }
 
