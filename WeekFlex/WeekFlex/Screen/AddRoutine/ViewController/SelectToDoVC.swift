@@ -302,9 +302,9 @@ extension SelectToDoVC: UICollectionViewDataSource {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             if indexPath.row == 0 {
-                cell.configure(name: "전체")
+                cell.configure(name: "전체", color: 0)
             } else {
-                cell.configure(name: taskData[indexPath.row-1].category.name)
+                cell.configure(name: taskData[indexPath.row-1].category.name, color: taskData[indexPath.row-1].category.color)
             }
             
             return cell
@@ -319,7 +319,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
             if searchText != nil {
                 // 검색중이라면?
                 
-                cell.configure(name: searchTask[indexPath.row].name, time: "", bookmarkCheck: searchTask[indexPath.row].isBookmarked )
+                cell.configure(name: searchTask[indexPath.row].name, time: searchTask[indexPath.row].days, bookmarkCheck: searchTask[indexPath.row].isBookmarked)
                 
                 if selectedViewModel.items.count > 0 {
                     for i in 0...selectedViewModel.items.count-1 {
@@ -338,7 +338,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
                     
-                    cell.configure(name: allTask[indexPath.row].name, time: "", bookmarkCheck: allTask[indexPath.row].isBookmarked)
+                    cell.configure(name: allTask[indexPath.row].name, time: allTask[indexPath.row].days, bookmarkCheck: allTask[indexPath.row].isBookmarked)
                     if selectedViewModel.items.count > 0 {
                         for i in 0...selectedViewModel.items.count-1 {
                             if allTask[indexPath.row].name == selectedViewModel.items[i].listName {
@@ -353,7 +353,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 } else {
                     // 특정 카테고리를 보고있다면?
                     
-                    cell.configure(name: taskData[categoryIndex-1].tasks[indexPath.row].name, time: "", bookmarkCheck: taskData[categoryIndex-1].tasks[indexPath.row].isBookmarked)
+                    cell.configure(name: taskData[categoryIndex-1].tasks[indexPath.row].name, time: taskData[categoryIndex-1].tasks[indexPath.row].days, bookmarkCheck: taskData[categoryIndex-1].tasks[indexPath.row].isBookmarked)
                     
                     if selectedViewModel.items.count > 0 {
                         for i in 0...selectedViewModel.items.count-1 {

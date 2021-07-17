@@ -27,9 +27,15 @@ class RoutineCell: UICollectionViewCell {
         timeLabel?.textColor = UIColor.gray3
     }
     
-    func configure(name: String, time: String, bookmarkCheck: Bool) {
+    func configure(name: String, time: [Day]?, bookmarkCheck: Bool) {
         routineNameLabel.text = name
-        timeLabel.text = time
+        
+        if time != nil {
+            // 시간이 들어왔다면? (@민승)
+            
+        } else {
+            timeLabel.text = ""
+        }
         
         if bookmarkCheck {
             // 북마크가 되어있는 지
