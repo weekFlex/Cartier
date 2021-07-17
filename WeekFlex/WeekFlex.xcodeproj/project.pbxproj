@@ -46,6 +46,7 @@
 		9BEFD54826A2AE1B00FD9112 /* LeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */; };
 		9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */; };
 		9BEFD55B26A334F400FD9112 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */; };
+		9BEFD55E26A3488300FD9112 /* CheckRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
 		9E5FD60C25F4CBD5008EB927 /* MyRoutineAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */; };
@@ -123,6 +124,7 @@
 		9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignFlowLayout.swift; sourceTree = "<group>"; };
 		9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineVC.swift; sourceTree = "<group>"; };
 		9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineCell.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9E5FD60B25F4CBD5008EB927 /* MyRoutineAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineAddVC.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				9B56E847260884E800EC9969 /* RoutineCell.swift */,
 				9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */,
 				9BEFD54726A2AE1B00FD9112 /* LeftAlignFlowLayout.swift */,
+				9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				9BEFD54826A2AE1B00FD9112 /* LeftAlignFlowLayout.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */,
+				9BEFD55E26A3488300FD9112 /* CheckRoutineCell.swift in Sources */,
 				0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */,
 				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
 				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
