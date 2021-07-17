@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fIX-jk-IgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="saV-Zh-zQ6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -332,10 +332,10 @@
             </objects>
             <point key="canvasLocation" x="2645" y="-16"/>
         </scene>
-        <!--View Controller-->
+        <!--Check RoutineVC-->
         <scene sceneID="btp-jh-wDY">
             <objects>
-                <viewController id="saV-Zh-zQ6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckRoutineVC" id="saV-Zh-zQ6" customClass="CheckRoutineVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eKt-ib-ONh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -349,6 +349,9 @@
                                             <constraint firstAttribute="width" secondItem="V81-eU-mlK" secondAttribute="height" multiplier="1:1" id="aaD-ef-pQF"/>
                                         </constraints>
                                         <state key="normal" image="icon32BackBlack"/>
+                                        <connections>
+                                            <action selector="backButtonDidTap:" destination="saV-Zh-zQ6" eventType="touchUpInside" id="w84-6e-YcI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -359,19 +362,19 @@
                                     <constraint firstAttribute="bottom" secondItem="V81-eU-mlK" secondAttribute="bottom" id="nG0-di-cOc"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLG-e8-UG2">
-                                <rect key="frame" x="24" y="129" width="366" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLG-e8-UG2">
+                                <rect key="frame" x="24" y="129" width="366" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVK-oF-S1m">
-                                <rect key="frame" x="24" y="179" width="42" height="21"/>
+                                <rect key="frame" x="24" y="163.5" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="68I-Aa-BNh">
-                                <rect key="frame" x="24" y="259" width="366" height="637"/>
+                                <rect key="frame" x="24" y="243.5" width="366" height="532.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="112" id="ohG-BB-iXu">
@@ -425,6 +428,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lL4-sH-LCx">
+                                <rect key="frame" x="24" y="806" width="366" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lL4-sH-LCx" secondAttribute="height" multiplier="327:52" id="e4i-Rq-RZV"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SXE-LN-PDN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -435,14 +445,23 @@
                             <constraint firstItem="SXE-LN-PDN" firstAttribute="trailing" secondItem="RE7-fj-ZNO" secondAttribute="trailing" id="CEN-SP-Qqe"/>
                             <constraint firstItem="mLG-e8-UG2" firstAttribute="leading" secondItem="SXE-LN-PDN" secondAttribute="leading" constant="24" id="EoU-b1-OMD"/>
                             <constraint firstItem="RE7-fj-ZNO" firstAttribute="leading" secondItem="SXE-LN-PDN" secondAttribute="leading" id="FuX-dW-uwJ"/>
-                            <constraint firstAttribute="bottom" secondItem="68I-Aa-BNh" secondAttribute="bottom" id="WJH-SW-qpw"/>
+                            <constraint firstItem="lL4-sH-LCx" firstAttribute="leading" secondItem="SXE-LN-PDN" secondAttribute="leading" constant="24" id="Suo-Xz-z3E"/>
                             <constraint firstItem="xVK-oF-S1m" firstAttribute="leading" secondItem="mLG-e8-UG2" secondAttribute="leading" id="Wlp-h9-O8n"/>
+                            <constraint firstItem="lL4-sH-LCx" firstAttribute="centerX" secondItem="eKt-ib-ONh" secondAttribute="centerX" id="cMc-gN-Dyo"/>
                             <constraint firstItem="SXE-LN-PDN" firstAttribute="trailing" secondItem="mLG-e8-UG2" secondAttribute="trailing" constant="24" id="cym-13-oz3"/>
+                            <constraint firstItem="lL4-sH-LCx" firstAttribute="top" secondItem="68I-Aa-BNh" secondAttribute="bottom" constant="30" id="dGX-SB-l3b"/>
                             <constraint firstItem="68I-Aa-BNh" firstAttribute="leading" secondItem="SXE-LN-PDN" secondAttribute="leading" constant="24" id="iGd-TV-k5B"/>
                             <constraint firstItem="mLG-e8-UG2" firstAttribute="top" secondItem="RE7-fj-ZNO" secondAttribute="bottom" constant="48" id="jui-pC-NGt"/>
                             <constraint firstItem="68I-Aa-BNh" firstAttribute="top" secondItem="xVK-oF-S1m" secondAttribute="bottom" constant="59" id="mHW-g4-aHi"/>
+                            <constraint firstAttribute="bottom" secondItem="lL4-sH-LCx" secondAttribute="bottom" constant="32" id="zk0-fR-cyf"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="explainLabel" destination="xVK-oF-S1m" id="mif-Bw-gEO"/>
+                        <outlet property="routineNameTextField" destination="mLG-e8-UG2" id="qs2-ep-xga"/>
+                        <outlet property="saveButton" destination="lL4-sH-LCx" id="TZD-gE-GbY"/>
+                        <outlet property="taskTableView" destination="68I-Aa-BNh" id="FFD-X5-aZE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aze-jD-uPC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
