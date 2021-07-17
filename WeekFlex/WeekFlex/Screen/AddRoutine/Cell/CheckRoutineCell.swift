@@ -8,16 +8,27 @@
 import UIKit
 
 class CheckRoutineCell: UITableViewCell {
-
+    
+    static let identifier = "CheckRoutineCell"
+    
+    @IBOutlet weak var categoryColorImage: UIImageView!
+    @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var taskTimeLabel: UILabel!
+    @IBOutlet weak var lineView: UIView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        taskNameLabel.setLabel(text: "", color: .black, font: .appleBold(size: 18))
+        taskTimeLabel.setLabel(text: "", color: .gray3, font: .appleRegular(size: 14))
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func configure(data: TaskListData) {
+        
+        taskNameLabel.text = data.name
+//        taskTimeLabel.text = data.days
+        
+        
     }
 
 }

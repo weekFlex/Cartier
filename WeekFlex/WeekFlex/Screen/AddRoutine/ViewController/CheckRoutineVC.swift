@@ -78,6 +78,9 @@ extension CheckRoutineVC {
         if let list = routineList {
             print(list)
         }
+        
+        taskTableView.delegate = self
+        taskTableView.dataSource = self
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -124,5 +127,46 @@ extension CheckRoutineVC: UITextFieldDelegate {
         // textField 클릭하면 무조건 키보드 올라오게
         textField.becomeFirstResponder()
     }
+    
+}
+
+// MARK: UITableViewDelegate
+
+extension CheckRoutineVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 95
+    }
+    
+    
+}
+
+
+// MARK: UITableViewDataSource
+
+extension CheckRoutineVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let data = routineList {
+            return data.count
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CheckRoutineCell.identifier, for: indexPath) as? CheckRoutineCell else { return UITableViewCell() }
+        
+        if let data = routineList {
+            
+        }
+        
+        
+        return cell
+        
+    }
+    
     
 }
