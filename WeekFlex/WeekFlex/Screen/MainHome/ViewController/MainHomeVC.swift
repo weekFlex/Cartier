@@ -142,7 +142,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard var data = weeklyData[safe: currentDay] else {
+        guard let data = weeklyData[safe: currentDay] else {
             tableView.isHidden = true
             noDataView.isHidden = false
             return 0
@@ -158,7 +158,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         noDataView.isHidden = true
         
 
-        return data.items.count ?? 0
+        return data.items.count
         
     }
     
