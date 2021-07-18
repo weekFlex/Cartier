@@ -25,6 +25,8 @@ class SelectToDoVC: UIViewController {
     // 카테고리의 첫번째가 항상 default로 보여지게 만들기 위한 변수
     var categoryIndex: Int = 0
     
+    var startViewName: Bool = false
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var headerView: UIView!
@@ -70,6 +72,7 @@ class SelectToDoVC: UIViewController {
         nextVC.routineName = routineNameLabel.text
         // 루틴 이름을 넘겨줌
         nextVC.routineList = selectedViewModel
+        nextVC.startViewName = startViewName
         
         self.navigationController?.pushViewController(nextVC, animated: true)
         // navigationController를 이용해 다음 뷰로 이동

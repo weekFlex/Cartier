@@ -15,6 +15,9 @@ class CheckRoutineVC: UIViewController {
     var routineName: String?
     var routineList: [TaskListData]?
     
+    // 어느 뷰에서 왔는지 알 수 있는 변수
+    var startViewName: Bool = false
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var routineNameTextField: UITextField!

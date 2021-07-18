@@ -144,8 +144,26 @@ extension MyRoutineListVC: UITableViewDelegate {
         deleteAction.backgroundColor = .color1
         
         let editAction = UIContextualAction(style: .normal, title: nil) { (_, _, completionHandler) in
+            
+            // edit 버튼 클릭 시 뷰 이동 Event
+            
+            let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+            guard let newTab = storyboard.instantiateViewController(identifier: "SelectToDoVC") as? SelectToDoVC else {
+                return
+            }
+            
+            let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
+            newTab.routineName = routineVM?.title // 루틴 이름 넘겨주기
+            
+            newTab.selectedViewModel = routineVM!.rountineTaskList
+            newTab.startViewName = true
+            // edit 버튼을 눌러서 왔다는 것을 알려주기 위한 bool 값
+            
+            self.navigationController?.pushViewController(newTab, animated: true)
+            
             completionHandler(true)
         }
+        
         editAction.image = UIImage(named: "icon32Edit")
         editAction.backgroundColor = .lightSalmon
         
@@ -154,20 +172,4 @@ extension MyRoutineListVC: UITableViewDelegate {
         return configuration
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // cell 클릭 시
-        
-        let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
-        guard let newTab = storyboard.instantiateViewController(identifier: "SelectToDoVC") as? SelectToDoVC else {
-            return
-        }
-        
-        let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
-        newTab.routineName = routineVM?.title // 루틴 이름 넘겨주기
-        
-        newTab.selectedViewModel = routineVM!.rountineTaskList
-        
-        self.navigationController?.pushViewController(newTab, animated: true)
-        
-    }
 }
