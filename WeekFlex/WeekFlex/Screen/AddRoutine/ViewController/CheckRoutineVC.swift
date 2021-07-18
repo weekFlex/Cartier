@@ -15,8 +15,8 @@ class CheckRoutineVC: UIViewController {
     var routineName: String?
     var routineList: [TaskListData]?
     
-    // 어느 뷰에서 왔는지 알 수 있는 변수
-    var startViewName: Bool = false
+    // 루틴 수정 뷰에서 왔는지 알 수 있는 변수
+    var routineEditEnable: Bool = false
     
     // MARK: IBOutlet
     
@@ -76,15 +76,23 @@ extension CheckRoutineVC {
             routineNameTextField.text = routineName
         }
         
-        explainLabel.setLabel(text: "짜잔! 마지막으로 루틴을 확인해 주세요:)", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
+        if routineEditEnable {
+            // 루틴 수정하기 일 때
+            
+            explainLabel.setLabel(text: "루틴을 수정하기 전 마지막으로 확인해 주세요!", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
+            routineNameTextField.isEnabled = true
+            
+            
+        } else {
+            // 루틴 생성하기 일 때
+            
+            explainLabel.setLabel(text: "짜잔! 마지막으로 루틴을 확인해 주세요:)", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
+            routineNameTextField.isEnabled = false
+            
+        }
         
         routineNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         // routineNameTextField가 수정될 때 마다 실행
-        
-        /*
-         루틴 만들기 뷰에서 왔는지, 이미 있는 루틴 수정하기 뷰에서 왔는지를 판단해 루틴 이름을 수정할 수 있을지에 대한 여부를 줘야함
-         
-         */
 
         saveButton.setButton(text: "저장하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
         saveButton.setRounded(radius: 3)
