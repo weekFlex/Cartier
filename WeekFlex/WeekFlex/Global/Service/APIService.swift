@@ -36,9 +36,11 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
 
+    func getRoutine(_ token: String,  completion: @escaping (NetworkResult<[Routine]>)->(Void)){
+        let target: APITarget = .getRoutine(token: token)
+        judgeObject(target, completion: completion)
+    }
 }
-
-
 
 extension APIService {
     
@@ -56,7 +58,6 @@ extension APIService {
                     print("구조체를 확인해보세요")
                 }
             case .failure(let error):
-                print("error.errorDescription:  ",error.errorDescription)
                 completion(.failure(error.response?.statusCode ?? 100))
             }
         }
