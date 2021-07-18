@@ -26,8 +26,21 @@ class MyRoutineListVC: UIViewController {
     
     // new routine button
     @IBOutlet var routineCreateButtonView: UIView!
+    @IBOutlet var routineCreateButton: UIButton!
     @IBOutlet var routinCreateImageView: UIImageView!
     @IBOutlet var routineCreateLabel: UILabel!
+    
+    
+    @IBAction func routineCreateButtonDidTap(_ sender: Any) {
+        // New Routine 버튼 클릭 시 Event
+        
+        let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+        guard let newTab = storyboard.instantiateViewController(identifier: "MakeRoutineNameVC") as? MakeRoutineNameVC else {
+            return
+        }
+        
+        self.navigationController?.pushViewController(newTab, animated: true)
+    }
     
     
     // MARK: Life Cycle
@@ -139,5 +152,10 @@ extension MyRoutineListVC: UITableViewDelegate {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction, ])
         
         return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // cell 클릭 시
+        
     }
 }
