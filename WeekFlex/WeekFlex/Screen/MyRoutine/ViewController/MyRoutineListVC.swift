@@ -157,5 +157,17 @@ extension MyRoutineListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // cell 클릭 시
         
+        let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+        guard let newTab = storyboard.instantiateViewController(identifier: "SelectToDoVC") as? SelectToDoVC else {
+            return
+        }
+        
+        let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
+        newTab.routineName = routineVM?.title // 루틴 이름 넘겨주기
+        
+        newTab.selectedViewModel = routineVM!.rountineTaskList
+        
+        self.navigationController?.pushViewController(newTab, animated: true)
+        
     }
 }
