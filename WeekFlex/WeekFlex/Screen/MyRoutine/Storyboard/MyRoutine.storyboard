@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OnP-bI-8jD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OnP-bI-8jD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -44,6 +44,12 @@
                                     <rect key="frame" x="0.0" y="146" width="382" height="90"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gZ-6E-9Sg">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="90"/>
+                                            <connections>
+                                                <action selector="routineCreateButtonDidTap:" destination="8PT-JZ-m6S" eventType="touchUpInside" id="gx2-6J-kwj"/>
+                                            </connections>
+                                        </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YR2-oK-nd5">
                                             <rect key="frame" x="93" y="33" width="24" height="24"/>
                                             <constraints>
@@ -62,9 +68,13 @@
                                     <constraints>
                                         <constraint firstItem="1Rt-fg-HF5" firstAttribute="leading" secondItem="YR2-oK-nd5" secondAttribute="trailing" constant="16" id="1X4-DG-2rX"/>
                                         <constraint firstItem="YR2-oK-nd5" firstAttribute="leading" secondItem="kpl-B9-HGh" secondAttribute="leading" constant="93" id="42r-Qp-e1m"/>
+                                        <constraint firstAttribute="trailing" secondItem="3gZ-6E-9Sg" secondAttribute="trailing" id="HTJ-rz-I3K"/>
+                                        <constraint firstItem="3gZ-6E-9Sg" firstAttribute="leading" secondItem="kpl-B9-HGh" secondAttribute="leading" id="JUA-aQ-Wkh"/>
+                                        <constraint firstAttribute="bottom" secondItem="3gZ-6E-9Sg" secondAttribute="bottom" id="PAm-dS-eMg"/>
                                         <constraint firstAttribute="height" constant="90" id="Q17-ug-bWg"/>
                                         <constraint firstItem="YR2-oK-nd5" firstAttribute="centerY" secondItem="kpl-B9-HGh" secondAttribute="centerY" id="nnw-vP-5ZX"/>
                                         <constraint firstItem="1Rt-fg-HF5" firstAttribute="centerY" secondItem="kpl-B9-HGh" secondAttribute="centerY" id="tfr-yf-Omi"/>
+                                        <constraint firstItem="3gZ-6E-9Sg" firstAttribute="top" secondItem="kpl-B9-HGh" secondAttribute="top" id="vMa-7O-HJK"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -133,6 +143,7 @@
                         <outlet property="backButton" destination="JeI-wr-cH7" id="pv9-ED-3rF"/>
                         <outlet property="headerLabel" destination="tu5-aJ-Q8e" id="b0E-lw-8QF"/>
                         <outlet property="routinCreateImageView" destination="YR2-oK-nd5" id="UvW-Nt-VcG"/>
+                        <outlet property="routineCreateButton" destination="3gZ-6E-9Sg" id="qM8-sE-zFi"/>
                         <outlet property="routineCreateButtonView" destination="kpl-B9-HGh" id="XBo-Sp-ovx"/>
                         <outlet property="routineCreateLabel" destination="1Rt-fg-HF5" id="xGr-fC-g5e"/>
                         <outlet property="routineTableView" destination="RNI-KK-WMH" id="MxC-Nh-wo1"/>
