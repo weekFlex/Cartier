@@ -51,7 +51,6 @@ extension MyRoutineListVC {
             routineList in
             // if getRoutine service failed,
             if let routineList = routineList {
-                print(routineList)
                 self.viewModel = RoutineListViewModel(routines: routineList)
             }
             DispatchQueue.main.async {
