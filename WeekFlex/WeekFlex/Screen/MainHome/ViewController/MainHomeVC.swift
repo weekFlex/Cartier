@@ -34,6 +34,7 @@ class MainHomeVC: UIViewController {
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
     var shouldCollaps = true
     var isFloating = false
+    var isDoneCheck = BehaviorRelay<Bool>(value:false)
     let bag = DisposeBag()
     lazy var floatingStacks:[UIStackView] = [self.getRoutineStack, self.addTaskStack]
     lazy var dimView: UIView = {    //플로팅버튼 배경
@@ -202,7 +203,16 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
 
 extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
     
+    
+    
+    
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
+        
+        isDoneCheck.asObservable()
+            .debounce(.seconds(3), scheduler: MainScheduler.asyncInstance )
+                    .subscribe(onNext: { (_) in
+                        print("한번만눌러")
+                    }).disposed(by: bag)
         print("star")
     }
     
@@ -291,9 +301,6 @@ extension MainHomeVC {
                         print(weeklyData)
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
-                        
-                        
-                        
                         // 데이터 전달 후 다시 로드
                         
                     case .failure(let error):

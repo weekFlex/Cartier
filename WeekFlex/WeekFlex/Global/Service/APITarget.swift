@@ -13,6 +13,7 @@ enum APITarget {
     case getTask(token: String) // 전체 Task 불러오기
     case getCategory(token: String) // 카테고리 리스트 API
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
+    case checkTodo(token: String, todoId: Int)   //할일 체크
 }
 
 // MARK: TargetType Protocol 구현
@@ -35,7 +36,10 @@ extension APITarget: TargetType {
             return "api/v1/category"
         case .getWeekly:
             return "api/v1/calendar/week"
+        case .checkTodo:
+            return "/api/v1/todo/done"
         }
+        
     }
     
     var method: Moya.Method {
@@ -45,6 +49,9 @@ extension APITarget: TargetType {
         
         case .getTask, .getCategory, .getWeekly:
             return .get
+            
+        case .checkTodo:
+            return .post
         }
     }
     
@@ -57,6 +64,7 @@ extension APITarget: TargetType {
     var task: Task {
         // task - 리퀘스트에 사용되는 파라미터 설정
         // 파라미터가 없을 때는 - .requestPlain
+        // get메소드인데 파라미터 존재시(URL로 전달) -.requestParameters(parameters: ["first_name": firstName, "last_name": lastName], encoding: URLEncoding.default)
         // 파라미터 존재시에는 - .requestParameters(parameters: ["first_name": firstName, "last_name": lastName], encoding: JSONEncoding.default)
         
         switch self {
@@ -66,7 +74,11 @@ extension APITarget: TargetType {
             
         case .getWeekly(_, let date):
             return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
+            
+        case .checkTodo(_, let todoId):
+            return .requestParameters(parameters: ["todoId":todoId], encoding: JSONEncoding.default)
         }
+        
         
     }
     
@@ -83,8 +95,11 @@ extension APITarget: TargetType {
         
         case .getTask(let token), .getCategory(let token):
             return ["Content-Type" : "application/json", "x-access-token" : token]
-      
+            
         case .getWeekly(token: let token, date: _):
+            return ["Content-Type" : "application/json", "x-access-token" : token]
+            
+        case .checkTodo(token: let token, todoId: _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }
