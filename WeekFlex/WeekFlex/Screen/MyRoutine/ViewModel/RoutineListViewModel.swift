@@ -21,12 +21,8 @@ extension RoutineListViewModel {
     
     func routineNameArray() -> [String] {
         
-        var result: [String] = []
         
-        for i in routines {
-            result.append(i.name)
-        }
-        
+        let result: [String] = routines.map { $0.name }
         return result
     }
 
