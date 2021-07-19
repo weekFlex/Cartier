@@ -180,3 +180,19 @@ extension EditRoutineViewModel {
         }
     }
 }
+
+extension EditRoutineViewModel {
+    func renderDaysStructListIntoDictionary(daysStructList: [Day]) -> [String:Int]? {
+        let dayNameList = daysStructList.map({$0.name})
+        let dayList = ["월", "화", "수", "목", "금", "토", "일"]
+        let dayDict = dayList.reduce(into: [String:Int](), { dict, day in
+            dict[day] = 0 // 모두 0으로 초기화
+            for dayName in dayNameList {
+                if day == dayName {
+                    dict[dayName] = 1
+                }
+            }
+        })
+        return dayDict
+    }
+}

@@ -9,23 +9,15 @@ import Foundation
 
 // MARK: - Todo
 struct Todo: Codable {
-    let categoryColor, categoryID: Int
-    let date: String
-    let done: Bool
+    var categoryID: Int?
+    var date: String?
     var endTime: String?
-    let id: Int
-    let name: String
-    let routineID: Int
-    let routineName: String
+    var name: String
     var startTime: String?
-    let userID: Int
 
     enum CodingKeys: String, CodingKey {
-        case categoryColor
         case categoryID = "categoryId"
-        case date, done, endTime, id, name
-        case routineID = "routineId"
-        case routineName, startTime
-        case userID = "userId"
+        case date, endTime, name
+        case startTime
     }
 }
