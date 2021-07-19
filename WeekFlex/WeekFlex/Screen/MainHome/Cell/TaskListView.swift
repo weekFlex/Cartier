@@ -11,7 +11,7 @@ import Foundation
 
 protocol TaskListCellDelegate: class {
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone:Bool)
-    func didTabMeatBall(cellIndex: Int, viewIndex: Int)
+    func didTabMeatBall(cellIndex: Int, viewIndex:Int, todoId: Int)
 }
 
 
@@ -20,7 +20,8 @@ class TaskListView: UIView {
     //MARK: Variable
     
     private let xibName = "TaskListView"
-    var cellIndex = 0   //이 view가 속한 cell의 index
+    var todoId = 0
+    var cellIndex = 0//이 view가 속한 cell의 index
     var viewIndex = 0   //이 view의 index
     weak var delegate: TaskListCellDelegate?
     var category = 0
@@ -46,12 +47,33 @@ class TaskListView: UIView {
     
     //MARK: IBAction
     @IBAction func starTabbed(_ sender: Any) {
+        if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            
+            APIService.shared.checkTodo(token, todoId: todoId){ [self] result in
+                switch result {
+                
+                case .success(let data):
+                    print("체크완료")
+                // 데이터 전달 후 다시 로드
+                
+                case .failure(let error):
+                    print(error)
+                    print("오류!!")
+                }
+            
+        }
+    } else {
+        // 네트워크 미연결 팝업 띄우기
+        print("네트워크 미연결")
+    }
+        
+        
         isDone = !isDone
-        self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
+//        self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
     }
     
     @IBAction func meatBallTabbed(_ sender: Any) {
-        self.delegate?.didTabMeatBall(cellIndex: cellIndex, viewIndex: viewIndex)
+        self.delegate?.didTabMeatBall(cellIndex: self.cellIndex, viewIndex: self.viewIndex, todoId: self.todoId )
     }
     
     

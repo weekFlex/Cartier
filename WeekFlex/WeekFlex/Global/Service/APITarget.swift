@@ -14,6 +14,8 @@ enum APITarget {
     case getCategory(token: String) // 카테고리 리스트 API
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int)   //할일 체크
+    case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
+    case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
 }
 
 // MARK: TargetType Protocol 구현
@@ -36,9 +38,14 @@ extension APITarget: TargetType {
             return "api/v1/category"
         case .getWeekly:
             return "api/v1/calendar/week"
-        case .checkTodo:
-            return "/api/v1/todo/done"
+        case .checkTodo(_, let todoId):
+            return "api/v1/todo/\(todoId)/done"
+        case .deleteTodoRoutine:
+            return  "api/v1/todo/routine"
+        case .deleteTodo(_,let todoId):
+            return "api/v1/todo/\(todoId)"
         }
+        
         
     }
     
@@ -52,6 +59,9 @@ extension APITarget: TargetType {
             
         case .checkTodo:
             return .post
+            
+        case .deleteTodoRoutine, .deleteTodo:
+            return .delete
         }
     }
     
@@ -75,8 +85,11 @@ extension APITarget: TargetType {
         case .getWeekly(_, let date):
             return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
             
-        case .checkTodo(_, let todoId):
+        case .checkTodo(_, let todoId), .deleteTodo(_, let todoId):
             return .requestParameters(parameters: ["todoId":todoId], encoding: JSONEncoding.default)
+            
+        case .deleteTodoRoutine(_, let routineId):
+            return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
         }
         
         
@@ -93,14 +106,9 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token, _),.getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
-            
-        case .getWeekly(token: let token, date: _):
-            return ["Content-Type" : "application/json", "x-access-token" : token]
-            
-        case .checkTodo(token: let token, todoId: _):
-            return ["Content-Type" : "application/json", "x-access-token" : token]
+         
         }
     }
     

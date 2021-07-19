@@ -13,7 +13,7 @@ struct APIService {
     
     static let shared = APIService()
     // 싱글톤객체로 생성
-
+    
     let provider = MoyaProvider<APITarget>()
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
@@ -35,7 +35,22 @@ struct APIService {
         let target: APITarget = .getWeekly(token: token, date: date)
         judgeObject(target, completion: completion)
     }
-
+    
+    func checkTodo(_ token: String, todoId: Int, completion: @escaping (NetworkResult<Int>)->(Void)){
+        let target: APITarget = .checkTodo(token: token, todoId: todoId)
+        judgeObject(target, completion: completion)
+    }
+    
+    func deleteTodoRoutine(_ token: String, routineId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)){
+        let target:  APITarget = .deleteTodoRoutine(token: token, routineId: routineId)
+        judgeObject(target, completion: completion)
+    }
+    
+    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))){
+        let target: APITarget = .deleteTodo(token: token, todoId: todoId)
+        judgeObject(target, completion: completion)
+    }
+    
 }
 
 
