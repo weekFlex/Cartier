@@ -18,6 +18,14 @@ extension RoutineListViewModel {
         let routine = self.routines[index]
         return RoutineViewModel(routine)
     }
+    
+    func routineNameArray() -> [String] {
+        
+        
+        let result: [String] = routines.map { $0.name }
+        return result
+    }
+
 }
 
 struct RoutineViewModel {

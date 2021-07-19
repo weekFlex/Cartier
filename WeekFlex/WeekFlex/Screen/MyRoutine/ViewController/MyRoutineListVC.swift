@@ -39,6 +39,8 @@ class MyRoutineListVC: UIViewController {
             return
         }
         
+        newTab.routineNameArray = viewModel?.routineNameArray()
+        
         self.navigationController?.pushViewController(newTab, animated: true)
     }
     

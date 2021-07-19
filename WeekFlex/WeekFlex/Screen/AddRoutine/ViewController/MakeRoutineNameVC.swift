@@ -12,6 +12,8 @@ class MakeRoutineNameVC: UIViewController {
     
     // MARK: Variable Part
     
+    var routineNameArray: [String]?
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var backButton: UIButton!
@@ -55,6 +57,7 @@ class MakeRoutineNameVC: UIViewController {
         setTextField()
         UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", forKey: "UserToken")
         // Do any additional setup after loading the view.
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,9 +113,23 @@ extension MakeRoutineNameVC {
         } else {
             // Text가 존재할 때 버튼 활성화
             
-            explainLabel.text = "멋진 이름이에요! *-*"
-            checkButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
-            checkButton.isEnabled = true
+            if let routineNameArray = routineNameArray {
+                if routineNameArray.contains(textField.text!) {
+                    // 이미 있는 루틴 이름이라면
+                    
+                    explainLabel.text = "이미 존재하는 루틴 이름이에요 ;ㅅ;"
+                    checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
+                    checkButton.isEnabled = false
+                } else {
+                    // 루틴 이름에 존재하지 않는다면
+                    
+                    explainLabel.text = "멋진 이름이에요! *-*"
+                    checkButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
+                    checkButton.isEnabled = true
+                    
+                }
+            }
+            
         }
         
         if let count = textField.text?.count {
@@ -123,6 +140,7 @@ extension MakeRoutineNameVC {
                 // 그 뒤에 글자들은 쳐져도 삭제된다
             }
         }
+        
         
     }
     
