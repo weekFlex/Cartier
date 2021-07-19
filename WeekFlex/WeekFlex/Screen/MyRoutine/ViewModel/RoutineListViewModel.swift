@@ -18,6 +18,18 @@ extension RoutineListViewModel {
         let routine = self.routines[index]
         return RoutineViewModel(routine)
     }
+    
+    func routineNameArray() -> [String] {
+        
+        var result: [String] = []
+        
+        for i in routines {
+            result.append(i.name)
+        }
+        
+        return result
+    }
+
 }
 
 struct RoutineViewModel {

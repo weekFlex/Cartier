@@ -12,6 +12,8 @@ class MakeRoutineNameVC: UIViewController {
     
     // MARK: Variable Part
     
+    var routineNameArray: [String]?
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var backButton: UIButton!
@@ -55,6 +57,10 @@ class MakeRoutineNameVC: UIViewController {
         setTextField()
         UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", forKey: "UserToken")
         // Do any additional setup after loading the view.
+        
+        if let routineNameArray = routineNameArray {
+            print(routineNameArray)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
