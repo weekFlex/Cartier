@@ -36,8 +36,8 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
-    func checkTodo(_ token: String, todoId: Int, completion: @escaping (NetworkResult<Int>)->(Void)){
-        let target: APITarget = .checkTodo(token: token, todoId: todoId)
+    func checkTodo(_ token: String, todoId: Int, done: Bool, completion: @escaping (NetworkResult<Int>)->(Void)){
+        let target: APITarget = .checkTodo(token: token, todoId: todoId, done: done)
         judgeObject(target, completion: completion)
     }
     
@@ -71,7 +71,7 @@ extension APIService {
                     print("구조체를 확인해보세요")
                 }
             case .failure(let error):
-                print("error.errorDescription:  ",error.errorDescription)
+                print("error.errorDescription:  ", error.errorDescription)
                 completion(.failure(error.response?.statusCode ?? 100))
             }
         }

@@ -7,6 +7,8 @@
 
 import UIKit
 import Foundation
+import RxCocoa
+import RxSwift
 
 
 protocol TaskListCellDelegate: class {
@@ -20,10 +22,11 @@ class TaskListView: UIView {
     //MARK: Variable
     
     private let xibName = "TaskListView"
-    var todoId = 0
-    var cellIndex = 0//이 view가 속한 cell의 index
-    var viewIndex = 0   //이 view의 index
+    var todoId = 0      // todoId
+    var cellIndex = 0   //이 view가 속한 cell의 index (routine)
+    var viewIndex = 0   //이 view의 index (todos)
     weak var delegate: TaskListCellDelegate?
+    let bag = DisposeBag()
     var category = 0
     var isDone: Bool = false {
         didSet{
@@ -42,6 +45,10 @@ class TaskListView: UIView {
     @IBOutlet weak var star: UIButton!
     @IBOutlet weak var meatBalls: UIButton!
     
+    func starTapRx(){
+        
+        
+    }
     
     
     
@@ -49,7 +56,7 @@ class TaskListView: UIView {
     @IBAction func starTabbed(_ sender: Any) {
         if let token = UserDefaults.standard.string(forKey: "UserToken") {
             
-            APIService.shared.checkTodo(token, todoId: todoId){ [self] result in
+            APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
                 switch result {
                 
                 case .success(let data):
@@ -69,7 +76,7 @@ class TaskListView: UIView {
         
         
         isDone = !isDone
-//        self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
+        self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
     }
     
     @IBAction func meatBallTabbed(_ sender: Any) {

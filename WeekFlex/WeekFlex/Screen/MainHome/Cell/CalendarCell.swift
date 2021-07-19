@@ -28,7 +28,7 @@ class CalendarCell: UICollectionViewCell {
     
     func configure(with viewModel: DailyData) {
         countCategory(data: viewModel)
-        star.image = UIImage(named: representCategory )
+        
         
     }
     
@@ -47,7 +47,7 @@ class CalendarCell: UICollectionViewCell {
         guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
         
         representCategory += String(categoryIndex)
-        
+        star.image = UIImage(named: representCategory)
      
         
         

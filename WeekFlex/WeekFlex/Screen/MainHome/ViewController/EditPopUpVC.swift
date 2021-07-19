@@ -17,6 +17,8 @@ class EditPopUpVC: UIViewController {
     //MARK: Variable
     
     var todoId: Int = 0
+    var cellIndex = 0
+    var viewIndex = 0
     
     var taskTitle: String = ""
     weak var delegate: EditPopUpDelegate?
@@ -73,7 +75,7 @@ class EditPopUpVC: UIViewController {
         present(alert,animated: false, completion: nil)
         
         
-        //        delegate?.didTabDelete(cellIndex: cellIndex, viewIndex: viewIndex)
+                delegate?.didTabDelete(cellIndex: cellIndex, viewIndex: viewIndex, todoId: todoId)
     }
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

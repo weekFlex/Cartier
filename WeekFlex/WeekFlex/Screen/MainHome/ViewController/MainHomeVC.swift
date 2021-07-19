@@ -229,13 +229,8 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
     
     
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
+        weeklyData[currentDay].items[cellIndex].todos[viewIndex].done = isDone
         
-        isDoneCheck.asObservable()
-            .debounce(.seconds(4), scheduler: MainScheduler.asyncInstance )
-            .subscribe(onNext: { (_) in
-                print("한번만눌러")
-            }).disposed(by: bag)
-        print("star")
     }
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
@@ -245,6 +240,8 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
         popupVC.delegate = self
         //        popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
         popupVC.todoId = todoId
+        popupVC.cellIndex = cellIndex
+        popupVC.viewIndex = viewIndex
         popupVC.modalPresentationStyle = .overCurrentContext
         //모달 화면 띄우기
         self.present(popupVC, animated: true, completion: nil)
@@ -313,8 +310,8 @@ extension MainHomeVC {
         print("getRoutines()")
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
-        let date = dateFormat.string(from:Calendar.current.date(byAdding: .day, value: -1, to: Date())!)
-        
+//        let date = dateFormat.string(from:Calendar.current.date(byAdding: .day, value: -1, to: Date())!)
+        let date = dateFormat.string(from:Date())
         if NetworkState.isConnected() {
             // 네트워크 연결 시
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
@@ -389,10 +386,12 @@ extension MainHomeVC {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
             }
         }
-        
-        
     }
     
+    
+    func calculateCategory(currentDay: Int){
+        
+    }
     
     
     var buttonImg: UIImage {
