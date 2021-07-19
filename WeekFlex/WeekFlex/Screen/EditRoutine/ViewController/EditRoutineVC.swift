@@ -13,7 +13,9 @@ class EditRoutineVC: UIViewController {
     
     private var listName: String?
     private let days = ["월", "화", "수", "목", "금", "토", "일"]
+    var saveTaskListDataDelegate: SaveTaskListProtocol?
     var todo: Todo?
+    var taskListData: TaskListData?
     var daysStructList: [Day]?
     var entryNumber: Int?
     var dayDict: [String:Int]?
@@ -72,9 +74,6 @@ class EditRoutineVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func completeButtonPressed(_ sender: Any) {
-        print(editRouineViewModel.todo.startTime)
-        print(editRouineViewModel.todo.endTime)
-        print(editRouineViewModel.days)
         let dict = editRouineViewModel.days
         // Days 구조체로 넣어주기
         let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
@@ -82,7 +81,11 @@ class EditRoutineVC: UIViewController {
                 dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
             }
         }
-        print(newData)
+        taskListData?.days = newData
+        // 이전 뷰로 데이터 넘겨주기
+        if let taskListData = taskListData {
+            self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -156,11 +159,17 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         switch entryNumber {
         // 루틴 설정 뷰에서 넘어올 때
         case 1:
+            
+            todo = Todo(categoryID: nil, date: nil, endTime: taskListData?.days?.first?.endTime, name: taskListData!.name, startTime: taskListData?.days?.first?.startTime)
+            
+            daysStructList = taskListData?.days
+            
             if let daysStructList = daysStructList { // 요일, 시간 설정을 해놨을 때
                 dayDict = editRouineViewModel.renderDaysStructListIntoDictionary(daysStructList: daysStructList)
             } else { // 안해놓았을 때
                 dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
             }
+            
             
         default:
             return

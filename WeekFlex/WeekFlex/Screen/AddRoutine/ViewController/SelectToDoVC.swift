@@ -502,25 +502,9 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     // 추가 안된 루틴이라면 -> 추가
                     
                     if let value = cells?.routine {
-                        // 여기에서 민승 수정 뷰 띄우기
                         // move to editRoutinVC
-                        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
-
-                        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
-                        editRoutineVC.modalTransitionStyle = .coverVertical
-                        editRoutineVC.modalPresentationStyle = .custom
-                        // 뷰 거기로 넘어가
-                        // 다른 뷰에서 여기로 데이터 전송하게
-                        // 이름, 시작 시간, 끝나는 시간, 요일 정보만 알면 됨
-                        editRoutineVC.todo = Todo(categoryID: nil, date: nil, endTime: value.days?.first?.endTime, name: value.name, startTime: value.days?.first?.startTime)
-                        print(editRoutineVC.todo)
-                        editRoutineVC.daysStructList = value.days
-                        editRoutineVC.entryNumber = 1
-                        self.present(editRoutineVC, animated: true, completion: .none)
-                        
-                        listItemAdded(value: value)
+                        initEditRoutineVC(withValue: value)
                     }
-                    
                     selectedCollectionView.reloadData()
                     todoCollectionView.reloadData()
                 }
@@ -529,10 +513,8 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 // selectedViewModel이 비어있다면? -> 무조건 추가
                 
                 if let value = cells?.routine {
-                    // 여기에서 민승 수정 뷰 띄우기
-                    // 뷰 거기로 넘어가
-                    // 다른 뷰에서 여기로 데이터 전송하게
-                    listItemAdded(value: value)
+                    // move to editRoutinVC
+                    initEditRoutineVC(withValue: value)
                 }
                 selectedCollectionView.reloadData()
                 todoCollectionView.reloadData()
@@ -543,13 +525,25 @@ extension SelectToDoVC: UICollectionViewDataSource {
     }
 }
 
-extension SelectToDoVC: SaveDaysProtocol {
-    func saveDaysProtocol(savedDaysData: [Day]) {
-        // Day 값을 여기 VC 로 가져와준다!!
-        // 어디에 DAY 값을 업데이트 시키면 되나요?
-        // 그 후에 listItemAdded() 를 어떻게 trigger 시킬까요???
+extension SelectToDoVC: SaveTaskListProtocol {
+    func saveDaysProtocol(savedTaskListData :TaskListData) {
+        listItemAdded(value: savedTaskListData)
+        print("saved \(savedTaskListData)")
+        todoCollectionView.reloadData()
+        selectedCollectionView.reloadData()
     }
 
+    func initEditRoutineVC(withValue: TaskListData) {
+        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
+        editRoutineVC.modalTransitionStyle = .coverVertical
+        editRoutineVC.modalPresentationStyle = .custom
+        editRoutineVC.entryNumber = 1
+        editRoutineVC.taskListData = withValue
+        editRoutineVC.saveTaskListDataDelegate = self
+        // value 자체를 가져가서 업데이트
+        self.present(editRoutineVC, animated: true, completion: .none)
+    }
 
 }
 
@@ -559,6 +553,7 @@ extension SelectToDoVC: SelectedItemViewDelegate {
         // 리스트에 추가하기
         
         selectedViewModel.insert(value, at: 0)
+        print("selectedViewModel: \(selectedViewModel)")
     }
     
     

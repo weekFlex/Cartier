@@ -9,5 +9,5 @@ import Foundation
 
 // EditRoutine 에서
 protocol SaveTimeProtocol { func saveTimeProtocol(savedTimeData: Todo) }
-protocol SaveDaysProtocol { func saveDaysProtocol(savedDaysData: [Day])} //EditRoutineVC -> SelectToDoVC
+protocol SaveTaskListProtocol { func saveDaysProtocol(savedTaskListData: TaskListData)} //EditRoutineVC -> SelectToDoVC
 protocol HideViewProtocol { func hideViewProtocol() }
