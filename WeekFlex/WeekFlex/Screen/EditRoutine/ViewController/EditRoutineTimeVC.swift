@@ -24,6 +24,7 @@ class EditRoutineTimeVC: UIViewController {
     
     // MARK: - IBOutlet
     
+    @IBOutlet var modalBackgroundView: UIView!
     @IBOutlet var editUIView: UIView!
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var startTimeHeaderLabel: UILabel!
@@ -76,12 +77,23 @@ class EditRoutineTimeVC: UIViewController {
 // MARK: - Extension for Functions
 
 extension EditRoutineTimeVC {
+    // MARK: Method
+    
+    @objc func backgroundTapped(sender: UITapGestureRecognizer) {
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: functions
+
     func connectTimePicker() {
         timePicker.delegate = self
         timePicker.dataSource = self
     }
     func setLayout() {
         // Layout
+        modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        modalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
         editUIView.backgroundColor = .white
         topConstraint.constant = 454/896*self.view.bounds.height

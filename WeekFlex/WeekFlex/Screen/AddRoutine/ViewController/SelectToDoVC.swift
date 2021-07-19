@@ -25,6 +25,8 @@ class SelectToDoVC: UIViewController {
     // 카테고리의 첫번째가 항상 default로 보여지게 만들기 위한 변수
     var categoryIndex: Int = 0
     
+    // 모달 뒤에 뜰 회색 전체 뷰
+    var modalBackgroundView: UIView!
     var routineEditEnable: Bool = false
     
     // MARK: IBOutlet
@@ -219,11 +221,11 @@ extension SelectToDoVC {
                         
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
-                    // 데이터 전달 후 다시 로드
-                    
+                        // 데이터 전달 후 다시 로드
+                        
                         // 첫번째 카테고리 선택을 default로 만듦
                         categoryCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: .right)
-                    
+                        
                     case .failure(let error):
                         print(error)
                         
@@ -450,10 +452,8 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     
                 } else {
                     // 특장 카테고리라면?
-                    
                     return taskData[categoryIndex-1].tasks.count
                 }
-                
             }
         }
     }
@@ -480,8 +480,6 @@ extension SelectToDoVC: UICollectionViewDataSource {
             textFieldView.backgroundColor = .gray1
             searchTextField.endEditing(false)
             // 키보드 내리기
-            
-            
             todoCollectionView.reloadData()
         }
         
@@ -492,7 +490,6 @@ extension SelectToDoVC: UICollectionViewDataSource {
             
             if selectedViewModel.count > 0 {
                 // selectedViewModel이 비어있지 않다면?
-                
                 var check = false
                 for i in 0...selectedViewModel.count-1 {
                     // 이미 추가 된 루틴인지 검사하는 과정이 필요 (중복 추가를 막기 위해)
@@ -503,27 +500,56 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 }
                 if check == false {
                     // 추가 안된 루틴이라면 -> 추가
-                    
                     if let value = cells?.routine {
-                        listItemAdded(value: value)
+                        // move to editRoutinVC
+                        initEditRoutineVC(withValue: value)
                     }
-                    
                     selectedCollectionView.reloadData()
                     todoCollectionView.reloadData()
                 }
-                
             } else {
                 // selectedViewModel이 비어있다면? -> 무조건 추가
-                
                 if let value = cells?.routine {
-                    listItemAdded(value: value)
+                    // move to editRoutinVC
+                    initEditRoutineVC(withValue: value)
                 }
                 selectedCollectionView.reloadData()
                 todoCollectionView.reloadData()
             }
-            
         }
-        
+    }
+}
+
+extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
+    func hideViewProtocol() {
+        modalBackgroundView.removeFromSuperview()
+    }
+    
+    func saveDaysProtocol(savedTaskListData :TaskListData) {
+        listItemAdded(value: savedTaskListData)
+        todoCollectionView.reloadData()
+        selectedCollectionView.reloadData()
+    }
+    
+    func initEditRoutineVC(withValue: TaskListData) {
+        modalAppeared()
+        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
+        editRoutineVC.modalTransitionStyle = .coverVertical
+        editRoutineVC.modalPresentationStyle = .custom
+        editRoutineVC.entryNumber = 1
+        editRoutineVC.taskListData = withValue
+        editRoutineVC.saveTaskListDataDelegate = self
+        editRoutineVC.hideViewDelegate = self
+        // value 자체를 가져가서 업데이트
+        self.present(editRoutineVC, animated: true, completion: .none)
+    }
+    
+    func modalAppeared() {
+        modalBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(view.bounds.width), height: Int(view.bounds.height)))
+        modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.view.addSubview(modalBackgroundView)
+//        view.bringSubviewToFront(modalBackgroundView)
     }
 }
 
@@ -531,10 +557,8 @@ extension SelectToDoVC: SelectedItemViewDelegate {
     
     func listItemAdded(value: TaskListData) {
         // 리스트에 추가하기
-        
         selectedViewModel.insert(value, at: 0)
     }
-    
     
     func listItemRemoved(value: Int) {
         // 리스트에서 지우기
@@ -542,3 +566,4 @@ extension SelectToDoVC: SelectedItemViewDelegate {
     }
     
 }
+
