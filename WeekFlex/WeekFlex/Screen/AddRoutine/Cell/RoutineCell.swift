@@ -41,7 +41,7 @@ class RoutineCell: UICollectionViewCell {
             timeLabel.text = ""
         }
         
-        if data.isBookmarked {
+        if data.isBookmarked ?? false {
             // 북마크가 되어있는 지
             bookmarkImage.image = UIImage(named: "icon16BookmarkActive")
         } else {

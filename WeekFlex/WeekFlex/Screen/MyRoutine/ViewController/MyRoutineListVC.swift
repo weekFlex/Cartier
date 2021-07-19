@@ -11,7 +11,7 @@ class MyRoutineListVC: UIViewController {
     
     // MARK: IBOutlet
     
-    var viewModel : MyRoutineListViewModel?
+    var viewModel : RoutineListViewModel?
     let identifier = "MyRoutineListItemTableViewCell"
     
     // MARK: IBOutlet
@@ -26,18 +26,32 @@ class MyRoutineListVC: UIViewController {
     
     // new routine button
     @IBOutlet var routineCreateButtonView: UIView!
+    @IBOutlet var routineCreateButton: UIButton!
     @IBOutlet var routinCreateImageView: UIImageView!
     @IBOutlet var routineCreateLabel: UILabel!
+    
+    
+    @IBAction func routineCreateButtonDidTap(_ sender: Any) {
+        // New Routine 버튼 클릭 시 Event
+        
+        let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+        guard let newTab = storyboard.instantiateViewController(identifier: "MakeRoutineNameVC") as? MakeRoutineNameVC else {
+            return
+        }
+        
+        newTab.routineNameArray = viewModel?.routineNameArray()
+        
+        self.navigationController?.pushViewController(newTab, animated: true)
+    }
     
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = MyRoutineListViewModel()
+        setData()
         setLayout()
         setDelegate()
-        // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
     }
     
 }
@@ -45,6 +59,20 @@ class MyRoutineListVC: UIViewController {
 extension MyRoutineListVC {
     
     // MARK: function
+    
+    func setData() {
+        // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
+        RoutineService().getRoutines(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") {
+            routineList in
+            // if getRoutine service failed,
+            if let routineList = routineList {
+                self.viewModel = RoutineListViewModel(routines: routineList)
+            }
+            DispatchQueue.main.async {
+                self.routineTableView.reloadData()
+            }
+        }
+    }
     
     func setLayout() {
         
@@ -74,8 +102,7 @@ extension MyRoutineListVC {
 extension MyRoutineListVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let count = viewModel?.items.count else { return 0 }
-        return count
+        return viewModel?.numberOfRoutines ?? 0
     }
     
     // pacing between sections
@@ -99,10 +126,10 @@ extension MyRoutineListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? MyRoutineListItemTableViewCell else { return UITableViewCell() }
         
-        guard let itemViewModel = viewModel?.items[indexPath.section] else { return UITableViewCell() }
-        
-        cell.configure(withViewModel: itemViewModel, index: indexPath.section)
-        
+        let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
+        cell.routineTitleLabel.text = routineVM?.title
+        cell.routineImage.image = UIImage(named: routineVM?.categoryColorImageName ?? "")
+        cell.routineElementsLabel.text = "\(routineVM?.numberOfTasks ?? 0)개의 할 일"
         return cell
     }
 }
@@ -119,8 +146,26 @@ extension MyRoutineListVC: UITableViewDelegate {
         deleteAction.backgroundColor = .color1
         
         let editAction = UIContextualAction(style: .normal, title: nil) { (_, _, completionHandler) in
+            
+            // edit 버튼 클릭 시 뷰 이동 Event
+            
+            let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+            guard let newTab = storyboard.instantiateViewController(identifier: "SelectToDoVC") as? SelectToDoVC else {
+                return
+            }
+            
+            let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
+            newTab.routineName = routineVM?.title // 루틴 이름 넘겨주기
+            
+            newTab.selectedViewModel = routineVM!.rountineTaskList
+            newTab.routineEditEnable = true
+            // edit 버튼을 눌러서 왔다는 것을 알려주기 위한 bool 값
+            
+            self.navigationController?.pushViewController(newTab, animated: true)
+            
             completionHandler(true)
         }
+        
         editAction.image = UIImage(named: "icon32Edit")
         editAction.backgroundColor = .lightSalmon
         
@@ -128,4 +173,5 @@ extension MyRoutineListVC: UITableViewDelegate {
         
         return configuration
     }
+    
 }

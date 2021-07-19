@@ -13,12 +13,19 @@ class EditRoutineVC: UIViewController {
     
     private var listName: String?
     private let days = ["월", "화", "수", "목", "금", "토", "일"]
+    var saveTaskListDataDelegate: SaveTaskListProtocol?
+    var hideViewDelegate: HideViewProtocol?
     var todo: Todo?
+    var taskListData: TaskListData?
+    var daysStructList: [Day]?
+    var entryNumber: Int?
+    var dayDict: [String:Int]?
+    
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
     
     // MARK: - IBOutlet
-
+    
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var editUIView: UIView!
     @IBOutlet var backButton: UIButton!
@@ -36,7 +43,7 @@ class EditRoutineVC: UIViewController {
     @IBOutlet var topLayerUIView: UIView!
     
     // MARK: - IBAction
-
+    
     // switch
     @IBAction func timeSwitchValueChanged(_ sender: Any) {
         if timeSwitch.isOn { // switch on
@@ -64,8 +71,30 @@ class EditRoutineVC: UIViewController {
         }
     }
     
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func completeButtonPressed(_ sender: Any) {
+        let dict = editRouineViewModel.days
+        // Days 구조체로 넣어주기
+        let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
+            if dayDict.value == 1 {
+                dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
+            }
+        }
+        taskListData?.days = newData
+        // 이전 뷰로 데이터 넘겨주기
+        if let taskListData = taskListData {
+            self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
+        }
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchListData() // fetch data using vm
@@ -89,8 +118,15 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
     
     // receive newly saved time data from EditRoutineTimeVC
     func saveTimeProtocol(savedTimeData: Todo) {
-        editRouineViewModel = EditRoutineViewModel(savedTimeData, days: ["월":1, "화":1, "수":1, "목":0, "금":0, "토":0, "일":0])
+        editRouineViewModel = EditRoutineViewModel(savedTimeData, days: editRouineViewModel.days)
         setTimeLabel() //reset time label
+    }
+    
+    // MARK: Method
+    
+    @objc func backgroundTapped(sender: UITapGestureRecognizer) {
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - function
@@ -98,7 +134,8 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
     func setLayout() {
         // background
         topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.0)
-        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        topLayerUIView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         editUIView.backgroundColor = .white
         topConstraint.constant = 330/896*self.view.bounds.height
         // header
@@ -131,12 +168,31 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
     }
     
     func fetchListData() {
-        if let todo = todo { // 원래는 이렇게 전 뷰에서 todo 구조체 데이터를 받아서 뿌려줌
-            editRouineViewModel = EditRoutineViewModel(todo, days: ["월":1, "화":1, "수":1, "목":0, "금":0, "토":0, "일":0])
-        } else { // 일단 지금은 더미 데이터 입력
-            editRouineViewModel = EditRoutineViewModel(Todo(categoryColor: 1, categoryID: 1, date: "2021-04-12", done: true, endTime: nil, id: 1, name: "정원이 형하고 앞구르기 하기", routineID: 1, routineName: "만나기 루틴", startTime: nil, userID: 0), days: ["월":1, "화":1, "수":1, "목":0, "금":0, "토":0, "일":0])
+        switch entryNumber {
+        // 루틴 설정 뷰에서 넘어올 때
+        case 1:
+            
+            todo = Todo(categoryID: nil, date: nil, endTime: taskListData?.days?.first?.endTime, name: taskListData!.name, startTime: taskListData?.days?.first?.startTime)
+            
+            daysStructList = taskListData?.days
+            
+            if let daysStructList = daysStructList { // 요일, 시간 설정을 해놨을 때
+                dayDict = editRouineViewModel.renderDaysStructListIntoDictionary(daysStructList: daysStructList)
+            } else { // 안해놓았을 때
+                dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
+            }
+            
+            
+        default:
+            return
         }
-       
+        if let todo = todo,
+           let dayDict = dayDict { // 원래는 이렇게 전 뷰에서 todo 구조체 데이터를 받아서 뿌려줌
+            editRouineViewModel = EditRoutineViewModel(todo, days: dayDict)
+        } else { // 일단 지금은 더미 데이터 입력
+            editRouineViewModel = EditRoutineViewModel(Todo(categoryID: 1, date: "2021-04-12", endTime: nil, name: "정원이 형하고 앞구르기 하기", startTime: nil), days: ["월":1, "화":1, "수":1, "목":0, "금":0, "토":0, "일":0])
+        }
+        
         // 해당 데이터가 time 있는 루틴이면 뷰 띄워지자마자 switch on 처리, 아니라면 off
         if editRouineViewModel.hasTimeSetting {
             timeSwitch.setOn(true, animated: true)
@@ -189,12 +245,10 @@ extension EditRoutineVC: UICollectionViewDataSource {
             editRouineViewModel.updateDays(day: curKey, isChecked: 1)
         } else {
             editRouineViewModel.updateDays(day: curKey, isChecked: 0)
-
         }
         weekCollectionView.reloadData()
     }
 }
-
 
 extension EditRoutineVC: UICollectionViewDelegate {
     

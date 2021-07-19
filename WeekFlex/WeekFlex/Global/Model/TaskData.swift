@@ -14,11 +14,11 @@ struct TaskData: Codable {
 
 // MARK: - Task
 struct TaskListData: Codable {
-    let category: String
+    let category: String?
     let categoryColor: Int
-    let days: [Day]?
+    var days: [Day]? // 처음에는 없지만, 이후 수정뷰에서 추가됨
     let id: Int
-    let isBookmarked: Bool
+    let isBookmarked: Bool?
     let name: String
 }
 

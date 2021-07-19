@@ -16,6 +16,7 @@ enum APITarget {
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
+    case getRoutine(token: String) // 루틴 리스트 API
 }
 
 // MARK: TargetType Protocol 구현
@@ -44,6 +45,8 @@ extension APITarget: TargetType {
             return  "api/v1/todo/routine"
         case .deleteTodo(_,let todoId):
             return "api/v1/todo/\(todoId)"
+        case .getRoutine:
+            return "api/v1/routine/"
         }
         
         
@@ -54,7 +57,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory, .getWeekly:
+        case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
         case .checkTodo:
@@ -79,7 +82,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory:
+        case .getTask, .getCategory, .getRoutine:
             return .requestPlain
             
         case .getWeekly(_, let date):
@@ -109,7 +112,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
          
         }
