@@ -27,6 +27,7 @@ class SelectToDoVC: UIViewController {
     
     // 모달 뒤에 뜰 회색 전체 뷰
     var modalBackgroundView: UIView!
+    var routineEditEnable: Bool = false
     
     // MARK: IBOutlet
     
@@ -73,6 +74,7 @@ class SelectToDoVC: UIViewController {
         nextVC.routineName = routineNameLabel.text
         // 루틴 이름을 넘겨줌
         nextVC.routineList = selectedViewModel
+        nextVC.routineEditEnable = routineEditEnable
         
         self.navigationController?.pushViewController(nextVC, animated: true)
         // navigationController를 이용해 다음 뷰로 이동

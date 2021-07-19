@@ -11,13 +11,5 @@ import Foundation
 struct Routine: Codable {
     let id: Int
     let name: String
-    let tasks: [RoutineTask]
-}
-
-// MARK: - Task
-struct RoutineTask: Codable {
-    let categoryColor: Int
-    let days: [Day]
-    let id: Int
-    let name: String
+    let tasks: [TaskListData]
 }
