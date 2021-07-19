@@ -14,6 +14,7 @@ class EditRoutineVC: UIViewController {
     private var listName: String?
     private let days = ["월", "화", "수", "목", "금", "토", "일"]
     var saveTaskListDataDelegate: SaveTaskListProtocol?
+    var hideViewDelegate: HideViewProtocol?
     var todo: Todo?
     var taskListData: TaskListData?
     var daysStructList: [Day]?
@@ -71,8 +72,10 @@ class EditRoutineVC: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func completeButtonPressed(_ sender: Any) {
         let dict = editRouineViewModel.days
         // Days 구조체로 넣어주기
@@ -86,6 +89,7 @@ class EditRoutineVC: UIViewController {
         if let taskListData = taskListData {
             self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
         }
+        self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -123,7 +127,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
     func setLayout() {
         // background
         topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.0)
-        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.0)
         editUIView.backgroundColor = .white
         topConstraint.constant = 330/896*self.view.bounds.height
         // header
@@ -233,12 +237,10 @@ extension EditRoutineVC: UICollectionViewDataSource {
             editRouineViewModel.updateDays(day: curKey, isChecked: 1)
         } else {
             editRouineViewModel.updateDays(day: curKey, isChecked: 0)
-            
         }
         weekCollectionView.reloadData()
     }
 }
-
 
 extension EditRoutineVC: UICollectionViewDelegate {
     
