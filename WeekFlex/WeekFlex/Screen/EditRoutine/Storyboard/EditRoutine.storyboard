@@ -209,6 +209,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QLS-nK-nL0">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gZ-cj-qeW">
                                 <rect key="frame" x="0.0" y="498" width="414" height="398"/>
                                 <subviews>
@@ -368,6 +373,7 @@
                         <outlet property="endTimeMeridiemLabel" destination="w6L-Hv-Cx2" id="1DW-9y-cOC"/>
                         <outlet property="endTimeMiddleLabel" destination="3aG-jq-kZq" id="bLw-bc-QET"/>
                         <outlet property="endTimeMinuteLabel" destination="xip-9T-l9T" id="UxI-RC-Kmt"/>
+                        <outlet property="modalBackgroundView" destination="QLS-nK-nL0" id="I12-IS-ZSD"/>
                         <outlet property="startTimeHeaderLabel" destination="DQ8-LO-sKZ" id="znx-IK-HJn"/>
                         <outlet property="startTimeHourLabel" destination="zZb-Ug-Rl8" id="e4N-aY-sVm"/>
                         <outlet property="startTimeHuggingView" destination="WtP-be-WZr" id="pb6-Jn-mmk"/>

@@ -122,12 +122,20 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         setTimeLabel() //reset time label
     }
     
+    // MARK: Method
+    
+    @objc func backgroundTapped(sender: UITapGestureRecognizer) {
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - function
     
     func setLayout() {
         // background
         topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.0)
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        topLayerUIView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         editUIView.backgroundColor = .white
         topConstraint.constant = 330/896*self.view.bounds.height
         // header
