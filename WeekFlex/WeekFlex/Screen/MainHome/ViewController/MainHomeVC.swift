@@ -31,6 +31,7 @@ class MainHomeVC: UIViewController {
             calendarCollectionView.reloadData()
         }
     }
+    var representCategory: [Int] = [Int](repeating: -1, count: 7)
     let weekDays: [String] = ["월","화","수","목","금","토","일"]
     var shouldCollaps = true
     var isFloating = false
@@ -149,7 +150,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 
                 self.weeklyData[self.currentDay].items.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                
+                self.calendarCollectionView.reloadData()
             }
             
             alert.addAction(cancel)
@@ -204,12 +205,8 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             view.viewIndex = i
             view.delegate = self
             view.frame = cell.bounds
-            view.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             view.heightAnchor.constraint(equalToConstant: 63).isActive = true
             let todo = cellData.todos[i]
-            //            guard let todo = cellData.todos[i] else {
-            //                print("에러: cellData nill값")
-            //                return cell }
             view.configure(with: todo )
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
@@ -226,11 +223,9 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
 extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
     
     
-    
-    
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
         weeklyData[currentDay].items[cellIndex].todos[viewIndex].done = isDone
-        
+        calendarCollectionView.reloadData()
     }
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
@@ -257,11 +252,13 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
         print("delete")
         weeklyData[currentDay].items[cellIndex].todos.remove(at: viewIndex)
         tableView.reloadData()
+        calendarCollectionView.reloadData()
         
     }
 }
 
 extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    //일주일 날짜 캘린더
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
@@ -302,15 +299,11 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
 
 extension MainHomeVC {
     
-    
-    
-    
     //MARK: function
     private func getRoutines(){
         print("getRoutines()")
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
-//        let date = dateFormat.string(from:Calendar.current.date(byAdding: .day, value: -1, to: Date())!)
         let date = dateFormat.string(from:Date())
         if NetworkState.isConnected() {
             // 네트워크 연결 시
@@ -320,7 +313,6 @@ extension MainHomeVC {
                     switch result {
                     
                     case .success(let data):
-                        print(data)
                         weeklyData = data
                         print(weeklyData)
                         calendarCollectionView.reloadData()
@@ -389,8 +381,20 @@ extension MainHomeVC {
     }
     
     
-    func calculateCategory(currentDay: Int){
+    func calculateCategoryToday(currentDay: Int){
+        var categoryCounter = [Int](repeating: 0, count: 15)
         
+        for routine in weeklyData[currentDay].items{
+            for todo in routine.todos{
+                if todo.done {
+                    categoryCounter[todo.categoryColor] += 1
+                }
+            }
+        }
+        
+        guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
+        
+        representCategory[currentDay] = categoryIndex
     }
     
     

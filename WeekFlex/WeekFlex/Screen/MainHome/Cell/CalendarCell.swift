@@ -10,7 +10,8 @@ import UIKit
 class CalendarCell: UICollectionViewCell {
     
     //MARK: Variable
-    var representCategory = "icon-24-star-n"
+    
+    var category = -1
     
     
     //MARK: IBOutlet
@@ -34,6 +35,7 @@ class CalendarCell: UICollectionViewCell {
     
     //대표 카테고리 계산
     func countCategory(data: DailyData){
+        
         var categoryCounter = [Int](repeating: 0, count: 15)
         
         for routine in data.items{
@@ -43,12 +45,14 @@ class CalendarCell: UICollectionViewCell {
                 }
             }
         }
+        if data.items.count == 0 {
+            star.image = UIImage(named: "no")
+        }else {
+            guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? -1) else { return  }
+            star.image = UIImage(named: "icon-24-star-n" + String(categoryIndex))
+            print("카테고리계산중:  ", categoryIndex)
+        }
         
-        guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
-        
-        representCategory += String(categoryIndex)
-        star.image = UIImage(named: representCategory)
-     
         
         
 
