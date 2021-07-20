@@ -9,7 +9,16 @@ import Foundation
 
 struct EditRoutineViewModel {
     var todo: Todo
-    var days: [String:Int]
+    var daySelected: Bool = false
+    var days: [String:Int] {
+        didSet {
+            if days.map({$0.value}).contains(1) {
+                daySelected = true
+            } else {
+                daySelected = false
+            }
+        }
+    }
 }
 
 extension EditRoutineViewModel {

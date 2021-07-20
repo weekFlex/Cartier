@@ -18,6 +18,14 @@ extension RoutineListViewModel {
         let routine = self.routines[index]
         return RoutineViewModel(routine)
     }
+    
+    func routineNameArray() -> [String] {
+        
+        
+        let result: [String] = routines.map { $0.name }
+        return result
+    }
+
 }
 
 struct RoutineViewModel {
@@ -51,5 +59,10 @@ extension RoutineViewModel {
         } else {
             return "icon-24-star-n0"
         }
+    }
+    
+    // 루틴 안에 있는 task를 넘겨줄 때 사용
+    var rountineTaskList: [TaskListData] {
+        return self.routine.tasks
     }
 }

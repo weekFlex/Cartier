@@ -84,6 +84,7 @@ class EditRoutineVC: UIViewController {
                 dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
             }
         }
+        print("inserted : \(newData)")
         taskListData?.days = newData
         // 이전 뷰로 데이터 넘겨주기
         if let taskListData = taskListData {
@@ -141,6 +142,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         // header
         backButton.setImage(UIImage(named: "icon32CancleBlack"), for: .normal)
         completeButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
+        completeButton.isEnabled = false
         headerLabel.setLabel(text: "할 일 수정하기", color: .black, font: .appleMedium(size: 18))
         // set routine name
         listName = editRouineViewModel.title
@@ -240,11 +242,17 @@ extension EditRoutineVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let curKey = days[indexPath.row]
         if editRouineViewModel.days[curKey] == 0 {
             editRouineViewModel.updateDays(day: curKey, isChecked: 1)
         } else {
             editRouineViewModel.updateDays(day: curKey, isChecked: 0)
+        }
+        if editRouineViewModel.daySelected {
+            completeButton.isEnabled = true
+        } else {
+            completeButton.isEnabled = false
         }
         weekCollectionView.reloadData()
     }
