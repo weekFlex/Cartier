@@ -235,10 +235,12 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
         popupVC.delegate = self
         //        popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
         popupVC.todoId = todoId
+        popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
         popupVC.modalPresentationStyle = .overCurrentContext
         //모달 화면 띄우기
+        
         self.present(popupVC, animated: true, completion: nil)
     }
     

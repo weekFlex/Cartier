@@ -64,7 +64,6 @@ class EditPopUpVC: UIViewController {
                 print("네트워크 미연결")
             }
             
-            
             self.dismiss(animated: true, completion: nil)
             
             
@@ -89,8 +88,11 @@ class EditPopUpVC: UIViewController {
         setLayout()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { super.touchesBegan(touches, with: event)
-        if let touch = touches.first , touch.view == self.view { self.dismiss(animated: true, completion: nil) } }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let touch = touches.first , touch.view == self.view {
+            self.dismiss(animated: true, completion: nil)
+        } }
     
 }
 
@@ -99,5 +101,6 @@ extension EditPopUpVC {
     func setLayout(){
         self.popupView.layer.cornerRadius = 20
         self.taskLabel.text = taskTitle
+        
     }
 }

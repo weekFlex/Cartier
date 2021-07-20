@@ -45,53 +45,15 @@ class TaskListView: UIView {
     @IBOutlet weak var star: UIButton!
     @IBOutlet weak var meatBalls: UIButton!
     
-    private func starTapRx(){
-        print( "rx" )
-//        let starTapObservable = star.rx.tap.asObservable()
-//        starTapObservable.debounce(.seconds(1), scheduler: MainScheduler.asyncInstance).bind{
-//            print("zz")
-//        }.disposed(by: bag)
-        
-//        star.rx.tap.asDriver().debounce(.seconds(1)).drive(onNext: { (_) in
-//            print("presssssss")
-//        }).disposed(by: bag)
-        
-        
-//        star.rx.tap.bind{ print("bind")}.disposed(by: bag)
-//        var button = UIButton()
-//        button.rx.tap.bind
-        
-    }
     
     
     
     //MARK: IBAction
     @IBAction func starTabbed(_ sender: Any) {
         print("별누름")
-
-        if let token = UserDefaults.standard.string(forKey: "UserToken") {
-
-            APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
-                switch result {
-
-                case .success(let data):
-                    print("체크완료")
-                // 데이터 전달 후 다시 로드
-
-                case .failure(let error):
-                    print(error)
-                    print("오류!!")
-                }
-
-        }
-    } else {
-        // 네트워크 미연결 팝업 띄우기
-        print("네트워크 미연결")
-    }
-
-
         isDone = !isDone
         self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
+        
     }
     
     @IBAction func meatBallTabbed(_ sender: Any) {
@@ -102,12 +64,12 @@ class TaskListView: UIView {
     //MARK: Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        starTapRx()
+        
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        starTapRx()
+        
     }
     
     func configure(with viewModel: TodoData) {
@@ -122,6 +84,35 @@ class TaskListView: UIView {
             star.setImage(UIImage(named: "icon-24-star-n0"), for: .normal)
         }
         
+        starTapped()
+        
     }
+    
+    func starTapped(){
+        star.rx.tap.asDriver().debounce(.seconds(2)).drive(onNext: { [self] in
+            print("보낸다")
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                
+                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
+                    switch result {
+                    
+                    case .success(let data):
+                        print("체크완료")
+                    // 데이터 전달 후 다시 로드
+                    
+                    case .failure(let error):
+                        print(error)
+                        print("오류!!")
+                    }
+                    
+                }
+            } else {
+                // 네트워크 미연결 팝업 띄우기
+                print("네트워크 미연결")
+            }
+             
+        }).disposed(by: bag)
+    }
+    
     
 }

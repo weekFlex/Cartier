@@ -36,7 +36,7 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
-    func checkTodo(_ token: String, todoId: Int, done: Bool, completion: @escaping (NetworkResult<Int>)->(Void)){
+    func checkTodo(_ token: String, todoId: Int, done: Bool, completion: @escaping (NetworkResult<SimpleData>)->(Void)){
         let target: APITarget = .checkTodo(token: token, todoId: todoId, done: done)
         judgeObject(target, completion: completion)
     }
@@ -65,9 +65,13 @@ extension APIService {
             switch response {
             case .success(let result):
                 do {
+                    
                     let decoder = JSONDecoder()
+                    print("result  " , result)
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
+                    print("body", body)
                     if let data = body.data {
+                        print(data)
                         completion(.success(data))
                     }
                 } catch {
