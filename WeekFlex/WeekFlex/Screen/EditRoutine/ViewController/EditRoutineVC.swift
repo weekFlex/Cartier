@@ -11,7 +11,6 @@ class EditRoutineVC: UIViewController {
     
     // MARK: - Variables
     
-    private var listName: String?
     private let days = ["월", "화", "수", "목", "금", "토", "일"]
     var saveTaskListDataDelegate: SaveTaskListProtocol?
     var hideViewDelegate: HideViewProtocol?
@@ -25,13 +24,28 @@ class EditRoutineVC: UIViewController {
     private var editRouineViewModel : EditRoutineViewModel!
     
     // MARK: - IBOutlet
-    
+    // constraints
     @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var routineTitleTopConstraint: NSLayoutConstraint!
+    @IBOutlet var categoryTopConstraint: NSLayoutConstraint!
+    @IBOutlet var daysHeaderLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet var weekCollectionViewTopConstraint: NSLayoutConstraint!
+    
+    // category
+    @IBOutlet var categoryUIView: UIView!
+    @IBOutlet var categoryHeaderLabel: UILabel!
+    @IBOutlet var categoryTapEnabledUIView: UIView!
+    @IBOutlet var categoryRightArrow: UIImageView!
+    @IBOutlet var categoryTitle: UILabel!
+    @IBOutlet var categoryColor: UIImageView!
+    // daysHeaderLabel - 요일
+    @IBOutlet var daysHeaderLabel: UILabel!
+    
     @IBOutlet var editUIView: UIView!
     @IBOutlet var backButton: UIButton!
     @IBOutlet var completeButton: UIButton!
     @IBOutlet var headerLabel: UILabel!
-    @IBOutlet var routineTitleLabel: UILabel!
+    @IBOutlet var routineTitle: UITextField!
     @IBOutlet var weekCollectionView: UICollectionView!
     @IBOutlet var collectionviewHeight: NSLayoutConstraint!
     @IBOutlet var timeHeaderLabel: UILabel!
@@ -111,6 +125,17 @@ class EditRoutineVC: UIViewController {
         super.viewWillLayoutSubviews()
         editUIView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // 이 뷰에 들어오자 마자 바로 키보드 띄우고 cursor 포커스 주기
+        self.routineTitle.becomeFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // 뷰 클릭 시 키보드 내리기
+        view.endEditing(true)
+    }
+    
 }
 
 // MARK: - Extension for Protocol
@@ -134,6 +159,15 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.text?.count == 0 || textField.text == nil {
+            // Text가 존재하지 않을 때 버튼 비활성화
+            completeButton.isEnabled = false
+        } else {
+            completeButton.isEnabled = true
+
+        }
+    }
     // MARK: - function
     
     func setLayout() {
@@ -142,15 +176,30 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
         topLayerUIView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         editUIView.backgroundColor = .white
-        topConstraint.constant = 330/896*self.view.bounds.height
         // header
         backButton.setImage(UIImage(named: "icon32CancleBlack"), for: .normal)
         completeButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
         completeButton.isEnabled = false
-        headerLabel.setLabel(text: "할 일 수정하기", color: .black, font: .appleMedium(size: 18))
         // set routine name
-        listName = editRouineViewModel.title
-        routineTitleLabel.setLabel(text: listName ?? "", color: .black, font: .appleBold(size: 22))
+        routineTitle.borderStyle = .none
+        routineTitle.placeholder = "할 일을 적어주세요"
+        routineTitle.font = .metroBold(size: 22)
+        routineTitle.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        // routineTitle이 수정될 때 마다 실행
+        routineTitle.delegate = self
+        
+        // category
+        categoryHeaderLabel.setLabel(text: "카테고리", color: .black, font: .appleBold(size: 16))
+        // 할일 추가하면
+//        categoryColor.image = UIImage(named: "icon-24-star-n0")
+//        categoryTitle.setLabel(text: "과제", color: .black, font: .appleMedium(size: 16))
+        // 할일 추가 전
+//        categoryColor.image = UIImage(named: "")
+        categoryTitle.setLabel(text: "카테고리를 생성해주세요", color: .gray3, font: .appleMedium(size: 16), letterSpacing: -0.16)
+        categoryRightArrow.image = UIImage(named: "icon16Right")
+        
+        // days header
+        daysHeaderLabel.setLabel(text: "요일", color: .black, font: .appleBold(size: 16))
         // collection view
         collectionviewHeight.constant = 41/375*view.bounds.width
         let layout = UICollectionViewFlowLayout()
@@ -160,12 +209,12 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         layout.minimumInteritemSpacing = 2
         weekCollectionView.collectionViewLayout = layout
         // time section
-        timeHeaderLabel.setLabel(text: "시간 설정", color: .black, font: .appleBold(size: 16))
+        timeHeaderLabel.setLabel(text: "시간 설정", color: .black, font: .appleBold(size: 16), letterSpacing: -0.16)
         timeSwitch.transform = CGAffineTransform(scaleX: 0.83, y: 0.83)
-        startTimeSubLabel.setLabel(text: "시작", color: .gray4, font: .appleRegular(size: 14))
-        endTimeSubLabel.setLabel(text: "종료", color: .gray4, font: .appleRegular(size: 14))
-        startTimeLabel.setLabel(text: "오전 10:00", color: .gray4, font: .appleRegular(size: 14))
-        endTimeLabel.setLabel(text: "오전 11:00", color: .gray4, font: .appleRegular(size: 14))
+        startTimeSubLabel.setLabel(text: "시작", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
+        endTimeSubLabel.setLabel(text: "종료", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
+        startTimeLabel.setLabel(text: "오전 10:00", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
+        endTimeLabel.setLabel(text: "오전 11:00", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
     }
     
     func setCollectionView() {
@@ -177,7 +226,19 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         switch entryNumber {
         // 루틴 설정 뷰에서 넘어올 때
         case 1:
+            // layout
+            headerLabel.setLabel(text: "할 일 수정하기", color: .black, font: .appleMedium(size: 18))
+            topConstraint.constant = 330/896*self.view.bounds.height
+            weekCollectionViewTopConstraint.constant = 24
+            routineTitle.isEnabled = false
+            routineTitleTopConstraint.constant = 32
             
+            categoryTopConstraint.isActive = false
+            daysHeaderLabelTopConstraint.isActive = false
+            categoryUIView.isHidden = true
+            daysHeaderLabel.isHidden = true
+            
+            // data
             todo = Todo(categoryID: nil, date: nil, endTime: taskListData?.days?.first?.endTime, name: taskListData!.name, startTime: taskListData?.days?.first?.startTime)
             
             daysStructList = taskListData?.days
@@ -187,16 +248,20 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
             } else { // 안해놓았을 때
                 dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
             }
-            
-            
+        case 2:
+            headerLabel.setLabel(text: "할 일 추가하기", color: .black, font: .appleMedium(size: 18))
+            topConstraint.constant = 40/896*self.view.bounds.height
+            routineTitleTopConstraint.constant = 48
+
         default:
             return
         }
         if let todo = todo,
            let dayDict = dayDict { // 원래는 이렇게 전 뷰에서 todo 구조체 데이터를 받아서 뿌려줌
             editRouineViewModel = EditRoutineViewModel(todo, days: dayDict)
-        } else { // 일단 지금은 더미 데이터 입력
-            editRouineViewModel = EditRoutineViewModel(Todo(categoryID: 1, date: "2021-04-12", endTime: nil, name: "정원이 형하고 앞구르기 하기", startTime: nil), days: ["월":1, "화":1, "수":1, "목":0, "금":0, "토":0, "일":0])
+            routineTitle.text = editRouineViewModel.title
+        } else { // 할일 추가의 경우 
+            editRouineViewModel = EditRoutineViewModel(Todo(categoryID: nil, date: nil, endTime: nil, name: "", startTime: nil), days: ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0])
         }
         
         // 해당 데이터가 time 있는 루틴이면 뷰 띄워지자마자 switch on 처리, 아니라면 off
@@ -264,4 +329,20 @@ extension EditRoutineVC: UICollectionViewDataSource {
 
 extension EditRoutineVC: UICollectionViewDelegate {
     
+}
+
+// MARK: UITextFieldDelegate
+
+extension EditRoutineVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 리턴 키 클릭 시
+        textField.endEditing(true)
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // textField 클릭하면 무조건 키보드 올라오게
+        textField.becomeFirstResponder()
+    }
 }

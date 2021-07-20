@@ -112,9 +112,12 @@ extension MakeRoutineNameVC {
             checkButton.isEnabled = false
         } else {
             // Text가 존재할 때 버튼 활성화
+            checkButton.isEnabled = true
+
             if let routineNameArray = routineNameArray {
                 if routineNameArray.contains(textField.text!) {
                     // 이미 있는 루틴 이름이라면
+
                     explainLabel.text = "이미 존재하는 루틴 이름이에요 ;ㅅ;"
                     checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
                     checkButton.isEnabled = false
