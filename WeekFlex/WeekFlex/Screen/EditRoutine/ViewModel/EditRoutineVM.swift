@@ -100,6 +100,10 @@ extension EditRoutineViewModel {
         self.todo.endTime = endTime
     }
     
+    mutating func updateName(name: String) {
+        self.todo.name = name
+    }
+    
     // picker에서 나온 시간, AM/PM, 분이 계산되어 합쳐진 startTime(17:00)
     // 오전 12 00 , 오후 12 00 으로 picker 로 값이 들어오면 다른 시간과는 다르게 +12를 한 후 처리해줘야함.
     func mergePickerIntoTime(mer: String, hour: String, min: String) -> String {

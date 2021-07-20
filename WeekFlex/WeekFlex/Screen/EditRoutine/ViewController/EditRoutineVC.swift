@@ -91,23 +91,32 @@ class EditRoutineVC: UIViewController {
     }
     
     @IBAction func completeButtonPressed(_ sender: Any) {
-        let dict = editRouineViewModel.days
-        
-        // Days 구조체로 넣어주기
-        let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
-            if dayDict.value == 1 {
-                dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
+        switch entryNumber {
+        case 1:
+            // Days 구조체로 넣어주기
+            let dict = editRouineViewModel.days
+            let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
+                if dayDict.value == 1 {
+                    dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
+                }
+            }.sorted { first, second in
+                let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]
+                return day[first.name]! < day[second.name]!
             }
-        }.sorted { first, second in
-            let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]
-            return day[first.name]! < day[second.name]!
+            
+            taskListData?.days = newData
+            // 이전 뷰로 데이터 넘겨주기
+            if let taskListData = taskListData {
+                self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
+            }
+        case 2:
+            editRouineViewModel.updateName(name: routineTitle.text!)
+            print(editRouineViewModel.todo)
+        default:
+            return
+            
         }
         
-        taskListData?.days = newData
-        // 이전 뷰로 데이터 넘겨주기
-        if let taskListData = taskListData {
-            self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
-        }
         self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
     }
@@ -165,9 +174,20 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
             completeButton.isEnabled = false
         } else {
             completeButton.isEnabled = true
-
+            
         }
     }
+    
+    @objc func categoryViewTapped(sender: UITapGestureRecognizer) {
+        topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.bringSubviewToFront(topLayerUIView)
+        guard let viewCategoryVC = self.storyboard?.instantiateViewController(identifier: "ViewCategoryVC") as? ViewCategoryVC else { return }
+        viewCategoryVC.modalTransitionStyle = .coverVertical
+        viewCategoryVC.modalPresentationStyle = .custom
+        viewCategoryVC.hideViewDelegate = self
+        self.present(viewCategoryVC, animated: true, completion: .none)
+    }
+    
     // MARK: - function
     
     func setLayout() {
@@ -191,13 +211,13 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         // category
         categoryHeaderLabel.setLabel(text: "카테고리", color: .black, font: .appleBold(size: 16))
         // 할일 추가하면
-//        categoryColor.image = UIImage(named: "icon-24-star-n0")
-//        categoryTitle.setLabel(text: "과제", color: .black, font: .appleMedium(size: 16))
+        //        categoryColor.image = UIImage(named: "icon-24-star-n0")
+        //        categoryTitle.setLabel(text: "과제", color: .black, font: .appleMedium(size: 16))
         // 할일 추가 전
-//        categoryColor.image = UIImage(named: "")
+        //        categoryColor.image = UIImage(named: "")
         categoryTitle.setLabel(text: "카테고리를 생성해주세요", color: .gray3, font: .appleMedium(size: 16), letterSpacing: -0.16)
         categoryRightArrow.image = UIImage(named: "icon16Right")
-        
+        categoryUIView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(categoryViewTapped)))
         // days header
         daysHeaderLabel.setLabel(text: "요일", color: .black, font: .appleBold(size: 16))
         // collection view
@@ -252,7 +272,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
             headerLabel.setLabel(text: "할 일 추가하기", color: .black, font: .appleMedium(size: 18))
             topConstraint.constant = 40/896*self.view.bounds.height
             routineTitleTopConstraint.constant = 48
-
+            
         default:
             return
         }
