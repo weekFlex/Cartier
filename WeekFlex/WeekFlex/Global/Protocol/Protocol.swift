@@ -11,3 +11,5 @@ import Foundation
 protocol SaveTimeProtocol { func saveTimeProtocol(savedTimeData: Todo) }
 protocol SaveTaskListProtocol { func saveDaysProtocol(savedTaskListData: TaskListData)} //EditRoutineVC -> SelectToDoVC
 protocol HideViewProtocol { func hideViewProtocol() }
+protocol SaveCategoryProtocol { func saveCategoryProtocol(savedCategory: CategoryData)} // ViewCategoryVC -> EditRoutineVC
+

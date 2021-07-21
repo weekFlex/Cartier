@@ -22,6 +22,7 @@ class EditRoutineVC: UIViewController {
     
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
+    private var categoryViewModel: CategoryViewModel?
     
     // MARK: - IBOutlet
     // constraints
@@ -149,7 +150,16 @@ class EditRoutineVC: UIViewController {
 
 // MARK: - Extension for Protocol
 
-extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
+extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtocol {
+        
+    // receive newly saved category data from CategoryViewVC
+    func saveCategoryProtocol(savedCategory: CategoryData) {
+        categoryViewModel = CategoryViewModel(savedCategory)
+        editRouineViewModel.updateCategory(ID: categoryViewModel?.ID ?? 0)
+        setCategoryData()
+        print("updated: \(editRouineViewModel.todo)")
+    }
+    
     func hideViewProtocol() {
         view.sendSubviewToBack(topLayerUIView)
         topLayerUIView.backgroundColor = UIColor(white: 0, alpha: 0.0)
@@ -185,6 +195,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         viewCategoryVC.modalTransitionStyle = .coverVertical
         viewCategoryVC.modalPresentationStyle = .custom
         viewCategoryVC.hideViewDelegate = self
+        viewCategoryVC.saveCategoryDelegate = self
         self.present(viewCategoryVC, animated: true, completion: .none)
     }
     
@@ -210,12 +221,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         
         // category
         categoryHeaderLabel.setLabel(text: "카테고리", color: .black, font: .appleBold(size: 16))
-        // 할일 추가하면
-        //        categoryColor.image = UIImage(named: "icon-24-star-n0")
-        //        categoryTitle.setLabel(text: "과제", color: .black, font: .appleMedium(size: 16))
-        // 할일 추가 전
-        //        categoryColor.image = UIImage(named: "")
-        categoryTitle.setLabel(text: "카테고리를 생성해주세요", color: .gray3, font: .appleMedium(size: 16), letterSpacing: -0.16)
+        setCategoryData()
         categoryRightArrow.image = UIImage(named: "icon16Right")
         categoryUIView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(categoryViewTapped)))
         // days header
@@ -235,6 +241,17 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol {
         endTimeSubLabel.setLabel(text: "종료", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
         startTimeLabel.setLabel(text: "오전 10:00", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
         endTimeLabel.setLabel(text: "오전 11:00", color: .gray4, font: .appleRegular(size: 14), letterSpacing: -0.14)
+    }
+    
+    func setCategoryData() {
+        if let categoryVM = categoryViewModel {
+            categoryTitle.setLabel(text: categoryVM.title, color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
+            categoryColor.image = UIImage(named: categoryVM.categoryColorImageName)
+            categoryColor.isHidden = false
+        } else {
+            categoryTitle.setLabel(text: "카테고리를 생성해주세요", color: .gray3, font: .appleMedium(size: 16), letterSpacing: -0.16)
+            categoryColor.isHidden = true
+        }
     }
     
     func setCollectionView() {

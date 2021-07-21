@@ -13,6 +13,8 @@ class ViewCategoryVC: UIViewController {
 
     @IBOutlet var categoryTableView: UITableView!
     var hideViewDelegate: HideViewProtocol?
+    var saveCategoryDelegate: SaveCategoryProtocol?
+    
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
     
@@ -76,10 +78,7 @@ extension ViewCategoryVC {
     func setData() {
         CategoryService().getCategories(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") { categoryList in
             if let categoryList = categoryList {
-                let categories = categoryList.map { categoryData in
-                    CategoryDataWithoutID(name: categoryData.name, color: categoryData.color)
-                }
-                self.categoryListViewModel = CategoryListViewModel(categories: categories)
+                self.categoryListViewModel = CategoryListViewModel(categories: categoryList)
             }
             DispatchQueue.main.async {
                 self.categoryTableView.reloadData()
@@ -98,10 +97,23 @@ extension ViewCategoryVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
         let categoryVM = categoryListViewModel?.categoryAtIndex(indexPath.row)
+        cell.selectionStyle = .none
         cell.categoryColor.image = UIImage(named: categoryVM?.categoryColorImageName ?? "icon-24-star-n0")
         cell.categoryTitle.text = categoryVM?.title
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let categoryVM = categoryListViewModel?.categoryAtIndex(indexPath.row)
+        // 전 뷰로 해당 카테고리 데이터를 넘긴다
+        saveCategoryDelegate?.saveCategoryProtocol(savedCategory: categoryVM!.category)
+        
+        // 지금 뷰가 없어진다
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
+        print("selected: \(categoryVM)")
+    }
+    
 }
 
 extension ViewCategoryVC: UITableViewDelegate {

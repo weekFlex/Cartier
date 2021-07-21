@@ -7,7 +7,7 @@
 
 import Foundation
 struct CategoryListViewModel {
-    let categories: [CategoryDataWithoutID]
+    let categories: [CategoryData]
     
     var numberOfCategories: Int {
         return categories.count
@@ -21,18 +21,22 @@ struct CategoryListViewModel {
 
 
 struct CategoryViewModel {
-    private let category: CategoryDataWithoutID
+    let category: CategoryData
     
-    init(_ category: CategoryDataWithoutID) {
+    init(_ category: CategoryData) {
         self.category = category
     }
     
-    var title: String? {
+    var title: String {
         return category.name
     }
     
     var categoryColorImageName: String {
         return "icon-24-star-n\(category.color)"
+    }
+    
+    var ID: Int {
+        return category.id
     }
 }
 
