@@ -11,8 +11,10 @@ class ViewCategoryVC: UIViewController {
     
     // MARK: - Variables
 
+    @IBOutlet var categoryTableView: UITableView!
     var hideViewDelegate: HideViewProtocol?
-
+    // View Model
+    private var categoryListViewModel : CategoryListViewModel!
     
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var modalBackgroundView: UIView!
@@ -22,7 +24,9 @@ class ViewCategoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setData()
         setLayout()
+        setDelegate()
     }
     
     override func viewWillLayoutSubviews() {
@@ -55,5 +59,37 @@ extension ViewCategoryVC {
         
         headerLabel.setLabel(text: "카테고리", color: .black, font: .appleBold(size: 20), letterSpacing: -0.2)
         addCategoryButton.setImage(UIImage(named: "icon32PlusBasic"), for: .normal)
+        
+        // tableview
+        categoryTableView.separatorStyle = .none
     }
+    
+    func setDelegate() {
+        categoryTableView.dataSource = self
+        categoryTableView.delegate = self
+    }
+    
+    func setData() {
+        categoryListViewModel = CategoryListViewModel(categories: [CategoryDataWithoutID(name: "첫번째 루틴", color: 1), CategoryDataWithoutID(name: "두번째 루틴", color: 2)])
+    }
+}
+
+// MARK: - TableView
+
+extension ViewCategoryVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categoryListViewModel.numberOfCategories
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
+        let categoryVM = categoryListViewModel.categoryAtIndex(indexPath.row)
+        cell.categoryColor.image = UIImage(named: categoryVM.categoryColorImageName)
+        cell.categoryTitle.text = categoryVM.title
+        return cell
+    }
+}
+
+extension ViewCategoryVC: UITableViewDelegate {
+    
 }
