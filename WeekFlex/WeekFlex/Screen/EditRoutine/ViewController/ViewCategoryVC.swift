@@ -14,14 +14,18 @@ class ViewCategoryVC: UIViewController {
     @IBOutlet var categoryTableView: UITableView!
     var hideViewDelegate: HideViewProtocol?
     // View Model
-    private var categoryListViewModel : CategoryListViewModel!
+    private var categoryListViewModel : CategoryListViewModel?
     
+    // MARK: IBOutlet
+
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var modalBackgroundView: UIView!
     @IBOutlet var categoryView: UIView!
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var addCategoryButton: UIButton!
     
+    // MARK: Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
@@ -70,7 +74,17 @@ extension ViewCategoryVC {
     }
     
     func setData() {
-        categoryListViewModel = CategoryListViewModel(categories: [CategoryDataWithoutID(name: "첫번째 루틴", color: 1), CategoryDataWithoutID(name: "두번째 루틴", color: 2)])
+        CategoryService().getCategories(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") { categoryList in
+            if let categoryList = categoryList {
+                let categories = categoryList.map { categoryData in
+                    CategoryDataWithoutID(name: categoryData.name, color: categoryData.color)
+                }
+                self.categoryListViewModel = CategoryListViewModel(categories: categories)
+            }
+            DispatchQueue.main.async {
+                self.categoryTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -78,14 +92,14 @@ extension ViewCategoryVC {
 
 extension ViewCategoryVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryListViewModel.numberOfCategories
+        return categoryListViewModel?.numberOfCategories ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier, for: indexPath) as? CategoryTableViewCell else { return UITableViewCell() }
-        let categoryVM = categoryListViewModel.categoryAtIndex(indexPath.row)
-        cell.categoryColor.image = UIImage(named: categoryVM.categoryColorImageName)
-        cell.categoryTitle.text = categoryVM.title
+        let categoryVM = categoryListViewModel?.categoryAtIndex(indexPath.row)
+        cell.categoryColor.image = UIImage(named: categoryVM?.categoryColorImageName ?? "icon-24-star-n0")
+        cell.categoryTitle.text = categoryVM?.title
         return cell
     }
 }

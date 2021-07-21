@@ -50,6 +50,7 @@
 		9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9826A8366300EB0428 /* CategoryVM.swift */; };
 		9E0FFB9B26A836B800EB0428 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */; };
 		9E0FFB9D26A83A4400EB0428 /* CategoryDataWithoutID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */; };
+		9E0FFBA026A8403500EB0428 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9F26A8403500EB0428 /* CategoryService.swift */; };
 		9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
@@ -141,6 +142,7 @@
 		9E0FFB9826A8366300EB0428 /* CategoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVM.swift; sourceTree = "<group>"; };
 		9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataWithoutID.swift; sourceTree = "<group>"; };
+		9E0FFB9F26A8403500EB0428 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoutineTimeVC.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -418,6 +420,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9E0FFB9E26A8402400EB0428 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9E0FFB9F26A8403500EB0428 /* CategoryService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		9E5FD5FE25F4CABB008EB927 /* MyRoutine */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,6 +633,7 @@
 		9EC2E0732631DD3000EF2F7E /* EditRoutine */ = {
 			isa = PBXGroup;
 			children = (
+				9E0FFB9E26A8402400EB0428 /* Service */,
 				9E65113D2698AFED00C60D15 /* Model */,
 				9EC2E0802631E43800EF2F7E /* Cell */,
 				9EC2E07C2631DDAF00EF2F7E /* ViewModel */,
@@ -832,6 +843,7 @@
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
 				0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */,
 				9BEFD55E26A3488300FD9112 /* CheckRoutineCell.swift in Sources */,
+				9E0FFBA026A8403500EB0428 /* CategoryService.swift in Sources */,
 				0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */,
 				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
 				9E0FFB9D26A83A4400EB0428 /* CategoryDataWithoutID.swift in Sources */,
