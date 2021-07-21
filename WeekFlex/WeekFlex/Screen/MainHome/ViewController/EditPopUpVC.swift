@@ -32,7 +32,8 @@ class EditPopUpVC: UIViewController {
     //MARK: IBAction
     
     @IBAction func editButton(_ sender: Any) {
-        //        delegate?.didTabEdit(cellIndex: cellIndex, viewIndex: viewIndex)
+        delegate?.didTabEdit(cellIndex: cellIndex, viewIndex: viewIndex)
+        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func deleteButton(_ sender: Any) {
         
@@ -65,7 +66,7 @@ class EditPopUpVC: UIViewController {
             }
             
             self.dismiss(animated: true, completion: nil)
-            
+            self.delegate?.didTabDelete(cellIndex: self.cellIndex, viewIndex: self.viewIndex, todoId: self.todoId)
             
         }
         
@@ -74,8 +75,10 @@ class EditPopUpVC: UIViewController {
         present(alert,animated: false, completion: nil)
         
         
-                delegate?.didTabDelete(cellIndex: cellIndex, viewIndex: viewIndex, todoId: todoId)
+        
     }
+    
+    
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
