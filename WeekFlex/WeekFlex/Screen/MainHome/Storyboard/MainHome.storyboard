@@ -186,6 +186,9 @@
                                                     <constraint firstAttribute="height" constant="60" id="VOF-jv-RXl"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon60ImportcircleVisual"/>
+                                                <connections>
+                                                    <action selector="getRoutineBtnDidtap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="7Cd-kN-Flg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -205,6 +208,9 @@
                                                     <constraint firstAttribute="height" constant="60" id="mxb-9X-eIj"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon60PlustodocircleVisual"/>
+                                                <connections>
+                                                    <action selector="addToDoBtnDidTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="Vsg-rb-AWa"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

@@ -8,7 +8,19 @@
 import Foundation
 
 struct EditRoutineViewModel {
-    var todo: Todo
+    var todo: Todo {
+        didSet {
+//            print(todo.startTime)
+//            print(todo.endTime)
+//            let timeFormat = DateFormatter()
+//            timeFormat.dateFormat = "HH:mm"
+//            let startTime = timeFormat.date(from:todo.startTime ?? "00:00")
+//            let endTime = timeFormat.date(from:todo.endTime ?? "00:00")
+//            let startTimeString = timeFormat.string(from: startTime!)
+//            let endTimeString = timeFormat.string(from: endTime!)
+//
+        }
+    }
     var daySelected: Bool = false
     var days: [String:Int] {
         didSet {
@@ -92,11 +104,11 @@ extension EditRoutineViewModel {
         days[day] = isChecked
     }
     
-    mutating func updateStartTime(startTime: String) {
+    mutating func updateStartTime(startTime: String?) {
         self.todo.startTime = startTime
     }
     
-    mutating func updateEndTime(endTime: String) {
+    mutating func updateEndTime(endTime: String?) {
         self.todo.endTime = endTime
     }
     
@@ -201,6 +213,19 @@ extension EditRoutineViewModel {
 extension EditRoutineViewModel {
     func renderDaysStructListIntoDictionary(daysStructList: [Day]) -> [String:Int]? {
         let dayNameList = daysStructList.map({$0.name})
+        let dayList = ["월", "화", "수", "목", "금", "토", "일"]
+        let dayDict = dayList.reduce(into: [String:Int](), { dict, day in
+            dict[day] = 0 // 모두 0으로 초기화
+            for dayName in dayNameList {
+                if day == dayName {
+                    dict[dayName] = 1
+                }
+            }
+        })
+        return dayDict
+    }
+    
+    func renderDaysListIntoDictionary(dayNameList: [String]) -> [String:Int]? {
         let dayList = ["월", "화", "수", "목", "금", "토", "일"]
         let dayDict = dayList.reduce(into: [String:Int](), { dict, day in
             dict[day] = 0 // 모두 0으로 초기화

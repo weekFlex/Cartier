@@ -13,6 +13,8 @@ class MyRoutineListVC: UIViewController {
     
     var viewModel : RoutineListViewModel?
     let identifier = "MyRoutineListItemTableViewCell"
+    // noti
+    let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
     
     // MARK: IBOutlet
     
@@ -43,6 +45,9 @@ class MyRoutineListVC: UIViewController {
         
         self.navigationController?.pushViewController(newTab, animated: true)
     }
+    @IBAction func backButtonDidTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: .none)
+    }
     
     // MARK: Life Cycle
     
@@ -61,14 +66,16 @@ extension MyRoutineListVC {
     
     func setData() {
         // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
-        RoutineService().getRoutines(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") {
-            routineList in
-            // if getRoutine service failed,
-            if let routineList = routineList {
-                self.viewModel = RoutineListViewModel(routines: routineList)
-            }
-            DispatchQueue.main.async {
-                self.routineTableView.reloadData()
+        if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            RoutineService().getRoutines(token: token) {
+                routineList in
+                // if getRoutine service failed,
+                if let routineList = routineList {
+                    self.viewModel = RoutineListViewModel(routines: routineList)
+                }
+                DispatchQueue.main.async {
+                    self.routineTableView.reloadData()
+                }
             }
         }
     }
@@ -85,7 +92,7 @@ extension MyRoutineListVC {
         
         // table view
         routineTableView.separatorStyle = .none
-        
+        routineTableView.showsVerticalScrollIndicator = false
         // new routine button
         routineCreateButtonView.setBorder(borderColor: .black, borderWidth: 3)
         routinCreateImageView.image = UIImage(named: "icon24PlusVisual")
@@ -131,6 +138,23 @@ extension MyRoutineListVC: UITableViewDataSource {
         cell.routineElementsLabel.text = "\(routineVM?.numberOfTasks ?? 0)개의 할 일"
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
+        if let token = UserDefaults.standard.string(forKey: "UserToken"),
+           let ID = routineVM?.ID {
+            APIService.shared.registerRoutine(token, routineID: ID) { result in
+                switch result {
+                case .success(_):
+                    NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                    self.dismiss(animated: true, completion: .none)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
 }
 
 extension MyRoutineListVC: UITableViewDelegate {
@@ -138,6 +162,28 @@ extension MyRoutineListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+            let routineVM = self.viewModel?.routineAtIndex(indexPath.section)
+            let alert = UIAlertController(title: "\(routineVM?.title ?? "") 루틴을\n정말 삭제하시겠습니까?", message: nil, preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "그만두기", style: .default, handler : nil)
+            let delete = UIAlertAction(title: "삭제하기", style: .destructive) { UIAlertAction in
+                if let token = UserDefaults.standard.string(forKey: "UserToken"),
+                   let ID = routineVM?.ID {
+                    print(ID)
+                    APIService.shared.deleteRoutine(token, routineID: ID) { result in
+                        switch result {
+                        case .success(_):
+                            NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                            self.dismiss(animated: true, completion: .none)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
+            }
+            alert.addAction(cancel)
+            alert.addAction(delete)
+            self.present(alert,animated: false, completion: nil)
+
             completionHandler(true)
         }
         
