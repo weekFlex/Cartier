@@ -220,7 +220,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
 }
 
-extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
+extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
@@ -233,7 +233,6 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
         print("meatBall")
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.delegate = self
-        //        popupVC.taskTitle = mainViewModel.lists[currentDay].routines[cellIndex].tasks[cellIndex].taskTitle
         popupVC.todoId = todoId
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
         popupVC.cellIndex = cellIndex
@@ -253,11 +252,16 @@ extension MainHomeVC:  TaskListCellDelegate, EditPopUpDelegate {
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
         print("delete")
-        weeklyData[currentDay].items[cellIndex].todos.remove(at: viewIndex)
+        var data = weeklyData[currentDay].items[cellIndex]
+        data.todos.remove(at: viewIndex)
+        if data.todos.count == 0 {
+            weeklyData[currentDay].items.remove(at: cellIndex)
+        }
         tableView.reloadData()
         calendarCollectionView.reloadData()
         
     }
+    
 }
 
 extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
