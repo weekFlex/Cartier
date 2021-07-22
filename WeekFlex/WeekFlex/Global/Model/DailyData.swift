@@ -25,12 +25,13 @@ struct TodoData: Codable {
     var categoryColor, categoryId: Int
     let date: String
     var done: Bool
-    var days: [String]
-    var endTime: String
+    var days: [String]?
+    var endTime: String?
     let id: Int
     let name: String
-    let routineId: Int
-    let routineName, startTime: String
+    let routineId: Int?
+    let routineName:String?
+    var startTime: String?
     let userId: Int
 }
 

@@ -50,7 +50,6 @@ class CalendarCell: UICollectionViewCell {
         }else {
             guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? -1) else { return  }
             star.image = UIImage(named: "icon-24-star-n" + String(categoryIndex))
-            print("카테고리계산중:  ", categoryIndex)
         }
         
         
