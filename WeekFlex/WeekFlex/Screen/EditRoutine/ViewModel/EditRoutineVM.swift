@@ -42,7 +42,7 @@ extension EditRoutineViewModel {
             return String(hour%12)
         }
     }
-    
+
     var startTimeMin: String {
         return String(self.todo.startTime!.split(separator: ":")[1])
     }

@@ -61,7 +61,6 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var getRoutineBtn: UIButton!
     @IBOutlet weak var getRoutineStack: UIStackView!
     @IBOutlet weak var addTaskStack: UIStackView!
-    
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var noDataView: UIView!
@@ -230,7 +229,6 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
-        print("meatBall")
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.delegate = self
         popupVC.todoId = todoId
@@ -245,13 +243,12 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabEdit(cellIndex: Int, viewIndex: Int) {
         //수정 누르면
-        print("edit")
         //민승이 뷰 띄우기!!
+        
     }
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
-        print("delete")
         var data = weeklyData[currentDay].items[cellIndex]
         data.todos.remove(at: viewIndex)
         if data.todos.count == 0 {
