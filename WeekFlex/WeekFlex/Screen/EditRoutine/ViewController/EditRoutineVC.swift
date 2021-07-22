@@ -112,7 +112,6 @@ class EditRoutineVC: UIViewController {
             }
         case 2:
             editRouineViewModel.updateName(name: routineTitle.text!)
-            print(editRouineViewModel.todo)
         default:
             return
             

@@ -8,7 +8,19 @@
 import Foundation
 
 struct EditRoutineViewModel {
-    var todo: Todo
+    var todo: Todo {
+        didSet {
+//            print(todo.startTime)
+//            print(todo.endTime)
+//            let timeFormat = DateFormatter()
+//            timeFormat.dateFormat = "HH:mm"
+//            let startTime = timeFormat.date(from:todo.startTime ?? "00:00")
+//            let endTime = timeFormat.date(from:todo.endTime ?? "00:00")
+//            let startTimeString = timeFormat.string(from: startTime!)
+//            let endTimeString = timeFormat.string(from: endTime!)
+//            
+        }
+    }
     var daySelected: Bool = false
     var days: [String:Int] {
         didSet {

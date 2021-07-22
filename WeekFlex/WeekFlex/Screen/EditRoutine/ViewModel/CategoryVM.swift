@@ -22,7 +22,6 @@ struct CategoryListViewModel {
 
 struct CategoryViewModel {
     let category: CategoryData
-    
     init(_ category: CategoryData) {
         self.category = category
     }
