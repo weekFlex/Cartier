@@ -589,7 +589,20 @@ extension SelectToDoVC: SelectedItemViewDelegate {
     
     func listItemAdded(value: TaskListData) {
         // 리스트에 추가하기
-        selectedViewModel.insert(value, at: 0)
+        
+        var changeHour: TaskListData = value
+
+        for i in 0...value.days!.count - 1 {
+            // 서버에 보낼 형식으로 변경해서 저장
+            
+            if let startTime = value.days?[i].startTime,
+               let endTime = value.days?[i].endTime {
+                changeHour.days?[i].startTime = startTime.changeHour()
+                changeHour.days?[i].endTime = endTime.changeHour()
+            }
+        }
+        
+        selectedViewModel.insert(changeHour, at: 0)
     }
     
     func listItemRemoved(value: Int) {
