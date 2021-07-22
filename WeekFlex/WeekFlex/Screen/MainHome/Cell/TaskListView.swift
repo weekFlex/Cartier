@@ -75,7 +75,8 @@ class TaskListView: UIView {
     func configure(with viewModel: TodoData) {
         
         taskTitle.text = viewModel.name
-        time.text = viewModel.startTime + " - " + viewModel.endTime
+        guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
+        time.text = startTime + " - " + endTime
         isDone = viewModel.done
         category = viewModel.categoryColor
         if(isDone){
@@ -90,13 +91,12 @@ class TaskListView: UIView {
     
     func starTapped(){
         star.rx.tap.asDriver().debounce(.seconds(2)).drive(onNext: { [self] in
-            print("보낸다")
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 
                 APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
                     switch result {
                     
-                    case .success(let data):
+                    case .success(let _):
                         print("체크완료")
                     // 데이터 전달 후 다시 로드
                     

@@ -25,7 +25,6 @@ class MainHomeVC: UIViewController {
     var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
-            print("currentDay: ",currentDay)
             changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
             tableView.reloadData()  //바뀐 날짜로 테이블 리로드
             calendarCollectionView.reloadData()
@@ -61,7 +60,6 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var getRoutineBtn: UIButton!
     @IBOutlet weak var getRoutineStack: UIStackView!
     @IBOutlet weak var addTaskStack: UIStackView!
-    
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var noDataView: UIView!
@@ -90,8 +88,8 @@ class MainHomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad()")
         UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
+//        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", forKey: "UserToken")
         
         //        "accessToken": "exy.asdfgfafasfg",
         //        "code": "dsagvbfqwerdsaxc",
@@ -122,14 +120,12 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 if NetworkState.isConnected() {
                     // 네트워크 연결 시
                     if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                        print("network연결")
                         let routineId = self.weeklyData[self.currentDay].items[indexPath.row].routineId
-                        print("routineId: ",routineId)
                         APIService.shared.deleteTodoRoutine(token, routineId: routineId ){ result in
                             switch result {
                             
                             case .success(let data):
-                                print("삭제완료: ", data)
+                                print("삭제완료")
                                 
                             // 데이터 전달 후 다시 로드
                             
@@ -226,7 +222,6 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
-        print("meatBall")
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.delegate = self
         popupVC.todoId = todoId
@@ -241,16 +236,12 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabEdit(cellIndex: Int, viewIndex: Int) {
         //수정 누르면
-        print("edit")
         //민승이 뷰 띄우기!!
-        
-        print(weeklyData[currentDay].items[cellIndex].todos[viewIndex])
         
     }
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
-        print("delete")
         var data = weeklyData[currentDay].items[cellIndex]
         data.todos.remove(at: viewIndex)
         if data.todos.count == 0 {
@@ -307,7 +298,6 @@ extension MainHomeVC {
     
     //MARK: function
     private func getRoutines(){
-        print("getRoutines()")
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
         let date = dateFormat.string(from:Date())
@@ -320,7 +310,15 @@ extension MainHomeVC {
                     
                     case .success(let data):
                         weeklyData = data
-                        print(weeklyData)
+                        for day in weeklyData {
+                            for routine in day.items {
+                                for var todo in routine.todos {
+                                    todo.startTime = todo.startTime?.changeTime()
+                                    todo.endTime = todo.endTime?.changeTime()
+                                }
+                            }
+                        }
+                        
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
                     // 데이터 전달 후 다시 로드
@@ -336,7 +334,7 @@ extension MainHomeVC {
             // 네트워크 미연결 팝업 띄우기
             print("네트워크 미연결")
         }
-        print("먼대")
+        
     }
     
     

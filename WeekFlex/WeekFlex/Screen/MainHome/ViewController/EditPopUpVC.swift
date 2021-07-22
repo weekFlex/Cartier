@@ -44,7 +44,6 @@ class EditPopUpVC: UIViewController {
             if NetworkState.isConnected() {
                 // 네트워크 연결 시
                 if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                    print("network연결")
                     
                     APIService.shared.deleteTodo(token, todoId: self.todoId){ result in
                         switch result {
