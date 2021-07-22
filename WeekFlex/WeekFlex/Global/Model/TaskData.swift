@@ -24,5 +24,6 @@ struct TaskListData: Codable {
 
 // MARK: - Day
 struct Day: Codable {
-    let endTime, name, startTime: String
+    let endTime, startTime: String?
+    let name: String
 }

@@ -13,6 +13,7 @@ class EditRoutineVC: UIViewController {
     
     private let days = ["월", "화", "수", "목", "금", "토", "일"]
     var saveTaskListDataDelegate: SaveTaskListProtocol?
+    var saveTodoDataDelegate: SaveTodoProtocol?
     var hideViewDelegate: HideViewProtocol?
     var todo: Todo?
     var taskListData: TaskListData?
@@ -20,6 +21,7 @@ class EditRoutineVC: UIViewController {
     var entryNumber: Int?
     var dayDict: [String:Int]?
     var date: String? // 홈에서 할일을 추가하는 경우 필요
+    var todoData: TodoData?
     
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
@@ -98,17 +100,17 @@ class EditRoutineVC: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func completeButtonPressed(_ sender: Any) {
+
         switch entryNumber {
         case 1:
             // Days 구조체로 넣어주기
             let dict = editRouineViewModel.days
             let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
                 if dayDict.value == 1 {
-                    dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
+                    dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime, startTime: editRouineViewModel.todo.startTime, name: dayDict.key))
                 }
             }.sorted { first, second in
                 let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]
@@ -116,6 +118,7 @@ class EditRoutineVC: UIViewController {
             }
             taskListData?.days = newData
             // 이전 뷰로 데이터 넘겨주기
+            
             if let taskListData = taskListData {
                 self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
             }
@@ -147,17 +150,40 @@ class EditRoutineVC: UIViewController {
                     switch result {
                     case true:
                         NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                        self.dismiss(animated: true, completion: nil)
+                        
                     case false:
                         print("실패")
                     }
                 }
             }
+        case 4:
+            print("next..")
+            print(editRouineViewModel.todo)
+            print(editRouineViewModel.days)
+            
+            let dict = editRouineViewModel.days
+            let newData = dict.reduce(into: [String]()) { dayNameList, dayDict in
+                if dayDict.value == 1 {
+                    dayNameList.append(dayDict.key)
+                }
+            }.sorted { first, second in
+                let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]
+                return day[first]! < day[second]!
+            }
+            todoData?.days = newData
+            todoData?.startTime = editRouineViewModel.todo.startTime
+            todoData?.endTime = editRouineViewModel.todo.endTime
+            todoData?.name = editRouineViewModel.todo.name
+            if let todoData = todoData{
+                print(todoData)
+                self.saveTodoDataDelegate?.saveTodoProtocol(savedTodoData: todoData)
+            }
         default:
             return
             
         }
-        
+        self.hideViewDelegate?.hideViewProtocol()
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Life Cycle
@@ -319,6 +345,8 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             daysHeaderLabelTopConstraint.isActive = false
             categoryUIView.isHidden = true
             daysHeaderLabel.isHidden = true
+            timeSettingHeaderLabelTopConstraint.constant = 100
+            switchTopConstraint.constant = 96
             
             // data
             todo = Todo(categoryID: nil, date: nil, endTime: taskListData?.days?.first?.endTime, name: taskListData!.name, startTime: taskListData?.days?.first?.startTime)
@@ -345,7 +373,33 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             weekCollectionViewTopConstraint.isActive = false
             switchTopConstraint.constant = 36
             timeSettingHeaderLabelTopConstraint.constant = 36
+        case 4:
+            // layout
+            headerLabel.setLabel(text: "할 일 수정하기", color: .black, font: .appleMedium(size: 18))
+            topConstraint.constant = 330/896*self.view.bounds.height
+            weekCollectionViewTopConstraint.constant = 24
+            routineTitle.isEnabled = false
+            routineTitleTopConstraint.constant = 32
             
+            categoryTopConstraint.isActive = false
+            daysHeaderLabelTopConstraint.isActive = false
+            categoryUIView.isHidden = true
+            daysHeaderLabel.isHidden = true
+            timeSettingHeaderLabelTopConstraint.constant = 100
+            switchTopConstraint.constant = 96
+            
+            // data
+            todo = Todo(categoryID: todoData?.id, date: nil, endTime: todoData?.endTime, name: todoData!.name, startTime: todoData?.startTime)
+            // 여기에서는 categoryID = todo.id
+            
+            if let dayNameList = todoData?.days {// 요일, 시간 설정을 해놨을 때
+                // 초기화 필요
+                editRouineViewModel = EditRoutineViewModel(Todo(categoryID: nil, date: nil, endTime: nil, name: "", startTime: nil), days: ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0])
+                dayDict = editRouineViewModel.renderDaysListIntoDictionary(dayNameList: dayNameList)
+            } else { // 안해놓았을 때
+                dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
+            }
+
         default:
             return
         }

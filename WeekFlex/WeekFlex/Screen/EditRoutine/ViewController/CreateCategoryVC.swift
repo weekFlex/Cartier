@@ -53,16 +53,17 @@ class CreateCategoryVC: UIViewController {
         if
             let colorID = checkedColor,
             let categoryTitle = categoryTitle.text {
-            
-            APIService.shared.createCategory("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", color: colorID, name: categoryTitle){ result in
-                switch result {
-                
-                case .success(_):
-                    NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                    self.dismiss(animated: true, completion: .none)
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                APIService.shared.createCategory(token, color: colorID, name: categoryTitle){ result in
+                    switch result {
                     
-                case .failure(_):
-                    self.present(self.alert,animated: false, completion: nil)
+                    case .success(_):
+                        NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                        self.dismiss(animated: true, completion: .none)
+                        
+                    case .failure(_):
+                        self.present(self.alert,animated: false, completion: nil)
+                    }
                 }
             }
         }
