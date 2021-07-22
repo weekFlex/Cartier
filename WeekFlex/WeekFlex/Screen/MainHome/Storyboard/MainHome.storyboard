@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0t-FE-q3I">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="131"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="131"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xI6-hw-NVu">
                                         <rect key="frame" x="358" y="80" width="32" height="32"/>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-AW-H8I">
-                                <rect key="frame" x="0.0" y="241" width="414" height="439"/>
+                                <rect key="frame" x="0.0" y="285" width="414" height="395"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="character132SadGray" translatesAutoresizingMaskIntoConstraints="NO" id="riI-ki-yvm">
                                         <rect key="frame" x="141" y="148" width="132" height="132"/>
@@ -77,7 +77,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="55M-bn-jjY">
-                                <rect key="frame" x="0.0" y="241" width="414" height="621"/>
+                                <rect key="frame" x="0.0" y="285" width="414" height="577"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2x5-xG-9cD" id="VUt-pE-Ixj"/>
@@ -85,7 +85,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRm-yg-E9r">
-                                <rect key="frame" x="0.0" y="131" width="414" height="110"/>
+                                <rect key="frame" x="0.0" y="175" width="414" height="110"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6hn-uB-6TS">
                                         <rect key="frame" x="20" y="10" width="374" height="100"/>
@@ -255,7 +255,7 @@
                             <constraint firstItem="J32-5J-fAC" firstAttribute="top" secondItem="fNw-AW-H8I" secondAttribute="bottom" id="iiN-aE-8Jw"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="J32-5J-fAC" secondAttribute="trailing" constant="24" id="kRW-nk-Qzn"/>
-                            <constraint firstItem="V0t-FE-q3I" firstAttribute="top" secondItem="4Ek-qn-pLe" secondAttribute="top" id="ltP-Vw-o64"/>
+                            <constraint firstItem="V0t-FE-q3I" firstAttribute="top" secondItem="BHq-2A-wUT" secondAttribute="top" id="ltP-Vw-o64"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="top" secondItem="V0t-FE-q3I" secondAttribute="bottom" id="v1H-sR-irE"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="fNw-AW-H8I" secondAttribute="trailing" id="vcN-Ff-E8h"/>
                         </constraints>
