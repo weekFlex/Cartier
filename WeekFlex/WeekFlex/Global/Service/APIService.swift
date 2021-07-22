@@ -67,11 +67,8 @@ extension APIService {
                 do {
                     
                     let decoder = JSONDecoder()
-                    print("result  " , result)
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
-                    print("body", body)
                     if let data = body.data {
-                        print(data)
                         completion(.success(data))
                     }
                 } catch {

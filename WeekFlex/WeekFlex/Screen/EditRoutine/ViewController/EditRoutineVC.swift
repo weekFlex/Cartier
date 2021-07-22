@@ -92,13 +92,14 @@ class EditRoutineVC: UIViewController {
     }
     
     @IBAction func completeButtonPressed(_ sender: Any) {
+
         switch entryNumber {
         case 1:
             // Days 구조체로 넣어주기
             let dict = editRouineViewModel.days
             let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
                 if dayDict.value == 1 {
-                    dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
+                    dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime, startTime: editRouineViewModel.todo.startTime, name: dayDict.key))
                 }
             }.sorted { first, second in
                 let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]
@@ -107,12 +108,12 @@ class EditRoutineVC: UIViewController {
             
             taskListData?.days = newData
             // 이전 뷰로 데이터 넘겨주기
+            
             if let taskListData = taskListData {
                 self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
             }
         case 2:
             editRouineViewModel.updateName(name: routineTitle.text!)
-            print(editRouineViewModel.todo)
         default:
             return
             
