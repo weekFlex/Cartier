@@ -18,6 +18,7 @@ class CreateCategoryVC: UIViewController {
     
     // MARK: IBOutlet
 
+    @IBOutlet var categoryTitleWidth: NSLayoutConstraint!
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var modalBackgroundView: UIView!
     @IBOutlet var backButton: UIButton!
@@ -25,7 +26,8 @@ class CreateCategoryVC: UIViewController {
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var categoryColorView: UIView!
     @IBOutlet var categoryTitle: UITextField!
-    
+    @IBOutlet var categoryColorImage: UIImageView!
+    @IBOutlet var categoryColorImageLength: NSLayoutConstraint!
     @IBOutlet var categoryCollectionView: UICollectionView!
 
     
@@ -68,10 +70,13 @@ extension CreateCategoryVC {
         // text field
         categoryTitle.borderStyle = .none
         categoryTitle.textAlignment = .center
-        categoryTitle.font = .metroBold(size: 24)
+        categoryTitle.font = .appleBold(size: 24)
+        categoryTitle.adjustsFontSizeToFitWidth = true
+        categoryTitle.minimumFontSize = 24
         categoryTitle.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         categoryTitle.delegate = self
-        
+        categoryColorImage.image = UIImage(named: "icon-24-star-n1")
+        categoryColorImageLength.constant = 20/896*self.view.bounds.height
         // collectionView
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
@@ -88,6 +93,7 @@ extension CreateCategoryVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+
         if textField.text?.count == 0 || textField.text == nil {
             // Text가 존재하지 않을 때 버튼 비활성화
             completeButton.isEnabled = false
@@ -115,7 +121,23 @@ extension CreateCategoryVC: UITextFieldDelegate {
     }
 }
 
-extension CreateCategoryVC: UICollectionViewDelegate {
+extension CreateCategoryVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
+                            indexPath: IndexPath) -> CGSize {
+        let sideLength = 40/896*self.view.bounds.height
+        return CGSize(width: sideLength, height:sideLength)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 44)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 22
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 24
+    }
     
 }
 

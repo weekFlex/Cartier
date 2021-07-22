@@ -27,7 +27,10 @@ class ViewCategoryVC: UIViewController {
     @IBOutlet var addCategoryButton: UIButton!
     
     @IBAction func addCategoryButton(_ sender: Any) {
-        
+        guard let createCategoryVC = self.storyboard?.instantiateViewController(identifier: "CreateCategoryVC") as? CreateCategoryVC else { return }
+        createCategoryVC.modalTransitionStyle = .coverVertical
+        createCategoryVC.modalPresentationStyle = .custom
+        self.present(createCategoryVC, animated: true, completion: .none)
     }
     
     // MARK: Life Cycle

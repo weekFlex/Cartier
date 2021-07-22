@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AsH-eo-rMO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9QR-ay-YWg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -599,7 +599,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkE-Gc-0X1">
-                                        <rect key="frame" x="8" y="24" width="32" height="32"/>
+                                        <rect key="frame" x="16" y="24" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="y8w-sq-OWm"/>
                                         </constraints>
@@ -619,24 +619,23 @@
                                             <action selector="completeButtonPressed:" destination="AsH-eo-rMO" eventType="touchUpInside" id="asw-6P-TFk"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGO-bM-6RP">
-                                        <rect key="frame" x="191" y="103" width="32" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGO-bM-6RP">
+                                        <rect key="frame" x="201" y="103" width="12" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qie-bT-Rcw">
-                                        <rect key="frame" x="167" y="112" width="16" height="16"/>
+                                        <rect key="frame" x="177" y="108.5" width="16" height="16"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="aGK-gC-rmy"/>
+                                            <constraint firstAttribute="width" secondItem="Qie-bT-Rcw" secondAttribute="height" multiplier="1:1" id="UpQ-BO-sos"/>
                                             <constraint firstAttribute="width" constant="16" id="bhu-hd-NFl"/>
                                         </constraints>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X6o-CY-HMf">
-                                        <rect key="frame" x="0.0" y="185" width="414" height="627"/>
+                                        <rect key="frame" x="0.0" y="180" width="414" height="632"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mYk-17-T1c">
-                                            <size key="itemSize" width="32" height="32"/>
-                                            <size key="estimatedItemSize" width="32" height="32"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h5M-TW-BJn">
+                                            <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -645,7 +644,7 @@
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ColorCategoryCollectionViewCell" id="ksB-W9-DQb" customClass="ColorCategoryCollectionViewCell" customModule="WeekFlex" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="59"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0e8-eK-aS2">
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rXS-BY-bWw">
                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="59"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
@@ -655,8 +654,8 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="cw3-Hy-kIy" secondAttribute="trailing" constant="4" id="Cr0-E4-4Ia"/>
-                                                        <constraint firstItem="cw3-Hy-kIy" firstAttribute="leading" secondItem="0e8-eK-aS2" secondAttribute="leading" constant="4" id="NFR-cq-iWN"/>
-                                                        <constraint firstItem="cw3-Hy-kIy" firstAttribute="top" secondItem="0e8-eK-aS2" secondAttribute="top" constant="4" id="aeL-3A-luS"/>
+                                                        <constraint firstItem="cw3-Hy-kIy" firstAttribute="leading" secondItem="rXS-BY-bWw" secondAttribute="leading" constant="4" id="NFR-cq-iWN"/>
+                                                        <constraint firstItem="cw3-Hy-kIy" firstAttribute="top" secondItem="rXS-BY-bWw" secondAttribute="top" constant="4" id="aeL-3A-luS"/>
                                                         <constraint firstAttribute="bottom" secondItem="cw3-Hy-kIy" secondAttribute="bottom" constant="4" id="yCp-pn-MJf"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
@@ -672,19 +671,21 @@
                                 <constraints>
                                     <constraint firstItem="FGO-bM-6RP" firstAttribute="top" secondItem="CLE-0b-0c7" secondAttribute="bottom" constant="52" id="1Bw-YG-rqZ"/>
                                     <constraint firstItem="CLE-0b-0c7" firstAttribute="top" secondItem="oib-bD-onG" secondAttribute="top" constant="30" id="8nY-7q-40R"/>
-                                    <constraint firstItem="xkE-Gc-0X1" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" constant="8" id="IlJ-om-fqs"/>
+                                    <constraint firstItem="xkE-Gc-0X1" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" constant="16" id="IlJ-om-fqs"/>
                                     <constraint firstItem="M6C-xD-kE2" firstAttribute="top" secondItem="oib-bD-onG" secondAttribute="top" constant="24" id="Kcl-GZ-bTK"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FGO-bM-6RP" secondAttribute="trailing" constant="16" id="Mo8-0s-Alp"/>
                                     <constraint firstItem="X6o-CY-HMf" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" id="Pji-9Y-lM2"/>
                                     <constraint firstItem="FGO-bM-6RP" firstAttribute="centerX" secondItem="oib-bD-onG" secondAttribute="centerX" id="RbC-kn-ibm"/>
                                     <constraint firstAttribute="trailing" secondItem="X6o-CY-HMf" secondAttribute="trailing" id="Uw2-zt-0Sb"/>
                                     <constraint firstItem="xkE-Gc-0X1" firstAttribute="top" secondItem="oib-bD-onG" secondAttribute="top" constant="24" id="WvB-5a-VlL"/>
                                     <constraint firstItem="Qie-bT-Rcw" firstAttribute="centerY" secondItem="FGO-bM-6RP" secondAttribute="centerY" id="a7m-mU-irA"/>
                                     <constraint firstAttribute="trailing" secondItem="M6C-xD-kE2" secondAttribute="trailing" constant="16" id="bCd-VG-lCG"/>
+                                    <constraint firstItem="Qie-bT-Rcw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oib-bD-onG" secondAttribute="leading" constant="16" id="baV-by-Dy8"/>
                                     <constraint firstAttribute="bottom" secondItem="X6o-CY-HMf" secondAttribute="bottom" id="c7M-Fn-b9t"/>
-                                    <constraint firstItem="FGO-bM-6RP" firstAttribute="leading" secondItem="Qie-bT-Rcw" secondAttribute="trailing" constant="8" id="dKt-ri-1ow"/>
+                                    <constraint firstItem="FGO-bM-6RP" firstAttribute="leading" secondItem="Qie-bT-Rcw" secondAttribute="trailing" constant="8" id="dQT-Qd-Nbc"/>
                                     <constraint firstItem="CLE-0b-0c7" firstAttribute="centerX" secondItem="oib-bD-onG" secondAttribute="centerX" id="lCt-3O-KGT"/>
-                                    <constraint firstItem="X6o-CY-HMf" firstAttribute="top" secondItem="FGO-bM-6RP" secondAttribute="bottom" constant="48" id="rSG-vq-2tn"/>
                                     <constraint firstItem="xkE-Gc-0X1" firstAttribute="width" secondItem="xkE-Gc-0X1" secondAttribute="height" multiplier="1:1" id="sKV-Ng-M2t"/>
+                                    <constraint firstItem="X6o-CY-HMf" firstAttribute="top" secondItem="CLE-0b-0c7" secondAttribute="bottom" constant="129" id="tjH-bS-j2Y"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -704,6 +705,8 @@
                     <connections>
                         <outlet property="backButton" destination="xkE-Gc-0X1" id="8GS-GP-niY"/>
                         <outlet property="categoryCollectionView" destination="X6o-CY-HMf" id="cfw-lZ-lLm"/>
+                        <outlet property="categoryColorImage" destination="Qie-bT-Rcw" id="n50-Pk-2IN"/>
+                        <outlet property="categoryColorImageLength" destination="bhu-hd-NFl" id="Pro-sq-QrX"/>
                         <outlet property="categoryColorView" destination="oib-bD-onG" id="LPD-kN-p90"/>
                         <outlet property="categoryTitle" destination="FGO-bM-6RP" id="1g4-na-WBP"/>
                         <outlet property="completeButton" destination="M6C-xD-kE2" id="4p9-zV-kF4"/>

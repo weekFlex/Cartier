@@ -20,6 +20,6 @@ class ColorCategoryCollectionViewCell: UICollectionViewCell {
 
     func setLayout() {
         checkImage.image = UIImage(named: "icon24CheckVisualWhite")
-//        checkImage.isHidden = true // 기본으로 체크가 안되어있도록 함
+        checkImage.isHidden = true // 기본으로 체크가 안되어있도록 함
     }
 }

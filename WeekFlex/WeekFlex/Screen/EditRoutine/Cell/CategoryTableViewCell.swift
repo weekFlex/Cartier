@@ -28,5 +28,6 @@ class CategoryTableViewCell: UITableViewCell {
 
     func setLayout() {
         categoryTitle.setLabel(text: "loading..", color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
+        
     }
 }
