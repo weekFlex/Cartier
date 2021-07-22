@@ -26,7 +26,7 @@ class CheckRoutineCell: UITableViewCell {
     func configure(data: TaskListData) {
         
         taskNameLabel.text = data.name
-        taskTimeLabel.text = "화, 수, 금 5:00pm-6:00pm"
+//        taskTimeLabel.text = data.da
         categoryColorImage.image = UIImage(named: "icon-24-star-n\(data.categoryColor)")
         
         

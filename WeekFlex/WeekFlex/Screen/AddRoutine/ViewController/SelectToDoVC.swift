@@ -584,7 +584,10 @@ extension SelectToDoVC: SelectedItemViewDelegate {
 
 extension String {
     
+    
     func changeTime() -> String {
+        // "10:00:00" -> "10:00 am"
+        // 시간 String 변경하는 extension
         
         var arr: [String] = []
         var answer: String = ""
@@ -601,7 +604,7 @@ extension String {
                 
                 if time < 10 {
                     // 한자리 숫자면
-                    arr[0] = "0\(time)"
+                    arr[0] = "\(time)"
                 }
                 
                 answer = "\(arr[0]):\(arr[1])am"
@@ -614,7 +617,7 @@ extension String {
                 
                 if time < 10 {
                     // 한자리 숫자면
-                    arr[0] = "0\(time)"
+                    arr[0] = "\(time)"
                 }
                 
                 answer = "\(arr[0]):\(arr[1])pm"
