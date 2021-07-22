@@ -74,7 +74,6 @@ class EditRoutineVC: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func completeButtonPressed(_ sender: Any) {
