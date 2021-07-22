@@ -19,18 +19,25 @@ class EditRoutineVC: UIViewController {
     var daysStructList: [Day]?
     var entryNumber: Int?
     var dayDict: [String:Int]?
+    var date: String? // 홈에서 할일을 추가하는 경우 필요
     
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
     private var categoryViewModel: CategoryViewModel?
     
+    // noti
+    let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
+    
     // MARK: - IBOutlet
+    
     // constraints
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var routineTitleTopConstraint: NSLayoutConstraint!
     @IBOutlet var categoryTopConstraint: NSLayoutConstraint!
     @IBOutlet var daysHeaderLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet var weekCollectionViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet var timeSettingHeaderLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet var switchTopConstraint: NSLayoutConstraint!
     
     // category
     @IBOutlet var categoryUIView: UIView!
@@ -82,6 +89,8 @@ class EditRoutineVC: UIViewController {
             editRoutineTimeVC.hideViewDelegate = self
             self.present(editRoutineTimeVC, animated: true, completion: .none)
         } else { // switch off
+            editRouineViewModel.updateStartTime(startTime: nil)
+            editRouineViewModel.updateEndTime(endTime: nil)
             hideTimeLabel()
         }
     }
@@ -110,15 +119,45 @@ class EditRoutineVC: UIViewController {
             if let taskListData = taskListData {
                 self.saveTaskListDataDelegate?.saveDaysProtocol(savedTaskListData: taskListData)
             }
-        case 2:
+        case 2: // task 등록 - categoryId, name
             editRouineViewModel.updateName(name: routineTitle.text!)
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                TodoService().createTask(token: token, categoryId: editRouineViewModel.todo.categoryID!, name: editRouineViewModel.todo.name) { result in
+                    switch result {
+                    case true:
+//                        NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+//                        self.dismiss(animated: true, completion: nil)
+                    print("성공")
+                    case false:
+                        print("실패")
+                    }
+                }
+            }
+            
+        case 3:
+            // 전 홈뷰에서 date 값을 가져왔어야함!
+            if let date = date {
+                editRouineViewModel.todo.date = date
+                editRouineViewModel.todo.name = routineTitle.text!
+                print(editRouineViewModel.todo)
+            }
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                TodoService().createTodo(
+                    token: token, categoryId: editRouineViewModel.todo.categoryID!, date: editRouineViewModel.todo.date!, endTime: editRouineViewModel.todo.endTime, startTime: editRouineViewModel.todo.startTime, name: editRouineViewModel.todo.name) { result in
+                    switch result {
+                    case true:
+                        NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                        self.dismiss(animated: true, completion: nil)
+                    case false:
+                        print("실패")
+                    }
+                }
+            }
         default:
             return
             
         }
         
-        self.hideViewDelegate?.hideViewProtocol()
-        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Life Cycle
@@ -156,7 +195,11 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
         categoryViewModel = CategoryViewModel(savedCategory)
         editRouineViewModel.updateCategory(ID: categoryViewModel?.ID ?? 0)
         setCategoryData()
-        print("updated: \(editRouineViewModel.todo)")
+        if routineTitle.text?.count == 0 || routineTitle.text == nil {
+            completeButton.isEnabled = false
+        } else {
+            completeButton.isEnabled = true
+        }
     }
     
     func hideViewProtocol() {
@@ -178,12 +221,15 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField.text?.count == 0 || textField.text == nil {
-            // Text가 존재하지 않을 때 버튼 비활성화
-            completeButton.isEnabled = false
+        if let _ = editRouineViewModel.todo.categoryID { //카테고리 설정 되어있어야지만 텍스트 확인, 안되어있으면 계속 비활성화!
+            if textField.text?.count == 0 || textField.text == nil {
+                // Text가 존재하지 않을 때 버튼 비활성화
+                completeButton.isEnabled = false
+            } else {
+                completeButton.isEnabled = true
+            }
         } else {
-            completeButton.isEnabled = true
-            
+            completeButton.isEnabled = false
         }
     }
     
@@ -284,10 +330,21 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             } else { // 안해놓았을 때
                 dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
             }
-        case 2:
+        case 2: // 할일 선택 에서 들어오는 경우,요일 입력란 O 카테고리 O 시간설정 O
             headerLabel.setLabel(text: "할 일 추가하기", color: .black, font: .appleMedium(size: 18))
             topConstraint.constant = 40/896*self.view.bounds.height
             routineTitleTopConstraint.constant = 48
+        case 3: //  main Home 에서 들어오는 경우, date 입력받아야함, 요일 입력란 X 카테고리 O 시간설정 O
+            // layout
+            headerLabel.setLabel(text: "할 일 추가하기", color: .black, font: .appleMedium(size: 18))
+            topConstraint.constant = 40/896*self.view.bounds.height
+            routineTitleTopConstraint.constant = 48
+            daysHeaderLabel.isHidden = true
+            daysHeaderLabelTopConstraint.isActive = false
+            weekCollectionView.isHidden = true
+            weekCollectionViewTopConstraint.isActive = false
+            switchTopConstraint.constant = 36
+            timeSettingHeaderLabelTopConstraint.constant = 36
             
         default:
             return

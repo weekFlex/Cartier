@@ -61,14 +61,16 @@ extension MyRoutineListVC {
     
     func setData() {
         // view model 을 통해 테이블뷰에 뿌려줄 아이템들을 가져와준다.
-        RoutineService().getRoutines(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") {
-            routineList in
-            // if getRoutine service failed,
-            if let routineList = routineList {
-                self.viewModel = RoutineListViewModel(routines: routineList)
-            }
-            DispatchQueue.main.async {
-                self.routineTableView.reloadData()
+        if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            RoutineService().getRoutines(token: token) {
+                routineList in
+                // if getRoutine service failed,
+                if let routineList = routineList {
+                    self.viewModel = RoutineListViewModel(routines: routineList)
+                }
+                DispatchQueue.main.async {
+                    self.routineTableView.reloadData()
+                }
             }
         }
     }

@@ -24,7 +24,7 @@ class CreateCategoryVC: UIViewController {
             if categoryTitle.text?.count != 0 || categoryTitle.text != nil {
                 completeButton.isEnabled = true
             }
-
+            
         }
     }
     var checkedColor: Int?
@@ -51,8 +51,8 @@ class CreateCategoryVC: UIViewController {
     
     @IBAction func addCompleteButtonPressed(_ sender: Any) {
         if
-           let colorID = checkedColor,
-           let categoryTitle = categoryTitle.text {
+            let colorID = checkedColor,
+            let categoryTitle = categoryTitle.text {
             
             APIService.shared.createCategory("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", color: colorID, name: categoryTitle){ result in
                 switch result {
@@ -60,11 +60,10 @@ class CreateCategoryVC: UIViewController {
                 case .success(_):
                     NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
                     self.dismiss(animated: true, completion: .none)
-                
+                    
                 case .failure(_):
                     self.present(self.alert,animated: false, completion: nil)
                 }
-                
             }
         }
     }
@@ -259,14 +258,14 @@ extension CreateCategoryVC: UICollectionViewDataSource {
         if let checkedID = checkedID {
             if checkedID < 10 { // section 1
                 if  indexPath.section == 0 &&
-                    indexPath.row == checkedID {
+                        indexPath.row == checkedID {
                     cell.checkImage.isHidden = false
                 } else {
                     cell.checkImage.isHidden = true
                 }
             } else { // section 2
                 if  indexPath.section == 1 &&
-                    indexPath.row == checkedID-10 {
+                        indexPath.row == checkedID-10 {
                     cell.checkImage.isHidden = false
                 } else {
                     cell.checkImage.isHidden = true

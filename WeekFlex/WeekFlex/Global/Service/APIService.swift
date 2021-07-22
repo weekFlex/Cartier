@@ -18,17 +18,18 @@ struct APIService {
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
     func getTask(_ token: String, completion: @escaping (NetworkResult<[TaskData]>)->(Void)) {
-        
         let target: APITarget = .getTask(token: token)
         judgeObject(target, completion: completion)
-        
+    }
+    
+    func createTask(token: String, categoryId: Int, name: String, completion: @escaping (NetworkResult<[TaskListData]>)->(Void)) {
+        let target: APITarget = .createTask(token: token, categoryId: categoryId, name: name)
+        judgeObject(target, completion: completion)
     }
     
     func getCategory(_ token: String, completion: @escaping (NetworkResult<[CategoryData]>)->(Void)) {
-        
         let target: APITarget = .getCategory(token: token)
         judgeObject(target, completion: completion)
-        
     }
     
     func getWeekly(_ token: String, date: String,  completion: @escaping (NetworkResult<[DailyData]>)->(Void)){
@@ -43,6 +44,11 @@ struct APIService {
     
     func createCategory(_ token: String, color: Int, name: String, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
         let target: APITarget = .createCategory(token: token, color: color, name: name)
+        judgeObject(target, completion: completion)
+    }
+    
+    func createTodo(_ token: String, categoryId: Int, date: String, endTime: String?, startTime: String?, name: String, completion: @escaping (NetworkResult<CreateTodoResponseData>)->(Void)) {
+        let target: APITarget = .createTodo(token: token, categoryId: categoryId, date: date, endTime: endTime, name: name, startTime: startTime)
         judgeObject(target, completion: completion)
     }
     

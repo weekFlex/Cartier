@@ -11,10 +11,12 @@ import Moya
 enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
+    case createTask(token: String, categoryId: Int, name: String) // task 등록
     case getCategory(token: String) // 카테고리 리스트 API
     case createCategory(token: String, color: Int, name: String)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
+    case createTodo(token: String, categoryId: Int, date: String, endTime: String?, name: String, startTime: String?)
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
@@ -34,7 +36,7 @@ extension APITarget: TargetType {
         // path - 서버의 도메인 뒤에 추가 될 경로
         
         switch self {
-        case .getTask:
+        case .getTask, .createTask:
             return "api/v1/task/"
         case .getCategory, .createCategory:
             return "api/v1/category"
@@ -46,11 +48,11 @@ extension APITarget: TargetType {
             return  "api/v1/todo/routine"
         case .deleteTodo(_,let todoId):
             return "api/v1/todo/\(todoId)"
+        case .createTodo:
+            return "api/v1/todo"
         case .getRoutine:
-            return "api/v1/routine/"
+            return "api/v1/routine"
         }
-        
-        
     }
     
     var method: Moya.Method {
@@ -61,7 +63,7 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
-        case .checkTodo, .createCategory:
+        case .checkTodo, .createCategory, .createTodo, .createTask:
             return .post
             
         case .deleteTodoRoutine, .deleteTodo:
@@ -85,9 +87,15 @@ extension APITarget: TargetType {
         
         case .getTask, .getCategory, .getRoutine:
             return .requestPlain
+        
+        case .createTask(_, let categoryId, let name):
+            return .requestParameters(parameters: ["categoryId": categoryId, "name": name], encoding: JSONEncoding.default)
             
         case .getWeekly(_, let date):
             return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
+        
+        case .createTodo(_, let categoryId, let date, let endTime, let name, let startTime):
+            return .requestParameters(parameters: ["categoryId": categoryId, "date": date, "name": name, "startTime": startTime ?? NSNull(), "endTime": endTime ?? NSNull()], encoding: JSONEncoding.default)
         
         case .createCategory(_, let color, let name):
             return .requestParameters(parameters: ["color": color, "name": name], encoding: JSONEncoding.default)
@@ -116,9 +124,8 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _), .createCategory(let token, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .createCategory(let token, _, _), .createTask(let token, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
-         
         }
     }
     

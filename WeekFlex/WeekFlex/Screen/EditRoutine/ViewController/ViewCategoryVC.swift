@@ -87,12 +87,14 @@ extension ViewCategoryVC {
     }
     
     func setData() {
-        CategoryService().getCategories(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") { categoryList in
-            if let categoryList = categoryList {
-                self.categoryListViewModel = CategoryListViewModel(categories: categoryList)
-            }
-            DispatchQueue.main.async {
-                self.categoryTableView.reloadData()
+        if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            CategoryService().getCategories(token: token) { categoryList in
+                if let categoryList = categoryList {
+                    self.categoryListViewModel = CategoryListViewModel(categories: categoryList)
+                }
+                DispatchQueue.main.async {
+                    self.categoryTableView.reloadData()
+                }
             }
         }
     }

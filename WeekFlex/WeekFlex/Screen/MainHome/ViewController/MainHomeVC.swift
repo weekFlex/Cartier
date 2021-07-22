@@ -18,7 +18,6 @@ class MainHomeVC: UIViewController {
     
     //MARK: Variable
     
-    
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
     
@@ -47,7 +46,8 @@ class MainHomeVC: UIViewController {
         return view
     }()
     
-    
+    // noti
+    let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
     
     //MARK: IBOutlet
     
@@ -91,7 +91,8 @@ class MainHomeVC: UIViewController {
         guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
         editRoutineVC.modalTransitionStyle = .coverVertical
         editRoutineVC.modalPresentationStyle = .custom
-        editRoutineVC.entryNumber = 2
+        editRoutineVC.entryNumber = 3
+        editRoutineVC.date = weeklyData[currentDay].date
         self.present(editRoutineVC, animated: true, completion: .none)
     }
     
@@ -99,8 +100,8 @@ class MainHomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad()")
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", forKey: "UserToken")
         
         //        "accessToken": "exy.asdfgfafasfg",
         //        "code": "dsagvbfqwerdsaxc",
@@ -316,28 +317,22 @@ extension MainHomeVC {
     
     //MARK: function
     private func getRoutines(){
-        print("getRoutines()")
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
         let date = dateFormat.string(from:Date())
         if NetworkState.isConnected() {
             // 네트워크 연결 시
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                
                 APIService.shared.getWeekly(token,date: date) { [self] result in
                     switch result {
-                    
                     case .success(let data):
                         weeklyData = data
-                        print(weeklyData)
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
                     // 데이터 전달 후 다시 로드
-                    
                     case .failure(let error):
                         print(error)
                         print("오류!!")
-                        
                     }
                 }
             }
@@ -345,13 +340,9 @@ extension MainHomeVC {
             // 네트워크 미연결 팝업 띄우기
             print("네트워크 미연결")
         }
-        print("먼대")
     }
     
-    
-    
-    
-    private func setDate(){
+    private func setDate() {
         // 오늘 요일 계산해서 weekdate에 일주일 날짜 채워넣음
         let startFormatter = DateFormatter()
         startFormatter.dateFormat = "e" // 일요일 1부터
@@ -373,32 +364,25 @@ extension MainHomeVC {
             let temp = Calendar.current.date(byAdding: .day, value: i, to: startDay)!
             weekDate[i] = formatter.string(from: temp)
         }
-        
         changeDate()
-        
-        
-        
     }
     
     //currentDay가 바뀔때마다 상단 날짜 라벨 text 바꿔줌
-    private func changeDate(){
-        
+    private func changeDate() {
         let selectedDate = weekDate[currentDay].components(separatedBy: "-")
         if(selectedDate != [""]){
             if(selectedDate[1] == "1") {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
-            }else if(selectedDate[1] == "2") {
+            } else if(selectedDate[1] == "2") {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
-            }else {
+            } else {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
             }
         }
     }
     
-    
     func calculateCategoryToday(currentDay: Int){
         var categoryCounter = [Int](repeating: 0, count: 15)
-        
         for routine in weeklyData[currentDay].items{
             for todo in routine.todos{
                 if todo.done {
@@ -408,15 +392,12 @@ extension MainHomeVC {
         }
         
         guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
-        
         representCategory[currentDay] = categoryIndex
     }
-    
     
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }
-    
     
     private func animateView(isCollaps:Bool ,  height:Double){
         shouldCollaps = isCollaps
@@ -427,7 +408,6 @@ extension MainHomeVC {
         }
     }
     
-    
     private func hideFloating(){
         floatingStacks.reversed().forEach { stack in
             UIView.animate(withDuration: 0.2) {
@@ -435,7 +415,6 @@ extension MainHomeVC {
                 self.view.layoutIfNeeded()
             }
         }
-        
         UIView.animate(withDuration: 0.2) {
             self.dimView.alpha = 0
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
@@ -446,18 +425,25 @@ extension MainHomeVC {
         floatingStacks.forEach { [weak self] stack in
             stack.isHidden = false
             stack.alpha = 0
-            
             UIView.animate(withDuration: 0.2) {
                 stack.alpha = 1
                 self?.view.layoutIfNeeded()
             }
         }
-        
         UIView.animate(withDuration: 0.2) {
             self.dimView.isHidden = false
             self.dimView.alpha = 1
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))
-            
         }
     }
+    
+    // MARK: Method
+    
+    @objc func didDismissCreateTodoVC(_ noti: Notification) {
+        hideFloating()
+        getRoutines() //네트워크 통신 한번더
+        calendarCollectionView.reloadData() // 리로드
+        tableView.reloadData() // 리로드
+    }
+    
 }

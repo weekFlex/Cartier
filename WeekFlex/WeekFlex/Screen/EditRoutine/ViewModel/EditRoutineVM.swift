@@ -18,7 +18,7 @@ struct EditRoutineViewModel {
 //            let endTime = timeFormat.date(from:todo.endTime ?? "00:00")
 //            let startTimeString = timeFormat.string(from: startTime!)
 //            let endTimeString = timeFormat.string(from: endTime!)
-//            
+//
         }
     }
     var daySelected: Bool = false
@@ -104,11 +104,11 @@ extension EditRoutineViewModel {
         days[day] = isChecked
     }
     
-    mutating func updateStartTime(startTime: String) {
+    mutating func updateStartTime(startTime: String?) {
         self.todo.startTime = startTime
     }
     
-    mutating func updateEndTime(endTime: String) {
+    mutating func updateEndTime(endTime: String?) {
         self.todo.endTime = endTime
     }
     
