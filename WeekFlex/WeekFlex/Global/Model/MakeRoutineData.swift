@@ -10,6 +10,11 @@ import Foundation
 struct MakeRoutineData: Codable {
     let name: String
     let routineTaskSaveRequests: [RoutineTaskSaveRequest]
+    
+    init(_ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest]) {
+        self.name = name
+        self.routineTaskSaveRequests = routineTaskSaveRequests
+    }
 }
 
 // MARK: - RoutineTaskSaveRequest
@@ -20,5 +25,10 @@ struct RoutineTaskSaveRequest: Codable {
     enum CodingKeys: String, CodingKey {
         case days
         case taskID = "taskId"
+    }
+    
+    init(_ days: [Day], _ taskID: Int) {
+        self.days = days
+        self.taskID = taskID
     }
 }

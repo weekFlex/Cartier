@@ -17,7 +17,7 @@ enum APITarget {
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
-    case makeRoutin(token: String, routine: MakeRoutineData) // 루틴 생성하기 API
+    case makeRoutine(token: String, routine: MakeRoutineData) // 루틴 생성하기 API
 }
 
 // MARK: TargetType Protocol 구현
@@ -46,7 +46,7 @@ extension APITarget: TargetType {
             return  "api/v1/todo/routine"
         case .deleteTodo(_,let todoId):
             return "api/v1/todo/\(todoId)"
-        case .getRoutine:
+        case .getRoutine, .makeRoutine:
             return "api/v1/routine"
         }
         
@@ -61,7 +61,7 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
-        case .checkTodo:
+        case .checkTodo, .makeRoutine:
             return .post
             
         case .deleteTodoRoutine, .deleteTodo:
@@ -97,6 +97,9 @@ extension APITarget: TargetType {
             
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
+            
+        case .makeRoutine(_, let routine):
+            return .requestParameters(parameters: ["routineSaveRequest" : routine], encoding: URLEncoding.default)
         }
         
         
@@ -113,7 +116,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _), .makeRoutine(let token, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
          
         }

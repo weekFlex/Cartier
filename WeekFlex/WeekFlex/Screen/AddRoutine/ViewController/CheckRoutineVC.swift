@@ -15,6 +15,7 @@ class CheckRoutineVC: UIViewController {
     var routineName: String?
     var routineList: [TaskListData]?
     
+    
     // 루틴 수정 뷰에서 왔는지 알 수 있는 변수
     var routineEditEnable: Bool = false
     
@@ -38,6 +39,24 @@ class CheckRoutineVC: UIViewController {
          2. 루틴 수정 api
          로 구분해줘야함
          */
+        
+        if !routineEditEnable {
+            // 새로운 루틴 만들기라면?
+            
+            var routineTask: [RoutineTaskSaveRequest] = []
+            
+            if let routineList = routineList {
+                for i in 0...routineList.count - 1 {
+                    routineTask.append(RoutineTaskSaveRequest(routineList[i].days!, routineList[i].id))
+                }
+                
+            }
+            var newRoutine = MakeRoutineData(routineNameTextField.text!,routineTask)
+            
+        }
+        
+       
+        
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
@@ -104,6 +123,8 @@ extension CheckRoutineVC {
         taskTableView.delegate = self
         taskTableView.dataSource = self
         taskTableView.separatorStyle = .none
+        
+        
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
