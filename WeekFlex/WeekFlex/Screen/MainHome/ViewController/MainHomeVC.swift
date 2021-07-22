@@ -67,10 +67,6 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var noDataView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
-    
-    
     //MARK: IBAction
     
     @IBAction func buttonDidTap(_ sender: UIButton) {       //Expended Header 펼치는 버튼
@@ -247,6 +243,9 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
         //수정 누르면
         print("edit")
         //민승이 뷰 띄우기!!
+        
+        print(weeklyData[currentDay].items[cellIndex].todos[viewIndex])
+        
     }
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
@@ -349,15 +348,15 @@ extension MainHomeVC {
         startFormatter.dateFormat = "e" // 일요일 1부터
         let date: Int = Int(startFormatter.string(from: Date())) ?? 1
         currentDay = (date + 5) % 7
-
+        
         //startDay = 그 주 월요일(Date type)
         let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Date())!
         
-//        //오류나서 임시
-//        let date: Int = Int(startFormatter.string(from: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)) ?? 1
-//        currentDay = (date + 5) % 7
-//        let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)!
-//        ///
+        //        //오류나서 임시
+        //        let date: Int = Int(startFormatter.string(from: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)) ?? 1
+        //        currentDay = (date + 5) % 7
+        //        let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)!
+        //        ///
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM-dd-EEEE"
         
@@ -433,7 +432,6 @@ extension MainHomeVC {
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
         }
     }
-    
     
     private func showFloating(){
         floatingStacks.forEach { [weak self] stack in
