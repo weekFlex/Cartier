@@ -59,20 +59,30 @@ struct APIService {
     
     func updateTodo(_ token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)) {
         let target:  APITarget = .updateTodo(token: token, days: days, endTime: endTime, startTime: startTime, name: name, todoId: todoId)
-        print(target)
         judgeObject(target, completion: completion)
     }
     
-    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))){
+    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))) {
         let target: APITarget = .deleteTodo(token: token, todoId: todoId)
         judgeObject(target, completion: completion)
     }
     
+    func deleteRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
+        let target: APITarget = .deleteRoutine(token: token, routineID: routineID)
+        judgeObject(target, completion: completion)
+    }
 
     func getRoutine(_ token: String,  completion: @escaping (NetworkResult<[Routine]>)->(Void)){
         let target: APITarget = .getRoutine(token: token)
         judgeObject(target, completion: completion)
     }
+    
+    func registerRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
+        let target: APITarget = .registerRoutine(token: token, routineID: routineID)
+        judgeObject(target, completion: completion)
+    }
+    
+    
 }
 
 extension APIService {

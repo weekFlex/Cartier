@@ -105,7 +105,7 @@ class EditRoutineVC: UIViewController {
     }
     
     @IBAction func completeButtonPressed(_ sender: Any) {
-
+        
         switch entryNumber {
         case 1:
             // Days 구조체로 넣어주기
@@ -130,9 +130,8 @@ class EditRoutineVC: UIViewController {
                 TodoService().createTask(token: token, categoryId: editRouineViewModel.todo.categoryID!, name: editRouineViewModel.todo.name) { result in
                     switch result {
                     case true:
-//                        NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-//                        self.dismiss(animated: true, completion: nil)
-                    print("성공")
+                        NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                        self.dismiss(animated: true, completion: nil)
                     case false:
                         print("실패")
                     }
@@ -144,7 +143,6 @@ class EditRoutineVC: UIViewController {
             if let date = date {
                 editRouineViewModel.todo.date = date
                 editRouineViewModel.todo.name = routineTitle.text!
-                print(editRouineViewModel.todo)
             }
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 TodoService().createTodo(
@@ -152,17 +150,12 @@ class EditRoutineVC: UIViewController {
                     switch result {
                     case true:
                         NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                        
                     case false:
                         print("실패")
                     }
                 }
             }
         case 4:
-            print("next..")
-            print(editRouineViewModel.todo)
-            print(editRouineViewModel.days)
-            
             let dict = editRouineViewModel.days
             let newData = dict.reduce(into: [String]()) { dayNameList, dayDict in
                 if dayDict.value == 1 {
@@ -179,7 +172,6 @@ class EditRoutineVC: UIViewController {
             if let todoData = todoData,
                let cellIndex = cellIndex,
                let viewIndex = viewIndex {
-                print(todoData)
                 self.saveTodoDataDelegate?.saveTodoProtocol(savedTodoData: todoData, cellIndex: cellIndex, viewIndex: viewIndex)
             }
             // 수정 api 통신
@@ -187,7 +179,7 @@ class EditRoutineVC: UIViewController {
                 TodoService().updateTodo(token: token, days: (todoData?.days!)!, endTime: todoData?.endTime ?? nil, startTime: todoData?.startTime ?? nil, name: todoData!.name, todoId: todoData!.id) { result in
                     switch result {
                     case true:
-                        print("api 성공")
+                        print("성공")
                     case false:
                         print("실패")
                     }
@@ -231,7 +223,7 @@ class EditRoutineVC: UIViewController {
 // MARK: - Extension for Protocol
 
 extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtocol {
-        
+    
     // receive newly saved category data from CategoryViewVC
     func saveCategoryProtocol(savedCategory: CategoryData) {
         categoryViewModel = CategoryViewModel(savedCategory)
@@ -415,7 +407,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             } else { // 안해놓았을 때
                 dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
             }
-
+            
         default:
             return
         }

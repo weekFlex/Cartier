@@ -19,8 +19,10 @@ enum APITarget {
     case updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int) // todo수정
     case createTodo(token: String, categoryId: Int, date: String, endTime: String?, name: String, startTime: String?)
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
+    case deleteRoutine(token: String, routineID: Int)
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
+    case registerRoutine(token: String, routineID: Int) // 루틴 등록
 }
 
 // MARK: TargetType Protocol 구현
@@ -51,8 +53,10 @@ extension APITarget: TargetType {
             return "api/v1/todo/\(todoId)"
         case .createTodo:
             return "api/v1/todo"
-        case .getRoutine:
+        case .getRoutine, .deleteRoutine:
             return "api/v1/routine"
+        case .registerRoutine(_, let routineID):
+            return "api/v1/routine/\(routineID)/register"
         }
     }
     
@@ -64,10 +68,10 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
-        case .checkTodo, .createCategory, .createTodo, .createTask:
+        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine:
             return .post
             
-        case .deleteTodoRoutine, .deleteTodo:
+        case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
             return .delete
             
         case .updateTodo:
@@ -110,6 +114,12 @@ extension APITarget: TargetType {
         case .deleteTodo(_, let todoId):
             return .requestParameters(parameters: ["todoId":todoId], encoding: JSONEncoding.default)
         
+        case .deleteRoutine(_, let routineID):
+            return .requestParameters(parameters: ["routineId": routineID], encoding: URLEncoding.default)
+            
+        case .registerRoutine(_, let routineID):
+            return .requestParameters(parameters: ["routineId": routineID], encoding: JSONEncoding.default)
+        
         case .updateTodo(_, let days, let endTime, let startTime, let name, let todoId):
             return .requestParameters(parameters: ["todoId": todoId, "days": days, "endTime": endTime ?? NSNull(), "startTime": startTime ?? NSNull(), "name": name] , encoding: JSONEncoding.default)
             
@@ -131,7 +141,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .createCategory(let token, _, _), .createTask(let token, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }

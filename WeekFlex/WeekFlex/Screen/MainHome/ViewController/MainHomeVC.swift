@@ -93,6 +93,12 @@ class MainHomeVC: UIViewController {
         editRoutineVC.date = weeklyData[currentDay].date
         self.present(editRoutineVC, animated: true, completion: .none)
     }
+    @IBAction func getRoutineBtnDidtap(_ sender: Any) {
+        let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
+        guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
+        myRoutineVC.modalPresentationStyle = .fullScreen
+        self.present(myRoutineVC, animated: true, completion: .none)
+    }
     
     //MARK: Life Cycle
     
@@ -125,12 +131,8 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                         let routineId = self.weeklyData[self.currentDay].items[indexPath.row].routineId
                         APIService.shared.deleteTodoRoutine(token, routineId: routineId ){ result in
                             switch result {
-                            
-                            case .success(let data):
+                            case .success(_):
                                 print("삭제완료")
-                                
-                            // 데이터 전달 후 다시 로드
-                            
                             case .failure(let error):
                                 print(error)
                                 print("오류!!")
@@ -275,6 +277,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
 }
 extension MainHomeVC: SaveTodoProtocol, HideViewProtocol {
+    // 할일 수정했을 때 가져오는 것
     func saveTodoProtocol(savedTodoData: TodoData, cellIndex: Int, viewIndex: Int) {
         print("성공! \(savedTodoData)  \(cellIndex)  \(viewIndex)")
         tableView.reloadData()
@@ -309,7 +312,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         //상단 날짜 표시 라벨과 날짜 하단 흰색 바
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
         let width = calendarCollectionView.frame.width / 7
@@ -449,9 +452,10 @@ extension MainHomeVC {
     }
     
     // MARK: Method
-    
+    // 할일 추가했을 때!
     @objc func didDismissCreateTodoVC(_ noti: Notification) {
         hideFloating()
+        isFloating = !isFloating
         getRoutines() //네트워크 통신 한번더
         calendarCollectionView.reloadData() // 리로드
         tableView.reloadData() // 리로드
