@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9QR-ay-YWg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AsH-eo-rMO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -592,6 +592,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oib-bD-onG">
                                 <rect key="frame" x="0.0" y="84" width="414" height="812"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfd-fb-vCc">
+                                        <rect key="frame" x="24" y="91" width="366" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Hab-0Z-ToR"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="textFieldStartEditingBtnTapped:" destination="9QR-ay-YWg" eventType="touchUpInside" id="pYw-LH-BD4"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLE-0b-0c7">
                                         <rect key="frame" x="186" y="30" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -606,6 +615,7 @@
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="backButtonPressed:" destination="AsH-eo-rMO" eventType="touchUpInside" id="SOF-ak-y5Y"/>
+                                            <action selector="cancleBtnDidTap:" destination="9QR-ay-YWg" eventType="touchUpInside" id="JC2-Nf-tyb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6C-xD-kE2">
@@ -616,6 +626,7 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <connections>
+                                            <action selector="addCompleteButtonPressed:" destination="9QR-ay-YWg" eventType="touchUpInside" id="aog-cT-FgX"/>
                                             <action selector="completeButtonPressed:" destination="AsH-eo-rMO" eventType="touchUpInside" id="asw-6P-TFk"/>
                                         </connections>
                                     </button>
@@ -673,6 +684,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Hfd-fb-vCc" secondAttribute="trailing" constant="24" id="0Je-xk-wgh"/>
                                     <constraint firstItem="FGO-bM-6RP" firstAttribute="top" secondItem="CLE-0b-0c7" secondAttribute="bottom" constant="52" id="1Bw-YG-rqZ"/>
                                     <constraint firstItem="CLE-0b-0c7" firstAttribute="top" secondItem="oib-bD-onG" secondAttribute="top" constant="30" id="8nY-7q-40R"/>
                                     <constraint firstItem="xkE-Gc-0X1" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" constant="16" id="IlJ-om-fqs"/>
@@ -687,9 +699,11 @@
                                     <constraint firstItem="Qie-bT-Rcw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oib-bD-onG" secondAttribute="leading" constant="16" id="baV-by-Dy8"/>
                                     <constraint firstAttribute="bottom" secondItem="X6o-CY-HMf" secondAttribute="bottom" id="c7M-Fn-b9t"/>
                                     <constraint firstItem="FGO-bM-6RP" firstAttribute="leading" secondItem="Qie-bT-Rcw" secondAttribute="trailing" constant="8" id="dQT-Qd-Nbc"/>
+                                    <constraint firstItem="Hfd-fb-vCc" firstAttribute="top" secondItem="xkE-Gc-0X1" secondAttribute="bottom" constant="35" id="ic6-lN-gAH"/>
                                     <constraint firstItem="CLE-0b-0c7" firstAttribute="centerX" secondItem="oib-bD-onG" secondAttribute="centerX" id="lCt-3O-KGT"/>
                                     <constraint firstItem="xkE-Gc-0X1" firstAttribute="width" secondItem="xkE-Gc-0X1" secondAttribute="height" multiplier="1:1" id="sKV-Ng-M2t"/>
                                     <constraint firstItem="X6o-CY-HMf" firstAttribute="top" secondItem="CLE-0b-0c7" secondAttribute="bottom" constant="129" id="tjH-bS-j2Y"/>
+                                    <constraint firstItem="Hfd-fb-vCc" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" constant="24" id="zhq-Ng-EnE"/>
                                 </constraints>
                             </view>
                         </subviews>

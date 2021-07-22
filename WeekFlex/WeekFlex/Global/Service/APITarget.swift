@@ -12,6 +12,7 @@ enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
     case getCategory(token: String) // 카테고리 리스트 API
+    case createCategory(token: String, color: Int, name: String)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
@@ -35,7 +36,7 @@ extension APITarget: TargetType {
         switch self {
         case .getTask:
             return "api/v1/task/"
-        case .getCategory:
+        case .getCategory, .createCategory:
             return "api/v1/category"
         case .getWeekly:
             return "api/v1/calendar/week"
@@ -60,7 +61,7 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
-        case .checkTodo:
+        case .checkTodo, .createCategory:
             return .post
             
         case .deleteTodoRoutine, .deleteTodo:
@@ -87,6 +88,9 @@ extension APITarget: TargetType {
             
         case .getWeekly(_, let date):
             return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
+        
+        case .createCategory(_, let color, let name):
+            return .requestParameters(parameters: ["color": color, "name": name], encoding: JSONEncoding.default)
             
         case .checkTodo(_, _, let done):
             return .requestParameters(parameters: ["done": done], encoding: JSONEncoding.default)
@@ -112,7 +116,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _), .createCategory(let token, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
          
         }

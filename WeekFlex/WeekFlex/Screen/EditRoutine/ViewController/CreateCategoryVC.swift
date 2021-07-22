@@ -18,8 +18,15 @@ class CreateCategoryVC: UIViewController {
                 setCategoryImage(num: ID)
             }
             categoryCollectionView.reloadData()
+            
+            if categoryTitle.text?.count != 0 || categoryTitle.text != nil {
+                completeButton.isEnabled = true
+            }
+
         }
     }
+    var checkedColor: Int?
+    
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
     
@@ -36,6 +43,33 @@ class CreateCategoryVC: UIViewController {
     @IBOutlet var categoryColorImageLength: NSLayoutConstraint!
     @IBOutlet var categoryCollectionView: UICollectionView!
     
+    @IBAction func addCompleteButtonPressed(_ sender: Any) {
+        if
+           let colorID = checkedColor,
+           let categoryTitle = categoryTitle.text {
+            
+            APIService.shared.createCategory("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", color: colorID, name: categoryTitle){ result in
+                switch result {
+                
+                case .success(_):
+                    self.dismiss(animated: true, completion: .none)
+                // 데이터 전달 후 다시 로드
+                
+                case .failure(let error):
+                    print(error)
+                    print("오류!!")
+                }
+                
+            }
+        }
+    }
+    @IBAction func cancleBtnDidTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func textFieldStartEditingBtnTapped(_ sender: Any) {
+        self.categoryTitle.becomeFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,12 +124,11 @@ extension CreateCategoryVC {
     func setCategoryImage(num: Int) {
         switch num<10 {
         case true:
+            checkedColor = num+1
             categoryColorImage.image = UIImage(named: "icon-24-star-n\(num+1)")
         case false:
-            print(num)
+            checkedColor = num-6
             categoryColorImage.image = UIImage(named: "icon-24-star-n\(num-6)")
-        default:
-            return
         }
     }
 }
@@ -110,13 +143,15 @@ extension CreateCategoryVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        
-        if textField.text?.count == 0 || textField.text == nil {
-            // Text가 존재하지 않을 때 버튼 비활성화
-            completeButton.isEnabled = false
+        if let checkedID = checkedID {
+            if textField.text?.count == 0 || textField.text == nil {
+                // Text가 존재하지 않을 때 버튼 비활성화
+                completeButton.isEnabled = false
+            } else {
+                completeButton.isEnabled = true
+            }
         } else {
-            completeButton.isEnabled = true
-            
+            completeButton.isEnabled = false
         }
     }
     
@@ -207,11 +242,9 @@ extension CreateCategoryVC: UICollectionViewDataSource {
         case 0:
             cell.backgroundColor = firstSectionColorList[indexPath.row]
         case 1:
-            print(indexPath.row)
-            print(secondSectionColorList[indexPath.row])
             cell.backgroundColor = secondSectionColorList[indexPath.row]
         default:
-            print("no")
+            assert(true)
         }
         cell.setRounded(radius: nil)
         

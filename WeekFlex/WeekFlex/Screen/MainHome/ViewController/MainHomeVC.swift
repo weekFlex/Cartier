@@ -72,7 +72,7 @@ class MainHomeVC: UIViewController {
     @IBAction func buttonDidTap(_ sender: UIButton) {       //Expended Header 펼치는 버튼
         if shouldCollaps {
             animateView(isCollaps: false,  height: 0)
-        }else {
+        } else {
             animateView(isCollaps: true,  height: 110)
         }
     }
@@ -80,10 +80,19 @@ class MainHomeVC: UIViewController {
     @IBAction func floatingBtnDidTap(_ sender: Any) {       //우측 하단 플로팅 버튼
         if isFloating {
             hideFloating()
-        }else{
+        } else {
             showFloating()
         }
         isFloating = !isFloating
+    }
+    
+    @IBAction func addToDoBtnDidTap(_ sender: Any) {
+        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
+        editRoutineVC.modalTransitionStyle = .coverVertical
+        editRoutineVC.modalPresentationStyle = .custom
+        editRoutineVC.entryNumber = 2
+        self.present(editRoutineVC, animated: true, completion: .none)
     }
     
     //MARK: Life Cycle

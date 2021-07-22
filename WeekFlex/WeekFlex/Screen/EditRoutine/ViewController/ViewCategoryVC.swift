@@ -34,10 +34,9 @@ class ViewCategoryVC: UIViewController {
     }
     
     // MARK: Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setData()
         setLayout()
         setDelegate()
     }
@@ -86,6 +85,7 @@ extension ViewCategoryVC {
         CategoryService().getCategories(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") { categoryList in
             if let categoryList = categoryList {
                 self.categoryListViewModel = CategoryListViewModel(categories: categoryList)
+                print("updated!")
             }
             DispatchQueue.main.async {
                 self.categoryTableView.reloadData()

@@ -41,6 +41,11 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func createCategory(_ token: String, color: Int, name: String, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
+        let target: APITarget = .createCategory(token: token, color: color, name: name)
+        judgeObject(target, completion: completion)
+    }
+    
     func deleteTodoRoutine(_ token: String, routineId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)){
         let target:  APITarget = .deleteTodoRoutine(token: token, routineId: routineId)
         judgeObject(target, completion: completion)
@@ -71,6 +76,7 @@ extension APIService {
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
                     print("body", body)
                     if let data = body.data {
+                        print("hi")
                         print(data)
                         completion(.success(data))
                     }
