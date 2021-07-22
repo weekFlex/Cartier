@@ -18,7 +18,6 @@ class CreateCategoryVC: UIViewController {
     
     // MARK: IBOutlet
 
-    @IBOutlet var categoryTitleWidth: NSLayoutConstraint!
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var modalBackgroundView: UIView!
     @IBOutlet var backButton: UIButton!

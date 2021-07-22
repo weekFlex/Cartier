@@ -537,7 +537,7 @@ extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
         guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
         editRoutineVC.modalTransitionStyle = .coverVertical
         editRoutineVC.modalPresentationStyle = .custom
-        editRoutineVC.entryNumber = 2
+        editRoutineVC.entryNumber = 1
         editRoutineVC.taskListData = withValue
         editRoutineVC.saveTaskListDataDelegate = self
         editRoutineVC.hideViewDelegate = self
