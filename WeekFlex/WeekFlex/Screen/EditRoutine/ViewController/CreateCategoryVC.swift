@@ -8,8 +8,10 @@
 import UIKit
 
 class CreateCategoryVC: UIViewController {
+    
     // MARK: - Variables
     
+    let didDismissCreateCategoryVC: Notification.Name = Notification.Name("DidDismissCreateCategoryVC")
     var hideViewDelegate: HideViewProtocol?
     var saveCategoryDelegate: SaveCategoryProtocol?
     var checkedID: Int? {
@@ -29,6 +31,10 @@ class CreateCategoryVC: UIViewController {
     
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
+    
+    // alert
+    let alert = UIAlertController(title: "존재하는 카테고리", message: "이미 존재하는 카테고리 이름입니다.\n다른 이름을 입력해주세요.", preferredStyle: .alert)
+    let cancel = UIAlertAction(title: "확인", style: .default, handler : nil)
     
     // MARK: IBOutlet
     
@@ -52,12 +58,11 @@ class CreateCategoryVC: UIViewController {
                 switch result {
                 
                 case .success(_):
+                    NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
                     self.dismiss(animated: true, completion: .none)
-                // 데이터 전달 후 다시 로드
                 
-                case .failure(let error):
-                    print(error)
-                    print("오류!!")
+                case .failure(_):
+                    self.present(self.alert,animated: false, completion: nil)
                 }
                 
             }
@@ -95,6 +100,9 @@ class CreateCategoryVC: UIViewController {
 
 extension CreateCategoryVC {
     func setLayout() {
+        // alert
+        alert.addAction(cancel)
+        
         // background
         modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.0)
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
