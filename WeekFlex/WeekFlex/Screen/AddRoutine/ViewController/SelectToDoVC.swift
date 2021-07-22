@@ -347,7 +347,16 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     for i in 0...selectedViewModel.count-1 {
                         if searchTask[indexPath.row].name == selectedViewModel[i].name {
                             // 만약에 내가 선택한 루틴이라면?
-                            cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
+                            
+                            if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
+                                if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
+                                   let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
+                                    cell.timeLabel.text = "\(days) \(startTime)-\(endTime)"
+                                } else {
+                                    cell.timeLabel.text = "\(days)"
+                                }
+                            }
+                            
                             cell.selected()
                             // 배경 컬러 주기
                             break
@@ -367,6 +376,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                         for i in 0...selectedViewModel.count-1 {
                             if allTask[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
+                                
                                 if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
                                     if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
                                        let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
@@ -394,7 +404,15 @@ extension SelectToDoVC: UICollectionViewDataSource {
                             if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 
-                                cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
+                                if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
+                                    if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
+                                       let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
+                                        cell.timeLabel.text = "\(days) \(startTime)-\(endTime)"
+                                    } else {
+                                        cell.timeLabel.text = "\(days)"
+                                    }
+                                }
+                                
                                 cell.selected()
                                 // 배경 컬러주기
                                 break
