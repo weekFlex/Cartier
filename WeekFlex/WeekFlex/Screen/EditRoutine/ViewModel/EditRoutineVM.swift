@@ -9,16 +9,7 @@ import Foundation
 
 struct EditRoutineViewModel {
     var todo: Todo
-    var daySelected: Bool = false
-    var days: [String:Int] {
-        didSet {
-            if days.map({$0.value}).contains(1) {
-                daySelected = true
-            } else {
-                daySelected = false
-            }
-        }
-    }
+    var days: [String:Int]
 }
 
 extension EditRoutineViewModel {
@@ -98,14 +89,6 @@ extension EditRoutineViewModel {
     
     mutating func updateEndTime(endTime: String) {
         self.todo.endTime = endTime
-    }
-    
-    mutating func updateName(name: String) {
-        self.todo.name = name
-    }
-    
-    mutating func updateCategory(ID: Int) {
-        self.todo.categoryID = ID
     }
     
     // picker에서 나온 시간, AM/PM, 분이 계산되어 합쳐진 startTime(17:00)
