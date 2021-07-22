@@ -97,7 +97,7 @@ extension CheckRoutineVC {
         saveButton.setButton(text: "저장하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
         saveButton.setRounded(radius: 3)
         
-        if let list = routineList {
+        if routineList != nil {
             taskTableView.reloadData()
         }
         

@@ -348,7 +348,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                         if searchTask[indexPath.row].name == selectedViewModel[i].name {
                             // 만약에 내가 선택한 루틴이라면?
                             
-                            if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
+                            if let days = selectedViewModel[i].days?.map({ $0.name }).joined(separator: ", ") {
                                 if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
                                    let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
                                     cell.timeLabel.text = "\(days) \(startTime)-\(endTime)"
@@ -377,7 +377,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                             if allTask[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 
-                                if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
+                                if let days = selectedViewModel[i].days?.map({ $0.name }).joined(separator: ", ") {
                                     if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
                                        let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
                                         cell.timeLabel.text = "\(days) \(startTime)-\(endTime)"
@@ -404,7 +404,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                             if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 
-                                if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
+                                if let days = selectedViewModel[i].days?.map({ $0.name }).joined(separator: ", ") {
                                     if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
                                        let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
                                         cell.timeLabel.text = "\(days) \(startTime)-\(endTime)"
