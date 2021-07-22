@@ -17,6 +17,7 @@ enum APITarget {
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
+    case makeRoutin(token: String, routine: MakeRoutineData) // 루틴 생성하기 API
 }
 
 // MARK: TargetType Protocol 구현
@@ -46,7 +47,7 @@ extension APITarget: TargetType {
         case .deleteTodo(_,let todoId):
             return "api/v1/todo/\(todoId)"
         case .getRoutine:
-            return "api/v1/routine/"
+            return "api/v1/routine"
         }
         
         

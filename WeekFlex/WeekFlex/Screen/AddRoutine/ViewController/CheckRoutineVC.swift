@@ -99,7 +99,6 @@ extension CheckRoutineVC {
         
         if routineList != nil {
             taskTableView.reloadData()
-            print(routineList)
         }
         
         taskTableView.delegate = self
