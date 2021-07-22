@@ -105,7 +105,6 @@ class EditRoutineVC: UIViewController {
                 let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]
                 return day[first.name]! < day[second.name]!
             }
-            
             taskListData?.days = newData
             // 이전 뷰로 데이터 넘겨주기
             if let taskListData = taskListData {
