@@ -13,7 +13,7 @@ struct APIService {
     
     static let shared = APIService()
     // 싱글톤객체로 생성
-
+    
     let provider = MoyaProvider<APITarget>()
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
@@ -35,6 +35,22 @@ struct APIService {
         let target: APITarget = .getWeekly(token: token, date: date)
         judgeObject(target, completion: completion)
     }
+    
+    func checkTodo(_ token: String, todoId: Int, done: Bool, completion: @escaping (NetworkResult<SimpleData>)->(Void)){
+        let target: APITarget = .checkTodo(token: token, todoId: todoId, done: done)
+        judgeObject(target, completion: completion)
+    }
+    
+    func deleteTodoRoutine(_ token: String, routineId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)){
+        let target:  APITarget = .deleteTodoRoutine(token: token, routineId: routineId)
+        judgeObject(target, completion: completion)
+    }
+    
+    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))){
+        let target: APITarget = .deleteTodo(token: token, todoId: todoId)
+        judgeObject(target, completion: completion)
+    }
+    
 
     func getRoutine(_ token: String,  completion: @escaping (NetworkResult<[Routine]>)->(Void)){
         let target: APITarget = .getRoutine(token: token)
@@ -49,9 +65,13 @@ extension APIService {
             switch response {
             case .success(let result):
                 do {
+                    
                     let decoder = JSONDecoder()
+                    print("result  " , result)
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
+                    print("body", body)
                     if let data = body.data {
+                        print(data)
                         completion(.success(data))
                     }
                 } catch {
