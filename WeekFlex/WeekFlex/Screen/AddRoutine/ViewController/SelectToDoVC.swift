@@ -336,6 +336,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
         else {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
+            cell.timeLabel.text = ""
             
             if searchText != nil {
                 // 검색중이라면?
@@ -346,6 +347,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     for i in 0...selectedViewModel.count-1 {
                         if searchTask[indexPath.row].name == selectedViewModel[i].name {
                             // 만약에 내가 선택한 루틴이라면?
+                            cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
                             cell.selected()
                             // 배경 컬러 주기
                             break
@@ -360,10 +362,13 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     // 전체 카테고리라면?
                     
                     cell.configure(data: allTask[indexPath.row])
+                    
                     if selectedViewModel.count > 0 {
                         for i in 0...selectedViewModel.count-1 {
                             if allTask[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
+                                
+                                cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
                                 cell.selected()
                                 // 배경 컬러주기
                                 break
@@ -380,6 +385,8 @@ extension SelectToDoVC: UICollectionViewDataSource {
                         for i in 0...selectedViewModel.count-1 {
                             if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
+                                
+                                cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
                                 cell.selected()
                                 // 배경 컬러주기
                                 break
@@ -500,21 +507,19 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 }
                 if check == false {
                     // 추가 안된 루틴이라면 -> 추가
+                    
                     if let value = cells?.routine {
                         // move to editRoutinVC
                         initEditRoutineVC(withValue: value)
                     }
-                    selectedCollectionView.reloadData()
-                    todoCollectionView.reloadData()
                 }
             } else {
                 // selectedViewModel이 비어있다면? -> 무조건 추가
+                
                 if let value = cells?.routine {
                     // move to editRoutinVC
                     initEditRoutineVC(withValue: value)
                 }
-                selectedCollectionView.reloadData()
-                todoCollectionView.reloadData()
             }
         }
     }
@@ -526,6 +531,8 @@ extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
     }
     
     func saveDaysProtocol(savedTaskListData :TaskListData) {
+        // 시간 넣어주기
+        
         listItemAdded(value: savedTaskListData)
         todoCollectionView.reloadData()
         selectedCollectionView.reloadData()
@@ -549,7 +556,6 @@ extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
         modalBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(view.bounds.width), height: Int(view.bounds.height)))
         modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.view.addSubview(modalBackgroundView)
-//        view.bringSubviewToFront(modalBackgroundView)
     }
 }
 
