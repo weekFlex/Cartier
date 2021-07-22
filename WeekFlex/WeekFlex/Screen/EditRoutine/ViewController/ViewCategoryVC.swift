@@ -26,6 +26,10 @@ class ViewCategoryVC: UIViewController {
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var addCategoryButton: UIButton!
     
+    @IBAction func addCategoryButton(_ sender: Any) {
+        
+    }
+    
     // MARK: Life Cycle
 
     override func viewDidLoad() {

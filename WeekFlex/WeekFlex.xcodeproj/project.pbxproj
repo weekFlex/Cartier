@@ -51,6 +51,7 @@
 		9E0FFB9B26A836B800EB0428 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */; };
 		9E0FFB9D26A83A4400EB0428 /* CategoryDataWithoutID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */; };
 		9E0FFBA026A8403500EB0428 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9F26A8403500EB0428 /* CategoryService.swift */; };
+		9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFBA126A8784F00EB0428 /* ColorCategoryTableViewCell.swift */; };
 		9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
@@ -143,6 +144,7 @@
 		9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataWithoutID.swift; sourceTree = "<group>"; };
 		9E0FFB9F26A8403500EB0428 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
+		9E0FFBA126A8784F00EB0428 /* ColorCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoutineTimeVC.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -676,6 +678,7 @@
 			children = (
 				9EC2E0812631E45100EF2F7E /* WeekCollectionViewCell.swift */,
 				9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */,
+				9E0FFBA126A8784F00EB0428 /* ColorCategoryTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */,
+				9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */,
 				9EC2E07E2631DDBA00EF2F7E /* EditRoutineVM.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
 				9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */,
