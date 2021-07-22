@@ -367,8 +367,16 @@ extension SelectToDoVC: UICollectionViewDataSource {
                         for i in 0...selectedViewModel.count-1 {
                             if allTask[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
-//                                selectedViewModel[i].days?[0].startTime.changeTime()
-                                cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
+                                if let days = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ") {
+                                    if let startTime = selectedViewModel[i].days?[0].startTime?.changeTime(),
+                                       let endTime = selectedViewModel[i].days?[0].endTime?.changeTime() {
+                                        cell.timeLabel.text = "\(days) \(startTime)-\(endTime)"
+                                    } else {
+                                        cell.timeLabel.text = "\(days)"
+                                    }
+                                }
+                                
+                                
                                 cell.selected()
                                 // 배경 컬러주기
                                 break
@@ -574,4 +582,47 @@ extension SelectToDoVC: SelectedItemViewDelegate {
 }
 
 
-
+extension String {
+    
+    func changeTime() -> String {
+        
+        var arr: [String] = []
+        var answer: String = ""
+        
+        if self != "" {
+            
+            arr = self.components(separatedBy: ":") // ["시간","분","초"] 로 분해
+            arr = Array(arr[0...1]) // 초가 존재한다면 빼기
+            
+            var time = Int(arr[0])!
+            
+            if time < 12 {
+                // 오전일 때
+                
+                if time < 10 {
+                    // 한자리 숫자면
+                    arr[0] = "0\(time)"
+                }
+                
+                answer = "\(arr[0]):\(arr[1])am"
+                
+            } else {
+                // 오후일 때
+                
+                time -= 12
+                arr[0] = String(time)
+                
+                if time < 10 {
+                    // 한자리 숫자면
+                    arr[0] = "0\(time)"
+                }
+                
+                answer = "\(arr[0]):\(arr[1])pm"
+            }
+        }
+        
+        
+        return answer
+        
+    }
+}
