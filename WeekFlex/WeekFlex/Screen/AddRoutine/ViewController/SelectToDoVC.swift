@@ -348,7 +348,6 @@ extension SelectToDoVC: UICollectionViewDataSource {
                         if searchTask[indexPath.row].name == selectedViewModel[i].name {
                             // 만약에 내가 선택한 루틴이라면?
                             cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
-                            selectedViewModel[i].days[0].start
                             cell.selected()
                             // 배경 컬러 주기
                             break
@@ -368,7 +367,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                         for i in 0...selectedViewModel.count-1 {
                             if allTask[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
-                                
+//                                selectedViewModel[i].days?[0].startTime.changeTime()
                                 cell.timeLabel.text = selectedViewModel[i].days?.map { $0.name }.joined(separator: ", ")
                                 cell.selected()
                                 // 배경 컬러주기
@@ -573,4 +572,6 @@ extension SelectToDoVC: SelectedItemViewDelegate {
     }
     
 }
+
+
 

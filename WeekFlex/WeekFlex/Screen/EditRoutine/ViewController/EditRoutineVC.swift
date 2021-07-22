@@ -81,7 +81,7 @@ class EditRoutineVC: UIViewController {
         // Days 구조체로 넣어주기
         let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
             if dayDict.value == 1 {
-                dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", name: dayDict.key, startTime: editRouineViewModel.todo.startTime ?? ""))
+                dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime ?? "", startTime: editRouineViewModel.todo.startTime ?? "", name: dayDict.key))
             }
         }
         taskListData?.days = newData
