@@ -57,6 +57,12 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func updateTodo(_ token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)) {
+        let target:  APITarget = .updateTodo(token: token, days: days, endTime: endTime, startTime: startTime, name: name, todoId: todoId)
+        print(target)
+        judgeObject(target, completion: completion)
+    }
+    
     func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))){
         let target: APITarget = .deleteTodo(token: token, todoId: todoId)
         judgeObject(target, completion: completion)

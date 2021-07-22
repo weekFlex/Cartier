@@ -33,4 +33,17 @@ class TodoService {
             }
         }
     }
+    
+    func updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int, completion: @escaping (Bool) -> ()) {
+        APIService.shared.updateTodo(token, days: days, endTime: endTime, startTime: startTime, name: name, todoId: todoId) { result in
+            switch result {
+            case .success(_):
+                completion(true)
+                            
+            case .failure(let error):
+                print(error)
+                completion(false) // 에러난다면 category can be nil
+            }
+        }
+    }
 }

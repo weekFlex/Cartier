@@ -22,6 +22,8 @@ class EditRoutineVC: UIViewController {
     var dayDict: [String:Int]?
     var date: String? // 홈에서 할일을 추가하는 경우 필요
     var todoData: TodoData?
+    var cellIndex: Int?
+    var viewIndex: Int?
     
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
@@ -174,10 +176,24 @@ class EditRoutineVC: UIViewController {
             todoData?.startTime = editRouineViewModel.todo.startTime
             todoData?.endTime = editRouineViewModel.todo.endTime
             todoData?.name = editRouineViewModel.todo.name
-            if let todoData = todoData{
+            if let todoData = todoData,
+               let cellIndex = cellIndex,
+               let viewIndex = viewIndex {
                 print(todoData)
-                self.saveTodoDataDelegate?.saveTodoProtocol(savedTodoData: todoData)
+                self.saveTodoDataDelegate?.saveTodoProtocol(savedTodoData: todoData, cellIndex: cellIndex, viewIndex: viewIndex)
             }
+            // 수정 api 통신
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                TodoService().updateTodo(token: token, days: (todoData?.days!)!, endTime: todoData?.endTime ?? nil, startTime: todoData?.startTime ?? nil, name: todoData!.name, todoId: todoData!.id) { result in
+                    switch result {
+                    case true:
+                        print("api 성공")
+                    case false:
+                        print("실패")
+                    }
+                }
+            }
+            
         default:
             return
             
@@ -371,8 +387,8 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             daysHeaderLabelTopConstraint.isActive = false
             weekCollectionView.isHidden = true
             weekCollectionViewTopConstraint.isActive = false
-            switchTopConstraint.constant = 36
-            timeSettingHeaderLabelTopConstraint.constant = 36
+            switchTopConstraint.constant = 99
+            timeSettingHeaderLabelTopConstraint.constant = 103
         case 4:
             // layout
             headerLabel.setLabel(text: "할 일 수정하기", color: .black, font: .appleMedium(size: 18))

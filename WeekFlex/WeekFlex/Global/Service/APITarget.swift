@@ -16,6 +16,7 @@ enum APITarget {
     case createCategory(token: String, color: Int, name: String)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
+    case updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int) // todo수정
     case createTodo(token: String, categoryId: Int, date: String, endTime: String?, name: String, startTime: String?)
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
@@ -46,7 +47,7 @@ extension APITarget: TargetType {
             return "api/v1/todo/\(todoId)/done"
         case .deleteTodoRoutine:
             return  "api/v1/todo/routine"
-        case .deleteTodo(_,let todoId):
+        case .deleteTodo(_,let todoId), .updateTodo(_, _, _, _, _, let todoId):
             return "api/v1/todo/\(todoId)"
         case .createTodo:
             return "api/v1/todo"
@@ -68,6 +69,9 @@ extension APITarget: TargetType {
             
         case .deleteTodoRoutine, .deleteTodo:
             return .delete
+            
+        case .updateTodo:
+            return .put
         }
     }
     
@@ -105,6 +109,9 @@ extension APITarget: TargetType {
             
         case .deleteTodo(_, let todoId):
             return .requestParameters(parameters: ["todoId":todoId], encoding: JSONEncoding.default)
+        
+        case .updateTodo(_, let days, let endTime, let startTime, let name, let todoId):
+            return .requestParameters(parameters: ["todoId": todoId, "days": days, "endTime": endTime ?? NSNull(), "startTime": startTime ?? NSNull(), "name": name] , encoding: JSONEncoding.default)
             
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
@@ -124,7 +131,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .createCategory(let token, _, _), .createTask(let token, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .createCategory(let token, _, _), .createTask(let token, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }

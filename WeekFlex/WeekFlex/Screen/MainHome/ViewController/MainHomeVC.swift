@@ -246,6 +246,8 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
         editRoutineVC.modalTransitionStyle = .coverVertical
         editRoutineVC.modalPresentationStyle = .custom
         editRoutineVC.entryNumber = 4
+        editRoutineVC.cellIndex = cellIndex
+        editRoutineVC.viewIndex = viewIndex
         editRoutineVC.saveTodoDataDelegate = self
         editRoutineVC.hideViewDelegate = self
         let data = weeklyData[currentDay].items[cellIndex].todos[viewIndex]
@@ -273,15 +275,16 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
 }
 extension MainHomeVC: SaveTodoProtocol, HideViewProtocol {
+    func saveTodoProtocol(savedTodoData: TodoData, cellIndex: Int, viewIndex: Int) {
+        print("성공! \(savedTodoData)  \(cellIndex)  \(viewIndex)")
+        tableView.reloadData()
+        calendarCollectionView.reloadData()
+    }
+    
     func hideViewProtocol() {
         modalBackgroundView.removeFromSuperview()
     }
     
-    func saveTodoProtocol(savedTodoData :TodoData) {
-        print("성공! \(savedTodoData)")
-        tableView.reloadData()
-        calendarCollectionView.reloadData()
-    }
 }
 
 extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
