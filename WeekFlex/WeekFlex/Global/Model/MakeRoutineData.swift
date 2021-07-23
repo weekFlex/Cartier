@@ -28,4 +28,12 @@ struct RoutineTaskSaveRequest: Codable {
         self.days = days
         self.taskId = taskId
     }
+    
+    func toParamter() -> [String: Any] {
+        return [
+            "days": days.map { $0.toParameter() },
+            "taskId": taskId
+        ]
+    }
 }
+

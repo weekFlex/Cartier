@@ -17,7 +17,7 @@ enum APITarget {
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
-    case makeRoutine(token: String, name: String, routineTaskSaveRequests: String) // 루틴 생성하기 API
+    case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
 }
 
 // MARK: TargetType Protocol 구현
@@ -99,10 +99,12 @@ extension APITarget: TargetType {
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
             
         case .makeRoutine(_, let name, let routineTaskSaveRequests):
-            return .requestParameters(parameters: ["name" : name, "routineTaskSaveRequests" : routineTaskSaveRequests], encoding: JSONEncoding.default)
+            let paramter: [String: Any] = [
+                "name": name,
+                "routineTaskSaveRequests": routineTaskSaveRequests.map { $0.toParamter() }
+            ]
+            return .requestParameters(parameters: paramter, encoding: JSONEncoding.default)
         }
-        
-        
     }
     
     var validationType: Moya.ValidationType {

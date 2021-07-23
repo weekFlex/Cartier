@@ -58,7 +58,7 @@ struct APIService {
     }
     
     
-    func makeRoutine(_ token: String, _ name: String, _ routineTaskSaveRequests: String, completion: @escaping (NetworkResult<[Routine]>)->(Void)){
+    func makeRoutine(_ token: String, _ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest], completion: @escaping (NetworkResult<Routine>)->(Void)){
         let target: APITarget = .makeRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests)
         judgeObject(target, completion: completion)
     }
@@ -75,10 +75,12 @@ extension APIService {
                     let decoder = JSONDecoder()
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
                     if let data = body.data {
+                        print(data)
                         completion(.success(data))
                     }
                 } catch {
                     print("구조체를 확인해보세요")
+                    completion(.failure(-1))
                 }
             case .failure(let error):
                 print(error)

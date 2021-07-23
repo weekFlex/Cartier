@@ -51,48 +51,54 @@ class CheckRoutineVC: UIViewController {
                     
                     if let days = routineList[i].days {
                         routineTask.append(RoutineTaskSaveRequest(days, routineList[i].id))
+                        myDay.append(contentsOf: days)
                     }
                     
                 }
                 
             }
             var newRoutine = MakeRoutineData(routineNameTextField.text!,routineTask)
-            print(newRoutine)
             
             let encoder: JSONEncoder = JSONEncoder()
 //            encoder.outputFormatting = .prettyPrinted // 사람이 보기 좋은 형태로 만들기 위해 옵션을 줬습니다
             //  이제 변환해줍니다
             let jsonData: Data = try! encoder.encode(routineTask)
-
+            
             //  잘 변환됐는지 데이터를 출력해봅시다
-            if let jsonString: String = String(data: jsonData, encoding: .utf8) {
-                print(jsonString)
+            guard let jsonString: String = String(data: jsonData, encoding: .utf8) else {
+                return
             }
-            
-            
-//            if NetworkState.isConnected() {
-//                // 네트워크 연결 시
-//
-//                if let token = UserDefaults.standard.string(forKey: "UserToken"),
-//                   let jsonString: String = String(data: jsonData, encoding: .utf8){
-////                    makeRoutine(token: token, name: name, days: days, taskId: taskId)
-//                    APIService.shared.makeRoutine(token, self.routineNameTextField.text!, jsonString) { [self] result in
-//                        switch result {
-//
-//                        case .success(let data):
-//                            print(data)
-//                            print("루틴 만들기 성공!!")
-//
-//                        case .failure(let error):
-//                            print(error)
-//
-//                        }
-//                    }
-//                }
-//            } else {
-//                // 네트워크 미연결 팝업 띄우기
-//
-//            }
+            let data = jsonString.data(using: .utf8)!
+            do{
+                
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+                dump(json)
+            }catch{
+                print("erroMsg")
+                
+            }
+
+            if NetworkState.isConnected() {
+                 //네트워크 연결 시
+
+
+                if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                    APIService.shared.makeRoutine(token, self.routineNameTextField.text!, routineTask) { [self] result in
+                        switch result {
+
+                        case .success(let data):
+                            print("루틴 만들기 성공!!")
+
+                        case .failure(let error):
+                            print(error)
+
+                        }
+                    }
+                }
+            } else {
+                 //네트워크 미연결 팝업 띄우기
+
+            }
             
         }
         

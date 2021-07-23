@@ -106,7 +106,6 @@ class EditRoutineVC: UIViewController {
                         dayStruct.append(Day(endTime: endTime, startTime: startTime, name: dayDict.key))
                         
                     } else {
-                        print("********************")
                         dayStruct.append(Day(name: dayDict.key))
                     }
                     

@@ -117,6 +117,21 @@ extension SelectToDoVC {
         nextButton.setTitle("다음", for: .normal)
         nextButton.titleLabel?.font = UIFont.appleMedium(size: 16)
         nextButton.tintColor = UIColor.gray4
+        
+        let yesButton = UIButton()
+        
+        self.view.addSubview(yesButton)
+        
+        // 레이아웃을 수동으로 주고싶을 때 호출하는 인스턴스
+        // true 일 때는 자동으로 레이아웃을 주는데 false로 지정하면서 내가 원하는대로 레이아웃을 줄 수 있게 함
+        yesButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        yesButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        yesButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        yesButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 32).isActive = true
+        yesButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 24).isActive = true
+        
     }
     
     func setLabel() {
