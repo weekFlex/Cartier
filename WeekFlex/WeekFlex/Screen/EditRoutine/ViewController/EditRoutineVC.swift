@@ -150,6 +150,7 @@ class EditRoutineVC: UIViewController {
                     switch result {
                     case true:
                         NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                        print("성공")
                     case false:
                         print("실패")
                     }

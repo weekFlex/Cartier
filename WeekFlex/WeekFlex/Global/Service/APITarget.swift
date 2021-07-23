@@ -40,7 +40,7 @@ extension APITarget: TargetType {
         
         switch self {
         case .getTask, .createTask:
-            return "api/v1/task"
+            return "api/v1/task/"
         case .getCategory, .createCategory:
             return "api/v1/category"
         case .getWeekly:
