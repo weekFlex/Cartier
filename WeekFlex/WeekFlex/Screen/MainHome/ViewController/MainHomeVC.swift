@@ -283,7 +283,7 @@ extension MainHomeVC: SaveTodoProtocol, HideViewProtocol {
         isFloating = !isFloating
         getRoutines() //네트워크 통신 한번더
         calendarCollectionView.reloadData() // 리로드
-        tableView.reloadData() // 리로드
+        tableView.reloadData() 
     }
     
     func hideViewProtocol() {
