@@ -56,6 +56,12 @@ struct APIService {
         let target: APITarget = .getRoutine(token: token)
         judgeObject(target, completion: completion)
     }
+    
+    
+    func makeRoutine(_ token: String, _ name: String, _ routineTaskSaveRequests: String, completion: @escaping (NetworkResult<[Routine]>)->(Void)){
+        let target: APITarget = .makeRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests)
+        judgeObject(target, completion: completion)
+    }
 }
 
 extension APIService {
@@ -75,6 +81,7 @@ extension APIService {
                     print("구조체를 확인해보세요")
                 }
             case .failure(let error):
+                print(error)
                 completion(.failure(error.response?.statusCode ?? 100))
             }
         }
@@ -95,6 +102,7 @@ extension APIService {
                 }
             case .failure(let error):
                 completion(.failure(error.response!.statusCode))
+                
             }
         }
     }

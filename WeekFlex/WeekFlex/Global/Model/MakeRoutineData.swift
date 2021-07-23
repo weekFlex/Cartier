@@ -20,15 +20,12 @@ struct MakeRoutineData: Codable {
 // MARK: - RoutineTaskSaveRequest
 struct RoutineTaskSaveRequest: Codable {
     let days: [Day]
-    let taskID: Int
+    let taskId: Int
 
-    enum CodingKeys: String, CodingKey {
-        case days
-        case taskID = "taskId"
-    }
     
-    init(_ days: [Day], _ taskID: Int) {
+    
+    init(_ days: [Day], _ taskId: Int) {
         self.days = days
-        self.taskID = taskID
+        self.taskId = taskId
     }
 }
