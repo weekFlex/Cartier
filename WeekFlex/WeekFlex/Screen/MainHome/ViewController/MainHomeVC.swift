@@ -96,14 +96,14 @@ class MainHomeVC: UIViewController {
     @IBAction func getRoutineBtnDidtap(_ sender: Any) {
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
-        myRoutineVC.modalPresentationStyle = .fullScreen
-        self.present(myRoutineVC, animated: true, completion: .none)
+        self.navigationController?.pushViewController(myRoutineVC, animated: true)
     }
     
     //MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
         UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
@@ -148,9 +148,8 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendarCollectionView.reloadData()
             }
-            
-            alert.addAction(cancel)
             alert.addAction(delete)
+            alert.addAction(cancel)
             present(alert,animated: false, completion: nil)
             
         }
@@ -280,8 +279,11 @@ extension MainHomeVC: SaveTodoProtocol, HideViewProtocol {
     // 할일 수정했을 때 가져오는 것
     func saveTodoProtocol(savedTodoData: TodoData, cellIndex: Int, viewIndex: Int) {
         print("성공! \(savedTodoData)  \(cellIndex)  \(viewIndex)")
-        tableView.reloadData()
-        calendarCollectionView.reloadData()
+        hideFloating()
+        isFloating = !isFloating
+        getRoutines() //네트워크 통신 한번더
+        calendarCollectionView.reloadData() // 리로드
+        tableView.reloadData() // 리로드
     }
     
     func hideViewProtocol() {

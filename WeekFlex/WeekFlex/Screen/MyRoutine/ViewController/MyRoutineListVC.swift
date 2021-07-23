@@ -35,18 +35,16 @@ class MyRoutineListVC: UIViewController {
     
     @IBAction func routineCreateButtonDidTap(_ sender: Any) {
         // New Routine 버튼 클릭 시 Event
-        
         let storyboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
         guard let newTab = storyboard.instantiateViewController(identifier: "MakeRoutineNameVC") as? MakeRoutineNameVC else {
             return
         }
-        
         newTab.routineNameArray = viewModel?.routineNameArray()
-        
         self.navigationController?.pushViewController(newTab, animated: true)
     }
+    
     @IBAction func backButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: .none)
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: Life Cycle
@@ -148,9 +146,13 @@ extension MyRoutineListVC: UITableViewDataSource {
                 switch result {
                 case .success(_):
                     NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                    self.dismiss(animated: true, completion: .none)
+                    self.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     print(error)
+                    let alert = UIAlertController(title: "해당 루틴은\n이미 등록되어있습니다!", message: nil, preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "넹넹구리면", style: .default, handler : nil)
+                    alert.addAction(cancel)
+                    self.present(alert,animated: false, completion: nil)
                 }
             }
         }
@@ -173,7 +175,7 @@ extension MyRoutineListVC: UITableViewDelegate {
                         switch result {
                         case .success(_):
                             NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                            self.dismiss(animated: true, completion: .none)
+                            self.navigationController?.popViewController(animated: true)
                         case .failure(let error):
                             print(error)
                         }
