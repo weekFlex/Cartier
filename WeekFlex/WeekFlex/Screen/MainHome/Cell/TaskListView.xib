@@ -14,8 +14,8 @@
         <view contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="TaskListView" customModule="WeekFlex" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="390" height="63"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jis-bk-aqH">
-                    <rect key="frame" x="24" y="15" width="31.5" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jis-bk-aqH">
+                    <rect key="frame" x="24" y="15" width="340" height="17"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -27,8 +27,8 @@
                         <action selector="meatBallTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xpe-kc-pW7"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-xz-ZPH">
-                    <rect key="frame" x="24" y="37" width="29.5" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-xz-ZPH">
+                    <rect key="frame" x="24" y="37" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                     <color key="textColor" systemColor="systemGrayColor"/>
                     <nil key="highlightedColor"/>
@@ -54,6 +54,7 @@
                 <constraint firstItem="AQZ-VT-8pm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FDC-ed-7bD"/>
                 <constraint firstItem="4vB-FD-T1B" firstAttribute="centerY" secondItem="AQZ-VT-8pm" secondAttribute="centerY" id="GTs-yx-yHz"/>
                 <constraint firstItem="jis-bk-aqH" firstAttribute="centerY" secondItem="AQZ-VT-8pm" secondAttribute="centerY" id="GgL-dh-f11"/>
+                <constraint firstItem="4vB-FD-T1B" firstAttribute="leading" secondItem="jis-bk-aqH" secondAttribute="trailing" constant="10" id="I3S-xW-ClL"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4vB-FD-T1B" secondAttribute="trailing" id="VWi-xh-5Fc"/>
                 <constraint firstItem="AQZ-VT-8pm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="diX-rd-1bW"/>
             </constraints>

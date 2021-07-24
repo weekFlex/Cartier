@@ -124,7 +124,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                         APIService.shared.deleteTodoRoutine(token, routineId: routineId ){ result in
                             switch result {
                             
-                            case .success(let data):
+                            case .success(let _):
                                 print("삭제완료")
                                 
                             // 데이터 전달 후 다시 로드
@@ -310,14 +310,20 @@ extension MainHomeVC {
                     
                     case .success(let data):
                         weeklyData = data
-                        for day in weeklyData {
-                            for routine in day.items {
-                                for var todo in routine.todos {
-                                    todo.startTime = todo.startTime?.changeTime()
-                                    todo.endTime = todo.endTime?.changeTime()
+                        for i in 0..<7 {
+                            for j in 0..<weeklyData[i].items.count {
+                                var data = weeklyData[i].items[j].todos
+                                for k in 0..<data.count {
+                                    data[k].startTime = data[k].startTime?.changeTime()
+                                    print(data[k].startTime)
+                                    data[k].endTime = data[k].endTime?.changeTime()
                                 }
                             }
                         }
+                        
+                        
+                        
+                        print(weeklyData)
                         
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
@@ -349,12 +355,6 @@ extension MainHomeVC {
         
         //startDay = 그 주 월요일(Date type)
         let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Date())!
-        
-        //        //오류나서 임시
-        //        let date: Int = Int(startFormatter.string(from: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)) ?? 1
-        //        currentDay = (date + 5) % 7
-        //        let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)!
-        //        ///
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM-dd-EEEE"
         

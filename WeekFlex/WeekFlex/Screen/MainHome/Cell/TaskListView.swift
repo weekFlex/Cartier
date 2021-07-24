@@ -50,7 +50,6 @@ class TaskListView: UIView {
     
     //MARK: IBAction
     @IBAction func starTabbed(_ sender: Any) {
-        print("별누름")
         isDone = !isDone
         self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
         

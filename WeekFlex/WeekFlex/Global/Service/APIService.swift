@@ -41,12 +41,12 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
-    func deleteTodoRoutine(_ token: String, routineId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)){
+    func deleteTodoRoutine(_ token: String, routineId: Int, completion: @escaping (NetworkResult<SimpleData>)-> (Void)){
         let target:  APITarget = .deleteTodoRoutine(token: token, routineId: routineId)
         judgeObject(target, completion: completion)
     }
     
-    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))){
+    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))){
         let target: APITarget = .deleteTodo(token: token, todoId: todoId)
         judgeObject(target, completion: completion)
     }
