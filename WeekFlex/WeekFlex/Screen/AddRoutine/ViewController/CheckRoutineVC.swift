@@ -16,8 +16,8 @@ class CheckRoutineVC: UIViewController {
     var routineList: [TaskListData]?
     
     
-    // 루틴 수정 뷰에서 왔는지 알 수 있는 변수
-    var routineEditEnable: Bool = false
+    // 루틴 수정 뷰에서 왔다면 존재하는 루틴 id 값
+    var routineEditId: Int?
     
     // MARK: IBOutlet
     
@@ -33,7 +33,10 @@ class CheckRoutineVC: UIViewController {
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         // 저장하기 버튼 클릭 Event
         
-        if !routineEditEnable {
+        if let routineEditId = routineEditId {
+            // 루틴 수정하기라면?
+            
+        } else {
             // 새로운 루틴 만들기라면?
             
             var routineTask: [RoutineTaskSaveRequest] = []
@@ -46,7 +49,7 @@ class CheckRoutineVC: UIViewController {
                     }
                 }
             }
-
+            
             if NetworkState.isConnected() {
                  //네트워크 연결 시
 
@@ -118,12 +121,11 @@ extension CheckRoutineVC {
             routineNameTextField.text = routineName
         }
         
-        if routineEditEnable {
+        if routineEditId != nil {
             // 루틴 수정하기 일 때
             
             explainLabel.setLabel(text: "루틴을 수정하기 전 마지막으로 확인해 주세요!", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
             routineNameTextField.isEnabled = true
-            
             
         } else {
             // 루틴 생성하기 일 때
@@ -132,6 +134,7 @@ extension CheckRoutineVC {
             routineNameTextField.isEnabled = false
             
         }
+        
         
         routineNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         // routineNameTextField가 수정될 때 마다 실행
