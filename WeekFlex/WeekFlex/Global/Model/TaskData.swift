@@ -26,14 +26,6 @@ struct TaskListData: Codable {
 struct Day: Codable {
     var endTime, startTime: String?
     let name: String
-    
-    internal func toParameter() -> [String: Any] {
-        return [
-            "startTime": startTime,
-            "endTime": endTime,
-            "name": name
-        ]
-    }
 }
 
 

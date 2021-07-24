@@ -99,11 +99,12 @@ extension APITarget: TargetType {
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
             
         case .makeRoutine(_, let name, let routineTaskSaveRequests):
-            let paramter: [String: Any] = [
-                "name": name,
-                "routineTaskSaveRequests": routineTaskSaveRequests.map { $0.toParamter() }
-            ]
-            return .requestParameters(parameters: paramter, encoding: JSONEncoding.default)
+            
+            let encoder: JSONEncoder = JSONEncoder()
+            let newRoutine = MakeRoutineData(name,routineTaskSaveRequests)
+            let jsonData: Data = try! encoder.encode(newRoutine)
+            
+            return .requestData(jsonData)
         }
     }
     

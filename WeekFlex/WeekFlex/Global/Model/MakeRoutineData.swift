@@ -21,19 +21,5 @@ struct MakeRoutineData: Codable {
 struct RoutineTaskSaveRequest: Codable {
     let days: [Day]
     let taskId: Int
-
-    
-    
-    init(_ days: [Day], _ taskId: Int) {
-        self.days = days
-        self.taskId = taskId
-    }
-    
-    func toParamter() -> [String: Any] {
-        return [
-            "days": days.map { $0.toParameter() },
-            "taskId": taskId
-        ]
-    }
 }
 
