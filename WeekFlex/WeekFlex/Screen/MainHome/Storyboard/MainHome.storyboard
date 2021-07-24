@@ -297,7 +297,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-iC-fZX">
-                                <rect key="frame" x="0.0" y="642" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="646" width="414" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh3-2c-WLu">
                                         <rect key="frame" x="24" y="29" width="332" height="24"/>
@@ -380,9 +380,10 @@
                         <viewLayoutGuide key="safeArea" id="cNo-Yd-vUv"/>
                         <color key="backgroundColor" white="0.0" alpha="0.20137958137356504" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aH1-iC-fZX" firstAttribute="leading" secondItem="cNo-Yd-vUv" secondAttribute="leading" id="0ZB-Ei-pAQ"/>
-                            <constraint firstItem="aH1-iC-fZX" firstAttribute="top" secondItem="cNo-Yd-vUv" secondAttribute="bottom" constant="-220" id="OzM-xb-puU"/>
-                            <constraint firstItem="cNo-Yd-vUv" firstAttribute="trailing" secondItem="aH1-iC-fZX" secondAttribute="trailing" id="zkU-VY-9oF"/>
+                            <constraint firstItem="aH1-iC-fZX" firstAttribute="leading" secondItem="sHW-N2-I5c" secondAttribute="leading" id="0ZB-Ei-pAQ"/>
+                            <constraint firstAttribute="bottom" secondItem="aH1-iC-fZX" secondAttribute="bottom" id="6pd-Os-hDo"/>
+                            <constraint firstItem="aH1-iC-fZX" firstAttribute="top" secondItem="sHW-N2-I5c" secondAttribute="bottom" constant="-250" id="OzM-xb-puU"/>
+                            <constraint firstAttribute="trailing" secondItem="aH1-iC-fZX" secondAttribute="trailing" id="zkU-VY-9oF"/>
                         </constraints>
                     </view>
                     <connections>
