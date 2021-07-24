@@ -334,6 +334,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="RZl-cY-V3D" secondAttribute="trailing" id="BAI-Vb-9EG"/>
                                             <constraint firstItem="uDK-bu-BGd" firstAttribute="top" secondItem="Tck-zg-JkD" secondAttribute="top" id="KMx-uJ-tvZ"/>
                                         </constraints>
                                     </stackView>
@@ -358,6 +359,9 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="6qF-Iz-3dd" secondAttribute="trailing" id="eNP-LT-oXe"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -382,7 +386,6 @@
                         <constraints>
                             <constraint firstItem="aH1-iC-fZX" firstAttribute="leading" secondItem="sHW-N2-I5c" secondAttribute="leading" id="0ZB-Ei-pAQ"/>
                             <constraint firstAttribute="bottom" secondItem="aH1-iC-fZX" secondAttribute="bottom" id="6pd-Os-hDo"/>
-                            <constraint firstItem="aH1-iC-fZX" firstAttribute="top" secondItem="sHW-N2-I5c" secondAttribute="bottom" constant="-250" id="OzM-xb-puU"/>
                             <constraint firstAttribute="trailing" secondItem="aH1-iC-fZX" secondAttribute="trailing" id="zkU-VY-9oF"/>
                         </constraints>
                     </view>

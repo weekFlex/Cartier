@@ -81,7 +81,6 @@ class MainHomeVC: UIViewController {
         } else {
             showFloating()
         }
-        
     }
     
     @IBAction func addToDoBtnDidTap(_ sender: Any) {
@@ -92,11 +91,13 @@ class MainHomeVC: UIViewController {
         editRoutineVC.entryNumber = 3
         editRoutineVC.date = weeklyData[currentDay].date
         self.present(editRoutineVC, animated: true, completion: .none)
+        clearPage()
     }
     @IBAction func getRoutineBtnDidtap(_ sender: Any) {
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
         self.navigationController?.pushViewController(myRoutineVC, animated: true)
+        clearPage()
     }
     
     //MARK: Life Cycle
@@ -111,6 +112,12 @@ class MainHomeVC: UIViewController {
         getRoutines()
         setDate()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let touch = touches.first , touch.view == self.dimView {
+            hideFloating()
+        } }
 }
 
 
@@ -131,7 +138,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                         let routineId = self.weeklyData[self.currentDay].items[indexPath.row].routineId
                         APIService.shared.deleteTodoRoutine(token, routineId: routineId ){ result in
                             switch result {
-
+                            
                             case .success(_):
                                 print("삭제완료")
                             case .failure(let error):
@@ -148,6 +155,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 self.weeklyData[self.currentDay].items.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendarCollectionView.reloadData()
+                self.tableView.reloadData()
             }
             alert.addAction(delete)
             alert.addAction(cancel)
@@ -227,6 +235,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
+        print("cellIndex : \(cellIndex), viewIndex:\(viewIndex)")
         popupVC.delegate = self
         popupVC.todoId = todoId
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
@@ -265,9 +274,8 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
-        var data = weeklyData[currentDay].items[cellIndex]
-        data.todos.remove(at: viewIndex)
-        if data.todos.count == 0 {
+        weeklyData[currentDay].items[cellIndex].todos.remove(at: viewIndex)
+        if weeklyData[currentDay].items[cellIndex].todos.count == 0 {
             weeklyData[currentDay].items.remove(at: cellIndex)
         }
         tableView.reloadData()
@@ -353,7 +361,7 @@ extension MainHomeVC {
                             }
                         }
                         print(weeklyData)
-
+                        
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
                     // 데이터 전달 후 다시 로드
@@ -403,7 +411,7 @@ extension MainHomeVC {
     }
     
     func calculateCategoryToday(currentDay: Int){
-        var categoryCounter = [Int](repeating: 0, count: 15)
+        var categoryCounter = [Int](repeating: 0, count: 16)
         for routine in weeklyData[currentDay].items{
             for todo in routine.todos{
                 if todo.done {
@@ -416,7 +424,7 @@ extension MainHomeVC {
         representCategory[currentDay] = categoryIndex
     }
     
-
+    
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }
@@ -465,6 +473,7 @@ extension MainHomeVC {
             stack.isHidden = true
             stack.alpha = 0     //다시 보여줄 때를 위해
         }
+        isFloating = !isFloating
         self.dimView.alpha = 0
         self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
     }
@@ -473,7 +482,7 @@ extension MainHomeVC {
     // 할일 추가했을 때!
     @objc func didDismissCreateTodoVC(_ noti: Notification) {
         clearPage()
-       
+        
         getRoutines() //네트워크 통신 한번더
         calendarCollectionView.reloadData() // 리로드
         tableView.reloadData() // 리로드
