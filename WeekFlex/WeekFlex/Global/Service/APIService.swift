@@ -81,6 +81,11 @@ struct APIService {
         let target: APITarget = .makeRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests)
         judgeObject(target, completion: completion)
     }
+    
+    func editRoutine(_ token: String, _ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest], _ id: Int, completion: @escaping (NetworkResult<Routine>)->(Void)){
+        let target: APITarget = .editRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests, id: id)
+        judgeObject(target, completion: completion)
+    }
 
     func registerRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
         let target: APITarget = .registerRoutine(token: token, routineID: routineID)

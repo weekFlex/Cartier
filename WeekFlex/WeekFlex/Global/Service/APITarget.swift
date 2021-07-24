@@ -23,6 +23,7 @@ enum APITarget {
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
     case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
+    case editRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest], id: Int) // 루틴 수정하기 API
     case registerRoutine(token: String, routineID: Int) // 루틴 등록
     
 }
@@ -55,6 +56,8 @@ extension APITarget: TargetType {
             return "api/v1/todo/\(todoId)"
         case .getRoutine, .makeRoutine, .deleteRoutine:
             return "api/v1/routine"
+        case .editRoutine(_, _, _, let id):
+            return "api/v1/routine/\(id)"
         case .createTodo:
             return "api/v1/todo"
         case .registerRoutine(_, let routineID):
@@ -76,7 +79,7 @@ extension APITarget: TargetType {
         case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
             return .delete
             
-        case .updateTodo:
+        case .updateTodo, .editRoutine:
             return .put
         }
     }
@@ -128,7 +131,7 @@ extension APITarget: TargetType {
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
             
-        case .makeRoutine(_, let name, let routineTaskSaveRequests):
+        case .makeRoutine(_, let name, let routineTaskSaveRequests), .editRoutine(_, let name, let routineTaskSaveRequests, _):
             
             let encoder: JSONEncoder = JSONEncoder()
             let newRoutine = MakeRoutineData(name,routineTaskSaveRequests)
@@ -149,7 +152,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .editRoutine(let token, _, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }
