@@ -23,3 +23,17 @@ struct RoutineTaskSaveRequest: Codable {
     let taskId: Int
 }
 
+struct EditRoutineData: Codable {
+    let name: String
+    let routineTaskUpdateRequests: [RoutineTaskUpdateRequests]
+    
+    init(_ name: String, _ routineTaskUpdateRequests: [RoutineTaskUpdateRequests]) {
+        self.name = name
+        self.routineTaskUpdateRequests = routineTaskUpdateRequests
+    }
+}
+
+struct RoutineTaskUpdateRequests: Codable {
+    let days: [Day]
+    let taskId: Int
+}

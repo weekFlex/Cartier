@@ -614,8 +614,11 @@ extension SelectToDoVC: SelectedItemViewDelegate {
                 changeHour.days?[i].endTime = endTime.changeHour()
             }
         }
-        
         selectedViewModel.insert(changeHour, at: 0)
+        
+        print(value)
+        print("------------")
+        print(selectedViewModel)
     }
     
     func listItemRemoved(value: Int) {

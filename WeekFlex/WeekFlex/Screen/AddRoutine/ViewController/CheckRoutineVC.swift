@@ -33,27 +33,58 @@ class CheckRoutineVC: UIViewController {
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         // 저장하기 버튼 클릭 Event
         
-        if let routineEditId = routineEditId {
-            // 루틴 수정하기라면?
-            
-        } else {
-            // 새로운 루틴 만들기라면?
-            
-            var routineTask: [RoutineTaskSaveRequest] = []
-            
-            if let routineList = routineList {
-                for i in 0...routineList.count - 1 {
-                    
-                    if let days = routineList[i].days {
-                        routineTask.append(RoutineTaskSaveRequest(days: days, taskId: routineList[i].id))
-                    }
-                }
-            }
-            
-            if NetworkState.isConnected() {
-                 //네트워크 연결 시
+        if NetworkState.isConnected() {
+             //네트워크 연결 시
 
-                if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                
+                if let id = routineEditId {
+                    // 루틴 수정하기라면?
+                    var routineTask: [RoutineTaskUpdateRequests] = []
+                    
+                    if let routineList = routineList {
+                        for i in 0...routineList.count - 1 {
+                            
+                            if let days = routineList[i].days {
+                                routineTask.append(RoutineTaskUpdateRequests(days: days, taskId: routineList[i].id))
+                            }
+                        }
+                    }
+                    
+                    APIService.shared.editRoutine(token, self.routineNameTextField.text!, routineTask, id) { [self] result in
+                        switch result {
+
+                        case .success(_):
+                            //루틴 수정하기 완료
+                            
+                            self.navigationController?.viewControllers.forEach {
+                                if let vc = $0 as? MyRoutineListVC {
+                                    self.navigationController?.popToViewController(vc, animated: true)
+                                    return
+                                    // 이전으로 돌아감
+                                }
+                            }
+                            
+                        case .failure(let error):
+                            print(error)
+
+                        }
+                    }
+                    
+                } else {
+                    // 루틴 생성하기라면?
+                    
+                    var routineTask: [RoutineTaskSaveRequest] = []
+                    
+                    if let routineList = routineList {
+                        for i in 0...routineList.count - 1 {
+                            
+                            if let days = routineList[i].days {
+                                routineTask.append(RoutineTaskSaveRequest(days: days, taskId: routineList[i].id))
+                            }
+                        }
+                    }
+                    
                     APIService.shared.makeRoutine(token, self.routineNameTextField.text!, routineTask) { [self] result in
                         switch result {
 
@@ -73,12 +104,13 @@ class CheckRoutineVC: UIViewController {
 
                         }
                     }
+                    
                 }
-            } else {
-                 //네트워크 미연결 팝업 띄우기
-
+                
             }
-            
+        } else {
+             //네트워크 미연결 팝업 띄우기
+
         }
         
        

@@ -23,7 +23,7 @@ enum APITarget {
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
     case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
-    case editRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest], id: Int) // 루틴 수정하기 API
+    case editRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskUpdateRequests], id: Int) // 루틴 수정하기 API
     case registerRoutine(token: String, routineID: Int) // 루틴 등록
     
 }
@@ -131,14 +131,23 @@ extension APITarget: TargetType {
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
             
-        case .makeRoutine(_, let name, let routineTaskSaveRequests), .editRoutine(_, let name, let routineTaskSaveRequests, _):
+        case .makeRoutine(_, let name, let routineTaskSaveRequests) :
             
             let encoder: JSONEncoder = JSONEncoder()
             let newRoutine = MakeRoutineData(name,routineTaskSaveRequests)
             let jsonData: Data = try! encoder.encode(newRoutine)
             
             return .requestData(jsonData)
+            
+        case .editRoutine(_, let name, let routineTaskSaveRequests, _) :
+        
+            let encoder: JSONEncoder = JSONEncoder()
+            let newRoutine = EditRoutineData(name,routineTaskSaveRequests)
+            let jsonData: Data = try! encoder.encode(newRoutine)
+            
+            return .requestData(jsonData)
         }
+        
     }
     
     var validationType: Moya.ValidationType {
