@@ -22,7 +22,9 @@ enum APITarget {
     case deleteRoutine(token: String, routineID: Int)
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
+    case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
     case registerRoutine(token: String, routineID: Int) // 루틴 등록
+    
 }
 
 // MARK: TargetType Protocol 구현
@@ -51,10 +53,10 @@ extension APITarget: TargetType {
             return  "api/v1/todo/routine"
         case .deleteTodo(_,let todoId), .updateTodo(_, _, _, _, _, let todoId):
             return "api/v1/todo/\(todoId)"
+        case .getRoutine, .makeRoutine, .deleteRoutine:
+            return "api/v1/routine"
         case .createTodo:
             return "api/v1/todo"
-        case .getRoutine, .deleteRoutine:
-            return "api/v1/routine"
         case .registerRoutine(_, let routineID):
             return "api/v1/routine/\(routineID)/register"
         }
@@ -68,7 +70,7 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
-        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine:
+        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine:
             return .post
             
         case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
@@ -125,9 +127,15 @@ extension APITarget: TargetType {
             
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
+            
+        case .makeRoutine(_, let name, let routineTaskSaveRequests):
+            
+            let encoder: JSONEncoder = JSONEncoder()
+            let newRoutine = MakeRoutineData(name,routineTaskSaveRequests)
+            let jsonData: Data = try! encoder.encode(newRoutine)
+            
+            return .requestData(jsonData)
         }
-        
-        
     }
     
     var validationType: Moya.ValidationType {
@@ -141,7 +149,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }

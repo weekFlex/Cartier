@@ -30,6 +30,7 @@
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
 		2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC526A779EE00A53F8E /* SimpleData.swift */; };
 		9B02562326A9A75200234098 /* UIString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02562226A9A75200234098 /* UIString+Extension.swift */; };
+		9B02562F26A9C2C300234098 /* MakeRoutineData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02562E26A9C2C300234098 /* MakeRoutineData.swift */; };
 		9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* SelectToDoVC.swift */; };
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
@@ -127,6 +128,7 @@
 		2D282EC526A779EE00A53F8E /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
 		45A572E8848738C512AB106E /* Pods-WeekFlex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.debug.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.debug.xcconfig"; sourceTree = "<group>"; };
 		9B02562226A9A75200234098 /* UIString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+Extension.swift"; sourceTree = "<group>"; };
+		9B02562E26A9C2C300234098 /* MakeRoutineData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineData.swift; sourceTree = "<group>"; };
 		9B1041912607594800746FCF /* SelectToDoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectToDoVC.swift; sourceTree = "<group>"; };
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineNameVC.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				9B9EEFF226989FA800FA0B5C /* TaskData.swift */,
 				0EBADDCE2699E4B7007A9323 /* DailyData.swift */,
 				9ED56E4A26A34BF100E1DEBF /* RoutineData.swift */,
+				9B02562E26A9C2C300234098 /* MakeRoutineData.swift */,
 				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
 			);
 			path = Model;
@@ -868,6 +871,7 @@
 				9BE0BFF92684DE3700E2FEDC /* GenericResponse.swift in Sources */,
 				0E795358261F6D0900345659 /* CalendarCell.swift in Sources */,
 				9B9EEFF326989FA800FA0B5C /* TaskData.swift in Sources */,
+				9B02562F26A9C2C300234098 /* MakeRoutineData.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
 				9E57245126A9D9610084C3BD /* TodoService.swift in Sources */,
 				9BE0BFFD2684DFFD00E2FEDC /* SimpleResponse.swift in Sources */,

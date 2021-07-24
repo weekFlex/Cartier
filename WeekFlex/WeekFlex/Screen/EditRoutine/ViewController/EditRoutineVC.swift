@@ -112,7 +112,16 @@ class EditRoutineVC: UIViewController {
             let dict = editRouineViewModel.days
             let newData = dict.reduce(into: [Day]()) { dayStruct, dayDict in
                 if dayDict.value == 1 {
-                    dayStruct.append(Day(endTime: editRouineViewModel.todo.endTime, startTime: editRouineViewModel.todo.startTime, name: dayDict.key))
+                    
+                    if let endTime = editRouineViewModel.todo.endTime,
+                       let startTime = editRouineViewModel.todo.startTime {
+                     
+                        dayStruct.append(Day(endTime: endTime, startTime: startTime, name: dayDict.key))
+                        
+                    } else {
+                        dayStruct.append(Day(name: dayDict.key))
+                    }
+                    
                 }
             }.sorted { first, second in
                 let day = ["월":0, "화":1, "수":2, "목":3, "금":4, "토":5, "일":6]

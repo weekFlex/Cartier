@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fIX-jk-IgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fIX-jk-IgO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -286,11 +286,24 @@
                                     <constraint firstItem="cwi-kb-rq7" firstAttribute="top" secondItem="lYA-Ti-s0D" secondAttribute="top" id="tPd-4F-UnL"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGk-xK-EvI">
+                                <rect key="frame" x="330" y="804" width="60" height="60"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="D1M-4x-zmh"/>
+                                    <constraint firstAttribute="width" constant="60" id="luQ-wm-HcU"/>
+                                </constraints>
+                                <state key="normal" image="icon32Plus"/>
+                                <connections>
+                                    <action selector="addTaskButtonDidTap:" destination="84J-78-AmK" eventType="touchUpInside" id="HQu-5C-b1s"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mxy-Dt-pBH"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3Fh-Ba-zXs" firstAttribute="top" secondItem="7yg-fr-fW0" secondAttribute="top" id="4fc-nK-K5x"/>
+                            <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="NGk-xK-EvI" secondAttribute="trailing" constant="24" id="4mL-TM-m0F"/>
                             <constraint firstItem="MTN-1v-mO3" firstAttribute="top" secondItem="0Tz-Tc-Fty" secondAttribute="bottom" priority="750" constant="40" id="5Gp-W1-vZC"/>
                             <constraint firstItem="lYA-Ti-s0D" firstAttribute="leading" secondItem="MTN-1v-mO3" secondAttribute="leading" id="7g9-mw-nqn"/>
                             <constraint firstItem="NWc-2E-t4g" firstAttribute="top" secondItem="1xq-Mt-uWb" secondAttribute="bottom" constant="10" id="Aiz-35-nTy"/>
@@ -303,6 +316,7 @@
                             <constraint firstItem="1xq-Mt-uWb" firstAttribute="bottom" secondItem="3Fh-Ba-zXs" secondAttribute="bottom" id="UmJ-3h-TIU"/>
                             <constraint firstItem="NWc-2E-t4g" firstAttribute="leading" secondItem="mxy-Dt-pBH" secondAttribute="leading" id="VNt-N4-lnt"/>
                             <constraint firstItem="lgu-nc-62Z" firstAttribute="centerY" secondItem="0Tz-Tc-Fty" secondAttribute="centerY" id="XCT-bm-qBD"/>
+                            <constraint firstAttribute="bottom" secondItem="NGk-xK-EvI" secondAttribute="bottom" constant="32" id="abp-8V-aas"/>
                             <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="lgu-nc-62Z" secondAttribute="trailing" constant="22" id="fFf-vw-nIF"/>
                             <constraint firstItem="mxy-Dt-pBH" firstAttribute="trailing" secondItem="MTN-1v-mO3" secondAttribute="trailing" constant="24" id="kQG-i2-iAH"/>
                             <constraint firstItem="0Tz-Tc-Fty" firstAttribute="width" secondItem="7yg-fr-fW0" secondAttribute="width" multiplier="32/375" id="lBZ-bI-krN"/>
@@ -315,6 +329,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addTaskButton" destination="NGk-xK-EvI" id="a37-5v-LKQ"/>
                         <outlet property="backButton" destination="0Tz-Tc-Fty" id="DQI-2c-4tN"/>
                         <outlet property="categoryCollectionView" destination="SHc-Us-Jem" id="HuA-3C-LXf"/>
                         <outlet property="collectionLayout" destination="MaL-bz-xXV" id="cjp-N3-Qht"/>
@@ -381,7 +396,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckRoutineCell" rowHeight="112" id="ohG-BB-iXu" customClass="CheckRoutineCell" customModule="WeekFlex" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="366" height="112"/>
+                                        <rect key="frame" x="0.0" y="28" width="366" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ohG-BB-iXu" id="ETG-Ey-f22">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="112"/>
@@ -594,6 +609,7 @@
         <image name="icon16SearchInactive" width="16" height="16"/>
         <image name="icon32BackBlack" width="32" height="32"/>
         <image name="icon32CheckInactive" width="32" height="32"/>
+        <image name="icon32Plus" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

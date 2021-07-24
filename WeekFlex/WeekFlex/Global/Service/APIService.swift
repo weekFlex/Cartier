@@ -77,6 +77,11 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func makeRoutine(_ token: String, _ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest], completion: @escaping (NetworkResult<Routine>)->(Void)){
+        let target: APITarget = .makeRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests)
+        judgeObject(target, completion: completion)
+    }
+
     func registerRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
         let target: APITarget = .registerRoutine(token: token, routineID: routineID)
         judgeObject(target, completion: completion)
@@ -122,6 +127,7 @@ extension APIService {
                 }
             case .failure(let error):
                 completion(.failure(error.response!.statusCode))
+                
             }
         }
     }

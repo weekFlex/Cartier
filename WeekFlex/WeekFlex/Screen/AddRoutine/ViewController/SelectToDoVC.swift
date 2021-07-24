@@ -57,6 +57,8 @@ class SelectToDoVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var addTaskButton: UIButton!
+    
     // MARK: IBAction
     
     @IBAction func backButtonDidTap(_ sender: Any) {
@@ -78,6 +80,11 @@ class SelectToDoVC: UIViewController {
         
         self.navigationController?.pushViewController(nextVC, animated: true)
         // navigationController를 이용해 다음 뷰로 이동
+        
+    }
+    
+    @IBAction func addTaskButtonDidTap(_ sender: Any) {
+        // @민승이
         
     }
     
@@ -117,6 +124,9 @@ extension SelectToDoVC {
         nextButton.setTitle("다음", for: .normal)
         nextButton.titleLabel?.font = UIFont.appleMedium(size: 16)
         nextButton.tintColor = UIColor.gray4
+        
+        addTaskButton.makeRounded(cornerRadius: nil)
+        
     }
     
     func setLabel() {
@@ -589,7 +599,20 @@ extension SelectToDoVC: SelectedItemViewDelegate {
     
     func listItemAdded(value: TaskListData) {
         // 리스트에 추가하기
-        selectedViewModel.insert(value, at: 0)
+        
+        var changeHour: TaskListData = value
+
+        for i in 0...value.days!.count - 1 {
+            // 서버에 보낼 형식으로 변경해서 저장
+            
+            if let startTime = value.days?[i].startTime,
+               let endTime = value.days?[i].endTime {
+                changeHour.days?[i].startTime = startTime.changeHour()
+                changeHour.days?[i].endTime = endTime.changeHour()
+            }
+        }
+        
+        selectedViewModel.insert(changeHour, at: 0)
     }
     
     func listItemRemoved(value: Int) {

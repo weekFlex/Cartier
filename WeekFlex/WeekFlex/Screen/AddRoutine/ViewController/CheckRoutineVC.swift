@@ -15,6 +15,7 @@ class CheckRoutineVC: UIViewController {
     var routineName: String?
     var routineList: [TaskListData]?
     
+    
     // 루틴 수정 뷰에서 왔는지 알 수 있는 변수
     var routineEditEnable: Bool = false
     
@@ -32,12 +33,53 @@ class CheckRoutineVC: UIViewController {
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         // 저장하기 버튼 클릭 Event
         
-        /*
-         경우에 따라
-         1. 루틴 생성 api
-         2. 루틴 수정 api
-         로 구분해줘야함
-         */
+        if !routineEditEnable {
+            // 새로운 루틴 만들기라면?
+            
+            var routineTask: [RoutineTaskSaveRequest] = []
+            
+            if let routineList = routineList {
+                for i in 0...routineList.count - 1 {
+                    
+                    if let days = routineList[i].days {
+                        routineTask.append(RoutineTaskSaveRequest(days: days, taskId: routineList[i].id))
+                    }
+                }
+            }
+
+            if NetworkState.isConnected() {
+                 //네트워크 연결 시
+
+                if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                    APIService.shared.makeRoutine(token, self.routineNameTextField.text!, routineTask) { [self] result in
+                        switch result {
+
+                        case .success(_):
+                            //루틴 생성하기 완료
+                            
+                            self.navigationController?.viewControllers.forEach {
+                                if let vc = $0 as? MyRoutineListVC {
+                                    self.navigationController?.popToViewController(vc, animated: true)
+                                    return
+                                    // 이전으로 돌아감
+                                }
+                            }
+                            
+                        case .failure(let error):
+                            print(error)
+
+                        }
+                    }
+                }
+            } else {
+                 //네트워크 미연결 팝업 띄우기
+
+            }
+            
+        }
+        
+       
+        
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
@@ -104,6 +146,8 @@ extension CheckRoutineVC {
         taskTableView.delegate = self
         taskTableView.dataSource = self
         taskTableView.separatorStyle = .none
+        
+        
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
