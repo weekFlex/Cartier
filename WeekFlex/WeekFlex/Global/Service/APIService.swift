@@ -18,17 +18,18 @@ struct APIService {
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
     func getTask(_ token: String, completion: @escaping (NetworkResult<[TaskData]>)->(Void)) {
-        
         let target: APITarget = .getTask(token: token)
         judgeObject(target, completion: completion)
-        
+    }
+    
+    func createTask(token: String, categoryId: Int, name: String, completion: @escaping (NetworkResult<[TaskListData]>)->(Void)) {
+        let target: APITarget = .createTask(token: token, categoryId: categoryId, name: name)
+        judgeObject(target, completion: completion)
     }
     
     func getCategory(_ token: String, completion: @escaping (NetworkResult<[CategoryData]>)->(Void)) {
-        
         let target: APITarget = .getCategory(token: token)
         judgeObject(target, completion: completion)
-        
     }
     
     func getWeekly(_ token: String, date: String,  completion: @escaping (NetworkResult<[DailyData]>)->(Void)){
@@ -41,27 +42,52 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func createCategory(_ token: String, color: Int, name: String, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
+        let target: APITarget = .createCategory(token: token, color: color, name: name)
+        judgeObject(target, completion: completion)
+    }
+    
+    func createTodo(_ token: String, categoryId: Int, date: String, endTime: String?, startTime: String?, name: String, completion: @escaping (NetworkResult<CreateTodoResponseData>)->(Void)) {
+        let target: APITarget = .createTodo(token: token, categoryId: categoryId, date: date, endTime: endTime, name: name, startTime: startTime)
+        judgeObject(target, completion: completion)
+    }
+    
     func deleteTodoRoutine(_ token: String, routineId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)){
         let target:  APITarget = .deleteTodoRoutine(token: token, routineId: routineId)
         judgeObject(target, completion: completion)
     }
     
-    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))){
+    func updateTodo(_ token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int, completion: @escaping (NetworkResult<Int>)-> (Void)) {
+        let target:  APITarget = .updateTodo(token: token, days: days, endTime: endTime, startTime: startTime, name: name, todoId: todoId)
+        judgeObject(target, completion: completion)
+    }
+    
+    func deleteTodo(_ token: String, todoId: Int, completion: @escaping ((NetworkResult<Int>) ->(Void))) {
         let target: APITarget = .deleteTodo(token: token, todoId: todoId)
         judgeObject(target, completion: completion)
     }
     
+    func deleteRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
+        let target: APITarget = .deleteRoutine(token: token, routineID: routineID)
+        judgeObject(target, completion: completion)
+    }
 
     func getRoutine(_ token: String,  completion: @escaping (NetworkResult<[Routine]>)->(Void)){
         let target: APITarget = .getRoutine(token: token)
         judgeObject(target, completion: completion)
     }
     
-    
     func makeRoutine(_ token: String, _ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest], completion: @escaping (NetworkResult<Routine>)->(Void)){
         let target: APITarget = .makeRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests)
         judgeObject(target, completion: completion)
     }
+
+    func registerRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
+        let target: APITarget = .registerRoutine(token: token, routineID: routineID)
+        judgeObject(target, completion: completion)
+    }
+    
+    
 }
 
 extension APIService {

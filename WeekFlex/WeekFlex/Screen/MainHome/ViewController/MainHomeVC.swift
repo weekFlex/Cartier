@@ -11,13 +11,9 @@ import RxSwift
 import RxCocoa
 import CoreData
 
-
-
 class MainHomeVC: UIViewController {
     
-    
     //MARK: Variable
-    
     
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
@@ -25,7 +21,6 @@ class MainHomeVC: UIViewController {
     var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
-            print("currentDay: ",currentDay)
             changeDate()    //클릭된 날짜 바뀌면 상단 날짜표시
             tableView.reloadData()  //바뀐 날짜로 테이블 리로드
             calendarCollectionView.reloadData()
@@ -47,7 +42,11 @@ class MainHomeVC: UIViewController {
         return view
     }()
     
+    // noti
+    let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
     
+    // 모달 뒤에 뜰 회색 전체 뷰
+    var modalBackgroundView: UIView!
     
     //MARK: IBOutlet
     
@@ -61,7 +60,6 @@ class MainHomeVC: UIViewController {
     @IBOutlet weak var getRoutineBtn: UIButton!
     @IBOutlet weak var getRoutineStack: UIStackView!
     @IBOutlet weak var addTaskStack: UIStackView!
-    
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var todayLabel: UILabel!
     @IBOutlet weak var noDataView: UIView!
@@ -72,7 +70,7 @@ class MainHomeVC: UIViewController {
     @IBAction func buttonDidTap(_ sender: UIButton) {       //Expended Header 펼치는 버튼
         if shouldCollaps {
             animateView(isCollaps: false,  height: 0)
-        }else {
+        } else {
             animateView(isCollaps: true,  height: 110)
         }
     }
@@ -80,26 +78,34 @@ class MainHomeVC: UIViewController {
     @IBAction func floatingBtnDidTap(_ sender: Any) {       //우측 하단 플로팅 버튼
         if isFloating {
             hideFloating()
-        }else{
+        } else {
             showFloating()
         }
         isFloating = !isFloating
+    }
+    
+    @IBAction func addToDoBtnDidTap(_ sender: Any) {
+        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
+        editRoutineVC.modalTransitionStyle = .coverVertical
+        editRoutineVC.modalPresentationStyle = .custom
+        editRoutineVC.entryNumber = 3
+        editRoutineVC.date = weeklyData[currentDay].date
+        self.present(editRoutineVC, animated: true, completion: .none)
+    }
+    @IBAction func getRoutineBtnDidtap(_ sender: Any) {
+        let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
+        guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
+        self.navigationController?.pushViewController(myRoutineVC, animated: true)
     }
     
     //MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad()")
+        self.navigationController?.navigationBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
         UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
-        
-        //        "accessToken": "exy.asdfgfafasfg",
-        //        "code": "dsagvbfqwerdsaxc",
-        //        "email": "hyerin@naver.com",
-        //        "name": "김혜린",
-        //        "signupType": "KAKAO"
-        
-        
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         getRoutines()
@@ -122,17 +128,11 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 if NetworkState.isConnected() {
                     // 네트워크 연결 시
                     if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                        print("network연결")
                         let routineId = self.weeklyData[self.currentDay].items[indexPath.row].routineId
-                        print("routineId: ",routineId)
                         APIService.shared.deleteTodoRoutine(token, routineId: routineId ){ result in
                             switch result {
-                            
-                            case .success(let data):
-                                print("삭제완료: ", data)
-                                
-                            // 데이터 전달 후 다시 로드
-                            
+                            case .success(_):
+                                print("삭제완료")
                             case .failure(let error):
                                 print(error)
                                 print("오류!!")
@@ -148,9 +148,8 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendarCollectionView.reloadData()
             }
-            
-            alert.addAction(cancel)
             alert.addAction(delete)
+            alert.addAction(cancel)
             present(alert,animated: false, completion: nil)
             
         }
@@ -226,7 +225,6 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
-        print("meatBall")
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.delegate = self
         popupVC.todoId = todoId
@@ -241,16 +239,31 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabEdit(cellIndex: Int, viewIndex: Int) {
         //수정 누르면
-        print("edit")
+        self.dismiss(animated: true, completion: .none)
+        modalAppeared()
         //민승이 뷰 띄우기!!
-        
-        print(weeklyData[currentDay].items[cellIndex].todos[viewIndex])
-        
+        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
+        editRoutineVC.modalTransitionStyle = .coverVertical
+        editRoutineVC.modalPresentationStyle = .custom
+        editRoutineVC.entryNumber = 4
+        editRoutineVC.cellIndex = cellIndex
+        editRoutineVC.viewIndex = viewIndex
+        editRoutineVC.saveTodoDataDelegate = self
+        editRoutineVC.hideViewDelegate = self
+        let data = weeklyData[currentDay].items[cellIndex].todos[viewIndex]
+        editRoutineVC.todoData = data
+        self.present(editRoutineVC, animated: true, completion: .none)
+    }
+    
+    func modalAppeared() {
+        modalBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(view.bounds.width), height: Int(view.bounds.height)))
+        modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.view.addSubview(modalBackgroundView)
     }
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
-        print("delete")
         var data = weeklyData[currentDay].items[cellIndex]
         data.todos.remove(at: viewIndex)
         if data.todos.count == 0 {
@@ -259,6 +272,22 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
         tableView.reloadData()
         calendarCollectionView.reloadData()
         
+    }
+    
+}
+extension MainHomeVC: SaveTodoProtocol, HideViewProtocol {
+    // 할일 수정했을 때 가져오는 것
+    func saveTodoProtocol(savedTodoData: TodoData, cellIndex: Int, viewIndex: Int) {
+        print("성공! \(savedTodoData)  \(cellIndex)  \(viewIndex)")
+        hideFloating()
+        isFloating = !isFloating
+        getRoutines() //네트워크 통신 한번더
+        calendarCollectionView.reloadData() // 리로드
+        tableView.reloadData() 
+    }
+    
+    func hideViewProtocol() {
+        modalBackgroundView.removeFromSuperview()
     }
     
 }
@@ -283,11 +312,8 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         guard let itemViewModel = weeklyData[safe: indexPath.row] else { return cell }
         cell.configure(with: itemViewModel)
         //상단 날짜 표시 라벨과 날짜 하단 흰색 바
-        
-        
         return cell
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                             indexPath: IndexPath) -> CGSize {
@@ -299,36 +325,36 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         currentDay = indexPath.row
         self.calendarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
-    
 }
-
 
 extension MainHomeVC {
     
     //MARK: function
     private func getRoutines(){
-        print("getRoutines()")
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"
         let date = dateFormat.string(from:Date())
         if NetworkState.isConnected() {
             // 네트워크 연결 시
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                
                 APIService.shared.getWeekly(token,date: date) { [self] result in
                     switch result {
-                    
                     case .success(let data):
                         weeklyData = data
-                        print(weeklyData)
+                        for day in weeklyData {
+                            for routine in day.items {
+                                for var todo in routine.todos {
+                                    todo.startTime = todo.startTime?.changeTime()
+                                    todo.endTime = todo.endTime?.changeTime()
+                                }
+                            }
+                        }
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
                     // 데이터 전달 후 다시 로드
-                    
                     case .failure(let error):
                         print(error)
                         print("오류!!")
-                        
                     }
                 }
             }
@@ -336,13 +362,9 @@ extension MainHomeVC {
             // 네트워크 미연결 팝업 띄우기
             print("네트워크 미연결")
         }
-        print("먼대")
     }
     
-    
-    
-    
-    private func setDate(){
+    private func setDate() {
         // 오늘 요일 계산해서 weekdate에 일주일 날짜 채워넣음
         let startFormatter = DateFormatter()
         startFormatter.dateFormat = "e" // 일요일 1부터
@@ -351,12 +373,6 @@ extension MainHomeVC {
         
         //startDay = 그 주 월요일(Date type)
         let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Date())!
-        
-        //        //오류나서 임시
-        //        let date: Int = Int(startFormatter.string(from: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)) ?? 1
-        //        currentDay = (date + 5) % 7
-        //        let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Calendar.current.date(byAdding: .day, value: -1, to: Date())!)!
-        //        ///
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM-dd-EEEE"
         
@@ -364,32 +380,25 @@ extension MainHomeVC {
             let temp = Calendar.current.date(byAdding: .day, value: i, to: startDay)!
             weekDate[i] = formatter.string(from: temp)
         }
-        
         changeDate()
-        
-        
-        
     }
     
     //currentDay가 바뀔때마다 상단 날짜 라벨 text 바꿔줌
-    private func changeDate(){
-        
+    private func changeDate() {
         let selectedDate = weekDate[currentDay].components(separatedBy: "-")
         if(selectedDate != [""]){
             if(selectedDate[1] == "1") {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "st, " + selectedDate[2]
-            }else if(selectedDate[1] == "2") {
+            } else if(selectedDate[1] == "2") {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "nd, " + selectedDate[2]
-            }else {
+            } else {
                 todayLabel.text = selectedDate[0] + " " + selectedDate[1] + "th, " + selectedDate[2]
             }
         }
     }
     
-    
     func calculateCategoryToday(currentDay: Int){
         var categoryCounter = [Int](repeating: 0, count: 15)
-        
         for routine in weeklyData[currentDay].items{
             for todo in routine.todos{
                 if todo.done {
@@ -399,15 +408,12 @@ extension MainHomeVC {
         }
         
         guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
-        
         representCategory[currentDay] = categoryIndex
     }
-    
     
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
     }
-    
     
     private func animateView(isCollaps:Bool ,  height:Double){
         shouldCollaps = isCollaps
@@ -418,7 +424,6 @@ extension MainHomeVC {
         }
     }
     
-    
     private func hideFloating(){
         floatingStacks.reversed().forEach { stack in
             UIView.animate(withDuration: 0.2) {
@@ -426,7 +431,6 @@ extension MainHomeVC {
                 self.view.layoutIfNeeded()
             }
         }
-        
         UIView.animate(withDuration: 0.2) {
             self.dimView.alpha = 0
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
@@ -437,18 +441,26 @@ extension MainHomeVC {
         floatingStacks.forEach { [weak self] stack in
             stack.isHidden = false
             stack.alpha = 0
-            
             UIView.animate(withDuration: 0.2) {
                 stack.alpha = 1
                 self?.view.layoutIfNeeded()
             }
         }
-        
         UIView.animate(withDuration: 0.2) {
             self.dimView.isHidden = false
             self.dimView.alpha = 1
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))
-            
         }
     }
+    
+    // MARK: Method
+    // 할일 추가했을 때!
+    @objc func didDismissCreateTodoVC(_ noti: Notification) {
+        hideFloating()
+        isFloating = !isFloating
+        getRoutines() //네트워크 통신 한번더
+        calendarCollectionView.reloadData() // 리로드
+        tableView.reloadData() // 리로드
+    }
+    
 }

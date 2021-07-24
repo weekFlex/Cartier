@@ -51,13 +51,9 @@ class MakeRoutineNameVC: UIViewController {
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         setView()
         setTextField()
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek", forKey: "UserToken")
-        // Do any additional setup after loading the view.
-
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -56,6 +56,8 @@
 		9E0FFBA026A8403500EB0428 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9F26A8403500EB0428 /* CategoryService.swift */; };
 		9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFBA126A8784F00EB0428 /* ColorCategoryTableViewCell.swift */; };
 		9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */; };
+		9E57244F26A9D8BA0084C3BD /* CreateTodoResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */; };
+		9E57245126A9D9610084C3BD /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57245026A9D9610084C3BD /* TodoService.swift */; };
 		9E5FD60225F4CAD6008EB927 /* MyRoutine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */; };
 		9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */; };
 		9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FD66426045B0C008EB927 /* UIColor+Extension.swift */; };
@@ -152,6 +154,8 @@
 		9E0FFB9F26A8403500EB0428 /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		9E0FFBA126A8784F00EB0428 /* ColorCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoutineTimeVC.swift; sourceTree = "<group>"; };
+		9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoResponseData.swift; sourceTree = "<group>"; };
+		9E57245026A9D9610084C3BD /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
 		9E5FD60125F4CAD6008EB927 /* MyRoutine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRoutine.storyboard; sourceTree = "<group>"; };
 		9E5FD60825F4CB33008EB927 /* MyRoutineListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutineListVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9E5FD66426045B0C008EB927 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				0EBADDCE2699E4B7007A9323 /* DailyData.swift */,
 				9ED56E4A26A34BF100E1DEBF /* RoutineData.swift */,
 				9B02562E26A9C2C300234098 /* MakeRoutineData.swift */,
+				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				9E0FFB9F26A8403500EB0428 /* CategoryService.swift */,
+				9E57245026A9D9610084C3BD /* TodoService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -867,6 +873,7 @@
 				9B9EEFF326989FA800FA0B5C /* TaskData.swift in Sources */,
 				9B02562F26A9C2C300234098 /* MakeRoutineData.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
+				9E57245126A9D9610084C3BD /* TodoService.swift in Sources */,
 				9BE0BFFD2684DFFD00E2FEDC /* SimpleResponse.swift in Sources */,
 				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
@@ -885,6 +892,7 @@
 				0EBADE13269F637D007A9323 /* Collection+Extension.swift in Sources */,
 				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
+				9E57244F26A9D8BA0084C3BD /* CreateTodoResponseData.swift in Sources */,
 				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9ED56E4F26A355A800E1DEBF /* RoutineService.swift in Sources */,

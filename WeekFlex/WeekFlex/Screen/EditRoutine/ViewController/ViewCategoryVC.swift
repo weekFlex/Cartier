@@ -10,8 +10,8 @@ import UIKit
 class ViewCategoryVC: UIViewController {
     
     // MARK: - Variables
-
-    @IBOutlet var categoryTableView: UITableView!
+    
+    let didDismissCreateCategoryVC: Notification.Name = Notification.Name("DidDismissCreateCategoryVC")
     var hideViewDelegate: HideViewProtocol?
     var saveCategoryDelegate: SaveCategoryProtocol?
     
@@ -19,7 +19,8 @@ class ViewCategoryVC: UIViewController {
     private var categoryListViewModel : CategoryListViewModel?
     
     // MARK: IBOutlet
-
+    
+    @IBOutlet var categoryTableView: UITableView!
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var modalBackgroundView: UIView!
     @IBOutlet var categoryView: UIView!
@@ -34,7 +35,7 @@ class ViewCategoryVC: UIViewController {
     }
     
     // MARK: Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
@@ -46,7 +47,6 @@ class ViewCategoryVC: UIViewController {
         super.viewWillLayoutSubviews()
         categoryView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
     }
-
 }
 
 // MARK: - Extension for Functions
@@ -54,6 +54,9 @@ class ViewCategoryVC: UIViewController {
 extension ViewCategoryVC {
     
     // MARK: Method
+    @objc func didDismissCreateCategoryVC(_ noti: Notification) {
+        setData()
+    }
     
     @objc func backgroundTapped(sender: UITapGestureRecognizer) {
         self.hideViewDelegate?.hideViewProtocol()
@@ -78,17 +81,20 @@ extension ViewCategoryVC {
     }
     
     func setDelegate() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateCategoryVC(_:)), name: didDismissCreateCategoryVC, object: nil)
         categoryTableView.dataSource = self
         categoryTableView.delegate = self
     }
     
     func setData() {
-        CategoryService().getCategories(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJlbWFpbFwiOlwibWluaUBrYWthby5jb21cIn0ifQ.OR6VUYpvHealBtmiE97xjwT3Z16_TfMfLYiri1j05ek") { categoryList in
-            if let categoryList = categoryList {
-                self.categoryListViewModel = CategoryListViewModel(categories: categoryList)
-            }
-            DispatchQueue.main.async {
-                self.categoryTableView.reloadData()
+        if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            CategoryService().getCategories(token: token) { categoryList in
+                if let categoryList = categoryList {
+                    self.categoryListViewModel = CategoryListViewModel(categories: categoryList)
+                }
+                DispatchQueue.main.async {
+                    self.categoryTableView.reloadData()
+                }
             }
         }
     }
@@ -118,7 +124,6 @@ extension ViewCategoryVC: UITableViewDataSource {
         // 지금 뷰가 없어진다
         self.hideViewDelegate?.hideViewProtocol()
         self.dismiss(animated: true, completion: nil)
-        print("selected: \(categoryVM)")
     }
     
 }
