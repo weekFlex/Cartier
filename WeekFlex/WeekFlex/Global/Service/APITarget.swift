@@ -11,12 +11,20 @@ import Moya
 enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
+    case createTask(token: String, categoryId: Int, name: String) // task 등록
     case getCategory(token: String) // 카테고리 리스트 API
+    case createCategory(token: String, color: Int, name: String)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
+    case updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int) // todo수정
+    case createTodo(token: String, categoryId: Int, date: String, endTime: String?, name: String, startTime: String?)
     case deleteTodoRoutine(token: String, routineId: Int)   //캘린더에서 루틴 전체 삭제
+    case deleteRoutine(token: String, routineID: Int)
     case deleteTodo(token: String, todoId: Int) //캘린더 할일삭제
     case getRoutine(token: String) // 루틴 리스트 API
+    case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
+    case registerRoutine(token: String, routineID: Int) // 루틴 등록
+    
 }
 
 // MARK: TargetType Protocol 구현
@@ -33,9 +41,9 @@ extension APITarget: TargetType {
         // path - 서버의 도메인 뒤에 추가 될 경로
         
         switch self {
-        case .getTask:
+        case .getTask, .createTask:
             return "api/v1/task/"
-        case .getCategory:
+        case .getCategory, .createCategory:
             return "api/v1/category"
         case .getWeekly:
             return "api/v1/calendar/week"
@@ -43,13 +51,15 @@ extension APITarget: TargetType {
             return "api/v1/todo/\(todoId)/done"
         case .deleteTodoRoutine:
             return  "api/v1/todo/routine"
-        case .deleteTodo(_,let todoId):
+        case .deleteTodo(_,let todoId), .updateTodo(_, _, _, _, _, let todoId):
             return "api/v1/todo/\(todoId)"
-        case .getRoutine:
-            return "api/v1/routine/"
+        case .getRoutine, .makeRoutine, .deleteRoutine:
+            return "api/v1/routine"
+        case .createTodo:
+            return "api/v1/todo"
+        case .registerRoutine(_, let routineID):
+            return "api/v1/routine/\(routineID)/register"
         }
-        
-        
     }
     
     var method: Moya.Method {
@@ -60,11 +70,14 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine:
             return .get
             
-        case .checkTodo:
+        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine:
             return .post
             
-        case .deleteTodoRoutine, .deleteTodo:
+        case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
             return .delete
+            
+        case .updateTodo:
+            return .put
         }
     }
     
@@ -84,21 +97,45 @@ extension APITarget: TargetType {
         
         case .getTask, .getCategory, .getRoutine:
             return .requestPlain
+        
+        case .createTask(_, let categoryId, let name):
+            return .requestParameters(parameters: ["categoryId": categoryId, "name": name], encoding: JSONEncoding.default)
             
         case .getWeekly(_, let date):
             return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
+        
+        case .createTodo(_, let categoryId, let date, let endTime, let name, let startTime):
+            return .requestParameters(parameters: ["categoryId": categoryId, "date": date, "name": name, "startTime": startTime ?? NSNull(), "endTime": endTime ?? NSNull()], encoding: JSONEncoding.default)
+        
+        case .createCategory(_, let color, let name):
+            return .requestParameters(parameters: ["color": color, "name": name], encoding: JSONEncoding.default)
             
         case .checkTodo(_, _, let done):
             return .requestParameters(parameters: ["done": done], encoding: JSONEncoding.default)
             
         case .deleteTodo(_, let todoId):
             return .requestParameters(parameters: ["todoId":todoId], encoding: JSONEncoding.default)
+        
+        case .deleteRoutine(_, let routineID):
+            return .requestParameters(parameters: ["routineId": routineID], encoding: URLEncoding.default)
+            
+        case .registerRoutine(_, let routineID):
+            return .requestParameters(parameters: ["routineId": routineID], encoding: JSONEncoding.default)
+        
+        case .updateTodo(_, let days, let endTime, let startTime, let name, let todoId):
+            return .requestParameters(parameters: ["todoId": todoId, "days": days, "endTime": endTime ?? NSNull(), "startTime": startTime ?? NSNull(), "name": name] , encoding: JSONEncoding.default)
             
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
+            
+        case .makeRoutine(_, let name, let routineTaskSaveRequests):
+            
+            let encoder: JSONEncoder = JSONEncoder()
+            let newRoutine = MakeRoutineData(name,routineTaskSaveRequests)
+            let jsonData: Data = try! encoder.encode(newRoutine)
+            
+            return .requestData(jsonData)
         }
-        
-        
     }
     
     var validationType: Moya.ValidationType {
@@ -112,9 +149,8 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .deleteTodo(token: let token, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
-         
         }
     }
     

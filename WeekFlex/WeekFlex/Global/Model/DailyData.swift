@@ -28,7 +28,7 @@ struct TodoData: Codable {
     var days: [String]?
     var endTime: String?
     let id: Int
-    let name: String
+    var name: String
     let routineId: Int?
     let routineName:String?
     var startTime: String?

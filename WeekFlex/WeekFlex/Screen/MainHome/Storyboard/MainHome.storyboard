@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2x5-xG-9cD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Ry-ep-wq6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -186,6 +186,9 @@
                                                     <constraint firstAttribute="height" constant="60" id="VOF-jv-RXl"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon60ImportcircleVisual"/>
+                                                <connections>
+                                                    <action selector="getRoutineBtnDidtap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="7Cd-kN-Flg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -205,6 +208,9 @@
                                                     <constraint firstAttribute="height" constant="60" id="mxb-9X-eIj"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon60PlustodocircleVisual"/>
+                                                <connections>
+                                                    <action selector="addToDoBtnDidTap:" destination="2x5-xG-9cD" eventType="touchUpInside" id="Vsg-rb-AWa"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -260,6 +266,7 @@
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="fNw-AW-H8I" secondAttribute="trailing" id="vcN-Ff-E8h"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="qh1-D5-d9A"/>
                     <connections>
                         <outlet property="addTaskBtn" destination="BEY-S9-pfO" id="VK6-SH-6Rg"/>
                         <outlet property="addTaskStack" destination="Ivo-U0-JyT" id="YkD-QI-MBB"/>
@@ -279,7 +286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWn-rM-XAH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1328.985507246377" y="-723.21428571428567"/>
+            <point key="canvasLocation" x="-418.84057971014494" y="-723.21428571428567"/>
         </scene>
         <!--Edit Pop UpVC-->
         <scene sceneID="Nqq-ZQ-LSz">
@@ -386,7 +393,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MbJ-RH-hhr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584" y="-723"/>
+            <point key="canvasLocation" x="326.08695652173918" y="-723.21428571428567"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="x9t-Sz-oG2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Ry-ep-wq6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dZq-Zw-hxq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2x5-xG-9cD" kind="relationship" relationship="rootViewController" id="f58-4F-OJu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ih5-Vo-1H1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1328.985507246377" y="-723.21428571428567"/>
         </scene>
     </scenes>
     <resources>

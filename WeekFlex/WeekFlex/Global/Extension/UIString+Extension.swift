@@ -52,5 +52,20 @@ extension String {
         return answer
         
     }
+    
+    func changeHour() -> String {
+        // 한자리 시간일 때 앞에 0 붙여주는 함수
+        // "9:00" -> "09:00"
+        
+        var hour: String = self
+        
+        if self.count == 4 {
+            // 한자리 숫자라면
+            hour = "0\(self)"
+        }
+        
+        return hour
+    }
+    
 }
 

@@ -35,15 +35,6 @@ class RoutineCell: UICollectionViewCell {
         
         routineNameLabel.text = data.name
         
-//        if data.days != nil {
-//            // 시간이 들어왔다면? (민승이가 넘겨줘씅ㄹ 때)
-////            timeLabel.text = data.days
-//            print(data.days)
-//            
-//        } else {
-//            timeLabel.text = ""
-//        }
-        
         if data.isBookmarked ?? false {
             // 북마크가 되어있는 지
             bookmarkImage.image = UIImage(named: "icon16BookmarkActive")
