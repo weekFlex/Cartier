@@ -7,3 +7,25 @@
 
 import Foundation
 import UIKit
+
+
+class TabBarVC: UITabBarController {
+    
+    enum TabBarItems: Int {
+        case main
+        case review
+        case myPage
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setTabBar()
+    }
+    
+    
+    
+    func setTabBar(){
+        
+        
+    }
+}

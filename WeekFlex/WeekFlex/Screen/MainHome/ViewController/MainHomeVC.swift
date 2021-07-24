@@ -401,6 +401,10 @@ extension MainHomeVC {
         representCategory[currentDay] = categoryIndex
     }
     
+    func addTodo(todo: TodoData, cellIndex: Int, viewIndex: Int){
+        
+    }
+    
     
     var buttonImg: UIImage {
         return shouldCollaps ? UIImage(named: "icon32UpWhite")!: UIImage(named: "icon32DownWhite" )!
