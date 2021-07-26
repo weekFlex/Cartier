@@ -26,7 +26,6 @@ class CheckRoutineCell: UITableViewCell {
     func configure(data: TaskListData) {
         
         taskNameLabel.text = data.name
-//        taskTimeLabel.text = data.da
         
         if let days = data.days?.map({ $0.name }).joined(separator: ", ") {
             if let startTime = data.days?[0].startTime?.changeTime(),

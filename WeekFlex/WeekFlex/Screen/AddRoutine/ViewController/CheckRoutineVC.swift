@@ -29,6 +29,12 @@ class CheckRoutineVC: UIViewController {
     
     // MARK: IBAction
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // 루틴 수정하기라면 이 뷰에 들어오자 마자 바로 키보드 띄우고 cursor 포커스 주기
+        self.routineNameTextField.becomeFirstResponder()
+    }
+    
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         // 저장하기 버튼 클릭 Event
