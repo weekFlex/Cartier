@@ -354,9 +354,8 @@ extension MainHomeVC {
                             for j in 0..<weeklyData[i].items.count {
                                 var data = weeklyData[i].items[j].todos
                                 for k in 0..<data.count {
-                                    data[k].startTime = data[k].startTime?.changeTime()
-                                    print(data[k].startTime)
-                                    data[k].endTime = data[k].endTime?.changeTime()
+                                    weeklyData[i].items[j].todos[k].startTime = data[k].startTime?.changeTime()
+                                    weeklyData[i].items[j].todos[k].endTime = data[k].endTime?.changeTime()
                                 }
                             }
                         }
