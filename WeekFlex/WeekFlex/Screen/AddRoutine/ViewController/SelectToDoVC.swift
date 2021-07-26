@@ -51,7 +51,6 @@ class SelectToDoVC: UIViewController {
     @IBOutlet weak var todoCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
-    
     @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
         didSet {
             collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -179,6 +178,9 @@ extension SelectToDoVC {
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
+        
+        let layout = categoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.scrollDirection = .horizontal
         
         todoCollectionView.delegate = self
         todoCollectionView.dataSource = self

@@ -69,7 +69,7 @@
                                             <constraint firstAttribute="height" constant="2" id="T8y-Kc-RJW"/>
                                         </constraints>
                                     </view>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SHc-Us-Jem">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SHc-Us-Jem">
                                         <rect key="frame" x="58" y="51" width="340" height="51"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VAD-km-JHg">
@@ -332,7 +332,7 @@
                         <outlet property="addTaskButton" destination="NGk-xK-EvI" id="a37-5v-LKQ"/>
                         <outlet property="backButton" destination="0Tz-Tc-Fty" id="DQI-2c-4tN"/>
                         <outlet property="categoryCollectionView" destination="SHc-Us-Jem" id="HuA-3C-LXf"/>
-                        <outlet property="collectionLayout" destination="MaL-bz-xXV" id="cjp-N3-Qht"/>
+                        <outlet property="collectionLayout" destination="VAD-km-JHg" id="dfx-pX-fpa"/>
                         <outlet property="emptyLabel" destination="cwi-kb-rq7" id="fdB-Hi-WfK"/>
                         <outlet property="headerView" destination="3Fh-Ba-zXs" id="edu-ZS-9oL"/>
                         <outlet property="nextButton" destination="lgu-nc-62Z" id="fHu-CX-bb2"/>
