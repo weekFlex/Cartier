@@ -36,7 +36,7 @@ class CalendarCell: UICollectionViewCell {
     //대표 카테고리 계산
     func countCategory(data: DailyData){
         
-        var categoryCounter = [Int](repeating: 0, count: 15)
+        var categoryCounter = [Int](repeating: 0, count: 16)
         
         for routine in data.items{
             for todo in routine.todos{

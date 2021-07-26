@@ -297,10 +297,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-iC-fZX">
-                                <rect key="frame" x="0.0" y="642" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="646" width="414" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh3-2c-WLu">
-                                        <rect key="frame" x="24" y="29" width="40" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh3-2c-WLu">
+                                        <rect key="frame" x="24" y="29" width="332" height="24"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -334,6 +334,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="RZl-cY-V3D" secondAttribute="trailing" id="BAI-Vb-9EG"/>
                                             <constraint firstItem="uDK-bu-BGd" firstAttribute="top" secondItem="Tck-zg-JkD" secondAttribute="top" id="KMx-uJ-tvZ"/>
                                         </constraints>
                                     </stackView>
@@ -358,6 +359,9 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="6qF-Iz-3dd" secondAttribute="trailing" id="eNP-LT-oXe"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -365,6 +369,7 @@
                                     <constraint firstItem="l7j-h9-Ptb" firstAttribute="centerY" secondItem="Dh3-2c-WLu" secondAttribute="centerY" id="276-lq-3PV"/>
                                     <constraint firstAttribute="trailing" secondItem="33P-31-LzY" secondAttribute="trailing" id="6A1-HB-hat"/>
                                     <constraint firstItem="Dh3-2c-WLu" firstAttribute="leading" secondItem="aH1-iC-fZX" secondAttribute="leading" constant="24" id="6OU-CJ-Omt"/>
+                                    <constraint firstItem="l7j-h9-Ptb" firstAttribute="leading" secondItem="Dh3-2c-WLu" secondAttribute="trailing" constant="10" id="8dM-vM-Ges"/>
                                     <constraint firstAttribute="trailing" secondItem="Tck-zg-JkD" secondAttribute="trailing" id="Czp-eY-Dpt"/>
                                     <constraint firstItem="33P-31-LzY" firstAttribute="leading" secondItem="aH1-iC-fZX" secondAttribute="leading" constant="24" id="G1T-f9-jaN"/>
                                     <constraint firstAttribute="trailing" secondItem="l7j-h9-Ptb" secondAttribute="trailing" constant="16" id="OAx-u5-ZEi"/>
@@ -379,9 +384,9 @@
                         <viewLayoutGuide key="safeArea" id="cNo-Yd-vUv"/>
                         <color key="backgroundColor" white="0.0" alpha="0.20137958137356504" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aH1-iC-fZX" firstAttribute="leading" secondItem="cNo-Yd-vUv" secondAttribute="leading" id="0ZB-Ei-pAQ"/>
-                            <constraint firstItem="aH1-iC-fZX" firstAttribute="top" secondItem="cNo-Yd-vUv" secondAttribute="bottom" constant="-220" id="OzM-xb-puU"/>
-                            <constraint firstItem="cNo-Yd-vUv" firstAttribute="trailing" secondItem="aH1-iC-fZX" secondAttribute="trailing" id="zkU-VY-9oF"/>
+                            <constraint firstItem="aH1-iC-fZX" firstAttribute="leading" secondItem="sHW-N2-I5c" secondAttribute="leading" id="0ZB-Ei-pAQ"/>
+                            <constraint firstAttribute="bottom" secondItem="aH1-iC-fZX" secondAttribute="bottom" id="6pd-Os-hDo"/>
+                            <constraint firstAttribute="trailing" secondItem="aH1-iC-fZX" secondAttribute="trailing" id="zkU-VY-9oF"/>
                         </constraints>
                     </view>
                     <connections>

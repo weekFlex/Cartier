@@ -31,6 +31,7 @@ class TaskListView: UIView {
     var isDone: Bool = false {
         didSet{
             if(isDone){
+                
                 star.setImage(UIImage(named: "icon-24-star-n" + String(category)),for: .normal)
             }else{
                 star.setImage(UIImage(named: "icon-24-star-n0"),for: .normal)
@@ -50,7 +51,6 @@ class TaskListView: UIView {
     
     //MARK: IBAction
     @IBAction func starTabbed(_ sender: Any) {
-        print("별누름")
         isDone = !isDone
         self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
         
@@ -73,10 +73,8 @@ class TaskListView: UIView {
     }
     
     func configure(with viewModel: TodoData) {
-        
+        starTapped()
         taskTitle.text = viewModel.name
-        guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
-        time.text = startTime + " - " + endTime
         isDone = viewModel.done
         category = viewModel.categoryColor
         if(isDone){
@@ -84,8 +82,12 @@ class TaskListView: UIView {
         }else{
             star.setImage(UIImage(named: "icon-24-star-n0"), for: .normal)
         }
+        guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
+        time.text = startTime + " - " + endTime
         
-        starTapped()
+        
+        
+        
         
     }
     
