@@ -219,7 +219,7 @@
         <!--Delete AccountVC-->
         <scene sceneID="PyS-bF-VKW">
             <objects>
-                <viewController storyboardIdentifier="DeleteAccount" id="O7j-yV-oM7" customClass="DeleteAccountVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeleteAccount" hidesBottomBarWhenPushed="YES" id="O7j-yV-oM7" customClass="DeleteAccountVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PRk-pS-77Y">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
