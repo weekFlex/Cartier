@@ -38,7 +38,9 @@ class MainHomeVC: UIViewController {
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         view.alpha = 0
         view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         self.view.insertSubview(view, belowSubview: self.floatingStackView)
+
         return view
     }()
     
@@ -241,7 +243,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
-        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalPresentationStyle = .overFullScreen
         //모달 화면 띄우기
         
         self.present(popupVC, animated: true, completion: nil)
@@ -481,7 +483,7 @@ extension MainHomeVC {
     // 할일 추가했을 때!
     @objc func didDismissCreateTodoVC(_ noti: Notification) {
         clearPage()
-        
+        tabBarController?.tabBar.isHidden = false
         getRoutines() //네트워크 통신 한번더
         calendarCollectionView.reloadData() // 리로드
         tableView.reloadData() // 리로드
