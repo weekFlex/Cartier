@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eFz-A3-vYp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eFz-A3-vYp">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,7 +45,7 @@
                                 <state key="normal" image="icon-32-back-black"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ifN-jg-tQS">
-                                <rect key="frame" x="16" y="131" width="382" height="731"/>
+                                <rect key="frame" x="16" y="131" width="382" height="682"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BQG-WQ-0Mw">
                                     <size key="itemSize" width="128" height="128"/>
@@ -84,6 +84,8 @@
                             <constraint firstItem="ifN-jg-tQS" firstAttribute="leading" secondItem="RZa-LK-xUZ" secondAttribute="leading" constant="16" id="xU3-Ou-2jx"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="icon-32-review-disable" id="Sw3-Of-d4U"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="month" destination="Gex-Si-WZk" id="4Fl-9I-EVq"/>
                         <outlet property="nextButton" destination="M36-T2-V3S" id="Gte-pw-v2S"/>
@@ -98,6 +100,7 @@
     </scenes>
     <resources>
         <image name="icon-32-back-black" width="96" height="96"/>
+        <image name="icon-32-review-disable" width="32" height="32"/>
         <image name="icon32BackBlack" width="32" height="32"/>
     </resources>
 </document>
