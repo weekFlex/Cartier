@@ -342,7 +342,6 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="RZl-cY-V3D" secondAttribute="trailing" id="BAI-Vb-9EG"/>
-                                                    <constraint firstItem="uDK-bu-BGd" firstAttribute="top" secondItem="Tck-zg-JkD" secondAttribute="top" id="KMx-uJ-tvZ"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="33P-31-LzY">

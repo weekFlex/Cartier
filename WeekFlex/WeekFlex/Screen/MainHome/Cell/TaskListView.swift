@@ -82,6 +82,7 @@ class TaskListView: UIView {
         }else{
             star.setImage(UIImage(named: "icon-24-star-n0"), for: .normal)
         }
+
         guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
         time.text = startTime + " - " + endTime
         
