@@ -110,6 +110,7 @@ class MainHomeVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
         UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
+        tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         getRoutines()
         setDate()
@@ -194,42 +195,67 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
-        
-        //루틴이름
         let cellData = weeklyData[currentDay].items[indexPath.row]
-        cell.title.text = "\(cellData.routineName)"
         let num = cellData.todos.count
         
-        //셀(루틴) 안에 커스텀 뷰 추가(할일들)
-        
-        for i in 0..<num {
-            
-            let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
-            let todo = cellData.todos[i]
-            view.todoId = cellData.todos[i].id
-            view.cellIndex = indexPath.row
-            view.viewIndex = i
-            view.delegate = self
-            view.configure(with: todo )
-            view.frame = cell.bounds
-            if(todo.startTime == nil){
-                view.heightAnchor.constraint(equalToConstant: 35).isActive = true
-            }else{
-                view.heightAnchor.constraint(equalToConstant: 51).isActive = true
+        if(indexPath.row == 0 && cellData.routineName == ""){
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "todayCell", for: indexPath) as? TodayTaskCell else { return UITableViewCell()}
+            //셀(루틴) 안에 커스텀 뷰 추가(할일들)
+            for i in 0..<num {
+                
+                let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
+                let todo = cellData.todos[i]
+                view.todoId = cellData.todos[i].id
+                view.cellIndex = indexPath.row
+                view.viewIndex = i
+                view.delegate = self
+                view.configure(with: todo )
+                view.frame = cell.bounds
+                if(todo.startTime == nil){
+                    view.heightAnchor.constraint(equalToConstant: 35).isActive = true
+                }else{
+                    view.heightAnchor.constraint(equalToConstant: 51).isActive = true
+                }
+                
+                
+                cell.stackView.translatesAutoresizingMaskIntoConstraints = false
+                cell.stackView.addArrangedSubview(view)
             }
             
+            cell.selectionStyle = .none
             
-            cell.stackView.translatesAutoresizingMaskIntoConstraints = false
-            cell.stackView.addArrangedSubview(view)
+            return cell
+        }else{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
+            
+            cell.title.text = "\(cellData.routineName)"
+            //셀(루틴) 안에 커스텀 뷰 추가(할일들)
+            for i in 0..<num {
+                
+                let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
+                let todo = cellData.todos[i]
+                view.todoId = cellData.todos[i].id
+                view.cellIndex = indexPath.row
+                view.viewIndex = i
+                view.delegate = self
+                view.configure(with: todo )
+                view.frame = cell.bounds
+                if(todo.startTime == nil){
+                    view.heightAnchor.constraint(equalToConstant: 35).isActive = true
+                }else{
+                    view.heightAnchor.constraint(equalToConstant: 51).isActive = true
+                }
+                
+                
+                cell.stackView.translatesAutoresizingMaskIntoConstraints = false
+                cell.stackView.addArrangedSubview(view)
+            }
+            
+            cell.selectionStyle = .none
+            
+            return cell
         }
-        
-        cell.selectionStyle = .none
-        
-        return cell
     }
-    
-    
 }
 
 extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {

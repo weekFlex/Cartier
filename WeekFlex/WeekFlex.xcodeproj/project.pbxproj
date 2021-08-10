@@ -28,6 +28,8 @@
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
+		0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC974726C25330003877B0 /* TodayTaskCell.swift */; };
+		0EFC974B26C258FB003877B0 /* TodayTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */; };
 		2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC526A779EE00A53F8E /* SimpleData.swift */; };
 		2D282EC926A9FC2A00A53F8E /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC826A9FC2A00A53F8E /* TabBarVC.swift */; };
 		2D282ECB26A9FC3C00A53F8E /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D282ECA26A9FC3C00A53F8E /* TabBar.storyboard */; };
@@ -127,6 +129,8 @@
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
+		0EFC974726C25330003877B0 /* TodayTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTaskCell.swift; sourceTree = "<group>"; };
+		0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayTaskCell.xib; sourceTree = "<group>"; };
 		2D282EC526A779EE00A53F8E /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
 		2D282EC826A9FC2A00A53F8E /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		2D282ECA26A9FC3C00A53F8E /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				0E26216026014B0B007D28F0 /* TaskListView.xib */,
 				0E26216326014B23007D28F0 /* TaskListView.swift */,
 				0E795357261F6D0900345659 /* CalendarCell.swift */,
+				0EFC974726C25330003877B0 /* TodayTaskCell.swift */,
+				0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -810,6 +816,7 @@
 				9E5FD6F226073996008EB927 /* Metropolis-ExtraBold.otf in Resources */,
 				9E5FD6EE26073996008EB927 /* Metropolis-ExtraLightItalic.otf in Resources */,
 				9E5FD6FB26073996008EB927 /* Metropolis-Thin.otf in Resources */,
+				0EFC974B26C258FB003877B0 /* TodayTaskCell.xib in Resources */,
 				9E5FD6EF26073996008EB927 /* Metropolis-ExtraBoldItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -924,6 +931,7 @@
 				9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */,
 				2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */,
 				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
+				0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */,
 				9E5FF5A9269A14D8000EAF7B /* Protocol.swift in Sources */,
