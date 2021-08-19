@@ -18,7 +18,7 @@
         <!--Main HomeVC-->
         <scene sceneID="Meb-21-cGf">
             <objects>
-                <viewController storyboardIdentifier="mainHomeStoryboard" id="2x5-xG-9cD" customClass="MainHomeVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainHomeStoryboard" extendedLayoutIncludesOpaqueBars="YES" id="2x5-xG-9cD" customClass="MainHomeVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Ek-qn-pLe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-AW-H8I">
-                                <rect key="frame" x="0.0" y="241" width="414" height="482"/>
+                                <rect key="frame" x="0.0" y="241" width="414" height="432"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="character132SadGray" translatesAutoresizingMaskIntoConstraints="NO" id="riI-ki-yvm">
                                         <rect key="frame" x="141" y="148" width="132" height="132"/>
@@ -168,7 +168,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="J32-5J-fAC">
-                                <rect key="frame" x="214" y="723" width="176" height="60"/>
+                                <rect key="frame" x="214" y="673" width="176" height="60"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="vIo-xE-tHQ">
                                         <rect key="frame" x="0.0" y="0.0" width="176" height="60"/>
@@ -246,7 +246,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BHq-2A-wUT"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="3W8-Zm-1Q9"/>
                             <constraint firstItem="fNw-AW-H8I" firstAttribute="top" secondItem="uRm-yg-E9r" secondAttribute="bottom" id="5ON-DU-pWA"/>
@@ -256,7 +256,7 @@
                             <constraint firstItem="55M-bn-jjY" firstAttribute="top" secondItem="uRm-yg-E9r" secondAttribute="bottom" id="aXc-Vj-9c4"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="V0t-FE-q3I" secondAttribute="trailing" id="cAE-TR-7WG"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="55M-bn-jjY" secondAttribute="bottom" id="cVa-VL-h1v"/>
-                            <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="30" id="eI4-MT-lf9"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="80" id="eI4-MT-lf9"/>
                             <constraint firstItem="fNw-AW-H8I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="fsj-hU-ADL"/>
                             <constraint firstItem="J32-5J-fAC" firstAttribute="top" secondItem="fNw-AW-H8I" secondAttribute="bottom" id="iiN-aE-8Jw"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
