@@ -29,6 +29,9 @@ class SelectToDoVC: UIViewController {
     var modalBackgroundView: UIView!
     var routineEditEnable: Bool = false
     
+    // notification
+    let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var headerView: UIView!
@@ -84,8 +87,12 @@ class SelectToDoVC: UIViewController {
     }
     
     @IBAction func addTaskButtonDidTap(_ sender: Any) {
-        // @민승이
-        
+        let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
+        editRoutineVC.modalTransitionStyle = .coverVertical
+        editRoutineVC.modalPresentationStyle = .custom
+        editRoutineVC.entryNumber = 2
+        self.present(editRoutineVC, animated: true, completion: .none)
     }
     
     
@@ -97,6 +104,7 @@ class SelectToDoVC: UIViewController {
         setLabel()
         setView()
         setDelegate()
+        setNotificationCenter()
         getTask()
         
         // Do any additional setup after loading the view.
@@ -115,6 +123,10 @@ class SelectToDoVC: UIViewController {
 extension SelectToDoVC {
     
     // MARK: Function
+    
+    func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
+    }
     
     func setButton() {
         
@@ -197,6 +209,13 @@ extension SelectToDoVC {
         
     }
     
+    @objc func didDismissCreateTodoVC(_ noti: Notification) {
+        getTask()
+        // @민희언니
+        // 여기에서 noti로 받아서
+        // 할일 추가 완료하고 reload 하게 하려고 했는뎅 새로고침이 안되네욥 ...
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         // TextField가 수정될 때 마다 실행 될 함수
         
@@ -228,7 +247,7 @@ extension SelectToDoVC {
                     
                     case .success(let data):
                         taskData = data
-                        
+                        print("추가 완료!")
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드

@@ -95,6 +95,7 @@ class MainHomeVC: UIViewController {
         self.present(editRoutineVC, animated: true, completion: .none)
         clearPage()
     }
+    
     @IBAction func getRoutineBtnDidtap(_ sender: Any) {
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
