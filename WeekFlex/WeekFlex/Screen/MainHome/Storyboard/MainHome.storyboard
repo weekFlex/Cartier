@@ -18,7 +18,7 @@
         <!--Main HomeVC-->
         <scene sceneID="Meb-21-cGf">
             <objects>
-                <viewController storyboardIdentifier="mainHomeStoryboard" id="2x5-xG-9cD" customClass="MainHomeVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainHomeStoryboard" extendedLayoutIncludesOpaqueBars="YES" id="2x5-xG-9cD" customClass="MainHomeVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Ek-qn-pLe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-AW-H8I">
-                                <rect key="frame" x="0.0" y="241" width="414" height="531"/>
+                                <rect key="frame" x="0.0" y="241" width="414" height="432"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="character132SadGray" translatesAutoresizingMaskIntoConstraints="NO" id="riI-ki-yvm">
                                         <rect key="frame" x="141" y="148" width="132" height="132"/>
@@ -77,7 +77,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="55M-bn-jjY">
-                                <rect key="frame" x="0.0" y="241" width="414" height="621"/>
+                                <rect key="frame" x="0.0" y="241" width="414" height="572"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2x5-xG-9cD" id="VUt-pE-Ixj"/>
@@ -168,7 +168,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="J32-5J-fAC">
-                                <rect key="frame" x="214" y="772" width="176" height="60"/>
+                                <rect key="frame" x="214" y="673" width="176" height="60"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="vIo-xE-tHQ">
                                         <rect key="frame" x="0.0" y="0.0" width="176" height="60"/>
@@ -246,7 +246,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BHq-2A-wUT"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="V0t-FE-q3I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="3W8-Zm-1Q9"/>
                             <constraint firstItem="fNw-AW-H8I" firstAttribute="top" secondItem="uRm-yg-E9r" secondAttribute="bottom" id="5ON-DU-pWA"/>
@@ -256,7 +256,7 @@
                             <constraint firstItem="55M-bn-jjY" firstAttribute="top" secondItem="uRm-yg-E9r" secondAttribute="bottom" id="aXc-Vj-9c4"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="trailing" secondItem="V0t-FE-q3I" secondAttribute="trailing" id="cAE-TR-7WG"/>
                             <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="55M-bn-jjY" secondAttribute="bottom" id="cVa-VL-h1v"/>
-                            <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="30" id="eI4-MT-lf9"/>
+                            <constraint firstItem="BHq-2A-wUT" firstAttribute="bottom" secondItem="J32-5J-fAC" secondAttribute="bottom" constant="80" id="eI4-MT-lf9"/>
                             <constraint firstItem="fNw-AW-H8I" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="fsj-hU-ADL"/>
                             <constraint firstItem="J32-5J-fAC" firstAttribute="top" secondItem="fNw-AW-H8I" secondAttribute="bottom" id="iiN-aE-8Jw"/>
                             <constraint firstItem="uRm-yg-E9r" firstAttribute="leading" secondItem="BHq-2A-wUT" secondAttribute="leading" id="jwE-es-8c6"/>
@@ -310,6 +310,10 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7j-h9-Ptb">
                                                 <rect key="frame" x="366" y="25" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="HQi-g8-9bM"/>
+                                                    <constraint firstAttribute="width" constant="32" id="zwx-mS-xD6"/>
+                                                </constraints>
                                                 <state key="normal" image="icon32CancleBlack"/>
                                                 <connections>
                                                     <action selector="cancelButton:" destination="xnl-2H-IoZ" eventType="touchUpInside" id="sKa-Cz-iuh"/>
@@ -338,7 +342,6 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="RZl-cY-V3D" secondAttribute="trailing" id="BAI-Vb-9EG"/>
-                                                    <constraint firstItem="uDK-bu-BGd" firstAttribute="top" secondItem="Tck-zg-JkD" secondAttribute="top" id="KMx-uJ-tvZ"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="33P-31-LzY">
@@ -367,7 +370,7 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="l7j-h9-Ptb" firstAttribute="centerY" secondItem="Dh3-2c-WLu" secondAttribute="centerY" id="276-lq-3PV"/>
                                             <constraint firstAttribute="trailing" secondItem="33P-31-LzY" secondAttribute="trailing" id="6A1-HB-hat"/>
@@ -415,7 +418,9 @@
         <scene sceneID="x9t-Sz-oG2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Ry-ep-wq6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icon-32-home-disable" selectedImage="icon32HomeActive" id="D0l-jd-ll2"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dZq-Zw-hxq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -433,9 +438,11 @@
     <resources>
         <image name="character132SadGray" width="132" height="132"/>
         <image name="icon-24-star-n0" width="24" height="24"/>
+        <image name="icon-32-home-disable" width="32" height="32"/>
         <image name="icon24DeleteBlack" width="72" height="72"/>
         <image name="icon24Edit" width="72" height="72"/>
         <image name="icon32CancleBlack" width="32" height="32"/>
+        <image name="icon32HomeActive" width="32" height="32"/>
         <image name="icon32UpWhite" width="32" height="32"/>
         <image name="icon60ImportcircleVisual" width="60" height="60"/>
         <image name="icon60PluscircleVisual" width="60" height="60"/>

@@ -195,7 +195,6 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
         
         //루틴이름
@@ -204,17 +203,24 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         let num = cellData.todos.count
         
         //셀(루틴) 안에 커스텀 뷰 추가(할일들)
+        
         for i in 0..<num {
-            let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
             
+            let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
+            let todo = cellData.todos[i]
             view.todoId = cellData.todos[i].id
             view.cellIndex = indexPath.row
             view.viewIndex = i
             view.delegate = self
-            view.frame = cell.bounds
-            view.heightAnchor.constraint(equalToConstant: 63).isActive = true
-            let todo = cellData.todos[i]
             view.configure(with: todo )
+            view.frame = cell.bounds
+            if(todo.startTime == nil){
+                view.heightAnchor.constraint(equalToConstant: 35).isActive = true
+            }else{
+                view.heightAnchor.constraint(equalToConstant: 51).isActive = true
+            }
+            
+            
             cell.stackView.translatesAutoresizingMaskIntoConstraints = false
             cell.stackView.addArrangedSubview(view)
         }
@@ -450,6 +456,7 @@ extension MainHomeVC {
         UIView.animate(withDuration: 0.2) {
             self.dimView.alpha = 0
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
+            self.tabBarController?.tabBar.isHidden = false
         }
         isFloating = !isFloating
     }
@@ -463,7 +470,9 @@ extension MainHomeVC {
                 self?.view.layoutIfNeeded()
             }
         }
+        
         UIView.animate(withDuration: 0.2) {
+            self.tabBarController?.tabBar.isHidden = true
             self.dimView.isHidden = false
             self.dimView.alpha = 1
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0Qr-fN-Uyd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0Qr-fN-Uyd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,11 +11,13 @@
         <scene sceneID="JZE-WA-G9L">
             <objects>
                 <tabBarController id="0Qr-fN-Uyd" customClass="TabBarVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="58b-Tb-iJU">
+                    <tabBar key="tabBar" contentMode="bottom" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="fill" id="58b-Tb-iJU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="12x-ev-pOc" kind="relationship" relationship="viewControllers" id="8Ql-7p-IF1"/>
@@ -31,31 +33,38 @@
         <scene sceneID="VMT-Xa-UTB">
             <objects>
                 <viewControllerPlaceholder storyboardName="MainHome" id="12x-ev-pOc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ogq-Zy-x4a"/>
+                    <tabBarItem key="tabBarItem" title="" id="ogq-Zy-x4a">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4q-Dy-7rW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1203" y="407"/>
+            <point key="canvasLocation" x="-1246" y="406"/>
         </scene>
         <!--Review-->
         <scene sceneID="pat-6Q-lJv">
             <objects>
                 <viewControllerPlaceholder storyboardName="Review" id="2aO-Ph-QK3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mIW-V8-uKb"/>
+                    <tabBarItem key="tabBarItem" title="" id="mIW-V8-uKb">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQh-B5-Pqh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-886" y="406"/>
+            <point key="canvasLocation" x="-915" y="406"/>
         </scene>
         <!--MyPage-->
         <scene sceneID="JP4-4f-HoO">
             <objects>
                 <viewControllerPlaceholder storyboardName="MyPage" id="aCB-XO-Opl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="zpl-FD-Lih"/>
+                    <tabBarItem key="tabBarItem" title="" id="zpl-FD-Lih">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVR-O1-h5k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-572" y="406"/>
+            <point key="canvasLocation" x="-599" y="406"/>
         </scene>
     </scenes>
 </document>
