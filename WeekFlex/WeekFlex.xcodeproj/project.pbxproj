@@ -53,6 +53,8 @@
 		9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */; };
 		9BEFD55B26A334F400FD9112 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */; };
 		9BEFD55E26A3488300FD9112 /* CheckRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */; };
+		9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFABB5526D7A68C0005AA2B /* WeekStarCell.swift */; };
+		9BFABB5C26D7B0980005AA2B /* LookBackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFABB5B26D7B0980005AA2B /* LookBackVC.swift */; };
 		9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9826A8366300EB0428 /* CategoryVM.swift */; };
 		9E0FFB9B26A836B800EB0428 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */; };
 		9E0FFB9D26A83A4400EB0428 /* CategoryDataWithoutID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */; };
@@ -154,6 +156,8 @@
 		9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineVC.swift; sourceTree = "<group>"; };
 		9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineCell.swift; sourceTree = "<group>"; };
+		9BFABB5526D7A68C0005AA2B /* WeekStarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStarCell.swift; sourceTree = "<group>"; };
+		9BFABB5B26D7B0980005AA2B /* LookBackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackVC.swift; sourceTree = "<group>"; };
 		9E0FFB9826A8366300EB0428 /* CategoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVM.swift; sourceTree = "<group>"; };
 		9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataWithoutID.swift; sourceTree = "<group>"; };
@@ -408,6 +412,7 @@
 		9B98763126D2437300EF218D /* LookBack */ = {
 			isa = PBXGroup;
 			children = (
+				9BFABB5326D7A66D0005AA2B /* Cell */,
 				9B98763726D243B100EF218D /* ViewController */,
 				9B98763226D243A000EF218D /* Storyboard */,
 			);
@@ -425,6 +430,7 @@
 		9B98763726D243B100EF218D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9BFABB5B26D7B0980005AA2B /* LookBackVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -472,6 +478,14 @@
 				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9BFABB5326D7A66D0005AA2B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9BFABB5526D7A68C0005AA2B /* WeekStarCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9E0FFB9E26A8402400EB0428 /* Service */ = {
@@ -927,6 +941,7 @@
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9EC2E07A2631DDAA00EF2F7E /* EditRoutineVC.swift in Sources */,
 				9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */,
+				9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */,
 				9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */,
 				9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */,
 				0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */,
@@ -946,6 +961,7 @@
 				9B02562326A9A75200234098 /* UIString+Extension.swift in Sources */,
 				9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */,
 				9EC2E07E2631DDBA00EF2F7E /* EditRoutineVM.swift in Sources */,
+				9BFABB5C26D7B0980005AA2B /* LookBackVC.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
 				9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */,
 				0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */,
