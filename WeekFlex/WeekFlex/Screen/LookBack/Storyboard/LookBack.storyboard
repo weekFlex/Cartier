@@ -73,14 +73,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRN-vn-syI">
-                                                <rect key="frame" x="141" y="134" width="132" height="132.5"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oRN-vn-syI">
+                                                <rect key="frame" x="141" y="150" width="132" height="132.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="oRN-vn-syI" secondAttribute="height" multiplier="1:1" id="lbF-z1-wII"/>
                                                 </constraints>
                                             </imageView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8T-Yy-bfB">
-                                                <rect key="frame" x="24" y="298.5" width="366" height="74"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w8T-Yy-bfB">
+                                                <rect key="frame" x="24" y="314.5" width="366" height="74"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="74" id="hmG-S9-7mC"/>
@@ -103,8 +103,8 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xc0-Vz-XnN">
-                                                <rect key="frame" x="0.0" y="412.5" width="414" height="200"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xc0-Vz-XnN">
+                                                <rect key="frame" x="0.0" y="428.5" width="414" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="Q5V-71-C7B"/>
@@ -127,23 +127,23 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eXx-R9-9bp">
-                                                <rect key="frame" x="0.0" y="638.5" width="414" height="6"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXx-R9-9bp">
+                                                <rect key="frame" x="0.0" y="654.5" width="414" height="6"/>
                                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="6" id="05y-bg-S9i"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJX-AA-c4A">
-                                                <rect key="frame" x="24" y="684.5" width="166" height="41"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJX-AA-c4A">
+                                                <rect key="frame" x="24" y="700.5" width="166" height="41"/>
                                                 <string key="text">1개의 루틴 성공 *-*
 3개의 루틴에 도전했어요</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBl-Iu-9jq">
-                                                <rect key="frame" x="24" y="757.5" width="366" height="128"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBl-Iu-9jq">
+                                                <rect key="frame" x="24" y="773.5" width="366" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="rnk-Nd-0Tq"/>
@@ -177,6 +177,7 @@
                                             <constraint firstItem="eXx-R9-9bp" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" id="DOQ-WG-2ag"/>
                                             <constraint firstItem="DI8-ud-cMF" firstAttribute="leading" secondItem="Pgu-hX-k6w" secondAttribute="leading" id="JI9-ji-wpd"/>
                                             <constraint firstItem="w8T-Yy-bfB" firstAttribute="top" secondItem="oRN-vn-syI" secondAttribute="bottom" constant="32" id="LQE-fV-a13"/>
+                                            <constraint firstItem="oRN-vn-syI" firstAttribute="top" secondItem="DI8-ud-cMF" secondAttribute="bottom" constant="40" id="O0c-Dj-RmH"/>
                                             <constraint firstItem="xc0-Vz-XnN" firstAttribute="top" secondItem="w8T-Yy-bfB" secondAttribute="bottom" constant="40" id="R5l-xW-sZe"/>
                                             <constraint firstItem="oRN-vn-syI" firstAttribute="centerX" secondItem="EVe-KD-mR6" secondAttribute="centerX" id="Rin-XL-PuC"/>
                                             <constraint firstItem="3JO-5j-tsX" firstAttribute="bottom" secondItem="Pgu-hX-k6w" secondAttribute="bottom" id="Z4H-aT-lRs"/>

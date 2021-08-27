@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qvK-pe-nye">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qvK-pe-nye">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -242,7 +242,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="character-80-sadcharacter-80-sad" translatesAutoresizingMaskIntoConstraints="NO" id="J15-9K-yNf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Character/character-80-sad" translatesAutoresizingMaskIntoConstraints="NO" id="J15-9K-yNf">
                                 <rect key="frame" x="127" y="236" width="136" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="136" id="CJi-F6-I61"/>
@@ -648,7 +648,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="character-80-sadcharacter-80-sad" width="240" height="240"/>
+        <image name="Character/character-80-sad" width="240" height="240"/>
         <image name="icon-24-check-blackicon-24-check-black" width="72" height="72"/>
         <image name="icon-24-check-grayicon-24-check-gray" width="72" height="72"/>
         <image name="icon-32-myPage-disable" width="32" height="32"/>

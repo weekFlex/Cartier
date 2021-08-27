@@ -30,6 +30,9 @@ class LookBackVC: UIViewController {
         setViewStyle()
     }
 
+    override func viewWillLayoutSubviews() {
+        titleImageView.setRounded(radius: nil)
+    }
 
 }
 
@@ -41,6 +44,7 @@ extension LookBackVC {
         
         weekStartCollectionView.delegate = self
         weekStartCollectionView.dataSource = self
+        weekStartCollectionView.setRounded(radius: 3)
         
         routineDateLabel.setLabel(text: "11월 30일~12월 6일", color: .gray3, font: .appleMedium(size: 12))
         
@@ -56,6 +60,10 @@ extension LookBackVC {
         
         writeLookBackButton.setButton(text: "회고 작성하기 >", color: .gray4, font: .appleMedium(size: 10), backgroundColor: UIColor(red: 246.0 / 255.0, green: 247.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0))
         writeLookBackButton.setRounded(radius: 6)
+        
+        titleImageView.contentMode = .scaleAspectFit
+        titleImageView.image = UIImage(named: "Character/character-80-sowhat-disable")?.resizableImage(withCapInsets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), resizingMode: .stretch)
+        titleImageView.backgroundColor = .bgSelected
         
     }
 }
