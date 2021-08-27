@@ -224,6 +224,8 @@
                         <outlet property="categoryStarCollectionViewHeight" destination="Q5V-71-C7B" id="Oam-YX-r0E"/>
                         <outlet property="goalPercentLabel" destination="Pgu-hX-k6w" id="JqJ-93-wjp"/>
                         <outlet property="routineDateLabel" destination="DI8-ud-cMF" id="6Te-l5-hNG"/>
+                        <outlet property="routineResultLabel" destination="PJX-AA-c4A" id="c9C-VF-sHQ"/>
+                        <outlet property="routineStarCollectionView" destination="KBl-Iu-9jq" id="Hjt-rM-Mpz"/>
                         <outlet property="titleImageView" destination="oRN-vn-syI" id="hgs-tD-EFN"/>
                         <outlet property="weekStartCollectionView" destination="w8T-Yy-bfB" id="oTW-6n-o7F"/>
                         <outlet property="writeLookBackButton" destination="3JO-5j-tsX" id="kd8-gW-YO4"/>

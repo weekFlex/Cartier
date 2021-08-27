@@ -16,15 +16,38 @@ class LookBackVC: UIViewController {
 
     // MARK: IBOutlet
     
-    @IBOutlet weak var goalPercentLabel: UILabel!
+    @IBOutlet weak var goalPercentLabel: UILabel! {
+        didSet {
+            goalPercentLabel.text = "목표 달성률 \(goalPercent)%\n이번 주는 어땠나요?"
+            let attrString = NSMutableAttributedString(string: goalPercentLabel.text!)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 4
+            attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+            goalPercentLabel.attributedText = attrString
+            goalPercentLabel.font = .metroBold(size: 20)
+        }
+    }
     @IBOutlet weak var writeLookBackButton: UIButton!
     @IBOutlet weak var routineDateLabel: UILabel!
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var weekStartCollectionView: UICollectionView!
-    
     @IBOutlet weak var categoryStarCollectionView: UICollectionView!
-    
     @IBOutlet weak var categoryStarCollectionViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var routineResultLabel: UILabel! {
+        didSet {
+            routineResultLabel.text = "1개의 루틴 성공 *-*\n3개의 루틴에 도전했어요"
+            routineResultLabel.numberOfLines = 0
+            let attrString = NSMutableAttributedString(string: routineResultLabel.text!)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 4
+            attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+            routineResultLabel.attributedText = attrString
+            routineResultLabel.font = .appleBold(size: 20)
+        }
+    }
+    @IBOutlet weak var routineStarCollectionView: UICollectionView!
+    
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
@@ -54,15 +77,6 @@ extension LookBackVC {
         
         routineDateLabel.setLabel(text: "11월 30일~12월 6일", color: .gray3, font: .appleMedium(size: 12))
         
-        goalPercentLabel.text = "목표 달성률 \(goalPercent)%\n이번 주는 어땠나요?"
-        
-        let attrString = NSMutableAttributedString(string: goalPercentLabel.text!)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 4
-        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        goalPercentLabel.attributedText = attrString
-        
-        goalPercentLabel.font = .metroBold(size: 20)
         
         writeLookBackButton.setButton(text: "회고 작성하기 >", color: .gray4, font: .appleMedium(size: 10), backgroundColor: UIColor(red: 246.0 / 255.0, green: 247.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0))
         writeLookBackButton.setRounded(radius: 6)
