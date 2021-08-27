@@ -46,7 +46,9 @@ class LookBackVC: UIViewController {
             routineResultLabel.font = .appleBold(size: 20)
         }
     }
+    
     @IBOutlet weak var routineStarCollectionView: UICollectionView!
+    @IBOutlet weak var routineStarCollectionViewHeight: NSLayoutConstraint!
     
     // MARK: Life Cycle Part
     
@@ -75,6 +77,9 @@ extension LookBackVC {
         categoryStarCollectionView.delegate = self
         categoryStarCollectionView.dataSource = self
         
+        routineStarCollectionView.delegate = self
+        routineStarCollectionView.dataSource = self
+        
         routineDateLabel.setLabel(text: "11월 30일~12월 6일", color: .gray3, font: .appleMedium(size: 12))
         
         
@@ -99,8 +104,10 @@ extension LookBackVC: UICollectionViewDelegateFlowLayout {
         
         if collectionView == weekStartCollectionView {
             return CGSize(width: collectionView.frame.width/7, height: 74/327 * collectionView.frame.width)
-        } else {
+        } else if collectionView == categoryStarCollectionView {
             return CGSize(width: collectionView.frame.width, height: 24)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: 62/328 * collectionView.frame.width)
         }
         
         
@@ -110,6 +117,8 @@ extension LookBackVC: UICollectionViewDelegateFlowLayout {
         // 아이템간의 간격
         
         if collectionView == weekStartCollectionView {
+            return 0
+        } else if collectionView == categoryStarCollectionView {
             return 0
         } else {
             return 0
@@ -122,8 +131,10 @@ extension LookBackVC: UICollectionViewDelegateFlowLayout {
         
         if collectionView == weekStartCollectionView {
             return 0
-        } else {
+        } else if collectionView == categoryStarCollectionView {
             return 28
+        } else {
+            return 7
         }
     
     }
@@ -146,11 +157,16 @@ extension LookBackVC: UICollectionViewDataSource {
         
         if collectionView == weekStartCollectionView {
             return 7
-        } else {
+        } else if collectionView == categoryStarCollectionView  {
             
             let count = 5
             categoryStarCollectionViewHeight.constant = CGFloat(24 * count + (28*(count-1)))
+            return count
             
+        } else {
+            let count = 3
+            let height: CGFloat = 62/328 * collectionView.frame.width * CGFloat(count)
+            routineStarCollectionViewHeight.constant =  height + CGFloat((8*(count-1)))
             return count
         }
         
@@ -168,7 +184,7 @@ extension LookBackVC: UICollectionViewDataSource {
             
             return cell
             
-        } else {
+        } else if collectionView == categoryStarCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryStarCell.identifier, for: indexPath) as? CategoryStarCell else {
                 return UICollectionViewCell()
             }
@@ -177,6 +193,14 @@ extension LookBackVC: UICollectionViewDataSource {
             
             return cell
             
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineStarCell.identifier, for: indexPath) as? RoutineStarCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.configure(image: "icon-24-star-n4", routine: "Design Master", percent: 80)
+            
+            return cell
         }
         
         

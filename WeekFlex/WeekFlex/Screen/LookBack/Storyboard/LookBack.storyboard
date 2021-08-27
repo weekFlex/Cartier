@@ -15,7 +15,7 @@
             <objects>
                 <viewController storyboardIdentifier="LookBackVC" id="Nhb-Qf-1c1" customClass="LookBackVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ke-qW-JCI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xo1-EF-2F3">
@@ -46,10 +46,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpH-3O-Yum">
-                                <rect key="frame" x="0.0" y="81" width="414" height="919"/>
+                                <rect key="frame" x="0.0" y="81" width="414" height="1519"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVe-KD-mR6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgu-hX-k6w">
                                                 <rect key="frame" x="24" y="32" width="135" height="41"/>
@@ -143,20 +143,20 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBl-Iu-9jq">
-                                                <rect key="frame" x="24" y="773.5" width="366" height="128"/>
+                                                <rect key="frame" x="24" y="773.5" width="366" height="300"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="128" id="rnk-Nd-0Tq"/>
+                                                    <constraint firstAttribute="height" constant="300" id="rnk-Nd-0Tq"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5uL-l3-5iV">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5uL-l3-5iV">
                                                     <size key="itemSize" width="359" height="73"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1JW-mi-Vtr">
-                                                        <rect key="frame" x="3.5" y="0.0" width="359" height="73"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RoutineStarCell" id="1JW-mi-Vtr" customClass="RoutineStarCell" customModule="WeekFlex" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="359" height="73"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="boB-e8-a7c">
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="73"/>
@@ -218,7 +218,7 @@
                             <constraint firstItem="sGN-kq-7QJ" firstAttribute="trailing" secondItem="Xo1-EF-2F3" secondAttribute="trailing" id="qIJ-ML-Eq2"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="1000"/>
+                    <size key="freeformSize" width="414" height="1600"/>
                     <connections>
                         <outlet property="categoryStarCollectionView" destination="xc0-Vz-XnN" id="MKo-nP-1cO"/>
                         <outlet property="categoryStarCollectionViewHeight" destination="Q5V-71-C7B" id="Oam-YX-r0E"/>
@@ -226,6 +226,7 @@
                         <outlet property="routineDateLabel" destination="DI8-ud-cMF" id="6Te-l5-hNG"/>
                         <outlet property="routineResultLabel" destination="PJX-AA-c4A" id="c9C-VF-sHQ"/>
                         <outlet property="routineStarCollectionView" destination="KBl-Iu-9jq" id="Hjt-rM-Mpz"/>
+                        <outlet property="routineStarCollectionViewHeight" destination="rnk-Nd-0Tq" id="Spu-mE-207"/>
                         <outlet property="titleImageView" destination="oRN-vn-syI" id="hgs-tD-EFN"/>
                         <outlet property="weekStartCollectionView" destination="w8T-Yy-bfB" id="oTW-6n-o7F"/>
                         <outlet property="writeLookBackButton" destination="3JO-5j-tsX" id="kd8-gW-YO4"/>
