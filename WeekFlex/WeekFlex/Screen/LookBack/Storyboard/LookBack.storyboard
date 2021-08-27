@@ -104,20 +104,20 @@
                                                 </cells>
                                             </collectionView>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xc0-Vz-XnN">
-                                                <rect key="frame" x="0.0" y="428.5" width="414" height="200"/>
+                                                <rect key="frame" x="32" y="428.5" width="350" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="Q5V-71-C7B"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xHf-NC-cwa">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xHf-NC-cwa">
                                                     <size key="itemSize" width="410" height="96"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9QU-lW-gVf">
-                                                        <rect key="frame" x="2" y="0.0" width="410" height="96"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryStarCell" id="9QU-lW-gVf" customClass="CategoryStarCell" customModule="WeekFlex" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="52" width="410" height="96"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="V7B-Ha-6Pv">
                                                             <rect key="frame" x="0.0" y="0.0" width="410" height="96"/>
@@ -169,7 +169,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="xc0-Vz-XnN" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" id="8pI-3q-eCb"/>
+                                            <constraint firstItem="xc0-Vz-XnN" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="32" id="8pI-3q-eCb"/>
                                             <constraint firstItem="PJX-AA-c4A" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="24" id="A4i-cc-qxm"/>
                                             <constraint firstItem="3JO-5j-tsX" firstAttribute="leading" secondItem="Pgu-hX-k6w" secondAttribute="trailing" constant="8" id="ADc-Jt-1gI"/>
                                             <constraint firstAttribute="trailing" secondItem="KBl-Iu-9jq" secondAttribute="trailing" constant="24" id="AQD-ho-mDl"/>
@@ -184,7 +184,7 @@
                                             <constraint firstItem="KBl-Iu-9jq" firstAttribute="top" secondItem="PJX-AA-c4A" secondAttribute="bottom" constant="32" id="gje-It-AjY"/>
                                             <constraint firstItem="PJX-AA-c4A" firstAttribute="top" secondItem="eXx-R9-9bp" secondAttribute="bottom" constant="40" id="hiL-Yb-V6h"/>
                                             <constraint firstItem="DI8-ud-cMF" firstAttribute="top" secondItem="Pgu-hX-k6w" secondAttribute="bottom" constant="16" id="i9E-p2-dza"/>
-                                            <constraint firstAttribute="trailing" secondItem="xc0-Vz-XnN" secondAttribute="trailing" id="mdL-Cv-Rgq"/>
+                                            <constraint firstAttribute="trailing" secondItem="xc0-Vz-XnN" secondAttribute="trailing" constant="32" id="mdL-Cv-Rgq"/>
                                             <constraint firstItem="eXx-R9-9bp" firstAttribute="top" secondItem="xc0-Vz-XnN" secondAttribute="bottom" constant="26" id="q8W-jH-duH"/>
                                             <constraint firstAttribute="trailing" secondItem="w8T-Yy-bfB" secondAttribute="trailing" constant="24" id="qv0-CD-DVA"/>
                                             <constraint firstItem="Pgu-hX-k6w" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="24" id="uVh-SR-dWv"/>
@@ -220,6 +220,8 @@
                     </view>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
+                        <outlet property="categoryStarCollectionView" destination="xc0-Vz-XnN" id="MKo-nP-1cO"/>
+                        <outlet property="categoryStarCollectionViewHeight" destination="Q5V-71-C7B" id="Oam-YX-r0E"/>
                         <outlet property="goalPercentLabel" destination="Pgu-hX-k6w" id="JqJ-93-wjp"/>
                         <outlet property="routineDateLabel" destination="DI8-ud-cMF" id="6Te-l5-hNG"/>
                         <outlet property="titleImageView" destination="oRN-vn-syI" id="hgs-tD-EFN"/>

@@ -22,6 +22,9 @@ class LookBackVC: UIViewController {
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var weekStartCollectionView: UICollectionView!
     
+    @IBOutlet weak var categoryStarCollectionView: UICollectionView!
+    
+    @IBOutlet weak var categoryStarCollectionViewHeight: NSLayoutConstraint!
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
@@ -45,6 +48,9 @@ extension LookBackVC {
         weekStartCollectionView.delegate = self
         weekStartCollectionView.dataSource = self
         weekStartCollectionView.setRounded(radius: 3)
+        
+        categoryStarCollectionView.delegate = self
+        categoryStarCollectionView.dataSource = self
         
         routineDateLabel.setLabel(text: "11월 30일~12월 6일", color: .gray3, font: .appleMedium(size: 12))
         
@@ -77,21 +83,34 @@ extension LookBackVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // 한 아이템의 크기
         
-        return CGSize(width: collectionView.frame.width/7, height: 74/327 * collectionView.frame.width)
+        if collectionView == weekStartCollectionView {
+            return CGSize(width: collectionView.frame.width/7, height: 74/327 * collectionView.frame.width)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: 24)
+        }
+        
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         // 아이템간의 간격
         
-        return 0
+        if collectionView == weekStartCollectionView {
+            return 0
+        } else {
+            return 0
+        }
         
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 0
+        if collectionView == weekStartCollectionView {
+            return 0
+        } else {
+            return 28
+        }
     
     }
     
@@ -111,20 +130,41 @@ extension LookBackVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 7
+        if collectionView == weekStartCollectionView {
+            return 7
+        } else {
+            
+            let count = 5
+            categoryStarCollectionViewHeight.constant = CGFloat(24 * count + (28*(count-1)))
+            
+            return count
+        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekStarCell.identifier, for: indexPath) as? WeekStarCell else {
-            return UICollectionViewCell()
+        if collectionView == weekStartCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekStarCell.identifier, for: indexPath) as? WeekStarCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.dayLabel.text = week[indexPath.row]
+            cell.starImage.image = UIImage(named: "icon-24-star-n\(indexPath.row)")
+            
+            return cell
+            
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryStarCell.identifier, for: indexPath) as? CategoryStarCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.configure(image: "icon-24-star-n4", category: "운동", percent: 25)
+            
+            return cell
+            
         }
         
-        cell.dayLabel.text = week[indexPath.row]
-        cell.starImage.image = UIImage(named: "icon-24-star-n\(indexPath.row)")
-        
-        return cell
         
         
     }
