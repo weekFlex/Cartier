@@ -22,12 +22,12 @@
                         <rect key="frame" x="8" y="16" width="374" height="118"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ame-Xc-1cB">
-                                <rect key="frame" x="16" y="12" width="342" height="94"/>
+                                <rect key="frame" x="16" y="12" width="342" height="102"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ame-Xc-1cB" secondAttribute="bottom" constant="12" id="A1v-ot-CVL"/>
+                            <constraint firstAttribute="bottom" secondItem="ame-Xc-1cB" secondAttribute="bottom" constant="4" id="A1v-ot-CVL"/>
                             <constraint firstItem="ame-Xc-1cB" firstAttribute="top" secondItem="GJ0-DU-bnq" secondAttribute="top" constant="12" id="bX9-RH-cdt"/>
                             <constraint firstAttribute="trailing" secondItem="ame-Xc-1cB" secondAttribute="trailing" constant="16" id="nrx-cn-vHv"/>
                             <constraint firstItem="ame-Xc-1cB" firstAttribute="leading" secondItem="GJ0-DU-bnq" secondAttribute="leading" constant="16" id="oGL-7c-SPD"/>

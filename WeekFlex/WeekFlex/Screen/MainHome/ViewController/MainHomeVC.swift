@@ -18,6 +18,7 @@ class MainHomeVC: UIViewController {
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
     
+    
     var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
@@ -456,6 +457,17 @@ extension MainHomeVC {
         guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
         representCategory[currentDay] = categoryIndex
     }
+    
+    
+    func saveLastWeek(){
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "lastSaveDate") == nil {
+            defaults.set("", forKey: "lastSaveDate")
+        } else {
+            
+        }
+    }
+    
     
     
     var buttonImg: UIImage {
