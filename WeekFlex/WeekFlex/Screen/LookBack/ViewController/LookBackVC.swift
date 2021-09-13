@@ -13,6 +13,10 @@ class LookBackVC: UIViewController {
     
     var week = ["월", "화", "수", "목", "금", "토", "일"]
     var goalPercent: Int = 10   // 이번주 목표 달성률
+    var nick: String = "민희" // 닉네임
+    var lookBackWrite: Bool = true // 회고 썼는지 안썻는지
+    var lookBackTitle: String = "최대글자수최대글자수최대" // 회고제목
+    var lookBackContents: String = "원래는 영어를 완벽하게 마스터하려고 했는데 인강으로 해서 그런지 결국 작심삼일...해버렸다. 토익 이거 얼마짜리인데 벌써 이러면 어떡하냐 ㅜ 기출문제집이 너무 아까워지고 있다. 토익 이제 한달 남았는데 제발 다음주부터는 열심히 하자 나 자신... 아 그래도 정해둔 책은 다 읽어서 다행이다. 영어 제발 하자~! 민트초코 맛있음" // 회고 내용
 
     // MARK: IBOutlet
     
@@ -50,16 +54,62 @@ class LookBackVC: UIViewController {
     @IBOutlet weak var routineStarCollectionView: UICollectionView!
     @IBOutlet weak var routineStarCollectionViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var nickLabel: UILabel!
+    
+    lazy var editButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setButton(text: "수정하기", color: .gray3, font: .appleMedium(size: 12))
+        button.backgroundColor = nil
+        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 24).isActive = true
+        
+        return button
+    }()
+    
+    lazy var titleLabel: UILabel = {
+        
+        let label = UILabel()
+        label.setLabel(text: "\(lookBackTitle)", color: .black, font: .appleBold(size: 16))
+        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
+//        label.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 24).isActive = true
+        return label
+    }()
+    
+    lazy var contentsLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.setLabel(text: "\(lookBackContents)", color: .black, font: .appleMedium(size: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
+//        label.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 24).isActive = true
+//        label.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 80).isActive = true
+        return label
+    }()
+    
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         setViewStyle()
+        if lookBackWrite {
+            // 회고를 썼다면?
+//            
+            view.addSubview(titleLabel)
+            nickLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = false
+            titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24).isActive = true
+            titleLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 24).isActive = true
+            titleLabel.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: 32).isActive = true
+            titleLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        }
     }
 
     override func viewWillLayoutSubviews() {
         titleImageView.setRounded(radius: nil)
+//        contentsLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 80).isActive = true
     }
 
 }
@@ -90,6 +140,7 @@ extension LookBackVC {
         titleImageView.image = UIImage(named: "Character/character-80-sowhat-disable")?.resizableImage(withCapInsets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), resizingMode: .stretch)
         titleImageView.backgroundColor = .bgSelected
         
+        nickLabel.setLabel(text: "\(nick)님의 기록", color: .black, font: .appleBold(size: 20))
     }
 }
 

@@ -166,9 +166,23 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHu-jh-SCR">
+                                                <rect key="frame" x="0.0" y="1113.5" width="414" height="6"/>
+                                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="6" id="Si6-l7-bSM"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="님의 기록" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EE5-3H-XEv">
+                                                <rect key="frame" x="24" y="1159.5" width="366" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="NHu-jh-SCR" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" id="0VD-MK-Sce"/>
                                             <constraint firstItem="xc0-Vz-XnN" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="32" id="8pI-3q-eCb"/>
                                             <constraint firstItem="PJX-AA-c4A" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="24" id="A4i-cc-qxm"/>
                                             <constraint firstItem="3JO-5j-tsX" firstAttribute="leading" secondItem="Pgu-hX-k6w" secondAttribute="trailing" constant="8" id="ADc-Jt-1gI"/>
@@ -178,15 +192,21 @@
                                             <constraint firstItem="DI8-ud-cMF" firstAttribute="leading" secondItem="Pgu-hX-k6w" secondAttribute="leading" id="JI9-ji-wpd"/>
                                             <constraint firstItem="w8T-Yy-bfB" firstAttribute="top" secondItem="oRN-vn-syI" secondAttribute="bottom" constant="32" id="LQE-fV-a13"/>
                                             <constraint firstItem="oRN-vn-syI" firstAttribute="top" secondItem="DI8-ud-cMF" secondAttribute="bottom" constant="40" id="O0c-Dj-RmH"/>
+                                            <constraint firstAttribute="trailing" secondItem="NHu-jh-SCR" secondAttribute="trailing" id="Qmg-BX-b9o"/>
                                             <constraint firstItem="xc0-Vz-XnN" firstAttribute="top" secondItem="w8T-Yy-bfB" secondAttribute="bottom" constant="40" id="R5l-xW-sZe"/>
                                             <constraint firstItem="oRN-vn-syI" firstAttribute="centerX" secondItem="EVe-KD-mR6" secondAttribute="centerX" id="Rin-XL-PuC"/>
+                                            <constraint firstAttribute="bottom" secondItem="EE5-3H-XEv" secondAttribute="bottom" constant="419.5" id="XSA-JO-bcg"/>
                                             <constraint firstItem="3JO-5j-tsX" firstAttribute="bottom" secondItem="Pgu-hX-k6w" secondAttribute="bottom" id="Z4H-aT-lRs"/>
+                                            <constraint firstAttribute="trailing" secondItem="EE5-3H-XEv" secondAttribute="trailing" constant="24" id="d4d-BB-tcB"/>
                                             <constraint firstItem="KBl-Iu-9jq" firstAttribute="top" secondItem="PJX-AA-c4A" secondAttribute="bottom" constant="32" id="gje-It-AjY"/>
                                             <constraint firstItem="PJX-AA-c4A" firstAttribute="top" secondItem="eXx-R9-9bp" secondAttribute="bottom" constant="40" id="hiL-Yb-V6h"/>
                                             <constraint firstItem="DI8-ud-cMF" firstAttribute="top" secondItem="Pgu-hX-k6w" secondAttribute="bottom" constant="16" id="i9E-p2-dza"/>
                                             <constraint firstAttribute="trailing" secondItem="xc0-Vz-XnN" secondAttribute="trailing" constant="32" id="mdL-Cv-Rgq"/>
+                                            <constraint firstItem="EE5-3H-XEv" firstAttribute="top" secondItem="NHu-jh-SCR" secondAttribute="bottom" constant="40" id="pbD-5Z-Az7"/>
                                             <constraint firstItem="eXx-R9-9bp" firstAttribute="top" secondItem="xc0-Vz-XnN" secondAttribute="bottom" constant="26" id="q8W-jH-duH"/>
                                             <constraint firstAttribute="trailing" secondItem="w8T-Yy-bfB" secondAttribute="trailing" constant="24" id="qv0-CD-DVA"/>
+                                            <constraint firstItem="NHu-jh-SCR" firstAttribute="top" secondItem="KBl-Iu-9jq" secondAttribute="bottom" constant="40" id="ram-pL-sRc"/>
+                                            <constraint firstItem="EE5-3H-XEv" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="24" id="spw-Hu-I8y"/>
                                             <constraint firstItem="Pgu-hX-k6w" firstAttribute="leading" secondItem="EVe-KD-mR6" secondAttribute="leading" constant="24" id="uVh-SR-dWv"/>
                                             <constraint firstItem="w8T-Yy-bfB" firstAttribute="centerX" secondItem="EVe-KD-mR6" secondAttribute="centerX" id="uxt-04-vRK"/>
                                             <constraint firstAttribute="trailing" secondItem="eXx-R9-9bp" secondAttribute="trailing" id="v1j-b4-Kre"/>
@@ -223,6 +243,7 @@
                         <outlet property="categoryStarCollectionView" destination="xc0-Vz-XnN" id="MKo-nP-1cO"/>
                         <outlet property="categoryStarCollectionViewHeight" destination="Q5V-71-C7B" id="Oam-YX-r0E"/>
                         <outlet property="goalPercentLabel" destination="Pgu-hX-k6w" id="JqJ-93-wjp"/>
+                        <outlet property="nickLabel" destination="EE5-3H-XEv" id="8YI-Gs-sVo"/>
                         <outlet property="routineDateLabel" destination="DI8-ud-cMF" id="6Te-l5-hNG"/>
                         <outlet property="routineResultLabel" destination="PJX-AA-c4A" id="c9C-VF-sHQ"/>
                         <outlet property="routineStarCollectionView" destination="KBl-Iu-9jq" id="Hjt-rM-Mpz"/>
