@@ -195,7 +195,6 @@
                                             <constraint firstAttribute="trailing" secondItem="NHu-jh-SCR" secondAttribute="trailing" id="Qmg-BX-b9o"/>
                                             <constraint firstItem="xc0-Vz-XnN" firstAttribute="top" secondItem="w8T-Yy-bfB" secondAttribute="bottom" constant="40" id="R5l-xW-sZe"/>
                                             <constraint firstItem="oRN-vn-syI" firstAttribute="centerX" secondItem="EVe-KD-mR6" secondAttribute="centerX" id="Rin-XL-PuC"/>
-                                            <constraint firstAttribute="bottom" secondItem="EE5-3H-XEv" secondAttribute="bottom" constant="419.5" id="XSA-JO-bcg"/>
                                             <constraint firstItem="3JO-5j-tsX" firstAttribute="bottom" secondItem="Pgu-hX-k6w" secondAttribute="bottom" id="Z4H-aT-lRs"/>
                                             <constraint firstAttribute="trailing" secondItem="EE5-3H-XEv" secondAttribute="trailing" constant="24" id="d4d-BB-tcB"/>
                                             <constraint firstItem="KBl-Iu-9jq" firstAttribute="top" secondItem="PJX-AA-c4A" secondAttribute="bottom" constant="32" id="gje-It-AjY"/>
@@ -243,7 +242,9 @@
                         <outlet property="categoryStarCollectionView" destination="xc0-Vz-XnN" id="MKo-nP-1cO"/>
                         <outlet property="categoryStarCollectionViewHeight" destination="Q5V-71-C7B" id="Oam-YX-r0E"/>
                         <outlet property="goalPercentLabel" destination="Pgu-hX-k6w" id="JqJ-93-wjp"/>
+                        <outlet property="mainView" destination="EVe-KD-mR6" id="cFA-OB-0vz"/>
                         <outlet property="nickLabel" destination="EE5-3H-XEv" id="8YI-Gs-sVo"/>
+                        <outlet property="nickTopView" destination="NHu-jh-SCR" id="J98-VI-rQx"/>
                         <outlet property="routineDateLabel" destination="DI8-ud-cMF" id="6Te-l5-hNG"/>
                         <outlet property="routineResultLabel" destination="PJX-AA-c4A" id="c9C-VF-sHQ"/>
                         <outlet property="routineStarCollectionView" destination="KBl-Iu-9jq" id="Hjt-rM-Mpz"/>
