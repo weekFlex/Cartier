@@ -114,7 +114,7 @@ class LookBackVC: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: 32).isActive = true
             titleLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 20).isActive = true
         } else {
-            // 회고 작성 전
+            // 회고 작성 전이라면?
             
             view.addSubview(contentsLabel)
             view.addSubview(writeButton)
