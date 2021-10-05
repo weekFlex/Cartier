@@ -81,6 +81,9 @@
                                                     <constraint firstAttribute="height" constant="16" id="dQy-28-TvY"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="categorySetting:" destination="ihN-B3-ijy" eventType="touchUpInside" id="0po-Cd-Q1T"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -100,6 +103,9 @@
                                                     <constraint firstAttribute="width" constant="16" id="q6u-gP-RMP"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="taskSetting:" destination="ihN-B3-ijy" eventType="touchUpInside" id="BfK-fV-owr"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -130,6 +136,9 @@
                                                     <constraint firstAttribute="width" constant="16" id="Kag-1g-nZa"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="logout:" destination="ihN-B3-ijy" eventType="touchUpInside" id="O6P-NX-DpT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -171,6 +180,9 @@
                                                     <constraint firstAttribute="width" constant="16" id="QVY-gD-jWA"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="contact:" destination="ihN-B3-ijy" eventType="touchUpInside" id="Gon-j4-jCf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -219,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDl-lw-Bfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260.86956521739131" y="-71.651785714285708"/>
+            <point key="canvasLocation" x="245" y="-72"/>
         </scene>
         <!--Delete AccountVC-->
         <scene sceneID="PyS-bF-VKW">

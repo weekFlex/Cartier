@@ -26,6 +26,7 @@
 		0EC381B4266D189A00438A74 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC381B3266D189A00438A74 /* Review.storyboard */; };
 		0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */; };
 		0ECB0709270B3C78005F766D /* MyPageHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */; };
+		0ECB070C270CD900005F766D /* ProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB070B270CD900005F766D /* ProfileData.swift */; };
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
@@ -128,6 +129,7 @@
 		0EC381B3266D189A00438A74 /* Review.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Review.storyboard; sourceTree = "<group>"; };
 		0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHomeVC.swift; sourceTree = "<group>"; };
 		0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHomeVC.swift; sourceTree = "<group>"; };
+		0ECB070B270CD900005F766D /* ProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileData.swift; sourceTree = "<group>"; };
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				9ED56E4A26A34BF100E1DEBF /* RoutineData.swift */,
 				9B02562E26A9C2C300234098 /* MakeRoutineData.swift */,
 				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
+				0ECB070B270CD900005F766D /* ProfileData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9ED56E4F26A355A800E1DEBF /* RoutineService.swift in Sources */,
+				0ECB070C270CD900005F766D /* ProfileData.swift in Sources */,
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				2D282EC926A9FC2A00A53F8E /* TabBarVC.swift in Sources */,

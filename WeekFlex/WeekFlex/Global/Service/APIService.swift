@@ -91,6 +91,11 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func getUserProfile(_ token: String, completion: @escaping ((NetworkResult<ProfileData>)->(Void))){
+        let target: APITarget = .getUserProfile(token: token)
+        judgeObject(target, completion: completion)
+    }
+    
     
 }
 
