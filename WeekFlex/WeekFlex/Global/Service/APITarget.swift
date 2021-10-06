@@ -132,7 +132,7 @@ extension APITarget: TargetType {
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
             
         case .statistics(_, let date):
-            return .requestParameters(parameters: ["date":date], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["date": date], encoding: URLEncoding.default)
 
         case .makeRoutine(_, let name, let routineTaskSaveRequests):
             

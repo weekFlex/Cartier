@@ -91,6 +91,10 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func getStatistics(_ token: String, _ date: String, completion: @escaping (NetworkResult<AchievementData>)->(Void)){
+        let target: APITarget = .statistics(token: token, date: date)
+        miniJudgeObject(target, completion: completion)
+    }
     
 }
 
@@ -104,6 +108,26 @@ extension APIService {
                     
                     let decoder = JSONDecoder()
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
+                    if let data = body.data {
+                        completion(.success(data))
+                    }
+                } catch {
+                    print("구조체를 확인해보세요")
+                }
+            case .failure(let error):
+                completion(.failure(error.response?.statusCode ?? 100))
+            }
+        }
+    }
+    
+    func miniJudgeObject<T: Codable>(_ target: APITarget, completion: @escaping (NetworkResult<T>) -> Void) {
+        provider.request(target) { response in
+            switch response {
+            case .success(let result):
+                do {
+                    
+                    let decoder = JSONDecoder()
+                    let body = try decoder.decode(SecondeGenericResponse<T>.self, from: result.data)
                     if let data = body.data {
                         completion(.success(data))
                     }

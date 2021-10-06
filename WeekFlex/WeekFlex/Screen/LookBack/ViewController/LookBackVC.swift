@@ -12,16 +12,7 @@ class LookBackVC: UIViewController {
     // MARK: Variable Part
     
     var week = ["월", "화", "수", "목", "금", "토", "일"]
-    var goalPercent: Int = 10   // 이번주 목표 달성률
-    var nick: String = "민희" // 닉네임
-    var lookBackWrite: Bool = true  // 회고 썼는지 안썻는지
-    var lookBackTitle: String = "최대글자수최대글자수최대" // 회고제목
-    var lookBackContents: String = "원래는 영어를 완벽하게 마스터하려고 했는데 인강으로 해서 그런지 결국 작심삼일...해버렸다. 토익 이거 얼마짜리인데 벌써 이러면 어떡하냐 ㅜ 기출문제집이 너무 아까워지고 있다. 토익 이제 한달 남았는데 제발 다음주부터는 열심히 하자 나 자신... 아 그래도 정해둔 책은 다 읽어서 다행이다. 영어 제발 하자~! 민트초코 맛있음" // 회고 내용
-
-    // MARK: IBOutlet
-    
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var goalPercentLabel: UILabel! {
+    var goalPercent: Int = 10 { // 이번주 목표 달성률
         didSet {
             goalPercentLabel.text = "목표 달성률 \(goalPercent)%\n이번 주는 어땠나요?"
             let attrString = NSMutableAttributedString(string: goalPercentLabel.text!)
@@ -32,6 +23,16 @@ class LookBackVC: UIViewController {
             goalPercentLabel.font = .metroBold(size: 20)
         }
     }
+    var nick: String = "민희" // 닉네임
+    var lookBackWrite: Bool = false  // 회고 썼는지 안썻는지
+    var lookBackTitle: String = "최대글자수최대글자수최대" // 회고제목
+    var lookBackContents: String = "원래는 영어를 완벽하게 마스터하려고 했는데 인강으로 해서 그런지 결국 작심삼일...해버렸다. 토익 이거 얼마짜리인데 벌써 이러면 어떡하냐 ㅜ 기출문제집이 너무 아까워지고 있다. 토익 이제 한달 남았는데 제발 다음주부터는 열심히 하자 나 자신... 아 그래도 정해둔 책은 다 읽어서 다행이다. 영어 제발 하자~! 민트초코 맛있음" // 회고 내용
+    var achievementData: AchievementData?
+
+    // MARK: IBOutlet
+    
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var goalPercentLabel: UILabel!
     @IBOutlet weak var writeLookBackButton: UIButton!
     @IBOutlet weak var routineDateLabel: UILabel!
     @IBOutlet weak var titleImageView: UIImageView!
@@ -101,6 +102,7 @@ class LookBackVC: UIViewController {
         
         super.viewDidLoad()
         setViewStyle()
+        getData()
         if lookBackWrite {
             // 회고를 썼다면?
       
@@ -165,7 +167,7 @@ extension LookBackVC {
         routineStarCollectionView.delegate = self
         routineStarCollectionView.dataSource = self
         
-        routineDateLabel.setLabel(text: "11월 30일~12월 6일", color: .gray3, font: .appleMedium(size: 12))
+        routineDateLabel.setLabel(text: "08월 23일~08월 29일", color: .gray3, font: .appleMedium(size: 12))
         
         
         writeLookBackButton.setButton(text: "회고 작성하기 >", color: .gray4, font: .appleMedium(size: 10), backgroundColor: UIColor(red: 246.0 / 255.0, green: 247.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0))
@@ -176,6 +178,44 @@ extension LookBackVC {
         titleImageView.backgroundColor = .bgSelected
         
         nickLabel.setLabel(text: "\(nick)님의 기록", color: .black, font: .appleBold(size: 20))
+    }
+    
+    func getData() {
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            UserDefaults.standard.set("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
+            
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                
+                APIService.shared.getStatistics(token, "2021-08-23") { [self] result in
+                    switch result {
+                    
+                    case .success(let data):
+                        achievementData = data
+                        if let achievementData = achievementData {
+                            goalPercent = achievementData.achievementRate
+                            
+                            categoryStarCollectionViewHeight.constant = CGFloat(24 * achievementData.category.count + (28*(achievementData.category.count-1)))
+                            categoryStarCollectionView.reloadData()
+                            
+                            
+                            let height: CGFloat = 62/328 * routineStarCollectionView.frame.width * CGFloat(achievementData.routine.count)
+                            routineStarCollectionViewHeight.constant = height + CGFloat((8*(achievementData.routine.count-1)))
+                            routineStarCollectionView.reloadData()
+                            
+                            self.view.reloadInputViews()
+                        }
+                        
+                    case .failure(let error):
+                        print(error)
+                        
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            
+        }
     }
 }
 
@@ -245,14 +285,11 @@ extension LookBackVC: UICollectionViewDataSource {
             return 7
         } else if collectionView == categoryStarCollectionView  {
             
-            let count = 5
-            categoryStarCollectionViewHeight.constant = CGFloat(24 * count + (28*(count-1)))
+            let count = achievementData?.category.count ?? 0
             return count
             
         } else {
-            let count = 3
-            let height: CGFloat = 62/328 * collectionView.frame.width * CGFloat(count)
-            routineStarCollectionViewHeight.constant =  height + CGFloat((8*(count-1)))
+            let count = achievementData?.routine.count ?? 0
             return count
         }
         
@@ -275,7 +312,9 @@ extension LookBackVC: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            cell.configure(image: "icon-24-star-n4", category: "운동", percent: 25)
+            if let data = achievementData?.category {
+                cell.configure(image: "icon-24-star-n\(data[indexPath.row].categoryColor)", category: data[indexPath.row].categoryName, percent: data[indexPath.row].doneRate, rate: "\(data[indexPath.row].done)/\(data[indexPath.row].total)")
+            }
             
             return cell
             
@@ -283,8 +322,10 @@ extension LookBackVC: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineStarCell.identifier, for: indexPath) as? RoutineStarCell else {
                 return UICollectionViewCell()
             }
+            if let data = achievementData?.routine {
+                cell.configure(image: "icon-24-star-n4", routine: data[indexPath.row].routineName, percent: data[indexPath.row].doneRate)
+            }
             
-            cell.configure(image: "icon-24-star-n4", routine: "Design Master", percent: 80)
             
             return cell
         }

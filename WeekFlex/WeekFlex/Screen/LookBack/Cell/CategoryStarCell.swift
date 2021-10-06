@@ -42,6 +42,7 @@ class CategoryStarCell: UICollectionViewCell {
         
     }()
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         loadView()
@@ -66,10 +67,18 @@ class CategoryStarCell: UICollectionViewCell {
 
     }
     
-    func configure(image: String, category: String, percent: Int) {
+    func configure(image: String, category: String, percent: Int, rate: String) {
         starImage.image = UIImage(named: image)
         categoryLabel.text = category
-        percentLabel.text = "\(percent)%"
+        percentLabel.text = "\(percent)% (\(rate))"
+        
+        let attributedStr = NSMutableAttributedString(string: percentLabel.text!)
+
+        attributedStr.addAttribute(.foregroundColor, value: UIColor.gray3, range: (percentLabel.text! as NSString).range(of: "(\(rate))"))
+        attributedStr.addAttribute(.font, value: UIFont.metroRegular(size: 14), range: (percentLabel.text! as NSString).range(of: "(\(rate))"))
+
+        // 설정이 적용된 text를 label의 attributedText에 저장
+        percentLabel.attributedText = attributedStr
     }
 
     
