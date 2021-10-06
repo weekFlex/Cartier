@@ -12,7 +12,7 @@ class LookBackVC: UIViewController {
     // MARK: Variable Part
     
     var week = ["월", "화", "수", "목", "금", "토", "일"]
-    var goalPercent: Int = 10 { // 이번주 목표 달성률
+    var goalPercent: Int = 0 { // 이번주 목표 달성률(서버에서 받음)
         didSet {
             goalPercentLabel.text = "목표 달성률 \(goalPercent)%\n이번 주는 어땠나요?"
             let attrString = NSMutableAttributedString(string: goalPercentLabel.text!)
@@ -23,11 +23,14 @@ class LookBackVC: UIViewController {
             goalPercentLabel.font = .metroBold(size: 20)
         }
     }
-    var nick: String = "민희" // 닉네임
+    
+    var startDate: String = "2021-08-23" // 시작 날짜(앞 뷰에서 받아오기)
+    var emotionMascot: Int = 0 // 캐릭터 이미지(앞 뷰에서 받아오기)
+    var nick: String = "정우" // 닉네임
     var lookBackWrite: Bool = false  // 회고 썼는지 안썻는지
-    var lookBackTitle: String = "최대글자수최대글자수최대" // 회고제목
-    var lookBackContents: String = "원래는 영어를 완벽하게 마스터하려고 했는데 인강으로 해서 그런지 결국 작심삼일...해버렸다. 토익 이거 얼마짜리인데 벌써 이러면 어떡하냐 ㅜ 기출문제집이 너무 아까워지고 있다. 토익 이제 한달 남았는데 제발 다음주부터는 열심히 하자 나 자신... 아 그래도 정해둔 책은 다 읽어서 다행이다. 영어 제발 하자~! 민트초코 맛있음" // 회고 내용
-    var achievementData: AchievementData?
+    var lookBackTitle: String = "최대글자수최대글자수최대" // 회고제목(앞 뷰에서 받아오기)
+    var lookBackContents: String = "원래는 영어를 완벽하게 마스터하려고 했는데 인강으로 해서 그런지 결국 작심삼일...해버렸다. 토익 이거 얼마짜리인데 벌써 이러면 어떡하냐 ㅜ 기출문제집이 너무 아까워지고 있다. 토익 이제 한달 남았는데 제발 다음주부터는 열심히 하자 나 자신... 아 그래도 정해둔 책은 다 읽어서 다행이다. 영어 제발 하자~! 민트초코 맛있음" // 회고 내용(앞 뷰에서 받아오기)
+    var achievementData: AchievementData? // 서버 데이터
 
     // MARK: IBOutlet
     
@@ -187,7 +190,7 @@ extension LookBackVC {
             
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 
-                APIService.shared.getStatistics(token, "2021-08-23") { [self] result in
+                APIService.shared.getStatistics(token, startDate) { [self] result in
                     switch result {
                     
                     case .success(let data):
