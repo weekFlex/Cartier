@@ -258,10 +258,10 @@
             </objects>
             <point key="canvasLocation" x="200.00000000000003" y="62.946428571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Select CharacterVC-->
         <scene sceneID="HW0-h9-vih">
             <objects>
-                <viewController id="oG9-hF-aUp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectCharacterVC" id="oG9-hF-aUp" customClass="SelectCharacterVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qmS-P8-ZsS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,11 +274,17 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="icon32CancleBlack"/>
+                                <connections>
+                                    <action selector="closeButtonDidTap:" destination="oG9-hF-aUp" eventType="touchUpInside" id="djd-rF-u1E"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbM-Sy-dGI">
                                 <rect key="frame" x="341.5" y="24.5" width="48.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다음"/>
+                                <connections>
+                                    <action selector="nextButtonDidTap:" destination="oG9-hF-aUp" eventType="touchUpInside" id="pY9-cG-oHL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어떤 한 주였나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZZ-hP-IYV">
                                 <rect key="frame" x="24" y="96" width="141" height="24"/>
@@ -357,6 +363,10 @@
                             <constraint firstItem="djV-x4-QTu" firstAttribute="top" secondItem="0ZZ-hP-IYV" secondAttribute="bottom" constant="32" id="sq5-4P-UEs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="iconCollectionView" destination="djV-x4-QTu" id="Yfl-NP-zNB"/>
+                        <outlet property="nextButton" destination="LbM-Sy-dGI" id="XDY-B0-hFE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2f-Jf-KOI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
