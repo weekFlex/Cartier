@@ -9,6 +9,9 @@ import UIKit
 
 class SelectCharacterVC: UIViewController {
 
+    
+    var icon = [("good","꽤 괜찮았어요"),("merong","열심히 놀았어요"),("yaho","뿌듯해요"),("sad","후회해요"),("angry","화가 났어요"),("bad","아쉬웠어요"),("kiki-disable","최고였어요"),("pissed-disable","아찔했어요"),("crazy-disable","정신 없었어요"),("iku-disable","미래의 나에게!"),("sowhat-disable","눈막귀막"),("vomit-disable","너무 힘들었어요")]
+    
     // MARK: - IBOutlet
     
     @IBOutlet weak var nextButton: UIButton!
@@ -30,7 +33,6 @@ class SelectCharacterVC: UIViewController {
         setView()
 
     }
-    
 
 }
 
@@ -41,6 +43,7 @@ extension SelectCharacterVC {
     // MARK: - Set Style Function
     
     func setView() {
+        iconCollectionView.backgroundColor = .white
         iconCollectionView.delegate = self
         iconCollectionView.dataSource = self
         
@@ -52,6 +55,26 @@ extension SelectCharacterVC {
 
 extension SelectCharacterVC: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width-28
+        return CGSize(width: width/3, height: width/3 + 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 32
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 14
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        // collectionView와 View 간의 간격
+        
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -62,7 +85,14 @@ extension SelectCharacterVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectIconCell.identifier, for: indexPath) as? SelectIconCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.configure(image: icon[indexPath.row].0, ment: icon[indexPath.row].1)
+        
+       
+        return cell
     }
     
     
