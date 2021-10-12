@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eFz-A3-vYp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eFz-A3-vYp">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,6 +35,9 @@
                                     <constraint firstAttribute="width" constant="32" id="Yuy-kE-7vN"/>
                                 </constraints>
                                 <state key="normal" image="icon32BackBlack"/>
+                                <connections>
+                                    <action selector="showPrev:" destination="eFz-A3-vYp" eventType="touchUpInside" id="HpB-Z3-RCJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M36-T2-V3S">
                                 <rect key="frame" x="366" y="67" width="32" height="32"/>
@@ -43,6 +46,9 @@
                                     <constraint firstAttribute="width" constant="32" id="nox-rC-Tfh"/>
                                 </constraints>
                                 <state key="normal" image="icon-32-back-black"/>
+                                <connections>
+                                    <action selector="showNext:" destination="eFz-A3-vYp" eventType="touchUpInside" id="9q2-Nx-UNi"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ifN-jg-tQS">
                                 <rect key="frame" x="16" y="131" width="382" height="682"/>

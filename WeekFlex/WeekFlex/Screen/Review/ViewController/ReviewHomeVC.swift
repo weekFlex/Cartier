@@ -14,8 +14,8 @@ class ReviewHomeVC: UIViewController {
     
     var reviewViewModel: ReviewCollectionViewCellViewModel = ReviewCollectionViewCellViewModel()
     var retrospectionData: [RetrospectionData] = []
-    var currentMonth: Int = 0
-    var currentYear: Int = 0
+    var currentMonth: Int = Calendar.current.component(.month, from: Date())
+    var currentYear: Int = Calendar.current.component(.year, from: Date())
     var currentIndex: Int = 0
     var nextIndex: Int = 0
     var currentCell: Int = 0
@@ -26,11 +26,35 @@ class ReviewHomeVC: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var reviewList: UICollectionView!
     
+    // MARK: IBAction
+    @IBAction func showPrev(_ sender: Any) {
+        if currentMonth == 1 {
+            currentYear -= 1
+            currentMonth = 12
+        }else{
+            currentMonth -= 1
+        }
+        nextIndex = currentIndex - 1
+        
+        setLayout()
+        reviewList.reloadData()
+    }
+    @IBAction func showNext(_ sender: Any) {
+        if currentMonth == 12 {
+            currentYear += 1
+            currentMonth = 1
+        }else{
+            currentMonth += 1
+        }
+        print(currentYear,",", currentMonth,",", nextIndex,",", currentIndex)
+        nextIndex = currentIndex + currentCell
+        setLayout()
+        reviewList.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         getRetrospection()
         reviewList.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: "reviewCell")
-        
     }
     
     
@@ -99,19 +123,17 @@ extension ReviewHomeVC {
     }
     
     func setLayout(){
-        
-        currentMonth = Calendar.current.component(.month, from: Date())
-        currentYear = Calendar.current.component(.year, from: Date())
         month.text = "\(currentYear)" + "." + "\(currentMonth)"
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd"
         currentCell = 0
         for i in stride(from:nextIndex,to: 0, by: -1){
-            
+            print("nextIndex", nextIndex)
             let date = retrospectionData[i].startDate.split(separator:"-")
             if date[0] == "\(currentYear)" && date[1] < "\(currentMonth)" {
                 currentIndex = i + 1
+                nextIndex = i + 1
                 break
             }else if date[0] == "\(currentYear)" && date[1] == "\(currentMonth)"{
                 currentCell += 1
