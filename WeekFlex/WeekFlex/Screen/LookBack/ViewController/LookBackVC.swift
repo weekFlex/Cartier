@@ -62,6 +62,15 @@ class LookBackVC: UIViewController {
     @IBOutlet weak var nickLabel: UILabel!
     @IBOutlet weak var nickTopView: UIView!
     
+    
+    @IBAction func writeLookBackButtonDidTap(_ sender: Any) {
+        
+        guard let popUpVC =
+                storyboard?.instantiateViewController(identifier: "SelectCharacterVC") as? SelectCharacterVC else {return}
+        self.present(popUpVC, animated: true, completion: nil)
+        
+    }
+    
     lazy var editButton: UIButton = {
         
         let button = UIButton()

@@ -11,9 +11,11 @@ class SelectCharacterVC: UIViewController {
 
     
     var icon = [("good","꽤 괜찮았어요"),("merong","열심히 놀았어요"),("yaho","뿌듯해요"),("sad","후회해요"),("angry","화가 났어요"),("bad","아쉬웠어요"),("kiki-disable","최고였어요"),("pissed-disable","아찔했어요"),("crazy-disable","정신 없었어요"),("iku-disable","미래의 나에게!"),("sowhat-disable","눈막귀막"),("vomit-disable","너무 힘들었어요")]
+    var nextImage: UIImage?
     
     // MARK: - IBOutlet
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var iconCollectionView: UICollectionView!
@@ -22,10 +24,18 @@ class SelectCharacterVC: UIViewController {
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
     
+        guard let popUpVC =
+                storyboard?.instantiateViewController(identifier: "WriteLookBackVC") as? WriteLookBackVC else {return}
+        
+        if let nextImage = nextImage {
+            popUpVC.titleImage = nextImage
+        }
+        
+        self.present(popUpVC, animated: true, completion: nil)
     }
     
     @IBAction func closeButtonDidTap(_ sender: Any) {
-    
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -46,6 +56,8 @@ extension SelectCharacterVC {
         iconCollectionView.backgroundColor = .white
         iconCollectionView.delegate = self
         iconCollectionView.dataSource = self
+        
+        closeButton.setTitle("", for: .normal)
         
         nextButton.isEnabled = false
         nextButton.setButton(text: "다음", color: .gray3, font: .appleMedium(size: 16))
@@ -99,6 +111,7 @@ extension SelectCharacterVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         nextButton.isEnabled = true
         nextButton.setTitleColor(.black, for: .normal)
+        nextImage = UIImage(named: "Character/character-80-\(icon[indexPath.row].0)")
     }
     
     
