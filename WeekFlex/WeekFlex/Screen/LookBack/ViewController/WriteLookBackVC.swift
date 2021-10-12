@@ -12,6 +12,7 @@ class WriteLookBackVC: UIViewController {
     
     var titleImage: UIImage?
     var placeHolder: String = "이번 한 주에 대해 회고 내용을 작성해보세요!"
+    var startDate: String?
     
 
     @IBOutlet weak var closeButton: UIButton!
@@ -29,6 +30,43 @@ class WriteLookBackVC: UIViewController {
     }
     
     @IBAction func completeButtonDidTap(_ sender: Any) {
+        
+        guard let pvc = self.presentingViewController else { return }
+        
+
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+
+            if let token = UserDefaults.standard.string(forKey: "UserToken"),
+            let startDate = startDate {
+                
+                var context = contextTextView.text ?? ""
+                if context == placeHolder {
+                    context = ""
+                }
+                
+                let title = titleTextField.text ?? ""
+
+                
+                APIService.shared.postLookBack(token, context, 0, startDate, title){ [self] result in
+                    switch result {
+
+                    case .success(_):
+                        self.dismiss(animated: true, completion: {
+                            pvc.dismiss(animated: true, completion: nil)
+                            NotificationCenter.default.post(name: .reloadData, object: nil, userInfo: nil)
+                        })
+
+                    case .failure(let error):
+                        print(error)
+
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+
+        }
         
     }
     

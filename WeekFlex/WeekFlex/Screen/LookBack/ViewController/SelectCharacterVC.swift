@@ -12,6 +12,7 @@ class SelectCharacterVC: UIViewController {
     
     var icon = [("good","꽤 괜찮았어요"),("merong","열심히 놀았어요"),("yaho","뿌듯해요"),("sad","후회해요"),("angry","화가 났어요"),("bad","아쉬웠어요"),("kiki-disable","최고였어요"),("pissed-disable","아찔했어요"),("crazy-disable","정신 없었어요"),("iku-disable","미래의 나에게!"),("sowhat-disable","눈막귀막"),("vomit-disable","너무 힘들었어요")]
     var nextImage: UIImage?
+    var startDate: String?
     
     // MARK: - IBOutlet
     
@@ -27,8 +28,10 @@ class SelectCharacterVC: UIViewController {
         guard let popUpVC =
                 storyboard?.instantiateViewController(identifier: "WriteLookBackVC") as? WriteLookBackVC else {return}
         
-        if let nextImage = nextImage {
+        if let nextImage = nextImage,
+           let startDate = startDate {
             popUpVC.titleImage = nextImage
+            popUpVC.startDate = startDate
         }
         
         self.present(popUpVC, animated: true, completion: nil)

@@ -67,6 +67,7 @@ class LookBackVC: UIViewController {
         
         guard let popUpVC =
                 storyboard?.instantiateViewController(identifier: "SelectCharacterVC") as? SelectCharacterVC else {return}
+        popUpVC.startDate = startDate
         self.present(popUpVC, animated: true, completion: nil)
         
     }
@@ -115,6 +116,9 @@ class LookBackVC: UIViewController {
         super.viewDidLoad()
         setViewStyle()
         getData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: .reloadData, object: nil)
+        
         if lookBackWrite {
             // 회고를 썼다면?
       
@@ -160,6 +164,8 @@ class LookBackVC: UIViewController {
         titleImageView.setRounded(radius: nil)
 //        contentsLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 80).isActive = true
     }
+    
+   
 
 }
 
@@ -192,7 +198,7 @@ extension LookBackVC {
         nickLabel.setLabel(text: "\(nick)님의 기록", color: .black, font: .appleBold(size: 20))
     }
     
-    func getData() {
+    @objc func getData() {
         if NetworkState.isConnected() {
             // 네트워크 연결 시
             UserDefaults.standard.set("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
@@ -347,4 +353,8 @@ extension LookBackVC: UICollectionViewDataSource {
     }
     
     
+}
+extension Notification.Name {
+    // Observer 이름 등록
+    static let reloadData = Notification.Name("reloadData")
 }
