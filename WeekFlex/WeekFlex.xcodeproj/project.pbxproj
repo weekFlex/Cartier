@@ -43,6 +43,7 @@
 		9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E847260884E800EC9969 /* RoutineCell.swift */; };
 		9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */; };
 		9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */; };
+		9B5ABC7A2715C31600189B71 /* LookBackData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5ABC792715C31600189B71 /* LookBackData.swift */; };
 		9B7B080527156E8700AB423B /* WriteLookBackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B080427156E8700AB423B /* WriteLookBackVC.swift */; };
 		9B7EA068270DCBBF00C07401 /* AchievementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7EA067270DCBBF00C07401 /* AchievementData.swift */; };
 		9B98763526D243AE00EF218D /* LookBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B98763426D243AE00EF218D /* LookBack.storyboard */; };
@@ -152,6 +153,7 @@
 		9B56E847260884E800EC9969 /* RoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCell.swift; sourceTree = "<group>"; };
 		9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRoutineCell.swift; sourceTree = "<group>"; };
 		9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		9B5ABC792715C31600189B71 /* LookBackData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackData.swift; sourceTree = "<group>"; };
 		9B7B080427156E8700AB423B /* WriteLookBackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteLookBackVC.swift; sourceTree = "<group>"; };
 		9B7EA067270DCBBF00C07401 /* AchievementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementData.swift; sourceTree = "<group>"; };
 		9B98763426D243AE00EF218D /* LookBack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LookBack.storyboard; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				9B02562E26A9C2C300234098 /* MakeRoutineData.swift */,
 				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
 				9B7EA067270DCBBF00C07401 /* AchievementData.swift */,
+				9B5ABC792715C31600189B71 /* LookBackData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -979,6 +982,7 @@
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				2D282EC926A9FC2A00A53F8E /* TabBarVC.swift in Sources */,
+				9B5ABC7A2715C31600189B71 /* LookBackData.swift in Sources */,
 				9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */,
 				9B02562326A9A75200234098 /* UIString+Extension.swift in Sources */,
 				9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */,

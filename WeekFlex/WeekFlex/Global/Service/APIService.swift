@@ -96,6 +96,11 @@ struct APIService {
         miniJudgeObject(target, completion: completion)
     }
     
+    func postLookBack(_ token: String, _ content: String, _ emotionMascot: Int, _ startDate: String, _ title: String, completion: @escaping (NetworkResult<LookBackData>)->(Void)){
+        let target: APITarget = .writeLookBack(token: token, content: content, emotionMascot: emotionMascot, startDate: startDate, title: title)
+        judgeObject(target, completion: completion)
+    }
+    
 }
 
 extension APIService {
