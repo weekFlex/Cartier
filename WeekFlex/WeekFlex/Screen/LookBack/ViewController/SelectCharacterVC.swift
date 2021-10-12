@@ -33,7 +33,7 @@ class SelectCharacterVC: UIViewController {
         setView()
 
     }
-
+    
 }
 
 // MARK: - Extension
@@ -47,6 +47,7 @@ extension SelectCharacterVC {
         iconCollectionView.delegate = self
         iconCollectionView.dataSource = self
         
+        nextButton.isEnabled = false
         nextButton.setButton(text: "다음", color: .gray3, font: .appleMedium(size: 16))
     }
 }
@@ -90,9 +91,14 @@ extension SelectCharacterVC: UICollectionViewDataSource {
         }
         
         cell.configure(image: icon[indexPath.row].0, ment: icon[indexPath.row].1)
+        cell.index = indexPath
         
-       
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        nextButton.isEnabled = true
+        nextButton.setTitleColor(.black, for: .normal)
     }
     
     
