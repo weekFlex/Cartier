@@ -27,10 +27,10 @@ class ReviewCell: UICollectionViewCell {
     
     
     
-    func configure(with viewModel: ReviewItemPresentable){
-        dateLabel.text = viewModel.date
-        titleLabel.text = viewModel.title
-        descriptionLabel.text = viewModel.description
+    func configure(with data: RetrospectionData){
+        dateLabel.text = data.startDate
+        titleLabel.text = data.title
+        descriptionLabel.text = data.content
         
     }
     

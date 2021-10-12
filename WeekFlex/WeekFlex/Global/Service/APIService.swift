@@ -96,6 +96,10 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func getRetrospection( _ token: String, completion: @escaping ((NetworkResult<[RetrospectionData]>)-> (Void))){
+        let target: APITarget = .getRetrospection(token: token)
+        judgeObject(target, completion: completion)
+    }
     
 }
 

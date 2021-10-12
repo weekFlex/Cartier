@@ -27,6 +27,7 @@
 		0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */; };
 		0ECB0709270B3C78005F766D /* MyPageHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */; };
 		0ECB070C270CD900005F766D /* ProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB070B270CD900005F766D /* ProfileData.swift */; };
+		0ECB070F2713F0DE005F766D /* RetrospectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB070E2713F0DE005F766D /* RetrospectionData.swift */; };
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
@@ -130,6 +131,7 @@
 		0EC381B6266D18C700438A74 /* ReviewHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHomeVC.swift; sourceTree = "<group>"; };
 		0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHomeVC.swift; sourceTree = "<group>"; };
 		0ECB070B270CD900005F766D /* ProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileData.swift; sourceTree = "<group>"; };
+		0ECB070E2713F0DE005F766D /* RetrospectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectionData.swift; sourceTree = "<group>"; };
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				9B02562E26A9C2C300234098 /* MakeRoutineData.swift */,
 				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
 				0ECB070B270CD900005F766D /* ProfileData.swift */,
+				0ECB070E2713F0DE005F766D /* RetrospectionData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -905,6 +908,7 @@
 				9BE0BFFD2684DFFD00E2FEDC /* SimpleResponse.swift in Sources */,
 				9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */,
 				9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */,
+				0ECB070F2713F0DE005F766D /* RetrospectionData.swift in Sources */,
 				9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */,
 				9BE0C0002684E19F00E2FEDC /* APIService.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
