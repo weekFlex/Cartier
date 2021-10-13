@@ -25,7 +25,7 @@ class SelectCharacterVC: UIViewController {
     @IBAction func nextButtonDidTap(_ sender: Any) {
     
         guard let popUpVC =
-                storyboard?.instantiateViewController(identifier: "WriteLookBackVC") as? WriteLookBackVC else {return}
+                storyboard?.instantiateViewController(identifier: "WriteRetrospectionVC") as? WriteRetrospectionVC else {return}
         
         if let nextImage = nextImage,
            let startDate = startDate {

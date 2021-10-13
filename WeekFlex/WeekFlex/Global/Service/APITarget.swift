@@ -25,7 +25,7 @@ enum APITarget {
     case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
     case registerRoutine(token: String, routineID: Int) // 루틴 등록
     case statistics(token: String, date: String) // 회고 관련 통계 가져오기
-    case writeLookBack(token: String, content: String, emotionMascot: Int, startDate: String, title: String) // 회고 작성
+    case writeRetrospection(token: String, content: String, emotionMascot: Int, startDate: String, title: String) // 회고 작성
     
 }
 
@@ -63,7 +63,7 @@ extension APITarget: TargetType {
             return "api/v1/routine/\(routineID)/register"
         case .statistics:
             return "api/v1/retrospection/statistics"
-        case .writeLookBack:
+        case .writeRetrospection:
             return "/api/v1/retrospection"
         }
     }
@@ -76,7 +76,7 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine, .statistics:
             return .get
             
-        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine, .writeLookBack:
+        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine, .writeRetrospection:
             return .post
             
         case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
@@ -128,7 +128,7 @@ extension APITarget: TargetType {
         case .registerRoutine(_, let routineID):
             return .requestParameters(parameters: ["routineId": routineID], encoding: JSONEncoding.default)
             
-        case .writeLookBack(_, let content, let emotionMascot, let startDate, let title):
+        case .writeRetrospection(_, let content, let emotionMascot, let startDate, let title):
             return .requestParameters(parameters: ["content": content, "emotionMascot": emotionMascot, "startDate": startDate, "title": title], encoding: JSONEncoding.default)
         
         case .updateTodo(_, let days, let endTime, let startTime, let name, let todoId):
@@ -161,7 +161,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .statistics(let token, _), .writeLookBack(let token, _, _, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }

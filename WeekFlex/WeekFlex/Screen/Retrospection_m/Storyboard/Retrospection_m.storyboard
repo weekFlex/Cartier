@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Look BackVC-->
+        <!--Day RetrospectionVC-->
         <scene sceneID="0U8-ge-33f">
             <objects>
-                <viewController storyboardIdentifier="LookBackVC" id="Nhb-Qf-1c1" customClass="LookBackVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DayRetrospectionVC" id="Nhb-Qf-1c1" customClass="DayRetrospectionVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ke-qW-JCI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -382,10 +382,10 @@
             </objects>
             <point key="canvasLocation" x="931.88405797101461" y="-181.47321428571428"/>
         </scene>
-        <!--Write Look BackVC-->
+        <!--Write RetrospectionVC-->
         <scene sceneID="KiS-DJ-qpK">
             <objects>
-                <viewController storyboardIdentifier="WriteLookBackVC" id="AOO-sI-qfb" customClass="WriteLookBackVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WriteRetrospectionVC" id="AOO-sI-qfb" customClass="WriteRetrospectionVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z5R-ky-3ao">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

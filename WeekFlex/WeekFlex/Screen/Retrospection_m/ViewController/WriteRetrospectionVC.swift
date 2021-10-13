@@ -1,5 +1,5 @@
 //
-//  WriteLookBackVC.swift
+//  WriteRetrospectionVC.swift
 //  WeekFlex
 //
 //  Created by 김민희 on 2021/10/12.
@@ -8,7 +8,7 @@
 import UIKit
 import Moya
 
-class WriteLookBackVC: UIViewController {
+class WriteRetrospectionVC: UIViewController {
     
     var titleImage: UIImage?
     var placeHolder: String = "이번 한 주에 대해 회고 내용을 작성해보세요!"
@@ -48,7 +48,7 @@ class WriteLookBackVC: UIViewController {
                 let title = titleTextField.text ?? ""
 
                 
-                APIService.shared.postLookBack(token, context, 0, startDate, title){ [self] result in
+                APIService.shared.writeRetrospection(token, context, 0, startDate, title){ [self] result in
                     switch result {
 
                     case .success(_):
@@ -116,7 +116,7 @@ class WriteLookBackVC: UIViewController {
 
 }
 
-extension WriteLookBackVC {
+extension WriteRetrospectionVC {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         // 검색할 때
@@ -136,7 +136,7 @@ extension WriteLookBackVC {
     
 }
 
-extension WriteLookBackVC: UITextFieldDelegate {
+extension WriteRetrospectionVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == titleTextField {
@@ -152,7 +152,7 @@ extension WriteLookBackVC: UITextFieldDelegate {
     }
 }
 
-extension WriteLookBackVC: UITextViewDelegate {
+extension WriteRetrospectionVC: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeHolder {

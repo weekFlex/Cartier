@@ -51,7 +51,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>LookBack</string>
+					<string>Retrospection_m</string>
 				</dict>
 			</array>
 		</dict>

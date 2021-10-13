@@ -1,5 +1,5 @@
 //
-//  LookBackVC.swift
+//  DayRetrospectionVC.swift
 //  WeekFlex
 //
 //  Created by 김민희 on 2021/08/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LookBackVC: UIViewController {
+class DayRetrospectionVC: UIViewController {
     
     // MARK: Variable Part
     
@@ -171,7 +171,7 @@ class LookBackVC: UIViewController {
 
 // MARK: Extension
 
-extension LookBackVC {
+extension DayRetrospectionVC {
     
     func setViewStyle() {
         
@@ -240,7 +240,7 @@ extension LookBackVC {
 
 // MARK: UICollectionViewDelegateFlowLayout
 
-extension LookBackVC: UICollectionViewDelegateFlowLayout {
+extension DayRetrospectionVC: UICollectionViewDelegateFlowLayout {
     // CollectionView 크기 잡기
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -294,7 +294,7 @@ extension LookBackVC: UICollectionViewDelegateFlowLayout {
 
 // MARK: UICollectionViewDataSource
 
-extension LookBackVC: UICollectionViewDataSource {
+extension DayRetrospectionVC: UICollectionViewDataSource {
     // CollectionView 데이터 넣기
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
