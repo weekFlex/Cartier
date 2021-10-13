@@ -9,7 +9,7 @@ import Foundation
 
 struct TaskData: Codable {
     let category: CategoryData
-    let tasks: [TaskListData]
+    var tasks: [TaskListData]
 }
 
 // MARK: - Task

@@ -496,6 +496,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 for category in taskData {
                     searchTask += category.tasks.filter { $0.name.contains(searchText!) == true }
                 }
+                searchTask.sort { $0.isBookmarked! && !$1.isBookmarked! } //
                 return searchTask.count
                 
             } else {
@@ -510,10 +511,12 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     for category in taskData {
                         allTask += category.tasks
                     }
+                    allTask.sort { $0.isBookmarked! && !$1.isBookmarked! } //
                     return allTask.count
                     
                 } else {
                     // 특장 카테고리라면?
+                    taskData[categoryIndex-1].tasks.sort { $0.isBookmarked! && !$1.isBookmarked! }
                     return taskData[categoryIndex-1].tasks.count
                 }
             }
