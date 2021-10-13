@@ -8,11 +8,10 @@
 import UIKit
 
 class SelectCharacterVC: UIViewController {
-
     
-    var icon = [("good","꽤 괜찮았어요"),("merong","열심히 놀았어요"),("yaho","뿌듯해요"),("sad","후회해요"),("angry","화가 났어요"),("bad","아쉬웠어요"),("kiki-disable","최고였어요"),("pissed-disable","아찔했어요"),("crazy-disable","정신 없었어요"),("iku-disable","미래의 나에게!"),("sowhat-disable","눈막귀막"),("vomit-disable","너무 힘들었어요")]
     var nextImage: UIImage?
     var startDate: String?
+    let myDelegate = UIApplication.shared.delegate as? AppDelegate
     
     // MARK: - IBOutlet
     
@@ -105,16 +104,24 @@ extension SelectCharacterVC: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.configure(image: icon[indexPath.row].0, ment: icon[indexPath.row].1)
+        if let array = myDelegate?.emotionMascot {
+            cell.configure(image: array[indexPath.row].0, ment: array[indexPath.row].1)
+        }
+        
         cell.index = indexPath
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if let array = myDelegate?.emotionMascot {
+            nextImage = UIImage(named: "Character/character-80-\(array[indexPath.row].0)")
+        }
+        
         nextButton.isEnabled = true
         nextButton.setTitleColor(.black, for: .normal)
-        nextImage = UIImage(named: "Character/character-80-\(icon[indexPath.row].0)")
+        
     }
     
     

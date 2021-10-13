@@ -23,7 +23,7 @@ class SelectIconCell: UICollectionViewCell {
             if index!.row < 6 {
                 backView.setBorder(borderColor: color[index!.row], borderWidth: 2)
                 mentLabel.textColor = color[index!.row]
-                backView.layer.cornerRadius = backView.layer.frame.height / 2.0
+//                backView.layer.cornerRadius = backView.layer.frame.height / 2.0
             }
             
             
