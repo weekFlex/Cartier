@@ -33,12 +33,20 @@
 		2D282ECB26A9FC3C00A53F8E /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D282ECA26A9FC3C00A53F8E /* TabBar.storyboard */; };
 		9B02562326A9A75200234098 /* UIString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02562226A9A75200234098 /* UIString+Extension.swift */; };
 		9B02562F26A9C2C300234098 /* MakeRoutineData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02562E26A9C2C300234098 /* MakeRoutineData.swift */; };
+		9B0A49FD26D9399B003CBA71 /* CategoryStarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0A49FC26D9399B003CBA71 /* CategoryStarCell.swift */; };
+		9B0A4A0026D94C08003CBA71 /* RoutineStarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0A49FF26D94C08003CBA71 /* RoutineStarCell.swift */; };
 		9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* SelectToDoVC.swift */; };
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
+		9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B566D9F2711699900243304 /* SelectCharacterVC.swift */; };
+		9B566DA227116ADE00243304 /* SelectIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B566DA127116ADE00243304 /* SelectIconCell.swift */; };
 		9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E847260884E800EC9969 /* RoutineCell.swift */; };
 		9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */; };
 		9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */; };
+		9B5ABC7A2715C31600189B71 /* RetrospectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5ABC792715C31600189B71 /* RetrospectionData.swift */; };
+		9B7B080527156E8700AB423B /* WriteRetrospectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B080427156E8700AB423B /* WriteRetrospectionVC.swift */; };
+		9B7EA068270DCBBF00C07401 /* AchievementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7EA067270DCBBF00C07401 /* AchievementData.swift */; };
+		9B98763526D243AE00EF218D /* Retrospection_m.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B98763426D243AE00EF218D /* Retrospection_m.storyboard */; };
 		9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9EEFEE2698920E00FA0B5C /* CategoryData.swift */; };
 		9B9EEFF326989FA800FA0B5C /* TaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9EEFF226989FA800FA0B5C /* TaskData.swift */; };
 		9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */; };
@@ -52,6 +60,8 @@
 		9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */; };
 		9BEFD55B26A334F400FD9112 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */; };
 		9BEFD55E26A3488300FD9112 /* CheckRoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */; };
+		9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFABB5526D7A68C0005AA2B /* WeekStarCell.swift */; };
+		9BFABB5C26D7B0980005AA2B /* DayRetrospectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFABB5B26D7B0980005AA2B /* DayRetrospectionVC.swift */; };
 		9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9826A8366300EB0428 /* CategoryVM.swift */; };
 		9E0FFB9B26A836B800EB0428 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */; };
 		9E0FFB9D26A83A4400EB0428 /* CategoryDataWithoutID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */; };
@@ -133,12 +143,20 @@
 		45A572E8848738C512AB106E /* Pods-WeekFlex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.debug.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.debug.xcconfig"; sourceTree = "<group>"; };
 		9B02562226A9A75200234098 /* UIString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+Extension.swift"; sourceTree = "<group>"; };
 		9B02562E26A9C2C300234098 /* MakeRoutineData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineData.swift; sourceTree = "<group>"; };
+		9B0A49FC26D9399B003CBA71 /* CategoryStarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStarCell.swift; sourceTree = "<group>"; };
+		9B0A49FF26D94C08003CBA71 /* RoutineStarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStarCell.swift; sourceTree = "<group>"; };
 		9B1041912607594800746FCF /* SelectToDoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectToDoVC.swift; sourceTree = "<group>"; };
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineNameVC.swift; sourceTree = "<group>"; };
+		9B566D9F2711699900243304 /* SelectCharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCharacterVC.swift; sourceTree = "<group>"; };
+		9B566DA127116ADE00243304 /* SelectIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconCell.swift; sourceTree = "<group>"; };
 		9B56E847260884E800EC9969 /* RoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCell.swift; sourceTree = "<group>"; };
 		9B56E8762609D7B600EC9969 /* SelectedRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRoutineCell.swift; sourceTree = "<group>"; };
 		9B56E8792609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		9B5ABC792715C31600189B71 /* RetrospectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectionData.swift; sourceTree = "<group>"; };
+		9B7B080427156E8700AB423B /* WriteRetrospectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRetrospectionVC.swift; sourceTree = "<group>"; };
+		9B7EA067270DCBBF00C07401 /* AchievementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementData.swift; sourceTree = "<group>"; };
+		9B98763426D243AE00EF218D /* Retrospection_m.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Retrospection_m.storyboard; sourceTree = "<group>"; };
 		9B9EEFEE2698920E00FA0B5C /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 		9B9EEFF226989FA800FA0B5C /* TaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskData.swift; sourceTree = "<group>"; };
 		9BB52E7B25F0C2F6001C63E5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
@@ -152,6 +170,8 @@
 		9BEFD55726A32EA200FD9112 /* CheckRoutineVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineVC.swift; sourceTree = "<group>"; };
 		9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9BEFD55D26A3488300FD9112 /* CheckRoutineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRoutineCell.swift; sourceTree = "<group>"; };
+		9BFABB5526D7A68C0005AA2B /* WeekStarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStarCell.swift; sourceTree = "<group>"; };
+		9BFABB5B26D7B0980005AA2B /* DayRetrospectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRetrospectionVC.swift; sourceTree = "<group>"; };
 		9E0FFB9826A8366300EB0428 /* CategoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVM.swift; sourceTree = "<group>"; };
 		9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9E0FFB9C26A83A4400EB0428 /* CategoryDataWithoutID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataWithoutID.swift; sourceTree = "<group>"; };
@@ -403,6 +423,34 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		9B98763126D2437300EF218D /* Retrospection_m */ = {
+			isa = PBXGroup;
+			children = (
+				9BFABB5326D7A66D0005AA2B /* Cell */,
+				9B98763726D243B100EF218D /* ViewController */,
+				9B98763226D243A000EF218D /* Storyboard */,
+			);
+			path = Retrospection_m;
+			sourceTree = "<group>";
+		};
+		9B98763226D243A000EF218D /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				9B98763426D243AE00EF218D /* Retrospection_m.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		9B98763726D243B100EF218D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9BFABB5B26D7B0980005AA2B /* DayRetrospectionVC.swift */,
+				9B566D9F2711699900243304 /* SelectCharacterVC.swift */,
+				9B7B080427156E8700AB423B /* WriteRetrospectionVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9BC81A9D25FA80AD001B1D83 /* AddRoutine */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,8 +492,21 @@
 				9ED56E4A26A34BF100E1DEBF /* RoutineData.swift */,
 				9B02562E26A9C2C300234098 /* MakeRoutineData.swift */,
 				9E57244E26A9D8BA0084C3BD /* CreateTodoResponseData.swift */,
+				9B7EA067270DCBBF00C07401 /* AchievementData.swift */,
+				9B5ABC792715C31600189B71 /* RetrospectionData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9BFABB5326D7A66D0005AA2B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9BFABB5526D7A68C0005AA2B /* WeekStarCell.swift */,
+				9B0A49FC26D9399B003CBA71 /* CategoryStarCell.swift */,
+				9B0A49FF26D94C08003CBA71 /* RoutineStarCell.swift */,
+				9B566DA127116ADE00243304 /* SelectIconCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9E0FFB9E26A8402400EB0428 /* Service */ = {
@@ -649,6 +710,7 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				9B98763126D2437300EF218D /* Retrospection_m */,
 				2D282EC726A9FB8200A53F8E /* Tabbar */,
 				9EC2E0732631DD3000EF2F7E /* EditRoutine */,
 				0EC381B0266D185B00438A74 /* Review */,
@@ -793,6 +855,7 @@
 				9E5FD6F926073996008EB927 /* Metropolis-MediumItalic.otf in Resources */,
 				0ED11294265FD56500677330 /* MyPage.storyboard in Resources */,
 				9E5FD6FD26073996008EB927 /* Metropolis-ExtraLight.otf in Resources */,
+				9B98763526D243AE00EF218D /* Retrospection_m.storyboard in Resources */,
 				9EC0DB0125EEB9D4007D04D0 /* Assets.xcassets in Resources */,
 				9E5FD6FC26073996008EB927 /* Metropolis-Bold.otf in Resources */,
 				9E5FD6FE26073996008EB927 /* Metropolis-SemiBoldItalic.otf in Resources */,
@@ -868,6 +931,7 @@
 				9EC2E0822631E45100EF2F7E /* WeekCollectionViewCell.swift in Sources */,
 				0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */,
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
+				9B7EA068270DCBBF00C07401 /* AchievementData.swift in Sources */,
 				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
 				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
 				0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */,
@@ -895,10 +959,12 @@
 				9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */,
 				9BE0C0002684E19F00E2FEDC /* APIService.swift in Sources */,
 				9EC0DAF825EEB9D1007D04D0 /* AppDelegate.swift in Sources */,
+				9B0A4A0026D94C08003CBA71 /* RoutineStarCell.swift in Sources */,
 				9BEFD55B26A334F400FD9112 /* UIButton+Extension.swift in Sources */,
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9EC2E07A2631DDAA00EF2F7E /* EditRoutineVC.swift in Sources */,
 				9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */,
+				9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */,
 				9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */,
 				9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */,
 				0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */,
@@ -906,18 +972,23 @@
 				0EBADDCF2699E4B7007A9323 /* DailyData.swift in Sources */,
 				0EBADE13269F637D007A9323 /* Collection+Extension.swift in Sources */,
 				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
+				9B7B080527156E8700AB423B /* WriteRetrospectionVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9E57244F26A9D8BA0084C3BD /* CreateTodoResponseData.swift in Sources */,
 				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9ED56E4F26A355A800E1DEBF /* RoutineService.swift in Sources */,
+				9B566DA227116ADE00243304 /* SelectIconCell.swift in Sources */,
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				9E5FD70326078C06008EB927 /* RoutineListViewModel.swift in Sources */,
 				2D282EC926A9FC2A00A53F8E /* TabBarVC.swift in Sources */,
+				9B5ABC7A2715C31600189B71 /* RetrospectionData.swift in Sources */,
 				9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */,
 				9B02562326A9A75200234098 /* UIString+Extension.swift in Sources */,
 				9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */,
 				9EC2E07E2631DDBA00EF2F7E /* EditRoutineVM.swift in Sources */,
+				9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */,
+				9BFABB5C26D7B0980005AA2B /* DayRetrospectionVC.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
 				9B9EEFEF2698920E00FA0B5C /* CategoryData.swift in Sources */,
 				0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */,
@@ -929,6 +1000,7 @@
 				9E5FF5A9269A14D8000EAF7B /* Protocol.swift in Sources */,
 				9E5FD60925F4CB33008EB927 /* MyRoutineListVC.swift in Sources */,
 				0E7952EF2610B4A500345659 /* MainRoutineListViewModel.swift in Sources */,
+				9B0A49FD26D9399B003CBA71 /* CategoryStarCell.swift in Sources */,
 				9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */,
 				9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */,
 			);
@@ -1081,13 +1153,13 @@
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WFRFQ5S6AR;
+				DEVELOPMENT_TEAM = DUQE66MABG;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.minseung.WeekFlex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WeekFlex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1103,13 +1175,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WFRFQ5S6AR;
+				DEVELOPMENT_TEAM = DUQE66MABG;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.minseung.WeekFlex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WeekFlex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
