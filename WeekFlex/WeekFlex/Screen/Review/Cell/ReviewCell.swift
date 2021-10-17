@@ -28,7 +28,20 @@ class ReviewCell: UICollectionViewCell {
     
     
     func configure(with data: RetrospectionData){
-        dateLabel.text = data.startDate
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        guard let startDay = dateformatter.date(from: data.startDate) else { return }
+        guard let endDay = Calendar.current.date(byAdding: .day, value: 7, to: startDay) else { return }
+        let startDayString = dateformatter.string(from: startDay)
+        let endDayString = dateformatter.string(from: endDay)
+        let subStartDays = startDayString.split(separator: "-")
+        let subEndDay = endDayString.split(separator: "-")
+//        for s in subStartDays {
+//            if s[0] == "0" {
+//                s.removeFirst()
+//            }
+//        }
+        dateLabel.text = "\(subStartDays[1])월 \(subStartDays[2])일 ~ \(subEndDay[1])월 \(subEndDay[2])일"
         titleLabel.text = data.title
         descriptionLabel.text = data.content
         
