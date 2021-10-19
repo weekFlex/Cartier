@@ -96,6 +96,7 @@ class MainHomeVC: UIViewController {
         self.present(editRoutineVC, animated: true, completion: .none)
         clearPage()
     }
+    
     @IBAction func getRoutineBtnDidtap(_ sender: Any) {
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
@@ -493,6 +494,7 @@ extension MainHomeVC {
         UIView.animate(withDuration: 0.2) {
             self.dimView.alpha = 0
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
+            self.tabBarController?.tabBar.isHidden = false
         }
         isFloating = !isFloating
     }
@@ -506,7 +508,9 @@ extension MainHomeVC {
                 self?.view.layoutIfNeeded()
             }
         }
+        
         UIView.animate(withDuration: 0.2) {
+            self.tabBarController?.tabBar.isHidden = true
             self.dimView.isHidden = false
             self.dimView.alpha = 1
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 4))

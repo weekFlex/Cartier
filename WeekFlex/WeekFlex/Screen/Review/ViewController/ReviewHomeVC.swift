@@ -53,6 +53,7 @@ class ReviewHomeVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjgsXCJlbWFpbFwiOlwicmV0cm9AYWFhLmNvbVwifSJ9.5uH2ZI5K6CKNE9OdEQl_M2e1aflgRgDV24_UkOjnwbw", forKey: "UserToken")
         getRetrospection()
         reviewList.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: "reviewCell")
     }
@@ -104,7 +105,7 @@ extension ReviewHomeVC {
 //                                    weeklyData[i].items[j].todos[k].endTime = data[k].endTime?.changeTime()
 //                                }
 //                            }
-//                        } 
+//                        }
                         print(retrospectionData)
                         nextIndex = retrospectionData.count - 1
                         setLayout()

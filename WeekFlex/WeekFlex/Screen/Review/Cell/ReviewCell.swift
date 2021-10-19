@@ -41,7 +41,7 @@ class ReviewCell: UICollectionViewCell {
 //                s.removeFirst()
 //            }
 //        }
-        dateLabel.text = "\(subStartDays[1])월 \(subStartDays[2])일 ~ \(subEndDay[1])월 \(subEndDay[2])일"
+        
         titleLabel.text = data.title
         descriptionLabel.text = data.content
         
