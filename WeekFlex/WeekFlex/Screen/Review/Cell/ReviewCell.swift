@@ -34,14 +34,8 @@ class ReviewCell: UICollectionViewCell {
         guard let endDay = Calendar.current.date(byAdding: .day, value: 7, to: startDay) else { return }
         let startDayString = dateformatter.string(from: startDay)
         let endDayString = dateformatter.string(from: endDay)
-        let subStartDays = startDayString.split(separator: "-")
-        let subEndDay = endDayString.split(separator: "-")
-//        for s in subStartDays {
-//            if s[0] == "0" {
-//                s.removeFirst()
-//            }
-//        }
         
+        dateLabel.text = "\(startDayString.changeDay()) ~ \(endDayString.changeDay())"
         titleLabel.text = data.title
         descriptionLabel.text = data.content
         
