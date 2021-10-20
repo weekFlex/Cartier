@@ -14,6 +14,7 @@ class ReviewHomeVC: UIViewController {
     
     var reviewViewModel: ReviewCollectionViewCellViewModel = ReviewCollectionViewCellViewModel()
     var retrospectionData: [RetrospectionData] = []
+    var monthlyData: [[RetrospectionData]] = []
     var currentMonth: Int = Calendar.current.component(.month, from: Date())
     var currentYear: Int = Calendar.current.component(.year, from: Date())
     var currentIndex: Int = 0
@@ -34,7 +35,7 @@ class ReviewHomeVC: UIViewController {
         }else{
             currentMonth -= 1
         }
-        nextIndex = currentIndex - 1
+        currentIndex -= 1
         
         setLayout()
         reviewList.reloadData()
@@ -46,8 +47,7 @@ class ReviewHomeVC: UIViewController {
         }else{
             currentMonth += 1
         }
-        print(currentYear,",", currentMonth,",", nextIndex,",", currentIndex)
-        nextIndex = currentIndex + currentCell
+        currentIndex += 1
         setLayout()
         reviewList.reloadData()
     }
@@ -63,12 +63,14 @@ class ReviewHomeVC: UIViewController {
 
 extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentCell
+        if monthlyData.isEmpty { return 0 }
+        else {return monthlyData[currentIndex].count }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = reviewList.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath) as! ReviewCell
-        let data = Array(retrospectionData[currentIndex..<currentIndex + currentCell])
+        let data = monthlyData[currentIndex]
         let item = data[indexPath.row]
         cell.configure(with: item)
         
@@ -97,17 +99,11 @@ extension ReviewHomeVC {
                     switch result {
                     case .success(let data):
                         retrospectionData = data
-//                        for i in 0..<7 {
-//                            for j in 0..<weeklyData[i].items.count {
-//                                var data = weeklyData[i].items[j].todos
-//                                for k in 0..<data.count {
-//                                    weeklyData[i].items[j].todos[k].startTime = data[k].startTime?.changeTime()
-//                                    weeklyData[i].items[j].todos[k].endTime = data[k].endTime?.changeTime()
-//                                }
-//                            }
-//                        }
+                        
+                        saveMonthly(data: data)
+                        
                         print(retrospectionData)
-                        nextIndex = retrospectionData.count - 1
+                        
                         setLayout()
                         reviewList.reloadData()
                     // 데이터 전달 후 다시 로드
@@ -124,26 +120,31 @@ extension ReviewHomeVC {
     }
     
     func setLayout(){
+        // 보여주고있는 년도.달
         month.text = "\(currentYear)" + "." + "\(currentMonth)"
-        
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd"
-        currentCell = 0
-        for i in stride(from:nextIndex,to: 0, by: -1){
-            print("nextIndex", nextIndex)
-            let date = retrospectionData[i].startDate.split(separator:"-")
-            if date[0] == "\(currentYear)" && date[1] < "\(currentMonth)" {
-                currentIndex = i + 1
-                nextIndex = i + 1
-                break
-            }else if date[0] == "\(currentYear)" && date[1] == "\(currentMonth)"{
-                currentCell += 1
-            }
-        }
+        //데이터 없는 경우 버튼 비활성화
+        nextButton.isEnabled = currentIndex == monthlyData.count - 1 ? false : true
+        prevButton.isEnabled = currentIndex == 0 ? false : true
         
         
         print("currentCell: ", currentCell)
         print("currentIndex: ", currentIndex)
     }
     
+    func saveMonthly(data: [RetrospectionData]){
+        var temp:[RetrospectionData] = []
+        var t = String(data[0].startDate.dropLast(2))
+        for i in data {
+            if t == String(i.startDate.dropLast(2)) {
+                temp.append(i)
+            }else{
+                monthlyData.append(temp)
+                temp = [i]
+                t = String(i.startDate.dropLast(2))
+            }
+        }
+        monthlyData.append(temp)
+        currentIndex = monthlyData.count - 1
+        print("monthlyData: \n",monthlyData)
+    }
 }
