@@ -65,7 +65,6 @@ extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if monthlyData.isEmpty { return 0 }
         else {return monthlyData[currentIndex].count }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,13 +77,23 @@ extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let width = reviewList.frame.width
         
         return CGSize(width: width, height: 160)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let dayStoryboard = UIStoryboard.init(name: "Retrospection_m", bundle: nil)
+        guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else{ return }
+        let data = monthlyData[currentIndex][indexPath.row]
+        popupVC.emotionMascot = data.emotionMascot
+        popupVC.startDate = data.startDate
+        popupVC.lookBackTitle = data.title
+        popupVC.lookBackContents = data.content
+        
+        self.present(popupVC, animated: true, completion: nil)
+        
+    }
 }
 
 extension ReviewHomeVC {
