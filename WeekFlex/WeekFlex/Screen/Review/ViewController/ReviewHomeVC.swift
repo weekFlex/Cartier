@@ -125,10 +125,7 @@ extension ReviewHomeVC {
         //데이터 없는 경우 버튼 비활성화
         nextButton.isEnabled = currentIndex == monthlyData.count - 1 ? false : true
         prevButton.isEnabled = currentIndex == 0 ? false : true
-        
-        
-        print("currentCell: ", currentCell)
-        print("currentIndex: ", currentIndex)
+
     }
     
     func saveMonthly(data: [RetrospectionData]){
