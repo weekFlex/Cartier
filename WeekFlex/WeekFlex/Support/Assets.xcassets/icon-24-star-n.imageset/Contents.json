@@ -1,23 +1,23 @@
 {
   "images" : [
     {
-      "filename" : "icon32CancleBlack.png",
+      "filename" : "icon24StarDisabled.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon32CancleBlack@2x.png",
+      "filename" : "icon24StarDisabled@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon32CancleBlack@3x.png",
       "idiom" : "universal",
+      "filename" : "icon24StarDisabled@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "author" : "xcode",
-    "version" : 1
+    "version" : 1,
+    "author" : "xcode"
   }
 }
