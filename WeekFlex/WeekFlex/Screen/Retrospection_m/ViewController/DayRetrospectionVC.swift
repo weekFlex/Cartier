@@ -11,6 +11,8 @@ class DayRetrospectionVC: UIViewController {
     
     // MARK: Variable Part
     
+   
+    
     var week = ["월", "화", "수", "목", "금", "토", "일"]
     var goalPercent: Int = 0 { // 이번주 목표 달성률(서버에서 받음)
         didSet {
@@ -24,8 +26,8 @@ class DayRetrospectionVC: UIViewController {
         }
     }
     
-    var startDate: String = "2021-08-23" // 시작 날짜(앞 뷰에서 받아오기)
-    var emotionMascot: Int = 0 // 캐릭터 이미지(앞 뷰에서 받아오기)
+    var startDate: String? // 시작 날짜(앞 뷰에서 받아오기)
+    var emotionMascot: Int? // 캐릭터 이미지(앞 뷰에서 받아오기)
     var nick: String = "정우" // 닉네임
     var lookBackWrite: Bool = false  // 회고 썼는지 안썻는지
     var lookBackTitle: String = "최대글자수최대글자수최대" // 회고제목(앞 뷰에서 받아오기)
@@ -112,7 +114,7 @@ class DayRetrospectionVC: UIViewController {
     // MARK: Life Cycle Part
     
     override func viewDidLoad() {
-        
+        // 4, 2021-10-04, 10월 첫주!~, 마스코트 4
         super.viewDidLoad()
         setViewStyle()
         getData()
@@ -173,6 +175,19 @@ class DayRetrospectionVC: UIViewController {
 
 extension DayRetrospectionVC {
     
+    func countSevenDays(date: String) -> String? {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        if let startDay = dateformatter.date(from: date) {
+            let endDay = Calendar.current.date(byAdding: .day, value: 7, to: startDay)
+            let startDayString = dateformatter.string(from: startDay)
+            let endDayString = dateformatter.string(from: endDay!)
+            
+            return "\(startDayString.changeDay()) ~ \(endDayString.changeDay())"
+        }
+        return nil
+    }
+    
     func setViewStyle() {
         
         weekStartCollectionView.delegate = self
@@ -185,14 +200,23 @@ extension DayRetrospectionVC {
         routineStarCollectionView.delegate = self
         routineStarCollectionView.dataSource = self
         
-        routineDateLabel.setLabel(text: "08월 23일~08월 29일", color: .gray3, font: .appleMedium(size: 12))
+        if let startDate = startDate,
+           let days = countSevenDays(date: startDate) {
+            routineDateLabel.setLabel(text: days, color: .gray3, font: .appleMedium(size: 12))
+        }
         
         
         writeLookBackButton.setButton(text: "회고 작성하기 >", color: .gray4, font: .appleMedium(size: 10), backgroundColor: UIColor(red: 246.0 / 255.0, green: 247.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0))
         writeLookBackButton.setRounded(radius: 6)
         
         titleImageView.contentMode = .scaleAspectFit
-        titleImageView.image = UIImage(named: "Character/character-80-sowhat-disable")?.resizableImage(withCapInsets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), resizingMode: .stretch)
+        //emotionMascot
+        let myDelegate = UIApplication.shared.delegate as? AppDelegate
+        if let arr = myDelegate?.emotionMascot,
+            let emotionMascot = emotionMascot {
+            titleImageView.image = UIImage(named: "Character/character-80-\(arr[emotionMascot].0)")?.resizableImage(withCapInsets: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), resizingMode: .stretch)
+        }
+        
         titleImageView.backgroundColor = .bgSelected
         
         nickLabel.setLabel(text: "\(nick)님의 기록", color: .black, font: .appleBold(size: 20))
@@ -201,9 +225,8 @@ extension DayRetrospectionVC {
     @objc func getData() {
         if NetworkState.isConnected() {
             // 네트워크 연결 시
-            UserDefaults.standard.set("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
-            
-            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+            if let token = UserDefaults.standard.string(forKey: "UserToken"),
+               let startDate = startDate {
                 
                 APIService.shared.getStatistics(token, startDate) { [self] result in
                     switch result {
