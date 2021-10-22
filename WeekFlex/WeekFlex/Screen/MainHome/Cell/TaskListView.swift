@@ -80,7 +80,7 @@ class TaskListView: UIView {
         if(isDone){
             star.setImage(UIImage(named:"icon-24-star-n" + String(category) ), for: .normal)
         }else{
-            star.setImage(UIImage(named: "icon-24-star-n0"), for: .normal)
+            star.setImage(UIImage(named: "icon-24-star-n"), for: .normal)
         }
 
         guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}

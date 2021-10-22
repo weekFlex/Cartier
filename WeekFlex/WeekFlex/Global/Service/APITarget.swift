@@ -24,6 +24,8 @@ enum APITarget {
     case getRoutine(token: String) // 루틴 리스트 API
     case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
     case registerRoutine(token: String, routineID: Int) // 루틴 등록
+    case getUserProfile(token: String) //유저 프로필 받아오기
+    case getRetrospection(token: String)    //회고 전체 받아오기
     case statistics(token: String, date: String) // 회고 관련 통계 가져오기
     case writeRetrospection(token: String, content: String, emotionMascot: Int, startDate: String, title: String) // 회고 작성
     
@@ -41,6 +43,7 @@ extension APITarget: TargetType {
     
     var path: String {
         // path - 서버의 도메인 뒤에 추가 될 경로
+        
         
         switch self {
         case .getTask, .createTask:
@@ -61,6 +64,10 @@ extension APITarget: TargetType {
             return "api/v1/todo"
         case .registerRoutine(_, let routineID):
             return "api/v1/routine/\(routineID)/register"
+        case .getUserProfile:
+            return "api/v1/users/profile"
+        case .getRetrospection:
+            return "api/v1/retrospection"
         case .statistics:
             return "api/v1/retrospection/statistics"
         case .writeRetrospection:
@@ -73,7 +80,8 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory, .getWeekly, .getRoutine, .statistics:
+
+        case .getTask, .getCategory, .getWeekly, .getRoutine, .getUserProfile, .getRetrospection, .statistics:
             return .get
             
         case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine, .writeRetrospection:
@@ -101,7 +109,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory, .getRoutine:
+        case .getTask, .getCategory, .getRoutine, .getUserProfile, .getRetrospection:
             return .requestPlain
         
         case .createTask(_, let categoryId, let name):
@@ -160,8 +168,7 @@ extension APITarget: TargetType {
         // headers - HTTP header
         
         switch self {
-        
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }

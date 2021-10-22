@@ -91,6 +91,15 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func getUserProfile(_ token: String, completion: @escaping ((NetworkResult<ProfileData>)->(Void))){
+        let target: APITarget = .getUserProfile(token: token)
+        judgeObject(target, completion: completion)
+    }
+    
+    func getRetrospection( _ token: String, completion: @escaping ((NetworkResult<[RetrospectionData]>)-> (Void))){
+        let target: APITarget = .getRetrospection(token: token)
+        judgeObject(target, completion: completion)
+    }
     func getStatistics(_ token: String, _ date: String, completion: @escaping (NetworkResult<AchievementData>)->(Void)){
         let target: APITarget = .statistics(token: token, date: date)
         miniJudgeObject(target, completion: completion)

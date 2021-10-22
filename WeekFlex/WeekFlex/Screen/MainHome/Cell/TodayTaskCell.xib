@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodayTaskCell" customModule="WeekFlex" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="todayCell" rowHeight="134" id="4jB-ne-pQ7" customClass="TodayTaskCell" customModule="WeekFlex" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="134"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4jB-ne-pQ7" id="d8B-gv-fE5">
+                <rect key="frame" x="0.0" y="0.0" width="390" height="134"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GJ0-DU-bnq">
+                        <rect key="frame" x="8" y="16" width="374" height="118"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ame-Xc-1cB">
+                                <rect key="frame" x="16" y="12" width="342" height="102"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ame-Xc-1cB" secondAttribute="bottom" constant="4" id="A1v-ot-CVL"/>
+                            <constraint firstItem="ame-Xc-1cB" firstAttribute="top" secondItem="GJ0-DU-bnq" secondAttribute="top" constant="12" id="bX9-RH-cdt"/>
+                            <constraint firstAttribute="trailing" secondItem="ame-Xc-1cB" secondAttribute="trailing" constant="16" id="nrx-cn-vHv"/>
+                            <constraint firstItem="ame-Xc-1cB" firstAttribute="leading" secondItem="GJ0-DU-bnq" secondAttribute="leading" constant="16" id="oGL-7c-SPD"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="GJ0-DU-bnq" firstAttribute="top" secondItem="d8B-gv-fE5" secondAttribute="top" constant="16" id="5dx-hf-yjQ"/>
+                    <constraint firstItem="GJ0-DU-bnq" firstAttribute="leading" secondItem="d8B-gv-fE5" secondAttribute="leading" constant="8" id="FJm-7r-sod"/>
+                    <constraint firstAttribute="bottom" secondItem="GJ0-DU-bnq" secondAttribute="bottom" id="LIP-Sk-rrh"/>
+                    <constraint firstAttribute="trailing" secondItem="GJ0-DU-bnq" secondAttribute="trailing" constant="8" id="g2F-eG-Yuj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="g87-I3-cFn"/>
+            <connections>
+                <outlet property="stackView" destination="ame-Xc-1cB" id="GDE-4Z-Pbk"/>
+                <outlet property="view" destination="GJ0-DU-bnq" id="Des-lv-ruc"/>
+            </connections>
+            <point key="canvasLocation" x="116.66666666666667" y="138.61607142857142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

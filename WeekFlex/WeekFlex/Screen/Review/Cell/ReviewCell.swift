@@ -27,10 +27,28 @@ class ReviewCell: UICollectionViewCell {
     
     
     
-    func configure(with viewModel: ReviewItemPresentable){
-        dateLabel.text = viewModel.date
-        titleLabel.text = viewModel.title
-        descriptionLabel.text = viewModel.description
+    func configure(with data: RetrospectionData){
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        guard let startDay = dateformatter.date(from: data.startDate) else { return }
+        guard let endDay = Calendar.current.date(byAdding: .day, value: 7, to: startDay) else { return }
+        let startDayString = dateformatter.string(from: startDay)
+        let endDayString = dateformatter.string(from: endDay)
+        let myDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        dateLabel.text = "\(startDayString.changeDay()) ~ \(endDayString.changeDay())"
+        titleLabel.text = data.title
+        descriptionLabel.text = data.content
+        if let arr = myDelegate?.emotionMascot {
+            reviewCharacter.image = UIImage(named: "Character/character-80-\(arr[data.emotionMascot].0)")
+        }
+        if !data.stars.isEmpty {
+            for i in categories.indices {
+                categories[i].image = UIImage(named: "icon-24-star-n\(data.stars[i])")
+            }
+        }
+        
         
     }
     

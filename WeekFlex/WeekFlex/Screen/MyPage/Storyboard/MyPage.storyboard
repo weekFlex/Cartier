@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qvK-pe-nye">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
@@ -12,7 +13,7 @@
         <!--마이 페이지-->
         <scene sceneID="wGS-xh-8w7">
             <objects>
-                <viewController id="ihN-B3-ijy" sceneMemberID="viewController">
+                <viewController id="ihN-B3-ijy" customClass="MyPageHomeVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Y1-bH-kfn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,6 +82,9 @@
                                                     <constraint firstAttribute="height" constant="16" id="dQy-28-TvY"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="categorySetting:" destination="ihN-B3-ijy" eventType="touchUpInside" id="0po-Cd-Q1T"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -100,6 +104,9 @@
                                                     <constraint firstAttribute="width" constant="16" id="q6u-gP-RMP"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="taskSetting:" destination="ihN-B3-ijy" eventType="touchUpInside" id="BfK-fV-owr"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -130,6 +137,9 @@
                                                     <constraint firstAttribute="width" constant="16" id="Kag-1g-nZa"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="logout:" destination="ihN-B3-ijy" eventType="touchUpInside" id="O6P-NX-DpT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -171,6 +181,9 @@
                                                     <constraint firstAttribute="width" constant="16" id="QVY-gD-jWA"/>
                                                 </constraints>
                                                 <state key="normal" title="Button" image="icon16Right"/>
+                                                <connections>
+                                                    <action selector="contact:" destination="ihN-B3-ijy" eventType="touchUpInside" id="Gon-j4-jCf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -211,10 +224,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="마이 페이지" id="twL-Mn-rLG"/>
+                    <connections>
+                        <outlet property="name" destination="GU6-5k-bz8" id="epp-u9-r8t"/>
+                        <outlet property="profilePic" destination="bVi-VS-MUf" id="f2M-Wz-fyG"/>
+                        <outlet property="via" destination="F7z-tN-QQx" id="ATL-Zm-ZaB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDl-lw-Bfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260.86956521739131" y="-71.651785714285708"/>
+            <point key="canvasLocation" x="245" y="-72"/>
         </scene>
         <!--Delete AccountVC-->
         <scene sceneID="PyS-bF-VKW">

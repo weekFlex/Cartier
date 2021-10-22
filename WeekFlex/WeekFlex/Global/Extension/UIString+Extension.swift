@@ -67,5 +67,26 @@ extension String {
         return hour
     }
     
+    func changeDay() -> String {
+        //"2021-10-01" -> "10월 1일"
+        var arr: [String] = []
+        var result: String = ""
+        if self != "" {
+            arr = self.components(separatedBy: "-")
+            arr = Array(arr[1...2]) //년도 제거
+            if arr[0][arr[0].startIndex] == "0" {
+                arr[0].removeFirst()
+            }
+            if arr[1][arr[1].startIndex] == "0" {
+                arr[1].removeFirst()
+            }
+            
+            result = "\(arr[0])월 \(arr[1])일"
+        }
+        
+        return result
+    }
+    
+    
 }
 
