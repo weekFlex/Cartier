@@ -130,7 +130,14 @@ extension ReviewHomeVC {
     
     func setLayout(){
         // 보여주고있는 년도.달
-        month.text = "\(currentYear)" + "." + "\(currentMonth)"
+        if(monthlyData.isEmpty){
+            month.text = "\(currentYear).\(currentMonth)"
+        }else{
+            let arr = monthlyData[currentIndex][0].startDate.components(separatedBy: "-")
+            month.text = "\(arr[0]).\(arr[1])";
+        }
+        
+        
         //데이터 없는 경우 버튼 비활성화
         nextButton.isEnabled = currentIndex == monthlyData.count - 1 ? false : true
         prevButton.isEnabled = currentIndex == 0 ? false : true

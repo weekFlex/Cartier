@@ -41,6 +41,7 @@ class ReviewCell: UICollectionViewCell {
         titleLabel.text = data.title
         descriptionLabel.text = data.content
         if let arr = myDelegate?.emotionMascot {
+            
             reviewCharacter.image = UIImage(named: "Character/character-80-\(arr[data.emotionMascot].0)")
         }
         if !data.stars.isEmpty {

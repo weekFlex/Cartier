@@ -86,19 +86,15 @@ class TaskListView: UIView {
         guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
         time.text = startTime + " - " + endTime
         
-        
-        
-        
-        
     }
     
     func starTapped(){
         star.rx.tap.asDriver().debounce(.seconds(2)).drive(onNext: { [self] in
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
+                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ result in
                     switch result {
                     
-                    case .success(let _):
+                    case .success( _):
                         print("체크완료")
                     // 데이터 전달 후 다시 로드
                     case .failure(let error):
