@@ -39,10 +39,31 @@ class ReviewCell: UICollectionViewCell {
         
         dateLabel.text = "\(startDayString.changeDay()) ~ \(endDayString.changeDay())"
         titleLabel.text = data.title
-        descriptionLabel.text = data.content
-        if let arr = myDelegate?.emotionMascot {
+        if(data.content != "" ){
+            descriptionLabel.text = data.content
+        }else{
+            descriptionLabel.text = "회고가 비어있어요"
+            let warningView = UIImageView()
+            let icon = UIImage(named: "warning.png")
+            warningView.image = icon
+            self.view.addSubview(warningView)
+            warningView.translatesAutoresizingMaskIntoConstraints = false
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             
-            reviewCharacter.image = UIImage(named: "Character/character-80-\(arr[data.emotionMascot].0)")
+            warningView.widthAnchor.constraint(equalToConstant: 12).isActive = true
+            warningView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+            warningView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 22).isActive = true
+            warningView.topAnchor.constraint(equalTo: descriptionLabel.topAnchor).isActive = true
+            warningView.trailingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: 6).isActive = true
+            
+            descriptionLabel.leadingAnchor.constraint(equalTo: warningView.trailingAnchor, constant: 6).isActive = true
+            descriptionLabel.trailingAnchor.constraint(equalTo: warningView.trailingAnchor, constant: 6).isActive = true
+            
+        }
+        
+        if let arr = myDelegate?.emotionMascot {
+            //
+            reviewCharacter.image = UIImage(named: "Character/character-96-\(arr[data.emotionMascot].0)")
         }
         if !data.stars.isEmpty {
             for i in categories.indices {

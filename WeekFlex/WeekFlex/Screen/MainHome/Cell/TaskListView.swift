@@ -91,10 +91,10 @@ class TaskListView: UIView {
     func starTapped(){
         star.rx.tap.asDriver().debounce(.seconds(2)).drive(onNext: { [self] in
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ result in
+                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
                     switch result {
                     
-                    case .success( _):
+                    case .success(let _):
                         print("체크완료")
                     // 데이터 전달 후 다시 로드
                     case .failure(let error):

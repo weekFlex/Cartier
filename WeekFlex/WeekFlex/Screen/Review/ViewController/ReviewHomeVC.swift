@@ -86,10 +86,13 @@ extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let dayStoryboard = UIStoryboard.init(name: "Retrospection_m", bundle: nil)
         guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else{ return }
         let data = monthlyData[currentIndex][indexPath.row]
-        popupVC.emotionMascot = data.emotionMascot
         popupVC.startDate = data.startDate
+        
+        if data.emotionMascot != 0 { popupVC.emotionMascot = data.emotionMascot }
+        if !data.content.isEmpty { popupVC.lookBackContents = data.content }
+        
         popupVC.lookBackTitle = data.title
-        popupVC.lookBackContents = data.content
+        
         
         self.present(popupVC, animated: true, completion: nil)
         
