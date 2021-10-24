@@ -80,7 +80,7 @@ class ReviewCell: UICollectionViewCell {
         }
         if !data.stars.isEmpty {
             for i in categories.indices {
-                categories[i].image = UIImage(named: "icon-24-star-n\(data.stars[i])")
+                categories[i].image = UIImage(named: "icon-24-star-n\(data.stars[i].id)")
             }
         }
         
