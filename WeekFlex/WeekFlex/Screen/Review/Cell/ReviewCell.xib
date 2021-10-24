@@ -91,7 +91,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회고내용회고내용회고내용회고내용회고내용회고내용" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W67-P2-mfy">
-                        <rect key="frame" x="22" y="129" width="202" height="16"/>
+                        <rect key="frame" x="40" y="129.5" width="184" height="16"/>
                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -111,6 +111,13 @@
                         </constraints>
                         <state key="normal" image="icon16Right"/>
                     </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning" translatesAutoresizingMaskIntoConstraints="NO" id="Fpt-hT-zab">
+                        <rect key="frame" x="22" y="129.5" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="JHa-aH-TZe"/>
+                            <constraint firstAttribute="height" constant="12" id="Zug-39-yB4"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="Yz5-Hl-OLq"/>
@@ -131,13 +138,14 @@
                 <constraint firstItem="0gj-jy-4PQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="FW4-QA-YnX"/>
                 <constraint firstItem="78S-cE-IqO" firstAttribute="top" secondItem="UeJ-hB-znJ" secondAttribute="bottom" constant="8" id="G9d-uR-L8x"/>
                 <constraint firstItem="c2p-to-leK" firstAttribute="leading" secondItem="eIp-0c-Jx8" secondAttribute="trailing" constant="2" id="HXH-gw-DqA"/>
-                <constraint firstItem="W67-P2-mfy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="LRc-Lc-hNW"/>
+                <constraint firstItem="Fpt-hT-zab" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="22" id="IXU-GP-oBB"/>
                 <constraint firstItem="wGx-I3-BMU" firstAttribute="leading" secondItem="c2p-to-leK" secondAttribute="trailing" constant="2" id="PF3-Yl-Phe"/>
                 <constraint firstItem="UeJ-hB-znJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Qpb-pw-aTW"/>
+                <constraint firstItem="Fpt-hT-zab" firstAttribute="top" secondItem="W67-P2-mfy" secondAttribute="top" id="T8l-c5-1Xn"/>
                 <constraint firstItem="I76-ah-hbS" firstAttribute="centerY" secondItem="klR-IR-gpe" secondAttribute="centerY" id="Ydf-wa-cio"/>
                 <constraint firstAttribute="trailing" secondItem="fOD-P5-bye" secondAttribute="trailing" constant="16" id="aGM-Dh-08a"/>
                 <constraint firstItem="UeJ-hB-znJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="ert-Jq-LXF"/>
-                <constraint firstItem="W67-P2-mfy" firstAttribute="top" secondItem="0gj-jy-4PQ" secondAttribute="bottom" constant="11.5" id="fic-dt-DC9"/>
+                <constraint firstItem="W67-P2-mfy" firstAttribute="top" secondItem="0gj-jy-4PQ" secondAttribute="bottom" constant="12" id="fic-dt-DC9"/>
                 <constraint firstItem="eIp-0c-Jx8" firstAttribute="leading" secondItem="klR-IR-gpe" secondAttribute="trailing" constant="2" id="g4J-WK-CRe"/>
                 <constraint firstItem="GZk-87-K0K" firstAttribute="centerY" secondItem="klR-IR-gpe" secondAttribute="centerY" id="ge4-pk-Byk"/>
                 <constraint firstItem="FtB-Fe-cbj" firstAttribute="centerY" secondItem="klR-IR-gpe" secondAttribute="centerY" id="kgk-9i-Rzb"/>
@@ -148,15 +156,20 @@
                 <constraint firstItem="wGx-I3-BMU" firstAttribute="centerY" secondItem="klR-IR-gpe" secondAttribute="centerY" id="u3q-w5-3OY"/>
                 <constraint firstItem="klR-IR-gpe" firstAttribute="top" secondItem="78S-cE-IqO" secondAttribute="bottom" constant="20" id="uba-Dt-gCq"/>
                 <constraint firstAttribute="trailing" secondItem="0gj-jy-4PQ" secondAttribute="trailing" constant="16" id="wKw-ta-ap7"/>
+                <constraint firstItem="W67-P2-mfy" firstAttribute="leading" secondItem="Fpt-hT-zab" secondAttribute="trailing" constant="6" id="xUc-pB-eoC"/>
                 <constraint firstItem="78S-cE-IqO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="yQv-OT-iEH"/>
             </constraints>
             <size key="customSize" width="170" height="65"/>
             <connections>
                 <outlet property="dateLabel" destination="UeJ-hB-znJ" id="cqi-kc-xRe"/>
                 <outlet property="descriptionLabel" destination="W67-P2-mfy" id="1pK-d1-YGz"/>
+                <outlet property="detailButton" destination="6dX-R3-GPi" id="Uz0-ot-tO0"/>
+                <outlet property="line" destination="0gj-jy-4PQ" id="nxc-nd-WVx"/>
                 <outlet property="reviewCharacter" destination="fOD-P5-bye" id="BC9-1S-8Fe"/>
                 <outlet property="titleLabel" destination="78S-cE-IqO" id="za5-j6-Msx"/>
                 <outlet property="view" destination="T8B-4I-UdG" id="5Mt-1d-zKu"/>
+                <outlet property="warningConstraint" destination="IXU-GP-oBB" id="4o0-aD-vmp"/>
+                <outlet property="warningIcon" destination="Fpt-hT-zab" id="1Tu-qz-0xf"/>
                 <outletCollection property="categories" destination="FtB-Fe-cbj" collectionClass="NSMutableArray" id="iuu-Zs-PW4"/>
                 <outletCollection property="categories" destination="eIp-0c-Jx8" collectionClass="NSMutableArray" id="Jrz-1Q-Nwx"/>
                 <outletCollection property="categories" destination="klR-IR-gpe" collectionClass="NSMutableArray" id="31U-iO-bxJ"/>
@@ -172,5 +185,6 @@
         <image name="Character/character-80-good" width="240" height="240"/>
         <image name="icon-24-star-n0" width="60" height="60"/>
         <image name="icon16Right" width="16" height="16"/>
+        <image name="warning" width="24" height="24"/>
     </resources>
 </document>
