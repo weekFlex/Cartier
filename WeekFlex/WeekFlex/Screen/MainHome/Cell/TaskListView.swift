@@ -86,10 +86,6 @@ class TaskListView: UIView {
         guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
         time.text = startTime + " - " + endTime
         
-        
-        
-        
-        
     }
     
     func starTapped(){

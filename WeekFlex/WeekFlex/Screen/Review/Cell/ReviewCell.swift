@@ -16,7 +16,11 @@ class ReviewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var reviewCharacter: UIImageView!
     @IBOutlet var categories: [UIImageView]!
+    @IBOutlet weak var warningIcon: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var detailButton: UIButton!
+    @IBOutlet weak var line: UIView!
+    @IBOutlet weak var warningConstraint: NSLayoutConstraint!
     
     
     override func awakeFromNib() {
@@ -39,13 +43,44 @@ class ReviewCell: UICollectionViewCell {
         
         dateLabel.text = "\(startDayString.changeDay()) ~ \(endDayString.changeDay())"
         titleLabel.text = data.title
-        descriptionLabel.text = data.content
+        if(data.content != "" ){
+            warningIcon.isHidden = true
+            warningConstraint.constant = 5
+            descriptionLabel.text = data.content
+            
+        }else{
+            warningIcon.isHidden = false
+            warningConstraint.constant = 22
+            descriptionLabel.text = "회고가 비어있어요"
+//            let warningView = UIImageView()
+//            let icon = UIImage(named: "warning.png")
+//            warningView.image = icon
+//            self.view.addSubview(warningView)
+//            warningView.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//            warningView.widthAnchor.constraint(equalToConstant: 12).isActive = true
+//            warningView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+//            warningView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 22).isActive = true
+//            warningView.topAnchor.constraint(equalTo: descriptionLabel.topAnchor).isActive = true
+//            warningView.trailingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: 6).isActive = true
+//
+//
+//            descriptionConstraint.secondItem = warningView
+//            descriptionConstraint.secondAttribute = trailingAnchor
+//            descriptionConstraint.isActive = true
+//            descriptionLabel.leadingAnchor.constraint(equalTo: warningView.trailingAnchor, constant: 6).isActive = true
+            
+            
+        }
+        
         if let arr = myDelegate?.emotionMascot {
-            reviewCharacter.image = UIImage(named: "Character/character-80-\(arr[data.emotionMascot].0)")
+            //0일경우 기본
+            reviewCharacter.image = UIImage(named: "Character/character-96-\(arr[data.emotionMascot].0)")
         }
         if !data.stars.isEmpty {
             for i in categories.indices {
-                categories[i].image = UIImage(named: "icon-24-star-n\(data.stars[i])")
+                categories[i].image = UIImage(named: "icon-24-star-n\(data.stars[i].id)")
             }
         }
         

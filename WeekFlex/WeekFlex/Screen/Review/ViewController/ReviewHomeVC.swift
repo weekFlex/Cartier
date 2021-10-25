@@ -53,7 +53,7 @@ class ReviewHomeVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjgsXCJlbWFpbFwiOlwicmV0cm9AYWFhLmNvbVwifSJ9.5uH2ZI5K6CKNE9OdEQl_M2e1aflgRgDV24_UkOjnwbw", forKey: "UserToken")
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjksXCJlbWFpbFwiOlwiZ2hscmhAZ21haWwuY29tXCJ9In0.SnNSMriM4iTnpo4vzqOcpmN9xswiu_Rr7jgYkYhxjA4", forKey: "UserToken")
         getRetrospection()
         reviewList.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: "reviewCell")
     }
@@ -86,10 +86,13 @@ extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let dayStoryboard = UIStoryboard.init(name: "Retrospection_m", bundle: nil)
         guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else{ return }
         let data = monthlyData[currentIndex][indexPath.row]
-        popupVC.emotionMascot = data.emotionMascot
         popupVC.startDate = data.startDate
+        
+        if data.emotionMascot != 0 { popupVC.emotionMascot = data.emotionMascot }
+        if !data.content.isEmpty { popupVC.lookBackContents = data.content }
+        
         popupVC.lookBackTitle = data.title
-        popupVC.lookBackContents = data.content
+        
         
         self.present(popupVC, animated: true, completion: nil)
         
@@ -130,7 +133,14 @@ extension ReviewHomeVC {
     
     func setLayout(){
         // 보여주고있는 년도.달
-        month.text = "\(currentYear)" + "." + "\(currentMonth)"
+        if(monthlyData.isEmpty){
+            month.text = "\(currentYear).\(currentMonth)"
+        }else{
+            let arr = monthlyData[currentIndex][0].startDate.components(separatedBy: "-")
+            month.text = "\(arr[0]).\(arr[1])";
+        }
+        
+        
         //데이터 없는 경우 버튼 비활성화
         nextButton.isEnabled = currentIndex == monthlyData.count - 1 ? false : true
         prevButton.isEnabled = currentIndex == 0 ? false : true
