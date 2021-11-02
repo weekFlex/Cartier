@@ -116,6 +116,7 @@ class MainHomeVC: UIViewController {
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         getRoutines()
         setDate()
+        saveLastWeek()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -445,28 +446,12 @@ extension MainHomeVC {
         }
     }
     
-    func calculateCategoryToday(currentDay: Int){
-        var categoryCounter = [Int](repeating: 0, count: 16)
-        for routine in weeklyData[currentDay].items{
-            for todo in routine.todos{
-                if todo.done {
-                    categoryCounter[todo.categoryColor] += 1
-                }
-            }
-        }
-        
-        guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
-        representCategory[currentDay] = categoryIndex
-    }
+   
     
     
     func saveLastWeek(){
-        let defaults = UserDefaults.standard
-        if defaults.object(forKey: "lastSaveDate") == nil {
-            defaults.set("", forKey: "lastSaveDate")
-        } else {
-            
-        }
+        let save = CheckLastSave()
+        save.check()
     }
     
     
@@ -536,5 +521,129 @@ extension MainHomeVC {
         calendarCollectionView.reloadData() // 리로드
         tableView.reloadData() // 리로드
     }
+    
+}
+
+class CheckLastSave {
+    
+    let lastSaveDate: String
+    let key = "lastSaveDate"
+    
+    func firstDayOfWeek() -> String {
+        let startFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
+        startFormatter.dateFormat = "e" // 일요일 1부터
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date: Int = Int(startFormatter.string(from: Date())) ?? 1
+        let currentDay = (date + 5) % 7
+        let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Date())!
+        let result = dateFormatter.string(from: startDay)
+    
+        return result
+    }
+    
+    func sendStars(data:[DailyData]){
+        var starArray : [Int] = []
+        for d in data {
+            var categoryCounter = [Int](repeating: 0, count: 16)
+            
+            for routine in d.items{
+                for todo in routine.todos{
+                    if todo.done {
+                        categoryCounter[todo.categoryColor] += 1
+                    }
+                }
+            }
+            
+            guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
+            starArray.append(categoryIndex)
+        }
+        
+        
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                APIService.shared.createLastStars(token, starArray, self.lastSaveDate ) { result in
+                    switch result {
+                    case .success(let _):
+                        print("회고별추가 성공")
+                        UserDefaults.standard.set(self.firstDayOfWeek(), forKey: self.key)
+                        for s in starArray {
+                            print(s)
+                        }
+                    case .failure(let error):
+                        print(error)
+                        print("오류!!")
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            print("네트워크 미연결")
+        }
+        
+    }
+    
+    func getLastWeek(date:String) {
+        var lastData:[DailyData] = []
+        
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                APIService.shared.getWeekly(token, date: date) { result in
+                    switch result {
+                    case .success(let data):
+                        lastData = data
+                        
+                        for w in lastData {
+                            print(w.items.count)
+                            if w.items.count == 0 { continue }
+                            self.sendStars(data: lastData)
+                            break
+                        }
+                        
+                        print("지난주 불러오기성공")
+                    case .failure(let error):
+                        print(error)
+                        print("오류!!")
+                    }
+                }
+                
+            
+            }
+            
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            print("네트워크 미연결")
+        }
+        
+    }
+    
+    func check(){
+        
+        if(lastSaveDate == "none"){
+            UserDefaults.standard.set(firstDayOfWeek(), forKey: key)
+        }else{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let lastDate:Date = dateFormatter.date(from: lastSaveDate)!
+            let interval = Date().timeIntervalSince(lastDate)
+            let days = Int(interval/86400)
+            print("7전")
+            if(days >= 7){
+                getLastWeek(date: lastSaveDate)
+                UserDefaults.standard.set(self.firstDayOfWeek(), forKey: self.key)
+            }
+        }
+    }
+    
+    
+    
+    init(){
+//        self.lastSaveDate = UserDefaults.standard.string(forKey: key) ?? "none"
+        self.lastSaveDate = "2021-08-09"
+    }
+    
     
 }

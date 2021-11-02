@@ -32,7 +32,6 @@ class ReviewCell: UICollectionViewCell {
     
     
     func configure(with data: RetrospectionData){
-        let delegate = UIApplication.shared.delegate as? AppDelegate
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd"
         guard let startDay = dateformatter.date(from: data.startDate) else { return }
@@ -52,26 +51,6 @@ class ReviewCell: UICollectionViewCell {
             warningIcon.isHidden = false
             warningConstraint.constant = 22
             descriptionLabel.text = "회고가 비어있어요"
-//            let warningView = UIImageView()
-//            let icon = UIImage(named: "warning.png")
-//            warningView.image = icon
-//            self.view.addSubview(warningView)
-//            warningView.translatesAutoresizingMaskIntoConstraints = false
-//
-//
-//            warningView.widthAnchor.constraint(equalToConstant: 12).isActive = true
-//            warningView.heightAnchor.constraint(equalToConstant: 12).isActive = true
-//            warningView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 22).isActive = true
-//            warningView.topAnchor.constraint(equalTo: descriptionLabel.topAnchor).isActive = true
-//            warningView.trailingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: 6).isActive = true
-//
-//
-//            descriptionConstraint.secondItem = warningView
-//            descriptionConstraint.secondAttribute = trailingAnchor
-//            descriptionConstraint.isActive = true
-//            descriptionLabel.leadingAnchor.constraint(equalTo: warningView.trailingAnchor, constant: 6).isActive = true
-            
-            
         }
         
         if let arr = myDelegate?.emotionMascot {
@@ -81,6 +60,10 @@ class ReviewCell: UICollectionViewCell {
         if !data.stars.isEmpty {
             for i in categories.indices {
                 categories[i].image = UIImage(named: "icon-24-star-n\(data.stars[i].id)")
+            }
+        }else {
+            for i in categories.indices {
+                categories[i].image = UIImage(named: "icon-24-star-n0")
             }
         }
         
