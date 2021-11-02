@@ -412,7 +412,7 @@ extension MainHomeVC {
         }
     }
     
-    private func setDate() {
+    public func setDate() {
         // 오늘 요일 계산해서 weekdate에 일주일 날짜 채워넣음
         let startFormatter = DateFormatter()
         startFormatter.dateFormat = "e" // 일요일 1부터
@@ -536,5 +536,94 @@ extension MainHomeVC {
         calendarCollectionView.reloadData() // 리로드
         tableView.reloadData() // 리로드
     }
+    
+}
+
+class CheckLastSave {
+    let lastSaveDate: String
+    let key = "lastSaveDate"
+    
+    func firstDayOfWeek() -> String {
+        let startFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
+        startFormatter.dateFormat = "e" // 일요일 1부터
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date: Int = Int(startFormatter.string(from: Date())) ?? 1
+        let currentDay = (date + 5) % 7
+        let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Date())!
+        let result = dateFormatter.string(from: startDay)
+    
+        return result
+    }
+    
+    func getLastWeek(date:String)-> [DailyData]{
+        var lastData:[DailyData] = []
+        
+        if NetworkState.isConnected() {
+            // 네트워크 연결 시
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                APIService.shared.getWeekly(token,date: date) { result in
+                    switch result {
+                    case .success(let data):
+                        lastData = data
+                        
+                    case .failure(let error):
+                        print(error)
+                        print("오류!!")
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            print("네트워크 미연결")
+        }
+        
+        return lastData
+    }
+    
+    func check(){
+        
+        if(lastSaveDate == "none"){
+            UserDefaults.standard.set(firstDayOfWeek(), forKey: key)
+        }else{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let lastDate:Date = dateFormatter.date(from: lastSaveDate)!
+            let interval = Date().timeIntervalSince(lastDate)
+            let days = Int(interval/86400)
+            
+            if(days >= 7){
+                let weekData = getLastWeek(date: lastSaveDate)
+                let starts:[Int] = []
+                for w in weekData {
+                    if w.items.count > 0 { calculate(data: weekData) }
+                }
+            }
+        }
+    }
+    
+    func calculate(data:[DailyData]){
+        var starArray : [Int] = []
+        for d in data {
+            var categoryCounter = [Int](repeating: 0, count: 16)
+            
+            for routine in d.items{
+                for todo in routine.todos{
+                    if todo.done {
+                        categoryCounter[todo.categoryColor] += 1
+                    }
+                }
+            }
+            
+            guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
+            starArray.append(categoryIndex)
+        }
+        
+    }
+    
+    init(){
+        self.lastSaveDate = UserDefaults.standard.string(forKey: key) ?? "none"
+    }
+    
     
 }
