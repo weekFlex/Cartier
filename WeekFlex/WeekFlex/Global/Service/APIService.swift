@@ -110,6 +110,12 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func createLastStars(_ token:String, _ stars: [Int], _ weekStartDate: String, completion: @escaping (NetworkResult<SimpleData>) -> (Void)) {
+        let target: APITarget = .createLastStars(token: token, stars: stars, weekStartDate: weekStartDate)
+        judgeObject(target, completion: completion)
+        
+    }
+    
 }
 
 extension APIService {
@@ -122,6 +128,7 @@ extension APIService {
                     
                     let decoder = JSONDecoder()
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
+                    print(body)
                     if let data = body.data {
                         completion(.success(data))
                     }
