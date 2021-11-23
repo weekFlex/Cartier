@@ -1,39 +1,41 @@
 //
-//  EditPopUpVC.swift
+//  EditVC.swift
 //  WeekFlex
 //
-//  Created by dohan on 2021/04/14.
+//  Created by dohan on 2021/11/23.
 //
 
 import Foundation
 import UIKit
 
+protocol EditPopUpDelegate: AnyObject {
+    func didTabEdit(cellIndex: Int, viewIndex:Int)
+    func didTabDelete(cellIndex: Int, viewIndex:Int, todoId:Int)
+}
 
-class EditPopUpVC: UIViewController {
+
+class EditVC: UIViewController{
     
     //MARK: Variable
     
-    var todoId: Int = 0
+    weak var delegate: EditPopUpDelegate?
+    var taskTitle: String = ""
     var cellIndex = 0
     var viewIndex = 0
-    
-    var taskTitle: String = ""
-    
+    var todoId = 0
     
     //MARK: IBOutlet
     
-    @IBOutlet weak var popupView: UIView!
-    @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var popUpView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
-    
-    //MARK: IBAction
     
     @IBAction func editButton(_ sender: Any) {
-//        delegate?.didTabEdit(cellIndex: cellIndex, viewIndex: viewIndex)
+        delegate?.didTabEdit(cellIndex: cellIndex, viewIndex: viewIndex)
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func deleteButton(_ sender: Any) {
-        
         let alert = UIAlertController(title: "해당 할일이 삭제됩니다.", message: "이대로 삭제를 진행할까요?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "그만두기", style: .default, handler : nil)
         let delete = UIAlertAction(title: "삭제하기", style: .cancel) { (action) in
@@ -44,12 +46,12 @@ class EditPopUpVC: UIViewController {
                     
                     APIService.shared.deleteTodo(token, todoId: self.todoId){ result in
                         switch result {
-                        
+                            
                         case .success(let data):
                             print("삭제완료: ", data)
                             
-                        // 데이터 전달 후 다시 로드
-                        
+                            // 데이터 전달 후 다시 로드
+                            
                         case .failure(let error):
                             print(error)
                             print("오류!!")
@@ -60,25 +62,23 @@ class EditPopUpVC: UIViewController {
                 // 네트워크 미연결 팝업 띄우기
                 print("네트워크 미연결")
             }
-            
             self.dismiss(animated: true, completion: nil)
-            
-            
+            self.delegate?.didTabDelete(cellIndex: self.cellIndex, viewIndex: self.viewIndex, todoId: self.todoId)
         }
-        
         alert.addAction(cancel)
         alert.addAction(delete)
         present(alert,animated: false, completion: nil)
         
-        
-        
     }
-    
     
     @IBAction func cancelButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if let tvc = self.presentingViewController as? TabBarVC {
+            if let pvc = tvc.selectedViewController as? MainHomeVC {
+                pvc.showDim(false)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
-    
     
     //MARK: Life Cycle
     
@@ -96,18 +96,11 @@ class EditPopUpVC: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 }
             }
-           
-        }
-
-    }
-    
-}
-
-extension EditPopUpVC {
+        } }
     
     func setLayout(){
-        self.popupView.layer.cornerRadius = 20
-        self.taskLabel.text = taskTitle
-        
+        popUpView.layer.cornerRadius = 20
+        self.view.backgroundColor = UIColor.clear
+        self.titleLabel.text = taskTitle
     }
 }

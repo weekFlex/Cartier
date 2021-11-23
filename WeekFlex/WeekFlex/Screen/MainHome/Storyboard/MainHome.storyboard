@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Ry-ep-wq6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2gc-lW-NlO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,6 +15,24 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="dwi-MD-27k">
+            <objects>
+                <navigationController id="2gc-lW-NlO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icon32HomeActive" selectedImage="icon32HomeActive" id="2on-QE-Gdt"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hcb-Sm-US8">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2x5-xG-9cD" kind="relationship" relationship="rootViewController" id="wHE-kd-77N"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KPT-M9-lQ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1241" y="-723"/>
+        </scene>
         <!--Main HomeVC-->
         <scene sceneID="Meb-21-cGf">
             <objects>
@@ -267,6 +285,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qh1-D5-d9A"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTaskBtn" destination="BEY-S9-pfO" id="VK6-SH-6Rg"/>
                         <outlet property="addTaskStack" destination="Ivo-U0-JyT" id="YkD-QI-MBB"/>
@@ -414,31 +433,114 @@
             </objects>
             <point key="canvasLocation" x="326.08695652173918" y="-723.21428571428567"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="x9t-Sz-oG2">
+        <!--EditVC-->
+        <scene sceneID="cAz-es-dIg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Ry-ep-wq6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icon-32-home-disable" selectedImage="icon32HomeActive" id="D0l-jd-ll2"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dZq-Zw-hxq">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <viewController storyboardIdentifier="EditVC" id="A4C-wC-sR8" customClass="EditVC" customModule="WeekFlex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aLW-gC-JDh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQs-3T-DSg">
+                                <rect key="frame" x="0.0" y="646" width="414" height="250"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5E5-hv-XR8">
+                                        <rect key="frame" x="24" y="29" width="48" height="24"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpp-CN-0OZ">
+                                        <rect key="frame" x="366" y="25" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="Lbp-9k-0KK"/>
+                                            <constraint firstAttribute="height" constant="32" id="lWG-Bw-X5c"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="icon32CancleBlack">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButton:" destination="A4C-wC-sR8" eventType="touchUpInside" id="sZa-o0-IIV"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon24Edit" translatesAutoresizingMaskIntoConstraints="NO" id="1U9-Gv-PST">
+                                        <rect key="frame" x="24" y="85" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="07Q-0S-GW2"/>
+                                            <constraint firstAttribute="height" constant="24" id="ey7-6t-Keq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orO-du-7iY">
+                                        <rect key="frame" x="54" y="81" width="92" height="32"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="할 일 수정하기">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="editButton:" destination="A4C-wC-sR8" eventType="touchUpInside" id="KNC-2w-t4Y"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon24DeleteBlack" translatesAutoresizingMaskIntoConstraints="NO" id="PSK-k5-s4d">
+                                        <rect key="frame" x="24" y="135" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="AqE-4u-wRG"/>
+                                            <constraint firstAttribute="width" constant="24" id="GEN-mU-BSC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Xg-9Y-4cg">
+                                        <rect key="frame" x="54" y="131" width="92" height="32"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="할 일 삭제하기">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteButton:" destination="A4C-wC-sR8" eventType="touchUpInside" id="he0-wM-Shb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Hpp-CN-0OZ" secondAttribute="trailing" constant="16" id="0zi-xK-Ned"/>
+                                    <constraint firstItem="orO-du-7iY" firstAttribute="leading" secondItem="1U9-Gv-PST" secondAttribute="trailing" constant="6" id="6EK-E6-N1O"/>
+                                    <constraint firstItem="1U9-Gv-PST" firstAttribute="top" secondItem="5E5-hv-XR8" secondAttribute="bottom" constant="32" id="Ex5-AK-w67"/>
+                                    <constraint firstItem="5E5-hv-XR8" firstAttribute="top" secondItem="EQs-3T-DSg" secondAttribute="top" constant="29" id="J5B-AF-KVt"/>
+                                    <constraint firstItem="1U9-Gv-PST" firstAttribute="leading" secondItem="EQs-3T-DSg" secondAttribute="leading" constant="24" id="LVt-a2-P0G"/>
+                                    <constraint firstItem="orO-du-7iY" firstAttribute="centerY" secondItem="1U9-Gv-PST" secondAttribute="centerY" id="Tvz-kc-vOX"/>
+                                    <constraint firstItem="PSK-k5-s4d" firstAttribute="top" secondItem="1U9-Gv-PST" secondAttribute="bottom" constant="26" id="XhL-AV-a2R"/>
+                                    <constraint firstItem="5Xg-9Y-4cg" firstAttribute="centerY" secondItem="PSK-k5-s4d" secondAttribute="centerY" id="a0f-Z0-YOU"/>
+                                    <constraint firstItem="5Xg-9Y-4cg" firstAttribute="leading" secondItem="PSK-k5-s4d" secondAttribute="trailing" constant="6" id="lSh-aS-52M"/>
+                                    <constraint firstItem="PSK-k5-s4d" firstAttribute="leading" secondItem="EQs-3T-DSg" secondAttribute="leading" constant="24" id="mtw-qi-cPB"/>
+                                    <constraint firstItem="5E5-hv-XR8" firstAttribute="leading" secondItem="EQs-3T-DSg" secondAttribute="leading" constant="24" id="n1g-w4-i5i"/>
+                                    <constraint firstItem="Hpp-CN-0OZ" firstAttribute="centerY" secondItem="5E5-hv-XR8" secondAttribute="centerY" id="qI1-eo-Y6N"/>
+                                    <constraint firstAttribute="height" constant="250" id="tLj-h6-5XZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cba-TT-XGq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EQs-3T-DSg" firstAttribute="leading" secondItem="cba-TT-XGq" secondAttribute="leading" id="eri-ob-74I"/>
+                            <constraint firstAttribute="bottom" secondItem="EQs-3T-DSg" secondAttribute="bottom" id="rzP-8H-xhW"/>
+                            <constraint firstItem="cba-TT-XGq" firstAttribute="trailing" secondItem="EQs-3T-DSg" secondAttribute="trailing" id="t8f-5O-Pgs"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <segue destination="2x5-xG-9cD" kind="relationship" relationship="rootViewController" id="f58-4F-OJu"/>
+                        <outlet property="popUpView" destination="EQs-3T-DSg" id="93y-bE-LTK"/>
+                        <outlet property="titleLabel" destination="5E5-hv-XR8" id="lSI-t9-vWo"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ih5-Vo-1H1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TGr-Lz-Nce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1328.985507246377" y="-723.21428571428567"/>
+            <point key="canvasLocation" x="1028" y="-723"/>
         </scene>
     </scenes>
     <resources>
         <image name="character132SadGray" width="132" height="132"/>
         <image name="icon-24-star-n0" width="60" height="60"/>
-        <image name="icon-32-home-disable" width="32" height="32"/>
         <image name="icon24DeleteBlack" width="72" height="72"/>
         <image name="icon24Edit" width="24" height="24"/>
         <image name="icon32CancleBlack" width="32" height="32"/>

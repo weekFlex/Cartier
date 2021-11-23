@@ -98,6 +98,7 @@ class MainHomeVC: UIViewController {
     }
     
     @IBAction func getRoutineBtnDidtap(_ sender: Any) {
+        self.tabBarController?.tabBar.isHidden = true
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
         self.navigationController?.pushViewController(myRoutineVC, animated: true)
@@ -271,15 +272,16 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
-        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
-        print("cellIndex : \(cellIndex), viewIndex:\(viewIndex)")
-        popupVC.delegate = self
-        popupVC.todoId = todoId
+        //모달 화면 띄우기
+        
+        showDim(true)
+        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
+        popupVC.delegate = self
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
-        popupVC.modalPresentationStyle = .overFullScreen
-        //모달 화면 띄우기
+        popupVC.todoId = todoId
+        popupVC.modalPresentationStyle = .overCurrentContext
         
         self.present(popupVC, animated: true, completion: nil)
     }
@@ -311,6 +313,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
+        showDim(false)
         weeklyData[currentDay].items[cellIndex].todos.remove(at: viewIndex)
         if weeklyData[currentDay].items[cellIndex].todos.count == 0 {
             weeklyData[currentDay].items.remove(at: cellIndex)
@@ -502,6 +505,20 @@ extension MainHomeVC {
         }
         isFloating = !isFloating
     }
+    
+    func showDim(_ isTrue: Bool){
+        if isTrue{
+            UIView.animate(withDuration: 0.3) {
+                self.dimView.isHidden = false
+                self.dimView.alpha = 1
+            }
+        }else {
+            self.dimView.alpha = 0
+            self.dimView.isHidden = true
+        }
+        
+    }
+    
     private func clearPage(){
         floatingStacks.forEach { stack in
             stack.isHidden = true
@@ -630,7 +647,6 @@ class CheckLastSave {
             let lastDate:Date = dateFormatter.date(from: lastSaveDate)!
             let interval = Date().timeIntervalSince(lastDate)
             let days = Int(interval/86400)
-            print("7전")
             if(days >= 7){
                 getLastWeek(date: lastSaveDate)
                 UserDefaults.standard.set(self.firstDayOfWeek(), forKey: self.key)

@@ -11,6 +11,7 @@
 		0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26212125F8CB14007D28F0 /* TableViewCell.xib */; };
 		0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26216026014B0B007D28F0 /* TaskListView.xib */; };
 		0E26216426014B23007D28F0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26216326014B23007D28F0 /* TaskListView.swift */; };
+		0E26A859274C0AD30069A779 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26A858274C0AD30069A779 /* EditVC.swift */; };
 		0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E47926737B380002EFDD /* ReviewCell.swift */; };
 		0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30E47A26737B380002EFDD /* ReviewCell.xib */; };
 		0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */; };
@@ -123,6 +124,7 @@
 		0E26212125F8CB14007D28F0 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		0E26216026014B0B007D28F0 /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
 		0E26216326014B23007D28F0 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		0E26A858274C0AD30069A779 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		0E30E47926737B380002EFDD /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		0E30E47A26737B380002EFDD /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModel.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			children = (
 				0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */,
 				0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */,
+				0E26A858274C0AD30069A779 /* EditVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1006,6 +1009,7 @@
 				9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */,
 				2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */,
 				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
+				0E26A859274C0AD30069A779 /* EditVC.swift in Sources */,
 				0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */,
