@@ -11,7 +11,7 @@
 		0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26212125F8CB14007D28F0 /* TableViewCell.xib */; };
 		0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26216026014B0B007D28F0 /* TaskListView.xib */; };
 		0E26216426014B23007D28F0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26216326014B23007D28F0 /* TaskListView.swift */; };
-		0E26A859274C0AD30069A779 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26A858274C0AD30069A779 /* EditVC.swift */; };
+		0E26A859274C0AD30069A779 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26A858274C0AD30069A779 /* EditPopUpVC.swift */; };
 		0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E47926737B380002EFDD /* ReviewCell.swift */; };
 		0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30E47A26737B380002EFDD /* ReviewCell.xib */; };
 		0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */; };
@@ -31,7 +31,6 @@
 		0ECB070F2713F0DE005F766D /* RetrospectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB070E2713F0DE005F766D /* RetrospectionData.swift */; };
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
-		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
 		0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC974726C25330003877B0 /* TodayTaskCell.swift */; };
 		0EFC974B26C258FB003877B0 /* TodayTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */; };
 		2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC526A779EE00A53F8E /* SimpleData.swift */; };
@@ -124,7 +123,7 @@
 		0E26212125F8CB14007D28F0 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		0E26216026014B0B007D28F0 /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
 		0E26216326014B23007D28F0 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
-		0E26A858274C0AD30069A779 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
+		0E26A858274C0AD30069A779 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
 		0E30E47926737B380002EFDD /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		0E30E47A26737B380002EFDD /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModel.swift; sourceTree = "<group>"; };
@@ -144,7 +143,6 @@
 		0ECB070E2713F0DE005F766D /* RetrospectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectionData.swift; sourceTree = "<group>"; };
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
-		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
 		0EFC974726C25330003877B0 /* TodayTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTaskCell.swift; sourceTree = "<group>"; };
 		0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayTaskCell.xib; sourceTree = "<group>"; };
 		2D282EC526A779EE00A53F8E /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
@@ -310,8 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */,
-				0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */,
-				0E26A858274C0AD30069A779 /* EditVC.swift */,
+				0E26A858274C0AD30069A779 /* EditPopUpVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -984,7 +981,6 @@
 				9EFE6AFF26A7370500064CAB /* ViewCategoryVC.swift in Sources */,
 				0EBADDCF2699E4B7007A9323 /* DailyData.swift in Sources */,
 				0EBADE13269F637D007A9323 /* Collection+Extension.swift in Sources */,
-				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
 				9B7B080527156E8700AB423B /* WriteRetrospectionVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9E57244F26A9D8BA0084C3BD /* CreateTodoResponseData.swift in Sources */,
@@ -1009,7 +1005,7 @@
 				9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */,
 				2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */,
 				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
-				0E26A859274C0AD30069A779 /* EditVC.swift in Sources */,
+				0E26A859274C0AD30069A779 /* EditPopUpVC.swift in Sources */,
 				0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */,

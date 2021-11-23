@@ -276,7 +276,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
         //모달 화면 띄우기
         
         showDim(true)
-        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditVC") as? EditVC else { return }
+        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
         popupVC.delegate = self
         popupVC.cellIndex = cellIndex
