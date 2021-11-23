@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 protocol EditPopUpDelegate: AnyObject {
     func didTabEdit(cellIndex: Int, viewIndex:Int)
@@ -31,6 +32,7 @@ class EditVC: UIViewController{
     
     
     @IBAction func editButton(_ sender: Any) {
+        hidePresentingDimView()
         delegate?.didTabEdit(cellIndex: cellIndex, viewIndex: viewIndex)
         self.dismiss(animated: true, completion: nil)
     }
@@ -72,12 +74,8 @@ class EditVC: UIViewController{
     }
     
     @IBAction func cancelButton(_ sender: Any) {
-        if let tvc = self.presentingViewController as? TabBarVC {
-            if let pvc = tvc.selectedViewController as? MainHomeVC {
-                pvc.showDim(false)
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+        hidePresentingDimView()
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: Life Cycle
@@ -90,17 +88,24 @@ class EditVC: UIViewController{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if let touch = touches.first , touch.view == self.view {
-            if let tvc = self.presentingViewController as? TabBarVC {
-                if let pvc = tvc.selectedViewController as? MainHomeVC {
-                    pvc.showDim(false)
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
+            hidePresentingDimView()
+            self.dismiss(animated: true, completion: nil)
         } }
     
     func setLayout(){
         popUpView.layer.cornerRadius = 20
         self.view.backgroundColor = UIColor.clear
         self.titleLabel.text = taskTitle
+    }
+    
+    func hidePresentingDimView(){
+        if let tvc = self.presentingViewController as? TabBarVC {
+            if let nvc = tvc.selectedViewController as? UINavigationController{
+                if let pvc = nvc.topViewController as? MainHomeVC {
+                    pvc.showDim(false)
+                    
+                }
+            }
+        }
     }
 }

@@ -123,6 +123,7 @@ class MainHomeVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if let touch = touches.first , touch.view == self.dimView {
+            self.tabBarController?.tabBar.isHidden = false
             hideFloating()
         } }
 }
@@ -281,7 +282,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
         popupVC.todoId = todoId
-        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalPresentationStyle = .overFullScreen
         
         self.present(popupVC, animated: true, completion: nil)
     }
@@ -482,8 +483,9 @@ extension MainHomeVC {
         UIView.animate(withDuration: 0.2) {
             self.dimView.alpha = 0
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
-            self.tabBarController?.tabBar.isHidden = false
+            
         }
+        self.tabBarController?.tabBar.isHidden = false
         isFloating = !isFloating
     }
     
@@ -511,10 +513,13 @@ extension MainHomeVC {
             UIView.animate(withDuration: 0.3) {
                 self.dimView.isHidden = false
                 self.dimView.alpha = 1
+                self.tabBarController?.tabBar.isHidden = true
             }
         }else {
             self.dimView.alpha = 0
             self.dimView.isHidden = true
+            self.tabBarController?.tabBar.isHidden = false
+//            clearPage()
         }
         
     }
