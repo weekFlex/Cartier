@@ -31,10 +31,9 @@ class TaskListView: UIView {
     var isDone: Bool = false {
         didSet{
             if(isDone){
-                
                 star.setImage(UIImage(named: "icon-24-star-n" + String(category)),for: .normal)
             }else{
-                star.setImage(UIImage(named: "icon-24-star-n0"),for: .normal)
+                star.setImage(UIImage(named: "icon-24-star-n"),for: .normal)
             }
         }
     }
@@ -42,7 +41,7 @@ class TaskListView: UIView {
     //MARK: IBOutlet
     
     @IBOutlet weak var taskTitle: UILabel!
-    @IBOutlet weak var time: UILabel!
+    
     @IBOutlet weak var star: UIButton!
     @IBOutlet weak var meatBalls: UIButton!
     
@@ -84,7 +83,15 @@ class TaskListView: UIView {
         }
 
         guard let startTime = viewModel.startTime, let endTime = viewModel.endTime else{return}
-        time.text = startTime + " - " + endTime
+        
+        let timeLabel = UILabel()
+        timeLabel.text = "\(startTime) - \(endTime)"
+        timeLabel.font = UIFont.appleRegular(size: 13)
+        timeLabel.textColor = UIColor.gray3
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskTitle.addSubview(timeLabel)
+        timeLabel.leadingAnchor.constraint(equalTo: taskTitle.leadingAnchor).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: taskTitle.bottomAnchor, constant: 2).isActive = true
         
     }
     

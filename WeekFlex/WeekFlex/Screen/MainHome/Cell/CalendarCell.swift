@@ -48,8 +48,14 @@ class CalendarCell: UICollectionViewCell {
         if data.items.count == 0 {
             star.image = UIImage(named: "no")
         }else { 
-            guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? -1) else { return  }
-            star.image = UIImage(named: "icon-24-star-n" + String(categoryIndex))
+            guard let categoryIndex = categoryCounter.firstIndex(of: categoryCounter.max() ?? 0) else { return  }
+            
+            if categoryIndex == 0 {
+                star.image = UIImage(named: "icon-24-star-n")
+            }else {
+                star.image = UIImage(named: "icon-24-star-n" + String(categoryIndex))
+            }
+            
         }
         
         
