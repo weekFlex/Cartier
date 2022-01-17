@@ -22,6 +22,10 @@ class MyPageHomeVC: UIViewController{
     @IBAction func logout(_ sender: Any) {
     }
     @IBAction func deleteAccount(_ sender: Any) {
+        let deleteStoryboard = UIStoryboard.init(name: "DeleteAccount", bundle: nil)
+        guard let nextVC = deleteStoryboard.instantiateViewController(withIdentifier: "DeleteAccount") as? DeleteAccountVC else { return }
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
     }
     @IBAction func contact(_ sender: Any) {
     }

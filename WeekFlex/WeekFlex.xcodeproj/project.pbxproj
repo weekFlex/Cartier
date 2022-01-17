@@ -327,8 +327,8 @@
 		0EB2A02127955053007E5E57 /* DeleteAccount */ = {
 			isa = PBXGroup;
 			children = (
-				0EB2A0232795506E007E5E57 /* Storyboard */,
 				0EB2A02227955066007E5E57 /* ViewController */,
+				0EB2A0232795506E007E5E57 /* Storyboard */,
 			);
 			path = DeleteAccount;
 			sourceTree = "<group>";
