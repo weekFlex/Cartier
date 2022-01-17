@@ -29,6 +29,7 @@ enum APITarget {
     case statistics(token: String, date: String) // 회고 관련 통계 가져오기
     case writeRetrospection(token: String, content: String, emotionMascot: Int, startDate: String, title: String) // 회고 작성
     case createLastStars(token: String, stars: [Int], weekStartDate: String) //지난주 별 보내기
+    
 }
 
 // MARK: TargetType Protocol 구현

@@ -21,6 +21,7 @@
 		0E795358261F6D0900345659 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E795357261F6D0900345659 /* CalendarCell.swift */; };
 		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
 		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
+		0EB2A025279550A5007E5E57 /* DeleteAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2A024279550A5007E5E57 /* DeleteAccount.storyboard */; };
 		0EBADDCF2699E4B7007A9323 /* DailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBADDCE2699E4B7007A9323 /* DailyData.swift */; };
 		0EBADE13269F637D007A9323 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBADE12269F637D007A9323 /* Collection+Extension.swift */; };
 		0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */; };
@@ -133,6 +134,7 @@
 		0E795357261F6D0900345659 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
 		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
+		0EB2A024279550A5007E5E57 /* DeleteAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeleteAccount.storyboard; sourceTree = "<group>"; };
 		0EBADDCE2699E4B7007A9323 /* DailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyData.swift; sourceTree = "<group>"; };
 		0EBADE12269F637D007A9323 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReasonVC.swift; sourceTree = "<group>"; };
@@ -322,6 +324,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		0EB2A02127955053007E5E57 /* DeleteAccount */ = {
+			isa = PBXGroup;
+			children = (
+				0EB2A0232795506E007E5E57 /* Storyboard */,
+				0EB2A02227955066007E5E57 /* ViewController */,
+			);
+			path = DeleteAccount;
+			sourceTree = "<group>";
+		};
+		0EB2A02227955066007E5E57 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0ED1129726623B2800677330 /* DeleteAccountVC.swift */,
+				0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0EB2A0232795506E007E5E57 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0EB2A024279550A5007E5E57 /* DeleteAccount.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		0EC381B0266D185B00438A74 /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,8 +397,6 @@
 		0ED1129626623B0E00677330 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0ED1129726623B2800677330 /* DeleteAccountVC.swift */,
-				0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */,
 				0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */,
 			);
 			path = ViewController;
@@ -719,6 +745,7 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				0EB2A02127955053007E5E57 /* DeleteAccount */,
 				9B98763126D2437300EF218D /* Retrospection_m */,
 				2D282EC726A9FB8200A53F8E /* Tabbar */,
 				9EC2E0732631DD3000EF2F7E /* EditRoutine */,
@@ -850,6 +877,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB2A025279550A5007E5E57 /* DeleteAccount.storyboard in Resources */,
 				9BC81AA025FA80CB001B1D83 /* AddRoutine.storyboard in Resources */,
 				9E5FD6FA26073996008EB927 /* Metropolis-Light.otf in Resources */,
 				9E5FD6F726073996008EB927 /* Metropolis-ThinItalic.otf in Resources */,

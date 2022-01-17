@@ -21,7 +21,8 @@ class MyPageHomeVC: UIViewController{
     }
     @IBAction func logout(_ sender: Any) {
     }
-    
+    @IBAction func deleteAccount(_ sender: Any) {
+    }
     @IBAction func contact(_ sender: Any) {
     }
     
