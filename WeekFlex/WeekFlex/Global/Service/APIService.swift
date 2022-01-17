@@ -116,6 +116,12 @@ struct APIService {
         
     }
     
+    func deleteAccount(_ token:String, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<SimpleResponse>) -> (Void)) {
+        let target: APITarget = .deleteAccount(token: token, details: details, withdrawalType: withdrawalType)
+        print("target",target)
+        judgeObject(target, completion: completion)
+    }
+    
 }
 
 extension APIService {
