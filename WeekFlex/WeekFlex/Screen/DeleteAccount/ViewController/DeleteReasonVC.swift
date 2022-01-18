@@ -71,7 +71,7 @@ class DeleteReasonVC: UIViewController{
     }
     
     @IBAction func didTabDeleteAccountBtn(_ sender: Any) {
-        print("details: \(details)  type: \(selectedType)")
+        
         let actionSheetController = UIAlertController(title: """
                 탈퇴하기를 누르면 되돌릴 수 없습니다.
                 정말 탈퇴 하시겠습니까?
