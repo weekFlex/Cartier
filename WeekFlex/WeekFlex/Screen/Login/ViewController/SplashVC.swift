@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 class SplashVC: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
@@ -17,23 +17,31 @@ class SplashVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            
-            let animationView = AnimationView(name: "Splash")
-            
-            animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-            animationView.contentMode = .scaleToFill
-            view.addSubview(animationView)
-            animationView.play(fromProgress: 0,
-                               toProgress: 1,
-                               loopMode: LottieLoopMode.playOnce,
-                               completion: { (finished) in
-                                if finished {
-                                    // 끝
-                                } else {
-                                    // 앱 다시 확인
-                                }
-                               })
-            
-        }
-
+        
+        let animationView = AnimationView(name: "Splash")
+        
+        animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        animationView.contentMode = .scaleToFill
+        view.addSubview(animationView)
+        animationView.play(fromProgress: 0,
+                           toProgress: 1,
+                           loopMode: LottieLoopMode.playOnce,
+                           completion: { (finished) in
+            if finished {
+                // 끝
+                guard let loginTab = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else {
+                    return
+                }
+                
+                loginTab.modalPresentationStyle = .fullScreen
+                self.present(loginTab, animated: false, completion: nil)
+                
+                
+            } else {
+                // 앱 다시 확인
+            }
+        })
+        
+    }
+    
 }
