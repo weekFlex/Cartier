@@ -42,6 +42,8 @@
 		9B0A4A0026D94C08003CBA71 /* RoutineStarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0A49FF26D94C08003CBA71 /* RoutineStarCell.swift */; };
 		9B1041922607594800746FCF /* SelectToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041912607594800746FCF /* SelectToDoVC.swift */; };
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
+		9B161F022797E98300897B53 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B161F012797E98300897B53 /* SplashVC.swift */; };
+		9B161F042797EA1A00897B53 /* Splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B161F032797EA1A00897B53 /* Splash.json */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
 		9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B566D9F2711699900243304 /* SelectCharacterVC.swift */; };
 		9B566DA227116ADE00243304 /* SelectIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B566DA127116ADE00243304 /* SelectIconCell.swift */; };
@@ -155,6 +157,8 @@
 		9B0A49FF26D94C08003CBA71 /* RoutineStarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineStarCell.swift; sourceTree = "<group>"; };
 		9B1041912607594800746FCF /* SelectToDoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectToDoVC.swift; sourceTree = "<group>"; };
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		9B161F012797E98300897B53 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		9B161F032797EA1A00897B53 /* Splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Splash.json; sourceTree = "<group>"; };
 		9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineNameVC.swift; sourceTree = "<group>"; };
 		9B566D9F2711699900243304 /* SelectCharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCharacterVC.swift; sourceTree = "<group>"; };
 		9B566DA127116ADE00243304 /* SelectIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconCell.swift; sourceTree = "<group>"; };
@@ -634,7 +638,9 @@
 		9E6760C725F0BF7800436D5C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9B161F032797EA1A00897B53 /* Splash.json */,
 				9E6760CB25F0BF9900436D5C /* LoginVC.swift */,
+				9B161F012797E98300897B53 /* SplashVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -854,6 +860,7 @@
 				9E5FD6FA26073996008EB927 /* Metropolis-Light.otf in Resources */,
 				9E5FD6F726073996008EB927 /* Metropolis-ThinItalic.otf in Resources */,
 				9E5FD6F526073996008EB927 /* Metropolis-Medium.otf in Resources */,
+				9B161F042797EA1A00897B53 /* Splash.json in Resources */,
 				9E5FD6F326073996008EB927 /* Metropolis-Black.otf in Resources */,
 				9E5FD6F626073996008EB927 /* Metropolis-RegularItalic.otf in Resources */,
 				9EC2E0772631DD9400EF2F7E /* EditRoutine.storyboard in Resources */,
@@ -997,6 +1004,7 @@
 				9B02562326A9A75200234098 /* UIString+Extension.swift in Sources */,
 				9E0FFBA226A8784F00EB0428 /* ColorCategoryTableViewCell.swift in Sources */,
 				0ECB0709270B3C78005F766D /* MyPageHomeVC.swift in Sources */,
+				9B161F022797E98300897B53 /* SplashVC.swift in Sources */,
 				9EC2E07E2631DDBA00EF2F7E /* EditRoutineVM.swift in Sources */,
 				9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */,
 				9BFABB5C26D7B0980005AA2B /* DayRetrospectionVC.swift in Sources */,
