@@ -129,13 +129,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="위플과 멋진 일주일을 디자인해보세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ov-b5-FDf">
-                                        <rect key="frame" x="26.5" y="198" width="234.5" height="19.5"/>
+                                        <rect key="frame" x="26.5" y="195.5" width="234.5" height="19.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5h-Qk-tKA">
-                                        <rect key="frame" x="26.5" y="119.5" width="216.5" height="62.5"/>
+                                        <rect key="frame" x="26.5" y="117" width="216.5" height="62.5"/>
                                         <string key="text">주어진 한주를
 뿌듯하게 보내는 방법</string>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="26"/>
@@ -147,8 +147,8 @@
                                 <constraints>
                                     <constraint firstItem="ElB-Ra-Pc1" firstAttribute="width" secondItem="i6O-ib-jDT" secondAttribute="width" multiplier="327/375" id="8Df-fR-bWT"/>
                                     <constraint firstItem="6ov-b5-FDf" firstAttribute="leading" secondItem="ElB-Ra-Pc1" secondAttribute="leading" id="FYs-bG-md7"/>
+                                    <constraint firstItem="Y5h-Qk-tKA" firstAttribute="top" secondItem="i6O-ib-jDT" secondAttribute="topMargin" constant="65" id="FaG-RL-vn3"/>
                                     <constraint firstItem="6ov-b5-FDf" firstAttribute="top" secondItem="Y5h-Qk-tKA" secondAttribute="bottom" constant="16" id="Twh-7t-d0P"/>
-                                    <constraint firstItem="ElB-Ra-Pc1" firstAttribute="top" secondItem="6ov-b5-FDf" secondAttribute="bottom" constant="72" id="jCS-Oa-vLx"/>
                                     <constraint firstItem="Y5h-Qk-tKA" firstAttribute="leading" secondItem="6ov-b5-FDf" secondAttribute="leading" id="rBT-aj-kC6"/>
                                     <constraint firstItem="ElB-Ra-Pc1" firstAttribute="centerX" secondItem="i6O-ib-jDT" secondAttribute="centerX" id="rzd-qd-Uv6"/>
                                     <constraint firstItem="ElB-Ra-Pc1" firstAttribute="centerY" secondItem="i6O-ib-jDT" secondAttribute="centerY" constant="90" id="uV9-6b-ceQ"/>

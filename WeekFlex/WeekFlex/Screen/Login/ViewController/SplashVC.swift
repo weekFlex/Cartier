@@ -21,7 +21,7 @@ class SplashVC: UIViewController {
         let animationView = AnimationView(name: "Splash")
         
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        animationView.contentMode = .scaleToFill
+        animationView.contentMode = .scaleAspectFill
         view.addSubview(animationView)
         animationView.play(fromProgress: 0,
                            toProgress: 1,
