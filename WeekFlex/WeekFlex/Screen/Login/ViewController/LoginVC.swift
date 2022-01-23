@@ -12,10 +12,18 @@ class LoginVC: UIViewController {
 
     @IBOutlet var buttonStackView: UIStackView!
     
+    @IBOutlet weak var kakaoButton: UIButton!
+    
+    @IBOutlet weak var googleButton: UIButton!
+    
+    @IBOutlet weak var appleButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        [kakaoButton, googleButton, appleButton].forEach {
+            $0.setTitle("", for: .normal)
+        }
 
-        setLayout()
+//        setLayout()
     }
     
     func setLayout() {
