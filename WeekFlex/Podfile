@@ -11,5 +11,6 @@ target 'WeekFlex' do
   pod "RxCocoa"
   pod 'Moya', '~> 14.0'
   pod "Alamofire"
+  pod 'lottie-ios'
 
 end

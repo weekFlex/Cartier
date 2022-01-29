@@ -119,6 +119,7 @@ class DeleteReasonVC: UIViewController{
           self.view.endEditing(true)
     }
     
+    
     func setLayout(){
         deleteBtn.layer.cornerRadius = 5
         deleteBtn.backgroundColor = .gray2
