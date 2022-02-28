@@ -29,6 +29,7 @@ struct APIService {
     
     func getCategory(_ token: String, completion: @escaping (NetworkResult<[CategoryData]>)->(Void)) {
         let target: APITarget = .getCategory(token: token)
+        print(target)
         judgeObject(target, completion: completion)
     }
     
@@ -46,6 +47,18 @@ struct APIService {
 
     func createCategory(_ token: String, color: Int, name: String, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
         let target: APITarget = .createCategory(token: token, color: color, name: name)
+        judgeObject(target, completion: completion)
+    }
+    
+    func updateCategory(_ token: String, color: Int, name: String, categoryID: Int, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
+        let target: APITarget = .updateCategory(token: token, color: color, name: name, categoryId: categoryID)
+        print("send", target)
+        judgeObject(target, completion: completion)
+    }
+    
+    func deleteCategory(_ token: String, categoryID: Int, completion: @escaping (NetworkResult<SimpleData>)->(Void)) {
+        let target: APITarget = .deleteCategory(token: token, categoryId: categoryID)
+        print("send", target)
         judgeObject(target, completion: completion)
     }
     

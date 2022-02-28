@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AsH-eo-rMO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AsH-eo-rMO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -147,7 +147,7 @@
                                                 </collectionViewCellContentView>
                                                 <size key="customSize" width="40" height="40"/>
                                                 <connections>
-                                                    <outlet property="weekLabel" destination="5RE-hq-dPd" id="ECE-Qb-JCS"/>
+                                                    <outlet property="weekLabel" destination="5RE-hq-dPd" id="xnd-Nb-2av"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -505,7 +505,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryTableViewCell" rowHeight="51" id="rMe-va-XNL" customClass="CategoryTableViewCell" customModule="WeekFlex" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="51"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="51"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rMe-va-XNL" id="myT-QS-Fk1">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
@@ -683,6 +683,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionReusableView>
                                     </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQE-9V-ihK">
+                                        <rect key="frame" x="24" y="693" width="366" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="TqM-NO-Jgb"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="deleteButtonPressed:" destination="9QR-ay-YWg" eventType="touchUpInside" id="V2h-6P-MNO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
@@ -702,8 +713,10 @@
                                     <constraint firstAttribute="bottom" secondItem="X6o-CY-HMf" secondAttribute="bottom" id="c7M-Fn-b9t"/>
                                     <constraint firstItem="FGO-bM-6RP" firstAttribute="leading" secondItem="Qie-bT-Rcw" secondAttribute="trailing" constant="8" id="dQT-Qd-Nbc"/>
                                     <constraint firstItem="Hfd-fb-vCc" firstAttribute="top" secondItem="xkE-Gc-0X1" secondAttribute="bottom" constant="35" id="ic6-lN-gAH"/>
+                                    <constraint firstAttribute="trailing" secondItem="LQE-9V-ihK" secondAttribute="trailing" constant="24" id="kvS-cV-thy"/>
                                     <constraint firstItem="CLE-0b-0c7" firstAttribute="centerX" secondItem="oib-bD-onG" secondAttribute="centerX" id="lCt-3O-KGT"/>
                                     <constraint firstItem="xkE-Gc-0X1" firstAttribute="width" secondItem="xkE-Gc-0X1" secondAttribute="height" multiplier="1:1" id="sKV-Ng-M2t"/>
+                                    <constraint firstItem="LQE-9V-ihK" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" constant="24" id="sRY-4a-Zen"/>
                                     <constraint firstItem="X6o-CY-HMf" firstAttribute="top" secondItem="CLE-0b-0c7" secondAttribute="bottom" constant="129" id="tjH-bS-j2Y"/>
                                     <constraint firstItem="Hfd-fb-vCc" firstAttribute="leading" secondItem="oib-bD-onG" secondAttribute="leading" constant="24" id="zhq-Ng-EnE"/>
                                 </constraints>
@@ -720,6 +733,7 @@
                             <constraint firstItem="oib-bD-onG" firstAttribute="top" secondItem="mVl-gl-948" secondAttribute="top" constant="40" id="ab0-lg-76F"/>
                             <constraint firstItem="oib-bD-onG" firstAttribute="leading" secondItem="mVl-gl-948" secondAttribute="leading" id="jmI-RM-HG7"/>
                             <constraint firstItem="Rad-43-f0m" firstAttribute="top" secondItem="DVN-8p-6Vg" secondAttribute="top" id="k7j-A5-pWY"/>
+                            <constraint firstItem="mVl-gl-948" firstAttribute="bottom" secondItem="LQE-9V-ihK" secondAttribute="bottom" constant="33" id="zfT-Kb-fG4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -730,6 +744,7 @@
                         <outlet property="categoryColorView" destination="oib-bD-onG" id="LPD-kN-p90"/>
                         <outlet property="categoryTitle" destination="FGO-bM-6RP" id="1g4-na-WBP"/>
                         <outlet property="completeButton" destination="M6C-xD-kE2" id="4p9-zV-kF4"/>
+                        <outlet property="deleteCateogyButton" destination="LQE-9V-ihK" id="Pz6-8R-wKK"/>
                         <outlet property="headerLabel" destination="CLE-0b-0c7" id="KUy-bL-ZHy"/>
                         <outlet property="modalBackgroundView" destination="Rad-43-f0m" id="6AO-of-Myx"/>
                         <outlet property="topConstraint" destination="ab0-lg-76F" id="VBr-l5-XIB"/>

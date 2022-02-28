@@ -14,6 +14,7 @@ class CategoryTableViewCell: UITableViewCell {
     
     @IBOutlet var categoryColor: UIImageView!
     @IBOutlet var categoryTitle: UILabel!
+    @IBOutlet var editButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,6 @@ class CategoryTableViewCell: UITableViewCell {
 
     func setLayout() {
         categoryTitle.setLabel(text: "loading..", color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
-        
+        editButton.setImage(UIImage(named: "icon16More"), for: .normal)
     }
 }

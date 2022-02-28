@@ -14,20 +14,24 @@ class CreateCategoryVC: UIViewController {
     let didDismissCreateCategoryVC: Notification.Name = Notification.Name("DidDismissCreateCategoryVC")
     var hideViewDelegate: HideViewProtocol?
     var saveCategoryDelegate: SaveCategoryProtocol?
+    var didViewDidLoad: Bool = false
+    var isEditingMode: Bool = false // 카테고리편집 모드인지 확인
+    var categoryName: String? // 편집으로 넘어왔을 때 필요
     var checkedID: Int? {
         didSet {
-            if let ID = checkedID {
-                setCategoryImage(num: ID)
+            if didViewDidLoad {
+                if let ID = checkedID {
+                    setCategoryImage(num: ID)
+                }
+                categoryCollectionView.reloadData()
+                if categoryTitle.text?.count != 0 || categoryTitle.text != nil {
+                    completeButton.isEnabled = true
+                }
             }
-            categoryCollectionView.reloadData()
-            
-            if categoryTitle.text?.count != 0 || categoryTitle.text != nil {
-                completeButton.isEnabled = true
-            }
-            
         }
     }
     var checkedColor: Int?
+    var categoryID: Int? // 편집을 하러 오면 ID 값이 있음, 편집 API 에서 필요함
     
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
@@ -48,23 +52,64 @@ class CreateCategoryVC: UIViewController {
     @IBOutlet var categoryColorImage: UIImageView!
     @IBOutlet var categoryColorImageLength: NSLayoutConstraint!
     @IBOutlet var categoryCollectionView: UICollectionView!
+    @IBOutlet var deleteCateogyButton: UIButton!
     
-    @IBAction func addCompleteButtonPressed(_ sender: Any) {
-        if
-            let colorID = checkedColor,
-            let categoryTitle = categoryTitle.text {
-            if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                APIService.shared.createCategory(token, color: colorID, name: categoryTitle){ result in
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        if let token = UserDefaults.standard.string(forKey: "UserToken") ,
+           let categoryID = categoryID {
+                APIService.shared.deleteCategory(token, categoryID: categoryID){ result in
                     switch result {
-                    
+                        
                     case .success(_):
+                        print("삭제완료")
                         NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
                         self.dismiss(animated: true, completion: .none)
                         
-                    case .failure(_):
+                    case .failure(let error):
+                        print("에러?", error)
                         self.present(self.alert,animated: false, completion: nil)
                     }
                 }
+            
+        }
+    }
+    @IBAction func addCompleteButtonPressed(_ sender: Any) {
+        if let colorID = checkedColor,
+           let categoryTitle = categoryTitle.text {
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                if isEditingMode { // 편집 API
+                    if let categoryID = categoryID {
+                        APIService.shared.updateCategory(token, color: colorID, name: categoryTitle, categoryID: categoryID){ result in
+                            switch result {
+                                
+                            case .success(_):
+                                print("수정완료")
+                                NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                                self.dismiss(animated: true, completion: .none)
+                                
+                            case .failure(let error):
+                                print("에러?", error)
+                                self.present(self.alert,animated: false, completion: nil)
+                            }
+                        }
+                    }
+                    
+                    
+                } else { // 생성 API
+                    APIService.shared.createCategory(token, color: colorID, name: categoryTitle){ result in
+                        switch result {
+                            
+                        case .success(_):
+                            NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                            self.dismiss(animated: true, completion: .none)
+                            
+                        case .failure(_):
+                            self.present(self.alert,animated: false, completion: nil)
+                        }
+                    }
+                    
+                }
+                
             }
         }
     }
@@ -75,9 +120,13 @@ class CreateCategoryVC: UIViewController {
     @IBAction func textFieldStartEditingBtnTapped(_ sender: Any) {
         self.categoryTitle.becomeFirstResponder()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isEditingMode { setEditingModeLayout() }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        didViewDidLoad = true
         setLayout()
     }
     
@@ -99,12 +148,24 @@ class CreateCategoryVC: UIViewController {
 }
 
 extension CreateCategoryVC {
+    
+    func setEditingModeLayout() {
+        let selectedIndexPath = IndexPath(row: checkedID! < 10 ? checkedID! - 1 : checkedID! - 4 , section: checkedID!/10)
+        categoryCollectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: [])
+        categoryCollectionView.delegate?.collectionView?(categoryCollectionView, didSelectItemAt: selectedIndexPath)
+        //        print("select", checkedID! ,selectedIndexPath)
+        headerLabel.setLabel(text: "카테고리 편집", color: .black, font: .appleMedium(size: 18))
+        if let categoryName = categoryName {
+            categoryTitle.text = categoryName
+        }
+        deleteCateogyButton.isHidden = false
+    }
+    
     func setLayout() {
         // alert
         alert.addAction(cancel)
-        
         // background
-        modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
         modalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         categoryColorView.backgroundColor = .white
@@ -127,6 +188,12 @@ extension CreateCategoryVC {
         // collectionView
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
+        
+        // 카테고리 삭제 버튼은 일단 hidden
+        deleteCateogyButton.isHidden = true
+        deleteCateogyButton.backgroundColor = .black
+        deleteCateogyButton.setButton(text: "카테고리 삭제하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
+        deleteCateogyButton.setRounded(radius: 3)
     }
     
     func setCategoryImage(num: Int) {
@@ -151,7 +218,7 @@ extension CreateCategoryVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if let checkedID = checkedID {
+        if let _ = checkedID {
             if textField.text?.count == 0 || textField.text == nil {
                 // Text가 존재하지 않을 때 버튼 비활성화
                 completeButton.isEnabled = false
@@ -183,7 +250,7 @@ extension CreateCategoryVC: UITextFieldDelegate {
 
 extension CreateCategoryVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
-                            indexPath: IndexPath) -> CGSize {
+                        indexPath: IndexPath) -> CGSize {
         let sideLength = 40/896*self.view.bounds.height
         return CGSize(width: sideLength, height:sideLength)
     }
@@ -281,6 +348,7 @@ extension CreateCategoryVC: UICollectionViewDataSource {
         // vm의 didset trigger
         // vm.checkedID = indexPath.row
         // vm.checkedID = indexPath.row + 10
+        //        print("selected!! - delegate", indexPath)
         switch indexPath.section {
         case 0:
             checkedID = indexPath.row

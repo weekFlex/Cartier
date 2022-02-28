@@ -100,6 +100,7 @@
 		9EC2E0822631E45100EF2F7E /* WeekCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC2E0812631E45100EF2F7E /* WeekCollectionViewCell.swift */; };
 		9ED56E4B26A34BF100E1DEBF /* RoutineData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED56E4A26A34BF100E1DEBF /* RoutineData.swift */; };
 		9ED56E4F26A355A800E1DEBF /* RoutineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED56E4E26A355A800E1DEBF /* RoutineService.swift */; };
+		9EE1C46626D7FE150074E680 /* CategoryAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1C46526D7FE150074E680 /* CategoryAdminViewController.swift */; };
 		9EFE6AFF26A7370500064CAB /* ViewCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */; };
 		9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */; };
 		D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */; };
@@ -203,6 +204,7 @@
 		9EC2E0812631E45100EF2F7E /* WeekCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCollectionViewCell.swift; sourceTree = "<group>"; };
 		9ED56E4A26A34BF100E1DEBF /* RoutineData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineData.swift; sourceTree = "<group>"; };
 		9ED56E4E26A355A800E1DEBF /* RoutineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineService.swift; sourceTree = "<group>"; };
+		9EE1C46526D7FE150074E680 /* CategoryAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAdminViewController.swift; sourceTree = "<group>"; };
 		9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCategoryVC.swift; sourceTree = "<group>"; };
 		9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryVC.swift; sourceTree = "<group>"; };
 		CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeekFlex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,6 +343,7 @@
 		0ED1129626623B0E00677330 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9EE1C46526D7FE150074E680 /* CategoryAdminViewController.swift */,
 				0ED1129726623B2800677330 /* DeleteAccountVC.swift */,
 				0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */,
 			);
@@ -870,6 +873,7 @@
 				9EC0DAFC25EEB9D1007D04D0 /* ViewController.swift in Sources */,
 				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
 				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
+				9EE1C46626D7FE150074E680 /* CategoryAdminViewController.swift in Sources */,
 				0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */,
 				9E0FFB9B26A836B800EB0428 /* CategoryTableViewCell.swift in Sources */,
 				9BEFD54826A2AE1B00FD9112 /* LeftAlignFlowLayout.swift in Sources */,

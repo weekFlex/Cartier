@@ -14,6 +14,8 @@ enum APITarget {
     case createTask(token: String, categoryId: Int, name: String) // task 등록
     case getCategory(token: String) // 카테고리 리스트 API
     case createCategory(token: String, color: Int, name: String)
+    case updateCategory(token: String, color: Int, name: String, categoryId: Int)
+    case deleteCategory(token: String, categoryId: Int)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
     case updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int) // todo수정
@@ -43,7 +45,7 @@ extension APITarget: TargetType {
         switch self {
         case .getTask, .createTask:
             return "api/v1/task/"
-        case .getCategory, .createCategory:
+        case .getCategory, .createCategory, .updateCategory, .deleteCategory:
             return "api/v1/category"
         case .getWeekly:
             return "api/v1/calendar/week"
@@ -73,10 +75,10 @@ extension APITarget: TargetType {
         case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine:
             return .post
             
-        case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
+        case .deleteTodoRoutine, .deleteTodo, .deleteRoutine, .deleteCategory:
             return .delete
             
-        case .updateTodo:
+        case .updateTodo, .updateCategory:
             return .put
         }
     }
@@ -119,12 +121,16 @@ extension APITarget: TargetType {
         case .deleteRoutine(_, let routineID):
             return .requestParameters(parameters: ["routineId": routineID], encoding: URLEncoding.default)
             
+        case .deleteCategory(_, let categoryId):
+            return .requestParameters(parameters: ["categoryId": categoryId], encoding: URLEncoding.default)
+            
         case .registerRoutine(_, let routineID):
             return .requestParameters(parameters: ["routineId": routineID], encoding: JSONEncoding.default)
         
         case .updateTodo(_, let days, let endTime, let startTime, let name, let todoId):
             return .requestParameters(parameters: ["todoId": todoId, "days": days, "endTime": endTime ?? NSNull(), "startTime": startTime ?? NSNull(), "name": name] , encoding: JSONEncoding.default)
-            
+        case .updateCategory(_, let color, let categoryId, let name):
+            return .requestParameters(parameters: ["color": color,"id": categoryId, "name": name], encoding: JSONEncoding.default)
         case .deleteTodoRoutine(_, let routineId):
             return .requestParameters(parameters: ["routineId":routineId], encoding: URLEncoding.default)
             
@@ -148,8 +154,7 @@ extension APITarget: TargetType {
         // headers - HTTP header
         
         switch self {
-        
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _):
+        case .getTask(let token), .getCategory(let token), .updateCategory(let token, _, _, _), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteCategory(let token, _),.deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }
