@@ -171,6 +171,13 @@
                         <outlet property="appleButton" destination="Luu-mO-8xA" id="6KP-Ke-oiJ"/>
                         <outlet property="googleButton" destination="HJF-Pu-4Kc" id="GnP-v8-0KO"/>
                         <outlet property="kakaoButton" destination="fpZ-kp-trs" id="6h5-JP-jkO"/>
+                        <outlet property="leftLineView" destination="zkI-3i-tY3" id="8Ii-Za-BnR"/>
+                        <outlet property="loginStackView" destination="aCZ-X1-uRU" id="R3Z-8r-X99"/>
+                        <outlet property="rightLineView" destination="ESU-DM-esz" id="ZWU-iF-9Cf"/>
+                        <outlet property="startLabel" destination="ref-RL-xf0" id="qxZ-3s-gNI"/>
+                        <outlet property="subTitleLabel" destination="6ov-b5-FDf" id="qZ9-6A-33D"/>
+                        <outlet property="titleLabel" destination="Y5h-Qk-tKA" id="1Ta-IR-qLT"/>
+                        <outlet property="weekFlexImageView" destination="ElB-Ra-Pc1" id="Iwh-RE-4VP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bp7-he-vtT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
