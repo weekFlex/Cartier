@@ -224,6 +224,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="마이 페이지" id="twL-Mn-rLG"/>
                     <connections>
+                        <outlet property="logoutButton" destination="9vX-3r-k7y" id="xHl-sP-Sgb"/>
                         <outlet property="name" destination="GU6-5k-bz8" id="epp-u9-r8t"/>
                         <outlet property="profilePic" destination="bVi-VS-MUf" id="f2M-Wz-fyG"/>
                         <outlet property="via" destination="F7z-tN-QQx" id="ATL-Zm-ZaB"/>
