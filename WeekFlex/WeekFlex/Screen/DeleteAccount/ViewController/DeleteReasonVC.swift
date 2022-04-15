@@ -79,7 +79,7 @@ class DeleteReasonVC: UIViewController{
         
         let actionDelete = UIAlertAction(title: "탈퇴하기" , style: .destructive, handler: {action in
             if NetworkState.isConnected() {
-                UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEwLFwiZW1haWxcIjpcInR0QHR0LnR0dFwifSJ9.QFgB-A5HvA1H4Bawt5SqhuDiEHc9rp3f6JlCk1GPYys", forKey: "UserToken")
+                UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjE5LFwiZW1haWxcIjpcImJsdWF5ZXJAa2FrYW8uY29tXCJ9In0.3y2cpfYyrSWl3Jo-VCp8sSBUcdD40IScktaPgn16r8c", forKey: "UserToken")
                 
                 if let token = UserDefaults.standard.string(forKey: "UserToken") {
                     
@@ -89,6 +89,13 @@ class DeleteReasonVC: UIViewController{
                             
                         case .success(_):
                             print("탈퇴 완료")
+                            UserDefaults.standard.removeObject(forKey: "UserToken")
+                            let loginStoryboard = UIStoryboard.init(name: "Login", bundle: nil)
+                            let nextVC = loginStoryboard.instantiateViewController(withIdentifier: "loginVC")
+                            guard let currentVC = self.presentingViewController else { return }
+                            self.dismiss(animated: true){
+                                currentVC.present(nextVC, animated: true)
+                            }
                         case .failure(let error):
                             print(error)
                             print("탈퇴오류!!")

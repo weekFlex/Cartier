@@ -116,10 +116,9 @@ struct APIService {
         
     }
     
-    func deleteAccount(_ token:String, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<SimpleResponse>) -> (Void)) {
+    func deleteAccount(_ token:String, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
         let target: APITarget = .deleteAccount(token: token, details: details, withdrawalType: withdrawalType)
-        print("target",target)
-        judgeObject(target, completion: completion)
+        judgeSimpleObject(target, completion: completion)
     }
     
 }
@@ -131,7 +130,6 @@ extension APIService {
             switch response {
             case .success(let result):
                 do {
-                    
                     let decoder = JSONDecoder()
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
                     print(body)
@@ -152,7 +150,6 @@ extension APIService {
             switch response {
             case .success(let result):
                 do {
-                    
                     let decoder = JSONDecoder()
                     let body = try decoder.decode(SecondeGenericResponse<T>.self, from: result.data)
                     if let data = body.data {
