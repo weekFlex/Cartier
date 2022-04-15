@@ -13,6 +13,7 @@ class MyPageHomeVC: UIViewController{
     
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var via: UILabel!
     
     @IBAction func categorySetting(_ sender: Any) {
@@ -20,6 +21,25 @@ class MyPageHomeVC: UIViewController{
     @IBAction func taskSetting(_ sender: Any) {
     }
     @IBAction func logout(_ sender: Any) {
+        let actionSheetController = UIAlertController(title: "로그아웃",
+                                                      message: "로그아웃 하시겠습니까?",
+                                                      preferredStyle: .alert)
+        
+        let logout = UIAlertAction(title: "로그아웃", style: .default, handler: {action in
+            UserDefaults.standard.removeObject(forKey: "UserToken")
+            
+            let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
+            guard let loginVC = storyboard.instantiateViewController(identifier: "LoginVC") as? LoginVC else { return }
+            UIApplication.shared.windows.first?.replaceRootViewController(loginVC, animated: true, completion: nil)
+        })
+        
+        let cancel = UIAlertAction(title: "취소" , style: .cancel, handler: nil)
+
+        actionSheetController.addAction(cancel)
+        actionSheetController.addAction(logout)
+        
+        self.present(actionSheetController, animated: true, completion: nil)
+        
     }
     @IBAction func deleteAccount(_ sender: Any) {
         let deleteStoryboard = UIStoryboard.init(name: "DeleteAccount", bundle: nil)
@@ -34,6 +54,7 @@ class MyPageHomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setInfo()
+        logoutButton.point(inside: CGPoint(x: logoutButton.frame.minX, y: 0), with: .none)
     }
     
     func setInfo(){
@@ -66,4 +87,56 @@ class MyPageHomeVC: UIViewController{
         }
     }
     
+}
+extension UIButton {
+
+  open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    let margin: CGFloat = 500
+    let hitArea = self.bounds.insetBy(dx: -margin, dy: -margin)
+    return hitArea.contains(point)
+  }
+}
+
+extension UIWindow {
+    func replaceRootViewController(
+        _ replacementController: UIViewController,
+        animated: Bool,
+        completion: (() -> Void)?
+    ) {
+           let snapshotImageView = UIImageView(image: self.snapshot())
+           self.addSubview(snapshotImageView)
+
+           let dismissCompletion = { () -> Void in // dismiss all modal view controllers
+               self.rootViewController = replacementController
+               self.bringSubviewToFront(snapshotImageView)
+               if animated {
+                   UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                        snapshotImageView.transform = CGAffineTransform(translationX: 0, y: 1000)
+                    }, completion: { (isEnd) -> Void in
+                        if isEnd {
+                            snapshotImageView.removeFromSuperview()
+                            completion?()
+                        }
+                    }
+                   )
+               } else {
+                   snapshotImageView.removeFromSuperview()
+                   completion?()
+               }
+           }
+
+           if self.rootViewController!.presentedViewController != nil {
+               self.rootViewController!.dismiss(animated: false, completion: dismissCompletion)
+           } else {
+               dismissCompletion()
+           }
+       }
+
+    func snapshot() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        drawHierarchy(in: bounds, afterScreenUpdates: true)
+        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage.init() }
+        UIGraphicsEndImageContext()
+        return result
+    }
 }

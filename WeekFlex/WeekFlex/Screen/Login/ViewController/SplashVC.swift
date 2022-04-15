@@ -32,9 +32,7 @@ class SplashVC: UIViewController {
                 guard let loginTab = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else {
                     return
                 }
-                
-                loginTab.modalPresentationStyle = .fullScreen
-                self.present(loginTab, animated: false, completion: nil)
+                UIApplication.shared.windows.first?.replaceRootViewController(loginTab, animated: true, completion: nil)
                 
                 
             } else {

@@ -45,6 +45,7 @@
 		9B1041AC26076BA900746FCF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1041AB26076BA900746FCF /* CategoryCell.swift */; };
 		9B161F022797E98300897B53 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B161F012797E98300897B53 /* SplashVC.swift */; };
 		9B161F042797EA1A00897B53 /* Splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B161F032797EA1A00897B53 /* Splash.json */; };
+		9B291630279F037A00D643A1 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29162F279F037A00D643A1 /* UIWindow+Extension.swift */; };
 		9B340A0B2611BECE0082BB7B /* MakeRoutineNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */; };
 		9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B566D9F2711699900243304 /* SelectCharacterVC.swift */; };
 		9B566DA227116ADE00243304 /* SelectIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B566DA127116ADE00243304 /* SelectIconCell.swift */; };
@@ -161,6 +162,7 @@
 		9B1041AB26076BA900746FCF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9B161F012797E98300897B53 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		9B161F032797EA1A00897B53 /* Splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Splash.json; sourceTree = "<group>"; };
+		9B29162F279F037A00D643A1 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		9B340A0A2611BECE0082BB7B /* MakeRoutineNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoutineNameVC.swift; sourceTree = "<group>"; };
 		9B566D9F2711699900243304 /* SelectCharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCharacterVC.swift; sourceTree = "<group>"; };
 		9B566DA127116ADE00243304 /* SelectIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIconCell.swift; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 				0EBADE12269F637D007A9323 /* Collection+Extension.swift */,
 				9BEFD55A26A334F400FD9112 /* UIButton+Extension.swift */,
 				9B02562226A9A75200234098 /* UIString+Extension.swift */,
+				9B29162F279F037A00D643A1 /* UIWindow+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1009,6 +1012,7 @@
 				9B56E848260884E800EC9969 /* RoutineCell.swift in Sources */,
 				9EC2E07A2631DDAA00EF2F7E /* EditRoutineVC.swift in Sources */,
 				9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */,
+				9B291630279F037A00D643A1 /* UIWindow+Extension.swift in Sources */,
 				9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */,
 				9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */,
 				9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */,
