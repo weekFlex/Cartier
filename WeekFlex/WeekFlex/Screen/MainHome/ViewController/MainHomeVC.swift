@@ -41,7 +41,7 @@ class MainHomeVC: UIViewController {
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         self.view.insertSubview(view, belowSubview: self.floatingStackView)
-
+        
         return view
     }()
     
@@ -98,11 +98,16 @@ class MainHomeVC: UIViewController {
     }
     
     @IBAction func getRoutineBtnDidtap(_ sender: Any) {
+        self.tabBarController?.tabBar.isHidden = true
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
         self.navigationController?.pushViewController(myRoutineVC, animated: true)
         clearPage()
     }
+    
+    
+    
+    
     
     //MARK: Life Cycle
     
@@ -122,6 +127,7 @@ class MainHomeVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if let touch = touches.first , touch.view == self.dimView {
+            self.tabBarController?.tabBar.isHidden = false
             hideFloating()
         } }
 }
@@ -130,23 +136,47 @@ class MainHomeVC: UIViewController {
 //MARK: TableView
 extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
     
-    //스와이프 삭제 액션
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //섹션 별 간격
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 16
+    }
+    
+    // section header 를 투명하게
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    
+    //스와이프 삭제
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if editingStyle == .delete {
+        //루틴 없는 하루 할일은 스와이프 방지
+        if weeklyData[currentDay].items[indexPath.section].routineName == "" {
+            return UISwipeActionsConfiguration()
+        }else {
+            // 루틴에만 스와이프 삭제 되도록
+            
+            let delete = UIContextualAction(style: .destructive, title: nil) { _,_,_ in }
+            delete.backgroundColor = UIColor.color1
             
             let alert = UIAlertController(title: "이번주의 해당 루틴 전체가 삭제됩니다.", message: "이대로 삭제를 진행할까요?", preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "그만두기", style: .default, handler : nil)
-            let delete = UIAlertAction(title: "삭제하기", style: .cancel) { (action) in
+            let cancelButton = UIAlertAction(title: "그만두기", style: .default) { (action) in
+                //un-swipe상태로
+                tableView.setEditing(false, animated: true)
+            }
+            let deleteButton = UIAlertAction(title: "삭제하기", style: .cancel) { (action) in
                 if NetworkState.isConnected() {
-                    // 네트워크 연결 시
                     if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                        let routineId = self.weeklyData[self.currentDay].items[indexPath.row].routineId
+                        let routineId = self.weeklyData[self.currentDay].items[indexPath.section].routineId
+                        print("+: ",routineId)
                         APIService.shared.deleteTodoRoutine(token, routineId: routineId ){ result in
                             switch result {
-                            
+                                
                             case .success(_):
                                 print("삭제완료")
+                                self.getRoutines()
                             case .failure(let error):
                                 print(error)
                                 print("오류!!")
@@ -154,29 +184,28 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                         }
                     }
                 } else {
-                    // 네트워크 미연결 팝업 띄우기
                     print("네트워크 미연결")
                 }
-                
-                self.weeklyData[self.currentDay].items.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                self.calendarCollectionView.reloadData()
-                self.tableView.reloadData()
             }
-            alert.addAction(delete)
-            alert.addAction(cancel)
+            
+            alert.addAction(deleteButton)
+            alert.addAction(cancelButton)
             present(alert,animated: false, completion: nil)
             
+            let configuration = UISwipeActionsConfiguration(actions: [delete,delete,delete,delete,delete])
+            return configuration
         }
+        
     }
+    
+    
     
     //셀 높이가 내용에 따라 동적으로 변하도록
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         guard let data = weeklyData[safe: currentDay] else {
             tableView.isHidden = true
             noDataView.isHidden = false
@@ -194,30 +223,34 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         
         
         return data.items.count
-        
+    }
+    
+    //한 섹션에 하나의 셀만 들어가도록
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellData = weeklyData[currentDay].items[indexPath.row]
+        let cellData = weeklyData[currentDay].items[indexPath.section]
         let num = cellData.todos.count
         
         if(indexPath.row == 0 && cellData.routineName == ""){
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "todayCell", for: indexPath) as? TodayTaskCell else { return UITableViewCell()}
+            
             //셀(루틴) 안에 커스텀 뷰 추가(할일들)
             for i in 0..<num {
-                
                 let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
                 let todo = cellData.todos[i]
                 view.todoId = cellData.todos[i].id
-                view.cellIndex = indexPath.row
+                view.cellIndex = indexPath.section
                 view.viewIndex = i
                 view.delegate = self
                 view.configure(with: todo )
                 view.frame = cell.bounds
                 if(todo.startTime == nil){
-                    view.heightAnchor.constraint(equalToConstant: 35).isActive = true
+                    view.heightAnchor.constraint(equalToConstant: 29).isActive = true
                 }else{
-                    view.heightAnchor.constraint(equalToConstant: 51).isActive = true
+                    view.heightAnchor.constraint(equalToConstant: 50).isActive = true
                 }
                 
                 
@@ -238,20 +271,22 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
                 let todo = cellData.todos[i]
                 view.todoId = cellData.todos[i].id
-                view.cellIndex = indexPath.row
+                view.cellIndex = indexPath.section
                 view.viewIndex = i
                 view.delegate = self
                 view.configure(with: todo )
                 view.frame = cell.bounds
+                
                 if(todo.startTime == nil){
-                    view.heightAnchor.constraint(equalToConstant: 35).isActive = true
+                    view.heightAnchor.constraint(equalToConstant: 29).isActive = true
                 }else{
-                    view.heightAnchor.constraint(equalToConstant: 51).isActive = true
+                    view.heightAnchor.constraint(equalToConstant: 50).isActive = true
                 }
                 
                 
                 cell.stackView.translatesAutoresizingMaskIntoConstraints = false
                 cell.stackView.addArrangedSubview(view)
+                cell.stackView.sizeToFit()
             }
             
             cell.selectionStyle = .none
@@ -271,15 +306,16 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
+        //모달 화면 띄우기
+        
+        showDim(true)
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
-        print("cellIndex : \(cellIndex), viewIndex:\(viewIndex)")
-        popupVC.delegate = self
-        popupVC.todoId = todoId
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
+        popupVC.delegate = self
         popupVC.cellIndex = cellIndex
         popupVC.viewIndex = viewIndex
+        popupVC.todoId = todoId
         popupVC.modalPresentationStyle = .overFullScreen
-        //모달 화면 띄우기
         
         self.present(popupVC, animated: true, completion: nil)
     }
@@ -311,6 +347,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
     func didTabDelete(cellIndex: Int, viewIndex:Int, todoId: Int) {
         //삭제 누르면
+        showDim(false)
         weeklyData[currentDay].items[cellIndex].todos.remove(at: viewIndex)
         if weeklyData[currentDay].items[cellIndex].todos.count == 0 {
             weeklyData[currentDay].items.remove(at: cellIndex)
@@ -329,7 +366,7 @@ extension MainHomeVC: SaveTodoProtocol, HideViewProtocol {
         isFloating = !isFloating
         getRoutines() //네트워크 통신 한번더
         calendarCollectionView.reloadData() // 리로드
-        tableView.reloadData() 
+        tableView.reloadData()
     }
     
     func hideViewProtocol() {
@@ -362,7 +399,7 @@ extension MainHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
-                            indexPath: IndexPath) -> CGSize {
+                        indexPath: IndexPath) -> CGSize {
         let width = calendarCollectionView.frame.width / 7
         return CGSize(width: width, height: self.calendarCollectionView.frame.height)
     }
@@ -400,7 +437,7 @@ extension MainHomeVC {
                         
                         calendarCollectionView.reloadData()
                         tableView.reloadData()
-                    // 데이터 전달 후 다시 로드
+                        // 데이터 전달 후 다시 로드
                     case .failure(let error):
                         print(error)
                         print("오류!!")
@@ -446,7 +483,6 @@ extension MainHomeVC {
         }
     }
     
-   
     
     
     func saveLastWeek(){
@@ -479,8 +515,9 @@ extension MainHomeVC {
         UIView.animate(withDuration: 0.2) {
             self.dimView.alpha = 0
             self.showFloatingBtn.transform = CGAffineTransform(rotationAngle: 0)
-            self.tabBarController?.tabBar.isHidden = false
+            
         }
+        self.tabBarController?.tabBar.isHidden = false
         isFloating = !isFloating
     }
     
@@ -502,6 +539,23 @@ extension MainHomeVC {
         }
         isFloating = !isFloating
     }
+    
+    func showDim(_ isTrue: Bool){
+        if isTrue{
+            UIView.animate(withDuration: 0.3) {
+                self.dimView.isHidden = false
+                self.dimView.alpha = 1
+                self.tabBarController?.tabBar.isHidden = true
+            }
+        }else {
+            self.dimView.alpha = 0
+            self.dimView.isHidden = true
+            self.tabBarController?.tabBar.isHidden = false
+            //            clearPage()
+        }
+        
+    }
+    
     private func clearPage(){
         floatingStacks.forEach { stack in
             stack.isHidden = true
@@ -538,7 +592,7 @@ class CheckLastSave {
         let currentDay = (date + 5) % 7
         let startDay = Calendar.current.date(byAdding: .day, value: -(currentDay), to: Date())!
         let result = dateFormatter.string(from: startDay)
-    
+        
         return result
     }
     
@@ -610,7 +664,7 @@ class CheckLastSave {
                     }
                 }
                 
-            
+                
             }
             
         } else {
@@ -630,7 +684,6 @@ class CheckLastSave {
             let lastDate:Date = dateFormatter.date(from: lastSaveDate)!
             let interval = Date().timeIntervalSince(lastDate)
             let days = Int(interval/86400)
-            print("7전")
             if(days >= 7){
                 getLastWeek(date: lastSaveDate)
                 UserDefaults.standard.set(self.firstDayOfWeek(), forKey: self.key)
@@ -641,7 +694,7 @@ class CheckLastSave {
     
     
     init(){
-//        self.lastSaveDate = UserDefaults.standard.string(forKey: key) ?? "none"
+        //        self.lastSaveDate = UserDefaults.standard.string(forKey: key) ?? "none"
         self.lastSaveDate = "2021-08-09"
     }
     

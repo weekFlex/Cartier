@@ -18,8 +18,8 @@ class TodayTaskCell: UITableViewCell {
         
         self.view.layer.cornerRadius = 5
         self.view.layer.masksToBounds = false
-        self.view.layer.borderWidth = 0.5
-        self.view.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).cgColor
+        self.view.layer.borderWidth = 1
+        self.view.layer.borderColor = UIColor.gray1.cgColor
         
     }
     

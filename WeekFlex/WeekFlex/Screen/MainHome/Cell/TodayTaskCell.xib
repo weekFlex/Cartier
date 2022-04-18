@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,26 +19,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GJ0-DU-bnq">
-                        <rect key="frame" x="8" y="16" width="374" height="118"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="134"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ame-Xc-1cB">
-                                <rect key="frame" x="16" y="12" width="342" height="102"/>
+                                <rect key="frame" x="16" y="6" width="358" height="122"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ame-Xc-1cB" secondAttribute="bottom" constant="4" id="A1v-ot-CVL"/>
-                            <constraint firstItem="ame-Xc-1cB" firstAttribute="top" secondItem="GJ0-DU-bnq" secondAttribute="top" constant="12" id="bX9-RH-cdt"/>
+                            <constraint firstAttribute="bottom" secondItem="ame-Xc-1cB" secondAttribute="bottom" constant="6" id="A1v-ot-CVL"/>
+                            <constraint firstItem="ame-Xc-1cB" firstAttribute="top" secondItem="GJ0-DU-bnq" secondAttribute="top" constant="6" id="bX9-RH-cdt"/>
                             <constraint firstAttribute="trailing" secondItem="ame-Xc-1cB" secondAttribute="trailing" constant="16" id="nrx-cn-vHv"/>
                             <constraint firstItem="ame-Xc-1cB" firstAttribute="leading" secondItem="GJ0-DU-bnq" secondAttribute="leading" constant="16" id="oGL-7c-SPD"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="GJ0-DU-bnq" firstAttribute="top" secondItem="d8B-gv-fE5" secondAttribute="top" constant="16" id="5dx-hf-yjQ"/>
-                    <constraint firstItem="GJ0-DU-bnq" firstAttribute="leading" secondItem="d8B-gv-fE5" secondAttribute="leading" constant="8" id="FJm-7r-sod"/>
+                    <constraint firstItem="GJ0-DU-bnq" firstAttribute="top" secondItem="d8B-gv-fE5" secondAttribute="top" id="5dx-hf-yjQ"/>
+                    <constraint firstItem="GJ0-DU-bnq" firstAttribute="leading" secondItem="d8B-gv-fE5" secondAttribute="leading" id="FJm-7r-sod"/>
                     <constraint firstAttribute="bottom" secondItem="GJ0-DU-bnq" secondAttribute="bottom" id="LIP-Sk-rrh"/>
-                    <constraint firstAttribute="trailing" secondItem="GJ0-DU-bnq" secondAttribute="trailing" constant="8" id="g2F-eG-Yuj"/>
+                    <constraint firstAttribute="trailing" secondItem="GJ0-DU-bnq" secondAttribute="trailing" id="g2F-eG-Yuj"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="g87-I3-cFn"/>

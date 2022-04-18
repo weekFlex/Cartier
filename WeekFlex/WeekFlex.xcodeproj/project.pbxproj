@@ -11,6 +11,7 @@
 		0E26212325F8CB14007D28F0 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26212125F8CB14007D28F0 /* TableViewCell.xib */; };
 		0E26216126014B0B007D28F0 /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26216026014B0B007D28F0 /* TaskListView.xib */; };
 		0E26216426014B23007D28F0 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26216326014B23007D28F0 /* TaskListView.swift */; };
+		0E26A859274C0AD30069A779 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E26A858274C0AD30069A779 /* EditPopUpVC.swift */; };
 		0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E47926737B380002EFDD /* ReviewCell.swift */; };
 		0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30E47A26737B380002EFDD /* ReviewCell.xib */; };
 		0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */; };
@@ -20,6 +21,7 @@
 		0E795358261F6D0900345659 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E795357261F6D0900345659 /* CalendarCell.swift */; };
 		0EAD6A1625F26D45001BD490 /* MainHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1525F26D45001BD490 /* MainHome.storyboard */; };
 		0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */; };
+		0EB2A025279550A5007E5E57 /* DeleteAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2A024279550A5007E5E57 /* DeleteAccount.storyboard */; };
 		0EBADDCF2699E4B7007A9323 /* DailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBADDCE2699E4B7007A9323 /* DailyData.swift */; };
 		0EBADE13269F637D007A9323 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBADE12269F637D007A9323 /* Collection+Extension.swift */; };
 		0EBF3C7B2665127A006A65C9 /* DeleteReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */; };
@@ -30,7 +32,6 @@
 		0ECB070F2713F0DE005F766D /* RetrospectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB070E2713F0DE005F766D /* RetrospectionData.swift */; };
 		0ED11294265FD56500677330 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED11293265FD56500677330 /* MyPage.storyboard */; };
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
-		0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */; };
 		0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC974726C25330003877B0 /* TodayTaskCell.swift */; };
 		0EFC974B26C258FB003877B0 /* TodayTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */; };
 		2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC526A779EE00A53F8E /* SimpleData.swift */; };
@@ -126,6 +127,7 @@
 		0E26212125F8CB14007D28F0 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		0E26216026014B0B007D28F0 /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
 		0E26216326014B23007D28F0 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		0E26A858274C0AD30069A779 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
 		0E30E47926737B380002EFDD /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		0E30E47A26737B380002EFDD /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModel.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		0E795357261F6D0900345659 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		0EAD6A1525F26D45001BD490 /* MainHome.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainHome.storyboard; sourceTree = "<group>"; };
 		0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeVC.swift; sourceTree = "<group>"; };
+		0EB2A024279550A5007E5E57 /* DeleteAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeleteAccount.storyboard; sourceTree = "<group>"; };
 		0EBADDCE2699E4B7007A9323 /* DailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyData.swift; sourceTree = "<group>"; };
 		0EBADE12269F637D007A9323 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReasonVC.swift; sourceTree = "<group>"; };
@@ -145,7 +148,6 @@
 		0ECB070E2713F0DE005F766D /* RetrospectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectionData.swift; sourceTree = "<group>"; };
 		0ED11293265FD56500677330 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
-		0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopUpVC.swift; sourceTree = "<group>"; };
 		0EFC974726C25330003877B0 /* TodayTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTaskCell.swift; sourceTree = "<group>"; };
 		0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayTaskCell.xib; sourceTree = "<group>"; };
 		2D282EC526A779EE00A53F8E /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
@@ -314,7 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				0EAD6A1825F2A107001BD490 /* MainHomeVC.swift */,
-				0EF113DF2625EF4B00AF93B2 /* EditPopUpVC.swift */,
+				0E26A858274C0AD30069A779 /* EditPopUpVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -326,6 +328,32 @@
 				0E7953302613B4E100345659 /* MainHomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EB2A02127955053007E5E57 /* DeleteAccount */ = {
+			isa = PBXGroup;
+			children = (
+				0EB2A02227955066007E5E57 /* ViewController */,
+				0EB2A0232795506E007E5E57 /* Storyboard */,
+			);
+			path = DeleteAccount;
+			sourceTree = "<group>";
+		};
+		0EB2A02227955066007E5E57 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0ED1129726623B2800677330 /* DeleteAccountVC.swift */,
+				0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0EB2A0232795506E007E5E57 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0EB2A024279550A5007E5E57 /* DeleteAccount.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		0EC381B0266D185B00438A74 /* Review */ = {
@@ -375,8 +403,6 @@
 		0ED1129626623B0E00677330 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0ED1129726623B2800677330 /* DeleteAccountVC.swift */,
-				0EBF3C7A2665127A006A65C9 /* DeleteReasonVC.swift */,
 				0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */,
 			);
 			path = ViewController;
@@ -728,6 +754,7 @@
 		9EC0DB1325EEBAED007D04D0 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				0EB2A02127955053007E5E57 /* DeleteAccount */,
 				9B98763126D2437300EF218D /* Retrospection_m */,
 				2D282EC726A9FB8200A53F8E /* Tabbar */,
 				9EC2E0732631DD3000EF2F7E /* EditRoutine */,
@@ -859,6 +886,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB2A025279550A5007E5E57 /* DeleteAccount.storyboard in Resources */,
 				9BC81AA025FA80CB001B1D83 /* AddRoutine.storyboard in Resources */,
 				9E5FD6FA26073996008EB927 /* Metropolis-Light.otf in Resources */,
 				9E5FD6F726073996008EB927 /* Metropolis-ThinItalic.otf in Resources */,
@@ -992,7 +1020,6 @@
 				9EFE6AFF26A7370500064CAB /* ViewCategoryVC.swift in Sources */,
 				0EBADDCF2699E4B7007A9323 /* DailyData.swift in Sources */,
 				0EBADE13269F637D007A9323 /* Collection+Extension.swift in Sources */,
-				0EF113E02625EF4B00AF93B2 /* EditPopUpVC.swift in Sources */,
 				9B7B080527156E8700AB423B /* WriteRetrospectionVC.swift in Sources */,
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9E57244F26A9D8BA0084C3BD /* CreateTodoResponseData.swift in Sources */,
@@ -1018,6 +1045,7 @@
 				9BEFD55826A32EA200FD9112 /* CheckRoutineVC.swift in Sources */,
 				2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */,
 				0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */,
+				0E26A859274C0AD30069A779 /* EditPopUpVC.swift in Sources */,
 				0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */,
 				9E5FD66526045B0D008EB927 /* UIColor+Extension.swift in Sources */,
 				9E39AF7F263B497F001A2321 /* EditRoutineTimeVC.swift in Sources */,
@@ -1177,7 +1205,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DUQE66MABG;
+				DEVELOPMENT_TEAM = 87NJWJY5W4;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1199,7 +1227,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DUQE66MABG;
+				DEVELOPMENT_TEAM = 87NJWJY5W4;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

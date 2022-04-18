@@ -82,6 +82,7 @@ extension MyRoutineListVC {
         
         // 네비게이션 바
         self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
         
         // 헤더
         backButton.setImage(UIImage(named: "icon32BackBlack"), for: .normal)
