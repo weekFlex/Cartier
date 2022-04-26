@@ -120,6 +120,11 @@ struct APIService {
         let target: APITarget = .deleteAccount(token: token, details: details, withdrawalType: withdrawalType)
         judgeSimpleObject(target, completion: completion)
     }
+
+    func socialLogin(_ token:String, _ code:String, _ email: String, _ name: String, _ signupType: String , completion: @escaping (NetworkResult<GenericResponse<[String]>>) -> (Void)) {
+        let target: APITarget = .socialLogin(token: token, code: code, email: email, name: name, signupType: signupType)
+        judgeObject(target, completion: completion)
+    }
     
 }
 

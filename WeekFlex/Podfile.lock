@@ -1,5 +1,16 @@
 PODS:
   - Alamofire (5.5.0)
+  - KakaoSDKAuth (2.9.1):
+    - KakaoSDKCommon (= 2.9.1)
+  - KakaoSDKCommon (2.9.1):
+    - KakaoSDKCommon/Common (= 2.9.1)
+    - KakaoSDKCommon/Network (= 2.9.1)
+  - KakaoSDKCommon/Common (2.9.1)
+  - KakaoSDKCommon/Network (2.9.1):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.9.1)
+  - KakaoSDKUser (2.9.1):
+    - KakaoSDKAuth (= 2.9.1)
   - lottie-ios (3.3.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
@@ -14,6 +25,9 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - KakaoSDKAuth
+  - KakaoSDKCommon
+  - KakaoSDKUser
   - lottie-ios
   - Moya (~> 14.0)
   - RxCocoa
@@ -22,6 +36,9 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - lottie-ios
     - Moya
     - RxCocoa
@@ -30,12 +47,15 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  KakaoSDKAuth: 8ec514e64f57f405735e92483fdae1cc2830d351
+  KakaoSDKCommon: c4b08131fdba6770a280ffe83916048174f329bf
+  KakaoSDKUser: 3b82c8f4b7bdd8584b296cf91d1be4b4a84102fb
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: c04ebf8e3aaaff133ae5c1f1ac5d8b20586fb14c
+PODFILE CHECKSUM: 181df7376fb40783278e038ca7e2211cfcd9464b
 
 COCOAPODS: 1.10.1

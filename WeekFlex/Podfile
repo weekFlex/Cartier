@@ -12,5 +12,8 @@ target 'WeekFlex' do
   pod 'Moya', '~> 14.0'
   pod "Alamofire"
   pod 'lottie-ios'
+  pod 'KakaoSDKAuth'
+  pod 'KakaoSDKUser'
+  pod 'KakaoSDKCommon'
 
 end
