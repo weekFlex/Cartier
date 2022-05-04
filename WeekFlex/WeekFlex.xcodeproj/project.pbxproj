@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,7 @@
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC974726C25330003877B0 /* TodayTaskCell.swift */; };
 		0EFC974B26C258FB003877B0 /* TodayTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */; };
+		1974CDD92813F9920065A514 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1974CDD82813F9920065A514 /* SnapKit */; };
 		2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC526A779EE00A53F8E /* SimpleData.swift */; };
 		2D282EC926A9FC2A00A53F8E /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC826A9FC2A00A53F8E /* TabBarVC.swift */; };
 		2D282ECB26A9FC3C00A53F8E /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D282ECA26A9FC3C00A53F8E /* TabBar.storyboard */; };
@@ -249,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */,
+				1974CDD92813F9920065A514 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +847,9 @@
 			dependencies = (
 			);
 			name = WeekFlex;
+			packageProductDependencies = (
+				1974CDD82813F9920065A514 /* SnapKit */,
+			);
 			productName = WeekFlex;
 			productReference = 9EC0DAF425EEB9D1007D04D0 /* WeekFlex.app */;
 			productType = "com.apple.product-type.application";
@@ -872,6 +877,9 @@
 				Base,
 			);
 			mainGroup = 9EC0DAEB25EEB9D1007D04D0;
+			packageReferences = (
+				1974CDD72813F9920065A514 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 9EC0DAF525EEB9D1007D04D0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1205,7 +1213,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 87NJWJY5W4;
+				DEVELOPMENT_TEAM = DUQE66MABG;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1227,7 +1235,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 87NJWJY5W4;
+				DEVELOPMENT_TEAM = DUQE66MABG;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1262,6 +1270,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1974CDD72813F9920065A514 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1974CDD82813F9920065A514 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1974CDD72813F9920065A514 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9EC0DAEC25EEB9D1007D04D0 /* Project object */;
 }
