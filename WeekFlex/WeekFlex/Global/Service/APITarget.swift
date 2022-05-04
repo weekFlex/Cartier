@@ -12,6 +12,7 @@ enum APITarget {
     
     case getTask(token: String) // 전체 Task 불러오기
     case createTask(token: String, categoryId: Int, name: String) // task 등록
+    case deleteTask(token: String, taskId: Int)
     case getCategory(token: String) // 카테고리 리스트 API
     case createCategory(token: String, color: Int, name: String)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
@@ -49,6 +50,8 @@ extension APITarget: TargetType {
         switch self {
         case .getTask, .createTask:
             return "api/v1/task/"
+        case .deleteTask(_, let taskId):
+            return "api/v1/task/\(taskId)"
         case .getCategory, .createCategory:
             return "api/v1/category"
         case .getWeekly:
@@ -92,7 +95,7 @@ extension APITarget: TargetType {
         case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine, .writeRetrospection, .createLastStars, .deleteAccount:
             return .post
             
-        case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
+        case .deleteTodoRoutine, .deleteTodo, .deleteRoutine, .deleteTask:
             return .delete
             
         case .updateTodo:
@@ -114,7 +117,7 @@ extension APITarget: TargetType {
         
         switch self {
         
-        case .getTask, .getCategory, .getRoutine, .getUserProfile, .getRetrospection:
+        case .getTask, .getCategory, .getRoutine, .getUserProfile, .getRetrospection, .deleteTask:
             return .requestPlain
         
         case .createTask(_, let categoryId, let name):
@@ -179,7 +182,7 @@ extension APITarget: TargetType {
         // headers - HTTP header
         
         switch self {
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _), .deleteAccount(let token,_,_):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _), .deleteAccount(let token,_,_), .deleteTask(let token, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }
