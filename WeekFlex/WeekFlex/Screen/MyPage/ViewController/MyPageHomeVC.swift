@@ -17,6 +17,10 @@ class MyPageHomeVC: UIViewController{
     @IBOutlet weak var via: UILabel!
     
     @IBAction func categorySetting(_ sender: Any) {
+        let categoryStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let nextVC = categoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryVC")
+                as? ManageCategoryVC else { return }
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     @IBAction func taskSetting(_ sender: Any) {
         let routineStoryboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
