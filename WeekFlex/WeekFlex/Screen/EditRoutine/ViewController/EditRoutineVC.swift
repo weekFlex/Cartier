@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class EditRoutineVC: UIViewController {
     
@@ -195,6 +196,8 @@ class EditRoutineVC: UIViewController {
                     }
                 }
             }
+        case 5: // 수정
+            break
             
         default:
             return
@@ -244,6 +247,11 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
         } else {
             completeButton.isEnabled = true
         }
+
+        if entryNumber == 5 {
+            categoryTitle.setLabel(text: savedCategory.name, color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
+            categoryColor.image = UIImage(named: "icon-24-star-n\(savedCategory.color)")
+        }
     }
     
     func hideViewProtocol() {
@@ -265,7 +273,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if let _ = editRouineViewModel.todo.categoryID { //카테고리 설정 되어있어야지만 텍스트 확인, 안되어있으면 계속 비활성화!
+        if editRouineViewModel.todo.categoryID != nil || entryNumber == 5 { //카테고리 설정 되어있어야지만 텍스트 확인, 안되어있으면 계속 비활성화!
             if textField.text?.count == 0 || textField.text == nil {
                 // Text가 존재하지 않을 때 버튼 비활성화
                 completeButton.isEnabled = false
@@ -299,7 +307,6 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
         // header
         backButton.setImage(UIImage(named: "icon32CancleBlack"), for: .normal)
         completeButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
-        completeButton.isEnabled = false
         // set routine name
         routineTitle.borderStyle = .none
         routineTitle.placeholder = "할 일을 적어주세요"
@@ -333,13 +340,21 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
     }
     
     func setCategoryData() {
-        if let categoryVM = categoryViewModel {
-            categoryTitle.setLabel(text: categoryVM.title, color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
-            categoryColor.image = UIImage(named: categoryVM.categoryColorImageName)
+
+        if entryNumber == 5 {
+            guard let taskListData = taskListData else { return }
+            categoryTitle.setLabel(text: taskListData.category ?? "카테고리", color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
+            categoryColor.image = UIImage(named: "icon-24-star-n\(taskListData.categoryColor)")
             categoryColor.isHidden = false
         } else {
-            categoryTitle.setLabel(text: "카테고리를 생성해주세요", color: .gray3, font: .appleMedium(size: 16), letterSpacing: -0.16)
-            categoryColor.isHidden = true
+            if let categoryVM = categoryViewModel {
+                categoryTitle.setLabel(text: categoryVM.title, color: .black, font: .appleMedium(size: 16), letterSpacing: -0.16)
+                categoryColor.image = UIImage(named: categoryVM.categoryColorImageName)
+                categoryColor.isHidden = false
+            } else {
+                categoryTitle.setLabel(text: "카테고리를 생성해주세요", color: .gray3, font: .appleMedium(size: 16), letterSpacing: -0.16)
+                categoryColor.isHidden = true
+            }
         }
     }
     
@@ -407,7 +422,11 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             switchTopConstraint.constant = 96
             
             // data
-            todo = Todo(categoryID: todoData?.id, date: nil, endTime: todoData?.endTime, name: todoData!.name, startTime: todoData?.startTime)
+            todo = Todo(categoryID: todoData?.id,
+                        date: nil,
+                        endTime: todoData?.endTime,
+                        name: todoData!.name,
+                        startTime: todoData?.startTime)
             // 여기에서는 categoryID = todo.id
             
             if let dayNameList = todoData?.days {// 요일, 시간 설정을 해놨을 때
@@ -417,7 +436,25 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
             } else { // 안해놓았을 때
                 dayDict = ["월":0, "화":0, "수":0, "목":0, "금":0, "토":0, "일":0]
             }
-            
+        case 5:
+            print("할 일 편집")
+            headerLabel.setLabel(text: "할 일 편집", color: .black, font: .appleMedium(size: 18))
+            topConstraint.constant = 40/896*self.view.bounds.height
+            routineTitleTopConstraint.constant = 48
+            daysHeaderLabel.isHidden = true
+            daysHeaderLabelTopConstraint.isActive = false
+            weekCollectionView.isHidden = true
+            weekCollectionViewTopConstraint.isActive = false
+            switchTopConstraint.constant = 99
+            timeSettingHeaderLabelTopConstraint.constant = 103
+
+            timeHeaderLabel.isHidden = true
+            timeSwitch.isHidden = true
+
+            guard let taskListData = taskListData else { return }
+            routineTitle.text = taskListData.name
+            makeRemoveButton()
+            completeButton.isEnabled = true
         default:
             return
         }
@@ -457,6 +494,63 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
         startTimeLabel.isHidden = false
         endTimeSubLabel.isHidden = false
         startTimeSubLabel.isHidden = false
+    }
+
+    func makeRemoveButton() {
+        var removeButton = UIButton()
+
+        if #available(iOS 15.0, *) {
+            var configuration = UIButton.Configuration.plain()
+            var removeButton = UIButton(configuration: configuration, primaryAction: nil)
+        }
+
+        self.view.addSubview(removeButton)
+        removeButton.setButton(text: "할일 삭제하기",
+                               color: .white,
+                               font: .appleBold(size: 16),
+                               backgroundColor: .black)
+        removeButton.addTarget(self, action: #selector(removeTask), for: .touchUpInside)
+        removeButton.setRounded(radius: 8)
+//        removeButton.style
+
+        removeButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(self.view.snp.bottom).offset(-32)
+            $0.left.equalTo(self.view.snp.left).offset(24)
+            $0.width.equalTo(self.view.snp.width).offset(-48)
+            $0.height.equalTo(52)
+        }
+    }
+
+    @objc
+    func removeTask() {
+
+        let alert = UIAlertController(title: nil,
+                                      message: "해당 할 일이 영구적으로 삭제됩니다.\n이대로 삭제를 진행할까요?",
+                                      preferredStyle: .actionSheet)
+        let remove = UIAlertAction(title: "삭제", style: .destructive) { (action) in
+            guard let token = UserDefaults.standard.string(forKey: "UserToken"),
+                  let taskListData = self.taskListData else { return }
+            APIService.shared.deleteTask(token, taskId: taskListData.id){ result in
+                switch result {
+
+                case .success(let data):
+                    print("삭제 완료")
+                    self.hideViewDelegate?.hideViewProtocol()
+                    NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    print(error)
+                    print("오류!!")
+                }
+            }
+        }
+        let cancle = UIAlertAction(title: "취소", style: .cancel)
+
+        alert.addAction(remove)
+        alert.addAction(cancle)
+        self.present(alert, animated: true)
+
     }
 }
 
