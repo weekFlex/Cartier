@@ -23,21 +23,6 @@ class CreateCategoryVC: UIViewController {
     var state: CategoryState = .making
     private var categoryViewModel: CategoryViewModel?
     var dismissAction : (() -> Void)?
-    var checkedID: Int? {
-        didSet {
-            switch state {
-            case .making:
-                if let ID = checkedID {
-                    setCategoryImage(num: ID)
-                }
-                categoryCollectionView.reloadData()
-
-                checkEnableComplete()
-            case .editing(_):
-                break
-            }
-        }
-    }
     var checkCategory: IndexPath? {
         didSet {
             categoryCollectionView.reloadData()
@@ -70,7 +55,9 @@ class CreateCategoryVC: UIViewController {
     @IBAction func addCompleteButtonPressed(_ sender: Any) {
         
         guard let categoryTitle = categoryTitle.text,
-              let token = UserDefaults.standard.string(forKey: "UserToken") else { return }
+              let token = UserDefaults.standard.string(forKey: "UserToken") else {
+            return
+        }
         
         switch state {
         case .making:
@@ -192,17 +179,6 @@ extension CreateCategoryVC {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
     }
-    
-    func setCategoryImage(num: Int) {
-        switch num < 10 {
-        case true:
-            checkedColor = num + 1
-            categoryColorImage.image = UIImage(named: "icon-24-star-n\(num + 1)")
-        case false:
-            checkedColor = num - 6
-            categoryColorImage.image = UIImage(named: "icon-24-star-n\(num - 6)")
-        }
-    }
 }
 
 // MARK: Method
@@ -218,7 +194,18 @@ extension CreateCategoryVC {
 
         switch state {
         case .making:
-            completeButton.isEnabled = (checkedID != nil) ? true : false
+            guard let checkCategory = checkCategory else {
+                completeButton.isEnabled = false
+                return
+            }
+
+            if checkCategory.section == 0 {
+                checkedColor = checkCategory.row + 1
+            } else {
+                checkedColor = checkCategory.row + 4
+            }
+
+            completeButton.isEnabled = true
 
         case .editing(_):
             guard let checkCategory = checkCategory else {
@@ -361,56 +348,23 @@ extension CreateCategoryVC: UICollectionViewDataSource {
 
         cell.backgroundColor = (indexPath.section == 0) ? firstSectionColorList[indexPath.row] : secondSectionColorList[indexPath.row]
         cell.setRounded(radius: nil)
-
-        switch state {
-
-        case .making:
-            guard let checkedID = checkedID else { return cell }
-            if checkedID < 10 { // section 1
-                if indexPath.section == 0 && indexPath.row == checkedID {
-                    cell.checkImage.isHidden = false
-                } else {
-                    cell.checkImage.isHidden = true
-                }
-            } else { // section 2
-                if indexPath.section == 1 && indexPath.row == checkedID-10 {
-                    cell.checkImage.isHidden = false
-                } else {
-                    cell.checkImage.isHidden = true
-                }
-            }
-        case .editing(_):
-            guard let checkCategory = checkCategory else { return cell }
-            cell.checkImage.isHidden = indexPath == checkCategory ? false : true
-        }
         
-
+        guard let checkCategory = checkCategory else { return cell }
+        cell.checkImage.isHidden = indexPath == checkCategory ? false : true
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        switch state {
-        case .making:
-            switch indexPath.section {
-            case 0:
-                checkedID = indexPath.row
-            case 1:
-                checkedID = indexPath.row + 10
-            default:
-                return
-            }
-        case .editing(_):
-            checkCategory = indexPath
-            switch indexPath.section {
-            case 0:
-                categoryColorImage.image = UIImage(named: "icon-24-star-n\(indexPath.row+1)")
-            case 1:
-                categoryColorImage.image = UIImage(named: "icon-24-star-n\(indexPath.row+4 )")
-            default:
-                break
-            }
+        checkCategory = indexPath
+        switch indexPath.section {
+        case 0:
+            categoryColorImage.image = UIImage(named: "icon-24-star-n\(indexPath.row+1)")
+        case 1:
+            categoryColorImage.image = UIImage(named: "icon-24-star-n\(indexPath.row+4 )")
+        default:
+            break
         }
 
     }
