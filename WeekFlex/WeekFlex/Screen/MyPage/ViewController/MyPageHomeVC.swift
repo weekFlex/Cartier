@@ -19,6 +19,12 @@ class MyPageHomeVC: UIViewController{
     @IBAction func categorySetting(_ sender: Any) {
     }
     @IBAction func taskSetting(_ sender: Any) {
+        let routineStoryboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+        guard let nextVC = routineStoryboard.instantiateViewController(withIdentifier: "SelectToDoVC") as?
+                SelectToDoVC else { return }
+        nextVC.routineName = "할 일 관리"
+        nextVC.taskCase = .editing
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     @IBAction func logout(_ sender: Any) {
         let actionSheetController = UIAlertController(title: "로그아웃",
@@ -95,48 +101,4 @@ extension UIButton {
     let hitArea = self.bounds.insetBy(dx: -margin, dy: -margin)
     return hitArea.contains(point)
   }
-}
-
-extension UIWindow {
-    func replaceRootViewController(
-        _ replacementController: UIViewController,
-        animated: Bool,
-        completion: (() -> Void)?
-    ) {
-           let snapshotImageView = UIImageView(image: self.snapshot())
-           self.addSubview(snapshotImageView)
-
-           let dismissCompletion = { () -> Void in // dismiss all modal view controllers
-               self.rootViewController = replacementController
-               self.bringSubviewToFront(snapshotImageView)
-               if animated {
-                   UIView.animate(withDuration: 0.5, animations: { () -> Void in
-                        snapshotImageView.transform = CGAffineTransform(translationX: 0, y: 1000)
-                    }, completion: { (isEnd) -> Void in
-                        if isEnd {
-                            snapshotImageView.removeFromSuperview()
-                            completion?()
-                        }
-                    }
-                   )
-               } else {
-                   snapshotImageView.removeFromSuperview()
-                   completion?()
-               }
-           }
-
-           if self.rootViewController!.presentedViewController != nil {
-               self.rootViewController!.dismiss(animated: false, completion: dismissCompletion)
-           } else {
-               dismissCompletion()
-           }
-       }
-
-    func snapshot() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
-        drawHierarchy(in: bounds, afterScreenUpdates: true)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage.init() }
-        UIGraphicsEndImageContext()
-        return result
-    }
 }
