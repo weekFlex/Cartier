@@ -49,7 +49,7 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
-    func updateCategory(_ token: String, color: Int, id: Int, name: String, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
+    func updateCategory(_ token: String, color: Int, id: Int, name: String?, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
         let target: APITarget = .updateCategory(token: token, color: color, id: id, name: name)
         judgeObject(target, completion: completion)
     }

@@ -15,7 +15,7 @@ enum APITarget {
     case deleteTask(token: String, taskId: Int)
     case getCategory(token: String) // 카테고리 리스트 API
     case createCategory(token: String, color: Int, name: String)
-    case updateCategory(token: String, color: Int, id: Int, name: String)
+    case updateCategory(token: String, color: Int, id: Int, name: String?)
     case getWeekly(token: String, date: String)   // 캘린더 일주일 할일 불러오기
     case checkTodo(token: String, todoId: Int, done: Bool)   //할일 체크
     case updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int) // todo수정
