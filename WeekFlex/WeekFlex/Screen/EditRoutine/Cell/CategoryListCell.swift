@@ -9,7 +9,12 @@ import UIKit
 
 class CategoryListCell: UITableViewCell {
 
+    // MARK: Property
     static let identifier = "CategoryListCell"
+    
+    // MARK: @IBOutlet
+    @IBOutlet weak var categoryColor: UIImageView!
+    @IBOutlet weak var categoryTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +28,8 @@ class CategoryListCell: UITableViewCell {
     }
     
     func configure(icon: String, title: String) {
-        
+        categoryTitle.text = title
+        categoryColor.image = UIImage(named: icon)
     }
 
 }
