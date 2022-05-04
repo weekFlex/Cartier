@@ -31,6 +31,7 @@ class ManageCategoryVC: UIViewController {
     func setDelegate() {
         categoryTableView.dataSource = self
         categoryTableView.delegate = self
+        categoryTableView.separatorStyle = .none
     }
     
     func setData() {
@@ -69,8 +70,19 @@ extension ManageCategoryVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let categoryVM = categoryListViewModel?.categoryAtIndex(indexPath.row) else { return }
-//        categoryVM.category
-        // 전 뷰로 해당 카테고리 데이터를 넘긴다
+        
+        guard let createCategoryVC = self.storyboard?.instantiateViewController(identifier: "CreateCategoryVC") as? CreateCategoryVC else { return }
+        createCategoryVC.modalTransitionStyle = .coverVertical
+        createCategoryVC.modalPresentationStyle = .custom
+        createCategoryVC.state = .editing(categoryVM.category)
+        createCategoryVC.dismissAction = {
+            self.setData()
+        }
+        self.present(createCategoryVC, animated: true, completion: .none)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
 }

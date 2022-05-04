@@ -9,8 +9,12 @@ import UIKit
 
 class CreateCategoryVC: UIViewController {
     
-    // MARK: - Variables
+    enum CategoryState {
+        case making
+        case editing(CategoryData)
+    }
     
+    // MARK: - Variables
     let didDismissCreateCategoryVC: Notification.Name = Notification.Name("DidDismissCreateCategoryVC")
     var hideViewDelegate: HideViewProtocol?
     var saveCategoryDelegate: SaveCategoryProtocol?
@@ -28,13 +32,16 @@ class CreateCategoryVC: UIViewController {
         }
     }
     var checkedColor: Int?
+    var state: CategoryState = .making
+    private var categoryViewModel: CategoryViewModel?
+    var dismissAction : (() -> Void)?
     
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
     
     // alert
     let alert = UIAlertController(title: "존재하는 카테고리", message: "이미 존재하는 카테고리 이름입니다.\n다른 이름을 입력해주세요.", preferredStyle: .alert)
-    let cancel = UIAlertAction(title: "확인", style: .default, handler : nil)
+    let cancel = UIAlertAction(title: "확인", style: .cancel, handler : nil)
     
     // MARK: IBOutlet
     
@@ -50,23 +57,41 @@ class CreateCategoryVC: UIViewController {
     @IBOutlet var categoryCollectionView: UICollectionView!
     
     @IBAction func addCompleteButtonPressed(_ sender: Any) {
-        if
-            let colorID = checkedColor,
-            let categoryTitle = categoryTitle.text {
-            if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                APIService.shared.createCategory(token, color: colorID, name: categoryTitle){ result in
-                    switch result {
+        
+        guard let colorID = checkedColor,
+              let categoryTitle = categoryTitle.text,
+              let token = UserDefaults.standard.string(forKey: "UserToken") else { return }
+        
+        switch state {
+        case .making:
+            APIService.shared.createCategory(token, color: colorID, name: categoryTitle) { result in
+                switch result {
+
+                case .success(_):
+                    NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
+                    self.dismiss(animated: true, completion: .none)
                     
-                    case .success(_):
-                        NotificationCenter.default.post(name: self.didDismissCreateCategoryVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                        self.dismiss(animated: true, completion: .none)
-                        
-                    case .failure(_):
-                        self.present(self.alert,animated: false, completion: nil)
+                case .failure(_):
+                    self.present(self.alert, animated: false, completion: nil)
+                }
+            }
+            
+        case .editing(_):
+            guard let categoryViewModel = categoryViewModel,
+                 let dismissAction = self.dismissAction else { return }
+            APIService.shared.updateCategory(token, color: colorID, id: categoryViewModel.ID, name: categoryTitle) { result in
+                switch result {
+                case .success(_):
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
                     }
+                    dismissAction()
+                case .failure(_):
+                    self.present(self.alert, animated: false, completion: nil)
                 }
             }
         }
+        
     }
     @IBAction func cancleBtnDidTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -104,7 +129,6 @@ extension CreateCategoryVC {
         alert.addAction(cancel)
         
         // background
-        modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.0)
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
         modalBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
         categoryColorView.backgroundColor = .white
@@ -112,7 +136,18 @@ extension CreateCategoryVC {
         backButton.setImage(UIImage(named: "icon32CancleBlack"), for: .normal)
         completeButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
         completeButton.isEnabled = false
-        headerLabel.setLabel(text: "카테고리 추가", color: .black, font: .appleMedium(size: 18))
+        switch state {
+        case .making:
+            headerLabel.setLabel(text: "카테고리 추가", color: .black, font: .appleMedium(size: 18))
+            modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        case .editing(let category):
+            categoryViewModel = CategoryViewModel(category)
+            headerLabel.setLabel(text: "카테고리 편집", color: .black, font: .appleMedium(size: 18))
+            categoryTitle.text = categoryViewModel?.title
+            categoryColorImage.image = UIImage(named: categoryViewModel?.categoryColorImageName ?? "icon-24-star-n")
+            modalBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            checkedID = categoryViewModel?.ID
+        }
         topConstraint.constant = 40/896*self.view.bounds.height
         
         // text field
@@ -130,7 +165,7 @@ extension CreateCategoryVC {
     }
     
     func setCategoryImage(num: Int) {
-        switch num<10 {
+        switch num < 10 {
         case true:
             checkedColor = num+1
             categoryColorImage.image = UIImage(named: "icon-24-star-n\(num+1)")
@@ -151,9 +186,13 @@ extension CreateCategoryVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else {
+            completeButton.isEnabled = false
+            return
+        }
+        print("\(#function) : \(text)")
         if let checkedID = checkedID {
-            if textField.text?.count == 0 || textField.text == nil {
-                // Text가 존재하지 않을 때 버튼 비활성화
+            if text.count == 0 {
                 completeButton.isEnabled = false
             } else {
                 completeButton.isEnabled = true
@@ -278,9 +317,6 @@ extension CreateCategoryVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // vm의 didset trigger
-        // vm.checkedID = indexPath.row
-        // vm.checkedID = indexPath.row + 10
         switch indexPath.section {
         case 0:
             checkedID = indexPath.row
