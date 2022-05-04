@@ -121,6 +121,8 @@
 		9EFE6AFF26A7370500064CAB /* ViewCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */; };
 		9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */; };
 		D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */; };
+		D22DCD21282224DB00EC9AE5 /* ManageCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22DCD20282224DB00EC9AE5 /* ManageCategoryVC.swift */; };
+		D22DCD232822258C00EC9AE5 /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22DCD222822258C00EC9AE5 /* CategoryListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +243,8 @@
 		9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCategoryVC.swift; sourceTree = "<group>"; };
 		9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryVC.swift; sourceTree = "<group>"; };
 		CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeekFlex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22DCD20282224DB00EC9AE5 /* ManageCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoryVC.swift; sourceTree = "<group>"; };
+		D22DCD222822258C00EC9AE5 /* CategoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
 		E69A384642D50E1D9D0EAF1A /* Pods-WeekFlex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.release.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -790,6 +794,7 @@
 				9E39AF7E263B497F001A2321 /* EditRoutineTimeVC.swift */,
 				9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */,
 				9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */,
+				D22DCD20282224DB00EC9AE5 /* ManageCategoryVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 				9EC2E0812631E45100EF2F7E /* WeekCollectionViewCell.swift */,
 				9E0FFB9A26A836B800EB0428 /* CategoryTableViewCell.swift */,
 				9E0FFBA126A8784F00EB0428 /* ColorCategoryTableViewCell.swift */,
+				D22DCD222822258C00EC9AE5 /* CategoryListCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1063,6 +1069,8 @@
 				9B0A49FD26D9399B003CBA71 /* CategoryStarCell.swift in Sources */,
 				9EC0DAFA25EEB9D1007D04D0 /* SceneDelegate.swift in Sources */,
 				9E6760CC25F0BF9900436D5C /* LoginVC.swift in Sources */,
+				D22DCD232822258C00EC9AE5 /* CategoryListCell.swift in Sources */,
+				D22DCD21282224DB00EC9AE5 /* ManageCategoryVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

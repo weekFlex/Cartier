@@ -615,6 +615,7 @@
                                             <constraint firstAttribute="height" constant="32" id="y8w-sq-OWm"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
                                         <connections>
                                             <action selector="backButtonPressed:" destination="AsH-eo-rMO" eventType="touchUpInside" id="SOF-ak-y5Y"/>
                                             <action selector="cancleBtnDidTap:" destination="9QR-ay-YWg" eventType="touchUpInside" id="JC2-Nf-tyb"/>
@@ -627,6 +628,7 @@
                                             <constraint firstAttribute="width" secondItem="M6C-xD-kE2" secondAttribute="height" multiplier="1:1" id="puc-4C-Jge"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
                                         <connections>
                                             <action selector="addCompleteButtonPressed:" destination="9QR-ay-YWg" eventType="touchUpInside" id="aog-cT-FgX"/>
                                             <action selector="completeButtonPressed:" destination="AsH-eo-rMO" eventType="touchUpInside" id="asw-6P-TFk"/>
@@ -755,8 +757,11 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="C5N-us-bXK" secondAttribute="height" multiplier="1:1" id="lrG-gE-NSV"/>
                                         </constraints>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Button" image="icon32BackBlack"/>
+                                        <state key="normal" title="Button" image="icon32BackBlack">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="backButtonDidTap:" destination="yUi-mS-Ldb" eventType="touchUpInside" id="JDF-ij-HEx"/>
                                         </connections>
@@ -777,10 +782,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rl1-h7-fdn">
-                                <rect key="frame" x="24" y="181" width="366" height="681"/>
+                                <rect key="frame" x="24" y="165.5" width="366" height="696.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CategoryListCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="NKg-O3-7IG" customClass="CategoryListCell" customModule="WeekFlex" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CategoryListCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryListCell" rowHeight="55" id="NKg-O3-7IG" customClass="CategoryListCell" customModule="WeekFlex" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="366" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NKg-O3-7IG" id="C4C-Gx-jid">
@@ -823,7 +828,7 @@
                             <constraint firstItem="1Uq-ee-taS" firstAttribute="bottom" secondItem="Rl1-h7-fdn" secondAttribute="bottom" id="AFD-S6-sH0"/>
                             <constraint firstItem="0h6-cI-2Xg" firstAttribute="top" secondItem="7pW-XT-yOq" secondAttribute="bottom" constant="40" id="Fdx-M6-dd1"/>
                             <constraint firstItem="0h6-cI-2Xg" firstAttribute="leading" secondItem="1Uq-ee-taS" secondAttribute="leading" constant="24" id="QGE-WG-RoG"/>
-                            <constraint firstItem="Rl1-h7-fdn" firstAttribute="top" secondItem="0h6-cI-2Xg" secondAttribute="bottom" constant="41" id="TeD-Mb-0nU"/>
+                            <constraint firstItem="Rl1-h7-fdn" firstAttribute="top" secondItem="0h6-cI-2Xg" secondAttribute="bottom" constant="25.5" id="TeD-Mb-0nU"/>
                             <constraint firstItem="1Uq-ee-taS" firstAttribute="trailing" secondItem="0h6-cI-2Xg" secondAttribute="trailing" constant="24" id="UvF-AV-4lM"/>
                             <constraint firstItem="7pW-XT-yOq" firstAttribute="top" secondItem="1Uq-ee-taS" secondAttribute="top" id="aqt-0f-TXS"/>
                             <constraint firstItem="Rl1-h7-fdn" firstAttribute="leading" secondItem="1Uq-ee-taS" secondAttribute="leading" constant="24" id="bxc-p5-OiN"/>
@@ -844,6 +849,9 @@
     <resources>
         <image name="icon-24-star-n4" width="24" height="24"/>
         <image name="icon32BackBlack" width="32" height="32"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
