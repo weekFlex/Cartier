@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CreateCategoryVC: UIViewController {
 
@@ -30,14 +31,7 @@ class CreateCategoryVC: UIViewController {
         }
     }
     private var categoryListViewModel : CategoryListViewModel?
-    
-    // alert
-    let alert = UIAlertController(title: "존재하는 카테고리",
-                                  message: "이미 존재하는 카테고리 이름입니다.\n다른 이름을 입력해주세요.",
-                                  preferredStyle: .alert)
-    let cancel = UIAlertAction(title: "확인",
-                               style: .cancel,
-                               handler : nil)
+
     
     // MARK: - @IBOutlet
     @IBOutlet var topConstraint: NSLayoutConstraint!
@@ -70,7 +64,7 @@ class CreateCategoryVC: UIViewController {
                     self.dismiss(animated: true, completion: .none)
                     
                 case .failure(_):
-                    self.present(self.alert, animated: false, completion: nil)
+                    self.showDupleAlert()
                 }
             }
             
@@ -91,7 +85,7 @@ class CreateCategoryVC: UIViewController {
                     }
                     dismissAction()
                 case .failure(_):
-                    self.present(self.alert, animated: false, completion: nil)
+                    self.showDupleAlert()
                 }
             }
         }
@@ -129,8 +123,6 @@ class CreateCategoryVC: UIViewController {
 
 extension CreateCategoryVC {
     func setLayout() {
-        // alert
-        alert.addAction(cancel)
         
         // background
         view.backgroundColor = UIColor(white: 0, alpha: 0.0)
@@ -161,6 +153,7 @@ extension CreateCategoryVC {
             } else {
                 checkCategory = IndexPath(row: color-4, section: 1)
             }
+            removeButton()
         }
         topConstraint.constant = 40/896 * view.bounds.height
         
@@ -239,8 +232,80 @@ extension CreateCategoryVC {
     @objc func textFieldDidChange(_ textField: UITextField) {
         checkEnableComplete()
     }
-    
+
+    func showDupleAlert() {
+        // alert
+        let alert = UIAlertController(title: "존재하는 카테고리",
+                                      message: "이미 존재하는 카테고리 이름입니다.\n다른 이름을 입력해주세요.",
+                                      preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "확인",
+                                   style: .default,
+                                   handler : nil)
+
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+
+    @objc func showRemoveAlert() {
+        guard let categoryViewModel = categoryViewModel else { return }
+        // alert
+        let alert = UIAlertController(title: nil,
+                                      message: "카테고리에 포함된 \(categoryViewModel.title)이 모두 삭제됩니다.\n이대로 삭제를 진행할까요?",
+                                      preferredStyle: .actionSheet)
+        let remove = UIAlertAction(title: "삭제",
+                                   style: .destructive) { (action) in
+            self.removeButtonDidTap()
+        }
+        let cancel = UIAlertAction(title: "취소",
+                                   style: .cancel,
+                                   handler : nil)
+
+        
+        alert.addAction(remove)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+
+    func removeButton() {
+        let removeButton = UIButton()
+        view.addSubview(removeButton)
+        removeButton.setButton(text: "카테고리 삭제하기",
+                               color: .white,
+                               font: .appleBold(size: 16),
+                               backgroundColor: .black)
+        removeButton.setRounded(radius: 8)
+
+        removeButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(self.view.snp.bottom).offset(-33)
+            $0.left.equalTo(self.view.snp.left).offset(24)
+            $0.width.equalTo(self.view.snp.width).offset(-48)
+            $0.height.equalTo(52)
+        }
+        removeButton.addTarget(self, action: #selector(showRemoveAlert), for: .touchUpInside)
+    }
+
+    func removeButtonDidTap() {
+        guard let token = UserDefaults.standard.string(forKey: "UserToken"),
+              let categoryViewModel = categoryViewModel,
+              let dismissAction = dismissAction else { return }
+        APIService.shared.deleteCategory(token,
+                                         id: categoryViewModel.ID) { result in
+            switch result {
+
+            case .success(_):
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
+                dismissAction()
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+    }
 }
+
 
 // MARK: UITextFieldDelegate
 extension CreateCategoryVC: UITextFieldDelegate {
