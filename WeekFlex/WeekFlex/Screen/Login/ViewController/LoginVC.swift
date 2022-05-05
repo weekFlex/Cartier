@@ -10,6 +10,7 @@ import UIKit
 import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
+import GoogleSignIn
 
 class LoginVC: UIViewController {
     
@@ -52,6 +53,8 @@ extension LoginVC {
     func setLayout() {
         appleButton.addTarget(self, action: #selector(handleAppleSignIn), for: .touchUpInside)
         kakaoButton.addTarget(self, action: #selector(handleKakaoSignIn), for: .touchUpInside)
+        googleButton.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
+        
     }
     
     func startAnimation() {
@@ -110,6 +113,8 @@ extension LoginVC {
         authorizationController.performRequests()
     }
     
+    
+    // Kakao Login Buttoon 눌렸을 때 액션
     @objc func handleKakaoSignIn(){
         print("카톡 로그인 눌림")
         //test용 연결끊기
@@ -131,7 +136,7 @@ extension LoginVC {
                     self.signupType = "KAKAO"
                     
                     // TODO: SNSRegisterScene으로 넘어가기.
-//                    _ = oauthToken
+                    //                    _ = oauthToken
                     
                     UserApi.shared.me { [self] user, error in
                         if let error = error {
@@ -183,6 +188,23 @@ extension LoginVC {
             }
         }
     }
+    
+    // Google Login 눌렸을때 액션
+    @objc func handleGoogleSignIn() {
+        print("구글로그인 눌림")
+        let config = GIDConfiguration(clientID: "960803817590-b9ggher3ot9hm43rpen88dtuo56ekq83.apps.googleusercontent.com")
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let user = user else { return }
+            
+            print(user)
+        }
+    }
+    
 }
 
 
@@ -195,7 +217,7 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         switch authorization.credential {
             // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            print("apple id 됨??")
+            
             // 계정 정보 가져오기
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName

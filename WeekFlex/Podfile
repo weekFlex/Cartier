@@ -15,5 +15,6 @@ target 'WeekFlex' do
   pod 'KakaoSDKAuth'
   pod 'KakaoSDKUser'
   pod 'KakaoSDKCommon'
+  pod 'GoogleSignIn'
 
 end
