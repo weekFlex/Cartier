@@ -40,6 +40,7 @@ class LoginVC: UIViewController {
         [kakaoButton, googleButton, appleButton].forEach {
             $0.setTitle("", for: .normal)
         }
+        //테스트용 회원탈퇴!
         
         startAnimation()
         setLayout()
@@ -103,8 +104,10 @@ extension LoginVC {
     // Apple Login Button 눌렸을 때 액션
     @objc func handleAppleSignIn() {
         print("애플로그인 눌림")
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
+        //이름, 이메일 받아옴
         request.requestedScopes = [.fullName, .email]
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
@@ -126,8 +129,10 @@ extension LoginVC {
                 print("unlink() success.")
             }
         }
-        
+        //카카오톡 설치되어있는지 확인
         if UserApi.isKakaoTalkLoginAvailable() {
+            
+            //카톡 로그인. api 호출 결과 클로저로 전달
             UserApi.shared.loginWithKakaoTalk { oauthToken, error in
                 if let error = error {
                     print(error)
@@ -136,40 +141,25 @@ extension LoginVC {
                     self.signupType = "KAKAO"
                     
                     // TODO: SNSRegisterScene으로 넘어가기.
-                    //                    _ = oauthToken
+                     _ = oauthToken
                     
+                    //사용자 정보 불러옴
                     UserApi.shared.me { [self] user, error in
                         if let error = error {
                             print(error)
                         } else {
-                            //정리
-                            if let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email {
-                                self.accessToken = token
-                                self.email = email
-                            }else{
-                                print("token/email error")
-                            }
-                            self.name = user?.kakaoAccount?.name ?? ""
+                            //닉네임(이름), 토큰, 이메일 받아옴
+                            guard let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email,
+                                  let name = user?.kakaoAccount?.profile?.nickname else{
+                                      print("token/email/name is nil")
+                                      return
+                                  }
+
+                            self.email = email
+                            self.accessToken = token
+                            self.name = name
                             
-                            
-                            //회원가입 따로빼기
-                            if NetworkState.isConnected() {
-                                if let token = self.accessToken {
-                                    APIService.shared.socialLogin(token, code, email, name, signupType) { result in
-                                        switch result {
-                                        case .success(_):
-                                            print("회원가입 성공")
-                                            
-                                        case .failure(let error):
-                                            print(error)
-                                        }
-                                    }
-                                    
-                                    
-                                }
-                            } else {
-                                print("네트워크 미연결")
-                            }
+                            login()
                         }
                     }
                 }
@@ -184,6 +174,25 @@ extension LoginVC {
                     
                     // do something
                     _ = oauthToken
+                    
+                    UserApi.shared.me { [self] user, error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            //닉네임(이름), 토큰, 이메일 받아옴
+                            guard let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email,
+                                  let name = user?.kakaoAccount?.profile?.nickname else{
+                                      print("token/email/name is nil")
+                                      return
+                                  }
+
+                            self.email = email
+                            self.accessToken = token
+                            self.name = name
+                            
+                            login()
+                        }
+                    }
                 }
             }
         }
@@ -201,7 +210,49 @@ extension LoginVC {
             }
             guard let user = user else { return }
             
-            print(user)
+            
+            self.accessToken = user.authentication.idToken
+            self.email = user.profile?.email ?? ""
+            self.name = user.profile?.name ?? ""
+            self.signupType = "GOOGLE"
+            self.login()
+        }
+    }
+    
+    func login(){
+        print("로그인===========")
+        print(accessToken)
+        print(email)
+        print(code)
+        print(name)
+        print(signupType)
+        
+        //화면 전환
+        
+        
+        if NetworkState.isConnected() {
+            if let token = self.accessToken {
+                APIService.shared.socialLogin(token, code, email, name, signupType) { result in
+                    switch result {
+                    case .success(_):
+                        print("회원가입 성공")
+                        //토큰 저장
+                        UserDefaults.standard.set(self.accessToken, forKey: "UserToken")
+                        
+                        let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
+                        guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
+                        nextController.modalPresentationStyle = .fullScreen
+                        self.present(nextController, animated: true,completion: nil)
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                
+                
+            }
+        } else {
+            print("네트워크 미연결")
         }
     }
     
@@ -235,6 +286,9 @@ extension LoginVC: ASAuthorizationControllerDelegate {
                let authorization_code = authorization_code {
                 print("token : \(String(decoding: access_token, as: UTF8.self))")
                 print("authorization_code : \(String(decoding: authorization_code, as: UTF8.self))")
+                self.accessToken = String(decoding: access_token, as: UTF8.self)
+                self.code = (String(decoding: authorization_code, as: UTF8.self))
+                
             }
             
         default:

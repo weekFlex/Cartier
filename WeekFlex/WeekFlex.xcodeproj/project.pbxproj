@@ -15,9 +15,6 @@
 		0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E47926737B380002EFDD /* ReviewCell.swift */; };
 		0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30E47A26737B380002EFDD /* ReviewCell.xib */; };
 		0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */; };
-		0E4B0DA72810863500013B58 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4B0DA62810863500013B58 /* KakaoSDKAuth */; };
-		0E4B0DA92810863500013B58 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4B0DA82810863500013B58 /* KakaoSDKCommon */; };
-		0E4B0DAB2810863500013B58 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 0E4B0DAA2810863500013B58 /* KakaoSDKUser */; };
 		0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952D5260A65F500345659 /* UIView+Extension.swift */; };
 		0E7952EF2610B4A500345659 /* MainRoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */; };
 		0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7953302613B4E100345659 /* MainHomeViewModel.swift */; };
@@ -251,10 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E4B0DAB2810863500013B58 /* KakaoSDKUser in Frameworks */,
 				D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */,
-				0E4B0DA92810863500013B58 /* KakaoSDKCommon in Frameworks */,
-				0E4B0DA72810863500013B58 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,9 +846,6 @@
 			);
 			name = WeekFlex;
 			packageProductDependencies = (
-				0E4B0DA62810863500013B58 /* KakaoSDKAuth */,
-				0E4B0DA82810863500013B58 /* KakaoSDKCommon */,
-				0E4B0DAA2810863500013B58 /* KakaoSDKUser */,
 			);
 			productName = WeekFlex;
 			productReference = 9EC0DAF425EEB9D1007D04D0 /* WeekFlex.app */;
@@ -1226,7 +1217,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.weefle.WeekFlex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.wf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1250,7 +1241,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.weefle.WeekFlex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.wf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1291,24 +1282,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		0E4B0DA62810863500013B58 /* KakaoSDKAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E4B0DA52810863400013B58 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKAuth;
-		};
-		0E4B0DA82810863500013B58 /* KakaoSDKCommon */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E4B0DA52810863400013B58 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKCommon;
-		};
-		0E4B0DAA2810863500013B58 /* KakaoSDKUser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E4B0DA52810863400013B58 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKUser;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9EC0DAEC25EEB9D1007D04D0 /* Project object */;
 }
