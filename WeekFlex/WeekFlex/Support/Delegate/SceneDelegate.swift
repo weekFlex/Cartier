@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -48,11 +49,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
-    //카카오 로그인
+    //소셜 로그인
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            
+            if (AuthApi.isKakaoTalkLoginUrl(url)) { //카카오 링크인지
                 _ = AuthController.handleOpenUrl(url: url)
+            }else if ((url.scheme?.contains("com.googleusercontent.apps")) != nil) {  //구글 링크인지
+                GIDSignIn.sharedInstance.handle(url)
             }
         }
     }

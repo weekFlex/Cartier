@@ -16,10 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let emotionMascot = [("empty","선택안함"),("good","꽤 괜찮았어요"),("merong","열심히 놀았어요"),("yaho","뿌듯해요"),("sad","후회해요"),("angry","화가 났어요"),("bad","아쉬웠어요"),("kiki-disable","최고였어요"),("pissed-disable","아찔했어요"),("crazy-disable","정신 없었어요"),("iku-disable","미래의 나에게!"),("sowhat-disable","눈막귀막"),("vomit-disable","너무 힘들었어요")]
     
-    let nativeAppKey = "db8cc9753904956db9029fc4bbd32af2"
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        //카카오 로그인 sdk 초기화
+        KakaoSDK.initSDK(appKey: Storage().nativeAppKey)
+        //구글 로그인
+       
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if error != nil || user == nil {
+                //show the app's signed-ouot state.
+            }else {
+                // signed - in state.
+            }
+        }
         
-        KakaoSDK.initSDK(appKey: "\(nativeAppKey)")
         // Override point for customization after application launch.
         let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: "") { (credentialState, error) in
@@ -52,9 +62,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //구글로그인
-    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-        return GIDSignIn.sharedInstance.handle(url)
-    }
+//    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+//        return GIDSignIn.sharedInstance.handle(url)
+//    }
+
+
+
+//    func application(
+//      _ app: UIApplication,
+//      open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+//    ) -> Bool {
+//      var handled: Bool
+//
+//      handled = GIDSignIn.sharedInstance.handle(url)
+//      if handled {
+//        return true
+//      }
+//
+//      // Handle other custom URL types.
+//
+//      // If not handled by this app, return false.
+//      return false
+//    }
     
 
 }

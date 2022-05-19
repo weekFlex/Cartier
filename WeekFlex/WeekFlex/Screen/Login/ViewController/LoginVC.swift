@@ -141,7 +141,7 @@ extension LoginVC {
                     self.signupType = "KAKAO"
                     
                     // TODO: SNSRegisterScene으로 넘어가기.
-                     _ = oauthToken
+                    _ = oauthToken
                     
                     //사용자 정보 불러옴
                     UserApi.shared.me { [self] user, error in
@@ -149,12 +149,13 @@ extension LoginVC {
                             print(error)
                         } else {
                             //닉네임(이름), 토큰, 이메일 받아옴
-                            guard let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email,
+                            guard let token = oauthToken?.accessToken,
+                                  let email = user?.kakaoAccount?.email,
                                   let name = user?.kakaoAccount?.profile?.nickname else{
                                       print("token/email/name is nil")
                                       return
                                   }
-
+                            
                             self.email = email
                             self.accessToken = token
                             self.name = name
@@ -180,12 +181,13 @@ extension LoginVC {
                             print(error)
                         } else {
                             //닉네임(이름), 토큰, 이메일 받아옴
-                            guard let token = oauthToken?.accessToken, let email = user?.kakaoAccount?.email,
+                            guard let token = oauthToken?.accessToken,
+                                  let email = user?.kakaoAccount?.email,
                                   let name = user?.kakaoAccount?.profile?.nickname else{
                                       print("token/email/name is nil")
                                       return
                                   }
-
+                            
                             self.email = email
                             self.accessToken = token
                             self.name = name
@@ -201,25 +203,34 @@ extension LoginVC {
     // Google Login 눌렸을때 액션
     @objc func handleGoogleSignIn() {
         print("구글로그인 눌림")
-        let config = GIDConfiguration(clientID: "960803817590-b9ggher3ot9hm43rpen88dtuo56ekq83.apps.googleusercontent.com")
+        GIDSignIn.sharedInstance.signOut()
+        
+        let config = GIDConfiguration.init(clientID: Storage().clientID)
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
-            if let error = error {
-                print(error)
-                return
-            }
+            
+            guard error == nil else { return }
             guard let user = user else { return }
             
+            //토큰 받아오기
+            user.authentication.do { authentication, error in
+                guard error == nil else { return }
+                guard let authentication = authentication else { return }
+                print("토큰 겟")
+                self.accessToken = authentication.idToken
+                self.email = user.profile?.email ?? ""
+                self.name = user.profile?.name ?? ""
+                self.signupType = "GOOGLE"
+                self.login()
+                // Send ID token to backend (example below).
+            }
             
-            self.accessToken = user.authentication.idToken
-            self.email = user.profile?.email ?? ""
-            self.name = user.profile?.name ?? ""
-            self.signupType = "GOOGLE"
-            self.login()
+            
         }
     }
     
     func login(){
+        
         print("로그인===========")
         print(accessToken)
         print(email)
@@ -238,7 +249,7 @@ extension LoginVC {
                         print("회원가입 성공")
                         //토큰 저장
                         UserDefaults.standard.set(self.accessToken, forKey: "UserToken")
-                        
+                        //로그인 성공하면 메인화면으로 이동
                         let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
                         guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
                         nextController.modalPresentationStyle = .fullScreen
@@ -246,6 +257,7 @@ extension LoginVC {
                         
                     case .failure(let error):
                         print(error)
+                        
                     }
                 }
                 
@@ -270,26 +282,25 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
             // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            let access_token = appleIDCredential.identityToken
             
-            let authorization_code = appleIDCredential.authorizationCode
-            
-            // 디버깅용 프린팅
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            
-            if let access_token = access_token,
-               let authorization_code = authorization_code {
-                print("token : \(String(decoding: access_token, as: UTF8.self))")
-                print("authorization_code : \(String(decoding: authorization_code, as: UTF8.self))")
+            if let access_token = appleIDCredential.identityToken,
+               let authorization_code = appleIDCredential.authorizationCode,
+               let email = appleIDCredential.email,
+               let familyName = appleIDCredential.fullName?.familyName,
+               let givenName = appleIDCredential.fullName?.givenName{
+                
+                //정보 저장
+                self.signupType = "APPLE"
+                self.name = familyName + givenName
+                self.email = email
                 self.accessToken = String(decoding: access_token, as: UTF8.self)
                 self.code = (String(decoding: authorization_code, as: UTF8.self))
                 
             }
+            
+            //로그인
+            login()
+            
             
         default:
             break
@@ -303,6 +314,8 @@ extension LoginVC: ASAuthorizationControllerDelegate {
 }
 
 extension LoginVC: ASAuthorizationControllerPresentationContextProviding {
+    
+    //애플로그인 화면
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
