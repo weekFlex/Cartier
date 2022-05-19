@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MyRoutineListVC: UIViewController {
     
@@ -15,6 +16,13 @@ class MyRoutineListVC: UIViewController {
     let identifier = "MyRoutineListItemTableViewCell"
     // noti
     let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
+    private lazy var tootipView = MyTopTipView(
+        viewColor: UIColor.black,
+        tipStartX: 118.0,
+        tipWidth: 14.0,
+        tipHeight: 9.0,
+        text: "일주일을 위한 첫 루틴을 생성해보세요"
+    )
     
     // MARK: IBOutlet
     
@@ -54,6 +62,14 @@ class MyRoutineListVC: UIViewController {
         setData()
         setLayout()
         setDelegate()
+        
+        view.addSubview(tootipView)
+        tootipView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(routineCreateButtonView.snp.bottom).inset(-17)
+            $0.width.equalTo(250.0)
+            $0.height.equalTo(35.0)
+        }
     }
     
 }
@@ -186,7 +202,7 @@ extension MyRoutineListVC: UITableViewDelegate {
             alert.addAction(cancel)
             alert.addAction(delete)
             self.present(alert,animated: false, completion: nil)
-
+            
             completionHandler(true)
         }
         

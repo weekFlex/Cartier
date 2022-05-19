@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "EasyTipView",
+        "repositoryURL": "https://github.com/teodorpatras/EasyTipView",
+        "state": {
+          "branch": null,
+          "revision": "1cba0e75f745da03773cd7092480c5fa8cde4a72",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "SnapKit",
+        "repositoryURL": "https://github.com/SnapKit/SnapKit",
+        "state": {
+          "branch": null,
+          "revision": "f222cbdf325885926566172f6f5f06af95473158",
+          "version": "5.6.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

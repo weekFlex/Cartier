@@ -32,6 +32,14 @@ class SelectToDoVC: UIViewController {
     // notification
     let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
     
+    private lazy var tootipView = MyTopTipView(
+        viewColor: UIColor.black,
+        tipStartX: 118.0,
+        tipWidth: 14.0,
+        tipHeight: 9.0,
+        text: "루틴에 추가할 새로운 할 일을 만들어보세요!"
+    )
+    
     // MARK: IBOutlet
     
     @IBOutlet weak var headerView: UIView!
@@ -106,6 +114,14 @@ class SelectToDoVC: UIViewController {
         setDelegate()
         setNotificationCenter()
         getTask()
+        
+        view.addSubview(tootipView)
+        tootipView.snp.makeConstraints {
+            $0.trailing.equalTo(addTaskButton.snp.trailing).inset(+2)
+            $0.bottom.equalTo(addTaskButton.snp.top).inset(-9)
+            $0.width.equalTo(277.0)
+            $0.height.equalTo(35.0)
+        }
         
         // Do any additional setup after loading the view.
     }
