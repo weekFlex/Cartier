@@ -16,12 +16,25 @@ class MyRoutineListVC: UIViewController {
     let identifier = "MyRoutineListItemTableViewCell"
     // noti
     let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
-    private lazy var tootipView = MyTopTipView(
+    
+    private lazy var launchTooltipView = MyTopTipView(
         viewColor: UIColor.black,
         tipStartX: 118.0,
         tipWidth: 14.0,
         tipHeight: 9.0,
-        text: "일주일을 위한 첫 루틴을 생성해보세요"
+        text: "일주일을 위한 첫 루틴을 생성해보세요",
+        state: .up,
+        dismissActions: tooltipAction
+    )
+    
+    private lazy var secondTooltipView = MyTopTipView(
+        viewColor: UIColor.black,
+        tipStartX: 118.0,
+        tipWidth: 14.0,
+        tipHeight: 9.0,
+        text: "이번주 일정에 루틴을 추가해주세요!",
+        state: .down(height: 35.0),
+        dismissActions: tooltipAction
     )
     
     // MARK: IBOutlet
@@ -62,14 +75,7 @@ class MyRoutineListVC: UIViewController {
         setData()
         setLayout()
         setDelegate()
-        
-        view.addSubview(tootipView)
-        tootipView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(routineCreateButtonView.snp.bottom).inset(-17)
-            $0.width.equalTo(250.0)
-            $0.height.equalTo(35.0)
-        }
+        addTooltip()
     }
     
 }
@@ -117,6 +123,37 @@ extension MyRoutineListVC {
     func setDelegate() {
         routineTableView.dataSource = self
         routineTableView.delegate = self
+    }
+    
+    func addTooltip() {
+        
+        guard let launch = UserDefaults.standard.string(forKey: "Launch_MR") else { return }
+        let sender = (launch == "launch" ? self.launchTooltipView : self.secondTooltipView)
+        self.view.addSubview(sender)
+        
+        sender.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(routineCreateButtonView.snp.bottom).inset(-17)
+            $0.width.equalTo(250.0)
+            $0.height.equalTo(35.0)
+        }
+        
+        
+    }
+    
+    func tooltipAction() {
+        
+        UIView.transition(with: self.view,
+                        duration: 0.25,
+                        options: [.transitionCrossDissolve],
+                        animations: { self.launchTooltipView.removeFromSuperview() },
+                        completion: nil)
+        
+        UIView.transition(with: self.view,
+                        duration: 0.25,
+                        options: [.transitionCrossDissolve],
+                        animations: { self.secondTooltipView.removeFromSuperview() },
+                        completion: nil)
     }
 }
 

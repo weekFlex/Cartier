@@ -6,17 +6,27 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewCategoryVC: UIViewController {
     
     // MARK: - Variables
-    
     let didDismissCreateCategoryVC: Notification.Name = Notification.Name("DidDismissCreateCategoryVC")
     var hideViewDelegate: HideViewProtocol?
     var saveCategoryDelegate: SaveCategoryProtocol?
     
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
+    
+    private lazy var tooltipView = MyTopTipView(
+        viewColor: UIColor.black,
+        tipStartX: 247.0,
+        tipWidth: 14.0,
+        tipHeight: 9.0,
+        text: "+ 버튼을 눌러 카테고리를 생성할 수 있어요!",
+        state: .up,
+        dismissActions: tooltipAction
+    )
     
     // MARK: IBOutlet
     
@@ -41,6 +51,7 @@ class ViewCategoryVC: UIViewController {
         setData()
         setLayout()
         setDelegate()
+        addTooltip()
     }
     
     override func viewWillLayoutSubviews() {
@@ -84,6 +95,26 @@ extension ViewCategoryVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateCategoryVC(_:)), name: didDismissCreateCategoryVC, object: nil)
         categoryTableView.dataSource = self
         categoryTableView.delegate = self
+    }
+    
+    func addTooltip() {
+        guard UserDefaults.standard.string(forKey: "Launch_VC") != nil else { return }
+        self.view.addSubview(self.tooltipView)
+        
+        tooltipView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(addCategoryButton.snp.bottom).inset(-8)
+            $0.width.equalTo(277.0)
+            $0.height.equalTo(35.0)
+        }
+    }
+    
+    func tooltipAction() {
+        UIView.transition(with: self.view,
+                        duration: 0.25,
+                        options: [.transitionCrossDissolve],
+                        animations: { self.tooltipView.removeFromSuperview() },
+                        completion: nil)
     }
     
     func setData() {

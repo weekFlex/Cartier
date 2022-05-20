@@ -32,12 +32,15 @@ class SelectToDoVC: UIViewController {
     // notification
     let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
     
-    private lazy var tootipView = MyTopTipView(
+    // ToolTip
+    private lazy var tooltipView = MyTopTipView(
         viewColor: UIColor.black,
-        tipStartX: 118.0,
+        tipStartX: 240.0,
         tipWidth: 14.0,
         tipHeight: 9.0,
-        text: "루틴에 추가할 새로운 할 일을 만들어보세요!"
+        text: "루틴에 추가할 새로운 할 일을 만들어보세요!",
+        state: .down(height: 35.0),
+        dismissActions: tooltipAction
     )
     
     // MARK: IBOutlet
@@ -114,15 +117,7 @@ class SelectToDoVC: UIViewController {
         setDelegate()
         setNotificationCenter()
         getTask()
-        
-        view.addSubview(tootipView)
-        tootipView.snp.makeConstraints {
-            $0.trailing.equalTo(addTaskButton.snp.trailing).inset(+2)
-            $0.bottom.equalTo(addTaskButton.snp.top).inset(-9)
-            $0.width.equalTo(277.0)
-            $0.height.equalTo(35.0)
-        }
-        
+        addTooltip()
         // Do any additional setup after loading the view.
     }
     
@@ -130,7 +125,6 @@ class SelectToDoVC: UIViewController {
         // 뷰 클릭 시 키보드 내리기
         view.endEditing(true)
     }
-    
     
 }
 
@@ -225,6 +219,24 @@ extension SelectToDoVC {
         
     }
     
+    func addTooltip() {
+        guard UserDefaults.standard.string(forKey: "Launch_STD") != nil else { return }
+        self.view.addSubview(self.tooltipView)
+        
+        tooltipView.snp.makeConstraints {
+            $0.trailing.equalTo(addTaskButton.snp.trailing).inset(+2)
+            $0.bottom.equalTo(addTaskButton.snp.top).inset(-17)
+            $0.width.equalTo(277.0)
+            $0.height.equalTo(35.0)
+        }
+    
+    func tooltipAction() {
+        UIView.transition(with: self.view,
+                        duration: 0.25,
+                        options: [.transitionCrossDissolve],
+                        animations: { self.tooltipView.removeFromSuperview() },
+                        completion: nil)
+    }
     @objc func didDismissCreateTodoVC(_ noti: Notification) {
         getTask()
         // @민희언니
