@@ -138,6 +138,7 @@ extension MyRoutineListVC {
             $0.height.equalTo(35.0)
         }
         
+        UserDefaults.standard.removeObject(forKey: "Launch_MR")
         
     }
     

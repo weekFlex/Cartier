@@ -35,7 +35,15 @@ class LoginVC: UIViewController {
             $0.setTitle("", for: .normal)
         }
         startAnimation()
+        setFirstLaunch()
         
+    }
+    
+    func setFirstLaunch() {
+        UserDefaults.standard.set("launch", forKey: "Launch_MR")
+        UserDefaults.standard.set("launch", forKey: "Launch_STD")
+        UserDefaults.standard.set("launch", forKey: "Launch_VC")
+        UserDefaults.standard.set(false, forKey: "firstRoutine")
     }
 }
 

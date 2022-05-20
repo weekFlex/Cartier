@@ -107,6 +107,8 @@ extension ViewCategoryVC {
             $0.width.equalTo(277.0)
             $0.height.equalTo(35.0)
         }
+        
+        UserDefaults.standard.removeObject(forKey: "Launch_VC")
     }
     
     func tooltipAction() {

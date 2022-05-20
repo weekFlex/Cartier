@@ -103,6 +103,14 @@ class CheckRoutineVC: UIViewController {
         view.endEditing(true)
     }
     
+    func firstMakeRoutineCheck() {
+        let result = UserDefaults.standard.bool(forKey: "firstRoutine")
+        if !result {
+            UserDefaults.standard.set(true, forKey: "firstRoutine")
+            UserDefaults.standard.set("second", forKey: "Launch_MR")
+        }
+    }
+    
 
 }
 

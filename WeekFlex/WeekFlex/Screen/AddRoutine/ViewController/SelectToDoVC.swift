@@ -229,6 +229,9 @@ extension SelectToDoVC {
             $0.width.equalTo(277.0)
             $0.height.equalTo(35.0)
         }
+        
+        UserDefaults.standard.removeObject(forKey: "Launch_STD")
+    }
     
     func tooltipAction() {
         UIView.transition(with: self.view,
@@ -237,6 +240,7 @@ extension SelectToDoVC {
                         animations: { self.tooltipView.removeFromSuperview() },
                         completion: nil)
     }
+    
     @objc func didDismissCreateTodoVC(_ noti: Notification) {
         getTask()
         // @민희언니
