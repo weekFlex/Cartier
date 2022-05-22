@@ -26,6 +26,11 @@ struct APIService {
         let target: APITarget = .createTask(token: token, categoryId: categoryId, name: name)
         judgeObject(target, completion: completion)
     }
+
+    func updateTask(token: String, categoryId: Int, name: String, taskId: Int, completion: @escaping (NetworkResult<TaskListData>)->(Void)) {
+        let target: APITarget = .updateTask(token: token, categoryId: categoryId, name: name, taskId: taskId)
+        judgeObject(target, completion: completion)
+    }
     
     func getCategory(_ token: String, completion: @escaping (NetworkResult<[CategoryData]>)->(Void)) {
         let target: APITarget = .getCategory(token: token)
