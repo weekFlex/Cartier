@@ -279,7 +279,6 @@ extension SelectToDoVC {
                     
                     case .success(let data):
                         taskData = data
-                        print("추가 완료!")
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드
@@ -605,7 +604,16 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 
                 if let value = cells?.routine {
                     // move to editRoutinVC
-                    initEditRoutineVC(withValue: value)
+                    if categoryIndex == 0 {
+                        // 전체 카테고리라면?
+                        initEditRoutineVC(withValue: value,
+                                          taskId: allTask[indexPath.row].id)
+                    } else {
+                        initEditRoutineVC(withValue: value,
+                                          taskId: taskData[categoryIndex-1].tasks[indexPath.row].id)
+                    }
+
+
                 }
             }
         }
@@ -625,7 +633,7 @@ extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
         selectedCollectionView.reloadData()
     }
     
-    func initEditRoutineVC(withValue: TaskListData) {
+    func initEditRoutineVC(withValue: TaskListData, taskId: Int? = nil) {
         modalAppeared()
         let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
         guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
@@ -636,6 +644,10 @@ extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
             editRoutineVC.entryNumber = 1
         case .editing:
             editRoutineVC.entryNumber = 5
+            editRoutineVC.taskId = taskId
+            editRoutineVC.dismissAction = {
+                self.getTask()
+            }
         }
         editRoutineVC.taskListData = withValue
         editRoutineVC.saveTaskListDataDelegate = self
