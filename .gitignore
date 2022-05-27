@@ -139,4 +139,8 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+
+## API key
+Storage.swift
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,cocoapods,macos

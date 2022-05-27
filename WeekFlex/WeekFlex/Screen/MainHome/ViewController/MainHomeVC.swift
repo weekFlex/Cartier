@@ -115,10 +115,11 @@ class MainHomeVC: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
+        
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        print("메인홈: ",UserDefaults.standard.string(forKey: "UserToken"))
         getRoutines()
         setDate()
         saveLastWeek()
@@ -440,7 +441,7 @@ extension MainHomeVC {
                         // 데이터 전달 후 다시 로드
                     case .failure(let error):
                         print(error)
-                        print("오류!!")
+                        print("getRoutines오류!!")
                     }
                 }
             }
@@ -628,7 +629,7 @@ class CheckLastSave {
                         }
                     case .failure(let error):
                         print(error)
-                        print("오류!!")
+                        print("별보내기오류!!")
                     }
                 }
             }
@@ -660,7 +661,7 @@ class CheckLastSave {
                         print("지난주 불러오기성공")
                     case .failure(let error):
                         print(error)
-                        print("오류!!")
+                        print("불러오기오류!!")
                     }
                 }
                 

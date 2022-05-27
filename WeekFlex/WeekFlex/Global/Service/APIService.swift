@@ -120,6 +120,11 @@ struct APIService {
         let target: APITarget = .deleteAccount(token: token, details: details, withdrawalType: withdrawalType)
         judgeSimpleObject(target, completion: completion)
     }
+
+    func socialLogin(_ token:String, _ code:String, _ email: String, _ name: String, _ signupType: String , completion: @escaping (NetworkResult<TokenData>) -> (Void)) {
+        let target: APITarget = .socialLogin(token: token, code: code, email: email, name: name, signupType: signupType)
+        judgeObject(target, completion: completion)
+    }
     
 }
 
@@ -132,7 +137,6 @@ extension APIService {
                 do {
                     let decoder = JSONDecoder()
                     let body = try decoder.decode(GenericResponse<T>.self, from: result.data)
-                    print(body)
                     if let data = body.data {
                         completion(.success(data))
                     }
