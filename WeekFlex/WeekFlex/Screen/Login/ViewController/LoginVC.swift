@@ -238,17 +238,16 @@ extension LoginVC {
         print(name)
         print(signupType)
         
-        //화면 전환
-        
         
         if NetworkState.isConnected() {
             if let token = self.accessToken {
                 APIService.shared.socialLogin(token, code, email, name, signupType) { result in
                     switch result {
-                    case .success(_):
+                    case .success(let data):
                         print("회원가입 성공")
                         //토큰 저장
-                        UserDefaults.standard.set(self.accessToken, forKey: "UserToken")
+                        UserDefaults.standard.set(data.token, forKey: "UserToken")
+                        print(">>? ",data.token)
                         //로그인 성공하면 메인화면으로 이동
                         let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
                         guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
