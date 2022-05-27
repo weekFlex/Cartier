@@ -201,7 +201,7 @@ extension DayRetrospectionVC {
     @objc func getData() {
         if NetworkState.isConnected() {
             // 네트워크 연결 시
-            UserDefaults.standard.set("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
+            
             
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 

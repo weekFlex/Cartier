@@ -53,7 +53,6 @@ class ReviewHomeVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjksXCJlbWFpbFwiOlwiZ2hscmhAZ21haWwuY29tXCJ9In0.SnNSMriM4iTnpo4vzqOcpmN9xswiu_Rr7jgYkYhxjA4", forKey: "UserToken")
         getRetrospection()
         reviewList.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: "reviewCell")
     }

@@ -79,7 +79,6 @@ class DeleteReasonVC: UIViewController{
         
         let actionDelete = UIAlertAction(title: "탈퇴하기" , style: .destructive, handler: {action in
             if NetworkState.isConnected() {
-                UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjE5LFwiZW1haWxcIjpcImJsdWF5ZXJAa2FrYW8uY29tXCJ9In0.3y2cpfYyrSWl3Jo-VCp8sSBUcdD40IScktaPgn16r8c", forKey: "UserToken")
                 
                 if let token = UserDefaults.standard.string(forKey: "UserToken") {
                     
