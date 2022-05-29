@@ -121,14 +121,14 @@ extension LoginVC {
     @objc func handleKakaoSignIn(){
         print("카톡 로그인 눌림")
         //test용 연결끊기
-        UserApi.shared.unlink {(error) in
-            if let error = error {
-                print(error)
-            }
-            else {
-                print("unlink() success.")
-            }
-        }
+//        UserApi.shared.unlink {(error) in
+//            if let error = error {
+//                print(error)
+//            }
+//            else {
+//                print("unlink() success.")
+//            }
+//        }
         //카카오톡 설치되어있는지 확인
         if UserApi.isKakaoTalkLoginAvailable() {
             
@@ -247,7 +247,7 @@ extension LoginVC {
                         print("회원가입 성공")
                         //토큰 저장
                         UserDefaults.standard.set(data.token, forKey: "UserToken")
-                        print(">>? ",data.token)
+                        print(">>token? ",data.token)
                         //로그인 성공하면 메인화면으로 이동
                         let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
                         guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
