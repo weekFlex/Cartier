@@ -56,7 +56,7 @@ class CheckRoutineVC: UIViewController {
 
                         case .success(_):
                             //루틴 생성하기 완료
-                            
+                            self.firstMakeRoutineCheck()
                             self.navigationController?.viewControllers.forEach {
                                 if let vc = $0 as? MyRoutineListVC {
                                     self.navigationController?.popToViewController(vc, animated: true)

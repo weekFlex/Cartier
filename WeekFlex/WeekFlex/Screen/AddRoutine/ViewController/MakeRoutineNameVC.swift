@@ -13,6 +13,7 @@ class MakeRoutineNameVC: UIViewController {
     // MARK: Variable Part
     
     var routineNameArray: [String]?
+    var userType: UserType = .existingUser
     
     // MARK: IBOutlet
     
@@ -32,13 +33,9 @@ class MakeRoutineNameVC: UIViewController {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SelectToDoVC") as? SelectToDoVC else {
             return
         }
-        
+        nextVC.userType = userType
         nextVC.routineName = self.routineNameTextField.text
-        // 루틴 이름을 넘겨줌
-        
         self.navigationController?.pushViewController(nextVC, animated: true)
-        // navigationController를 이용해 다음 뷰로 이동
-        
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
@@ -82,7 +79,7 @@ extension MakeRoutineNameVC {
         titleLabel.setLabel(text: "루틴 추가하기", color: .black, font: .appleMedium(size: 18))
         explainLabel.setLabel(text: "루틴 이름을 입력해주세요", color: .black, font: .appleBold(size: 20))
         
-        checkButton.isEnabled = false
+//        checkButton.isEnabled = false
     }
     
     func setTextField() {
@@ -105,10 +102,10 @@ extension MakeRoutineNameVC {
             
             explainLabel.text = "ex. English Master"
             checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
-            checkButton.isEnabled = false
+//            checkButton.isEnabled = false
         } else {
             // Text가 존재할 때 버튼 활성화
-            checkButton.isEnabled = true
+//            checkButton.isEnabled = true
 
             if let routineNameArray = routineNameArray {
                 if routineNameArray.contains(textField.text!) {
@@ -116,13 +113,13 @@ extension MakeRoutineNameVC {
 
                     explainLabel.text = "이미 존재하는 루틴 이름이에요 ;ㅅ;"
                     checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
-                    checkButton.isEnabled = false
+//                    checkButton.isEnabled = false
                 } else {
                     // 루틴 이름에 존재하지 않는다면
                     
                     explainLabel.text = "멋진 이름이에요! *-*"
                     checkButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
-                    checkButton.isEnabled = true
+//                    checkButton.isEnabled = true
                     
                 }
             }

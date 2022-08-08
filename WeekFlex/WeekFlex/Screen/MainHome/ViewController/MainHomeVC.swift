@@ -17,8 +17,7 @@ class MainHomeVC: UIViewController {
     
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
-    
-    
+    var userType: UserType = .newUser(level: 1)
     var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
@@ -101,13 +100,10 @@ class MainHomeVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
+        myRoutineVC.userType = userType
         self.navigationController?.pushViewController(myRoutineVC, animated: true)
         clearPage()
     }
-    
-    
-    
-    
     
     //MARK: Life Cycle
     
@@ -115,13 +111,14 @@ class MainHomeVC: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjYsXCJlbWFpbFwiOlwiaHllcmluQG5hdmVyLmNvbVwifSJ9.ynmj6jnNo8vpqj5RnFHQ0UYP9kkxFFXqHw68ztuGTqo", forKey: "UserToken")
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         getRoutines()
         setDate()
         saveLastWeek()
+        setUserType()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -574,6 +571,19 @@ extension MainHomeVC {
         getRoutines() //네트워크 통신 한번더
         calendarCollectionView.reloadData() // 리로드
         tableView.reloadData() // 리로드
+    }
+    
+    func setUserType() {
+        switch userType {
+        case .newUser(let level):
+            if level == 1 {
+                getRoutineBtnDidtap(self)
+            } else if level == 2 {
+                // 툴팁 보여주기
+            }
+        case .existingUser:
+            break
+        }
     }
     
 }

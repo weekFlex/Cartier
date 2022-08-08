@@ -24,6 +24,7 @@ class EditRoutineVC: UIViewController {
     var todoData: TodoData?
     var cellIndex: Int?
     var viewIndex: Int?
+    var complete: (() -> Void)?
     
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
@@ -139,8 +140,9 @@ class EditRoutineVC: UIViewController {
                 TodoService().createTask(token: token, categoryId: editRouineViewModel.todo.categoryID!, name: editRouineViewModel.todo.name) { result in
                     switch result {
                     case true:
-                        NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
-                        self.dismiss(animated: true, completion: nil)
+                        self.dismiss(animated: true) {
+                            self.complete
+                        }
                     case false:
                         print("실패")
                     }
@@ -201,7 +203,12 @@ class EditRoutineVC: UIViewController {
             
         }
         self.hideViewDelegate?.hideViewProtocol()
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            guard let complete = self.complete else {
+                return
+            }
+            complete()
+        }
     }
     
     // MARK: - Life Cycle

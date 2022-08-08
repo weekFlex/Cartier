@@ -12,6 +12,7 @@ class SelectToDoVC: UIViewController {
     // MARK: Variable Part
     
     var routineName: String?
+    var userType: UserType = .existingUser
     var categoryData: [CategoryData] = []
     var taskData: [TaskData] = [] // 서
     var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
@@ -98,12 +99,16 @@ class SelectToDoVC: UIViewController {
     }
     
     @IBAction func addTaskButtonDidTap(_ sender: Any) {
+        tooltipAction()
         let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
         guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
         editRoutineVC.modalTransitionStyle = .coverVertical
         editRoutineVC.modalPresentationStyle = .custom
         editRoutineVC.entryNumber = 2
-        self.present(editRoutineVC, animated: true, completion: .none)
+        editRoutineVC.complete = {
+            self.getTask()
+        }
+        self.present(editRoutineVC, animated: true)
     }
     
     
@@ -115,9 +120,8 @@ class SelectToDoVC: UIViewController {
         setLabel()
         setView()
         setDelegate()
-        setNotificationCenter()
         getTask()
-        addTooltip()
+        setUserType()
         // Do any additional setup after loading the view.
     }
     
@@ -133,10 +137,6 @@ class SelectToDoVC: UIViewController {
 extension SelectToDoVC {
     
     // MARK: Function
-    
-    func setNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
-    }
     
     func setButton() {
         
@@ -219,18 +219,25 @@ extension SelectToDoVC {
         
     }
     
+    func setUserType() {
+        switch userType {
+        case .newUser(let level):
+            if level == 1 {
+                addTooltip()
+            }
+        case .existingUser:
+            break
+        }
+    }
+    
     func addTooltip() {
-        guard UserDefaults.standard.string(forKey: "Launch_STD") != nil else { return }
         self.view.addSubview(self.tooltipView)
-        
         tooltipView.snp.makeConstraints {
             $0.trailing.equalTo(addTaskButton.snp.trailing).inset(+2)
             $0.bottom.equalTo(addTaskButton.snp.top).inset(-17)
             $0.width.equalTo(277.0)
             $0.height.equalTo(35.0)
         }
-        
-        UserDefaults.standard.removeObject(forKey: "Launch_STD")
     }
     
     func tooltipAction() {
@@ -239,13 +246,6 @@ extension SelectToDoVC {
                         options: [.transitionCrossDissolve],
                         animations: { self.tooltipView.removeFromSuperview() },
                         completion: nil)
-    }
-    
-    @objc func didDismissCreateTodoVC(_ noti: Notification) {
-        getTask()
-        // @민희언니
-        // 여기에서 noti로 받아서
-        // 할일 추가 완료하고 reload 하게 하려고 했는뎅 새로고침이 안되네욥 ...
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -333,7 +333,7 @@ extension SelectToDoVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 300, height: self.selectRoutineView.frame.height)
         }
         else if collectionView == categoryCollectionView {
-            return CGSize(width: 50, height: categoryCollectionView.frame.height)
+            return CGSize(width: 55, height: categoryCollectionView.frame.height)
         }
         else {
             return CGSize(width: collectionView.frame.width-32, height: 52)
