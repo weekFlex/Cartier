@@ -123,6 +123,7 @@
 		D203ABE8283641E1008FCB62 /* EasyTipView in Frameworks */ = {isa = PBXBuildFile; productRef = D203ABE7283641E1008FCB62 /* EasyTipView */; };
 		D203ABEA28364BEB008FCB62 /* MyTopTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203ABE928364BEB008FCB62 /* MyTopTipView.swift */; };
 		D203ABED28364CA9008FCB62 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D203ABEC28364CA9008FCB62 /* SnapKit */; };
+		D2E46F9F28A0F0E8001A883A /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E46F9E28A0F0E8001A883A /* Enum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -244,6 +245,7 @@
 		9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryVC.swift; sourceTree = "<group>"; };
 		CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeekFlex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D203ABE928364BEB008FCB62 /* MyTopTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTopTipView.swift; sourceTree = "<group>"; };
+		D2E46F9E28A0F0E8001A883A /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		E69A384642D50E1D9D0EAF1A /* Pods-WeekFlex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.release.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -640,6 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				9E5FF5A8269A14D8000EAF7B /* Protocol.swift */,
+				D2E46F9E28A0F0E8001A883A /* Enum.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -994,6 +997,7 @@
 				9EC2E0822631E45100EF2F7E /* WeekCollectionViewCell.swift in Sources */,
 				0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */,
 				9B7EA068270DCBBF00C07401 /* AchievementData.swift in Sources */,
+				D2E46F9F28A0F0E8001A883A /* Enum.swift in Sources */,
 				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
 				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
 				0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */,

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+enum UserType: Equatable {
+    case newUser(level: Int)
+    case existingUser
+}
