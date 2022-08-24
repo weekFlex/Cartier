@@ -89,8 +89,9 @@ class CheckRoutineVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setView()
-
+        setupDelegate()
+        setupAttributes()
+        setupLayout()
         // Do any additional setup after loading the view.
     }
     
@@ -102,47 +103,33 @@ class CheckRoutineVC: UIViewController {
 }
 
 // MARK: Extension
-
 extension CheckRoutineVC {
-    
-    func setView() {
-        
+    func setupDelegate() {
+        routineNameTextField.delegate = self
+        taskTableView.delegate = self
+        taskTableView.dataSource = self
+    }
+    func setupAttributes() {
         routineNameTextField.font = .metroBold(size: 24)
-        
+        routineNameTextField.minimumFontSize = 24
+        routineNameTextField.sizeToFit()
+        routineNameTextField.isEnabled = false
         if let routineName = routineName {
             routineNameTextField.text = routineName
         }
-        
-        if routineEditEnable {
-            // 루틴 수정하기 일 때
-            
-            explainLabel.setLabel(text: "루틴을 수정하기 전 마지막으로 확인해 주세요!", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
-            routineNameTextField.isEnabled = true
-            
-            
-        } else {
-            // 루틴 생성하기 일 때
-            
-            explainLabel.setLabel(text: "짜잔! 마지막으로 루틴을 확인해 주세요:)", color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
-            routineNameTextField.isEnabled = false
-            
-        }
-        
         routineNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        // routineNameTextField가 수정될 때 마다 실행
-
-        saveButton.setButton(text: "저장하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
-        saveButton.setRounded(radius: 3)
         
+        let explainLabelText: String = routineEditEnable ? "루틴을 수정하기 전 마지막으로 확인해 주세요!" : "짜잔! 마지막으로 루틴을 확인해 주세요:)"
+        explainLabel.setLabel(text: explainLabelText, color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
+        
+        taskTableView.separatorStyle = .none
         if routineList != nil {
             taskTableView.reloadData()
         }
         
-        taskTableView.delegate = self
-        taskTableView.dataSource = self
-        taskTableView.separatorStyle = .none
-        
-        
+        saveButton.setButton(text: "저장하기", color: .white, font: .appleBold(size: 16), backgroundColor: .black)
+        saveButton.setRounded(radius: 3)
+    }
     func setupLayout() {
         view.addSubview(routineNameEditButton)
         routineNameEditButton.snp.makeConstraints {
