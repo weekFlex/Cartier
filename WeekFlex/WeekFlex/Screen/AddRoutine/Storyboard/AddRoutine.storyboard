@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fIX-jk-IgO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fIX-jk-IgO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -381,7 +381,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLG-e8-UG2">
-                                <rect key="frame" x="24" y="129" width="366" height="18.5"/>
+                                <rect key="frame" x="24" y="129" width="4" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
@@ -396,7 +396,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckRoutineCell" rowHeight="112" id="ohG-BB-iXu" customClass="CheckRoutineCell" customModule="WeekFlex" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="366" height="112"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="366" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ohG-BB-iXu" id="ETG-Ey-f22">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="112"/>
@@ -475,7 +475,6 @@
                             <constraint firstItem="lL4-sH-LCx" firstAttribute="leading" secondItem="SXE-LN-PDN" secondAttribute="leading" constant="24" id="Suo-Xz-z3E"/>
                             <constraint firstItem="xVK-oF-S1m" firstAttribute="leading" secondItem="mLG-e8-UG2" secondAttribute="leading" id="Wlp-h9-O8n"/>
                             <constraint firstItem="lL4-sH-LCx" firstAttribute="centerX" secondItem="eKt-ib-ONh" secondAttribute="centerX" id="cMc-gN-Dyo"/>
-                            <constraint firstItem="SXE-LN-PDN" firstAttribute="trailing" secondItem="mLG-e8-UG2" secondAttribute="trailing" constant="24" id="cym-13-oz3"/>
                             <constraint firstItem="lL4-sH-LCx" firstAttribute="top" secondItem="68I-Aa-BNh" secondAttribute="bottom" constant="30" id="dGX-SB-l3b"/>
                             <constraint firstItem="68I-Aa-BNh" firstAttribute="leading" secondItem="SXE-LN-PDN" secondAttribute="leading" constant="24" id="iGd-TV-k5B"/>
                             <constraint firstItem="mLG-e8-UG2" firstAttribute="top" secondItem="RE7-fj-ZNO" secondAttribute="bottom" constant="48" id="jui-pC-NGt"/>
@@ -505,24 +504,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4I-cq-X3y">
                                 <rect key="frame" x="0.0" y="49" width="414" height="32"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duX-xj-s7F">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duX-xj-s7F">
                                         <rect key="frame" x="16" y="0.0" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="duX-xj-s7F" secondAttribute="height" multiplier="1:1" id="z68-RP-0jN"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="icon32BackBlack"/>
                                         <connections>
-                                            <action selector="backButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="Zl0-dH-tR4"/>
+                                            <action selector="backButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="I9t-dJ-tsr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRn-cx-I6P">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRn-cx-I6P">
                                         <rect key="frame" x="366" y="0.0" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bRn-cx-I6P" secondAttribute="height" multiplier="1:1" id="hoB-hd-o9B"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="icon32CheckInactive"/>
                                         <connections>
-                                            <action selector="checkButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="XWN-Mj-f5X"/>
+                                            <action selector="checkButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="vqT-Oa-WQ7"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GB-UK-YR7">
@@ -574,8 +575,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="aZT-DS-HRx"/>
                     <connections>
-                        <outlet property="backButton" destination="duX-xj-s7F" id="aeC-wA-JGP"/>
-                        <outlet property="checkButton" destination="bRn-cx-I6P" id="7kx-go-KqW"/>
+                        <outlet property="backButton" destination="duX-xj-s7F" id="1Ya-fV-EPl"/>
+                        <outlet property="checkButton" destination="bRn-cx-I6P" id="hAV-rj-RJO"/>
                         <outlet property="explainLabel" destination="bhF-Cq-Kbv" id="Lj3-1j-4Jn"/>
                         <outlet property="routineNameTextField" destination="ovi-Yw-IsB" id="Exr-RA-fe5"/>
                         <outlet property="titleLabel" destination="5GB-UK-YR7" id="cJW-ar-x8z"/>
