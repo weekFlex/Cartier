@@ -22,6 +22,13 @@ class CheckRoutineVC: UIViewController {
     
     // MARK: IBOutlet
     
+    private var routineNameEditButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "icon24Edit"), for: .normal)
+        button.addTarget(self, action: #selector(routineNameEditButtonDidTap), for: .touchUpInside)
+        return button
+    }()
+    
     @IBOutlet weak var routineNameTextField: UITextField!
     @IBOutlet weak var explainLabel: UILabel!
     @IBOutlet weak var taskTableView: UITableView!
@@ -157,6 +164,14 @@ extension CheckRoutineVC {
         taskTableView.separatorStyle = .none
         
         
+    func setupLayout() {
+        view.addSubview(routineNameEditButton)
+        routineNameEditButton.snp.makeConstraints {
+            $0.left.equalTo(routineNameTextField.snp.right)
+            $0.width.equalTo(24)
+            $0.height.equalTo(24)
+            $0.centerY.equalTo(routineNameTextField.snp.centerY)
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
