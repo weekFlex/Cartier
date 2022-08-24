@@ -159,6 +159,7 @@ extension CheckRoutineVC: UITextFieldDelegate {
         // 리턴 키 클릭 시
         
         textField.endEditing(true)
+        routineNameEditButton.isHidden = false
         return true
         
     }
