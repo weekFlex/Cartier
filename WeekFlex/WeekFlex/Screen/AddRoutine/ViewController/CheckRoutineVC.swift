@@ -36,58 +36,43 @@ class CheckRoutineVC: UIViewController {
     
     
     // MARK: IBAction
-    
-    
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        // 저장하기 버튼 클릭 Event
-        
-        if !routineEditEnable {
-            // 새로운 루틴 만들기라면?
-            
+        switch routineEditEnable {
+        case true:
+            break
+        case false:
             var routineTask: [RoutineTaskSaveRequest] = []
             
             if let routineList = routineList {
                 for i in 0...routineList.count - 1 {
-                    
                     if let days = routineList[i].days {
                         routineTask.append(RoutineTaskSaveRequest(days: days, taskId: routineList[i].id))
                     }
                 }
             }
-
-            if NetworkState.isConnected() {
-                 //네트워크 연결 시
-
-                if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                    APIService.shared.makeRoutine(token, self.routineNameTextField.text!, routineTask) { [self] result in
-                        switch result {
-
-                        case .success(_):
-                            //루틴 생성하기 완료
-                            self.firstMakeRoutineCheck()
-                            self.navigationController?.viewControllers.forEach {
-                                if let vc = $0 as? MyRoutineListVC {
-                                    self.navigationController?.popToViewController(vc, animated: true)
-                                    return
-                                    // 이전으로 돌아감
-                                }
-                            }
-                            
-                        case .failure(let error):
-                            print(error)
-
+            guard NetworkState.isConnected() else {
+                // TODO: 네트워크 미연결 팝업 띄우기
+                return
+            }
+            guard let name = routineNameTextField.text,
+                  let token = UserDefaults.standard.string(forKey: "UserToken") else { return }
+            APIService.shared.makeRoutine(token, name, routineTask) { [self] result in
+                switch result {
+                case .success(_):
+                    //루틴 생성하기 완료
+                    self.navigationController?.viewControllers.forEach {
+                        if let vc = $0 as? MyRoutineListVC {
+                            vc.userType = .newUser(level: 2)
+                            self.navigationController?.popToViewController(vc, animated: true)
+                            return
+                            // 이전으로 돌아감
                         }
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            } else {
-                 //네트워크 미연결 팝업 띄우기
-
             }
-            
         }
-        
-       
-        
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
