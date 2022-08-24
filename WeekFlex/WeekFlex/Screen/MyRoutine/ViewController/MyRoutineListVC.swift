@@ -124,7 +124,7 @@ extension MyRoutineListVC {
         case 2:
             let sender = self.secondTooltipView
             self.view.addSubview(sender)
-            
+            self.launchTooltipView.removeFromSuperview()
             sender.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
                 $0.bottom.equalTo(routineTableView.snp.top).inset(-20)
