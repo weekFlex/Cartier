@@ -175,30 +175,14 @@ extension CheckRoutineVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+        let textFieldState: Bool = textField.text?.count == 0 || textField.text == nil
+        saveButton.isEnabled = textFieldState
         
-        if textField.text?.count == 0 || textField.text == nil {
-            // Text가 존재하지 않을 때 저장하기 버튼 비활성화
-            
-            saveButton.isEnabled = false
-            
-        } else {
-            // Text가 존재할 때 저장하기 버튼 활성화
-            
-            saveButton.isEnabled = true
-            
+        if let count = textField.text?.count,
+           count > 25 {
+            textField.deleteBackward()
         }
-        
-        if let count = textField.text?.count {
-            if count > 25 {
-                // 루틴 이름이 최대인 25글자를 넘는다면?
-                
-                textField.deleteBackward()
-                // 그 뒤에 글자들은 쳐져도 삭제된다
-            }
-        }
-        
     }
-    
 }
 
 // MARK: UITextFieldDelegate
