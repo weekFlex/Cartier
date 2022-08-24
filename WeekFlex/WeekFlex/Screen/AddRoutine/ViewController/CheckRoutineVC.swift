@@ -81,7 +81,11 @@ class CheckRoutineVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: Life Cycle Part
+    @objc func routineNameEditButtonDidTap() {
+        routineNameTextField.isEnabled = true
+        routineNameTextField.becomeFirstResponder()
+        routineNameEditButton.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
