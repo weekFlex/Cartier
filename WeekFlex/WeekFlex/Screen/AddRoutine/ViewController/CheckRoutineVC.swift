@@ -10,18 +10,10 @@ import SnapKit
 
 class CheckRoutineVC: UIViewController {
 
-    
-    // MARK: Variable Part
-    
+    // MARK: - Variable Part
     var routineName: String?
     var routineList: [TaskListData]?
-    
-    
-    // 루틴 수정 뷰에서 왔는지 알 수 있는 변수
     var routineEditEnable: Bool = false
-    
-    // MARK: IBOutlet
-    
     private var routineNameEditButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "icon24Edit"), for: .normal)
@@ -29,11 +21,11 @@ class CheckRoutineVC: UIViewController {
         return button
     }()
     
+    // MARK: - IBOutlet
     @IBOutlet weak var routineNameTextField: UITextField!
     @IBOutlet weak var explainLabel: UILabel!
     @IBOutlet weak var taskTableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
-    
     
     // MARK: IBAction
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
@@ -76,8 +68,6 @@ class CheckRoutineVC: UIViewController {
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        // 뒤로가기 버튼 클릭 Event
-        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -87,6 +77,7 @@ class CheckRoutineVC: UIViewController {
         routineNameEditButton.isHidden = true
     }
     
+    // MARK: - Life Cycle Part
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegate()
@@ -97,7 +88,7 @@ class CheckRoutineVC: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // 뷰 클릭 시 키보드 내리기
-        
+        routineNameEditButton.isHidden = false
         view.endEditing(true)
     }
 }
@@ -152,54 +143,39 @@ extension CheckRoutineVC {
 }
 
 // MARK: UITextFieldDelegate
-
 extension CheckRoutineVC: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 리턴 키 클릭 시
-        
         textField.endEditing(true)
         routineNameEditButton.isHidden = false
         return true
         
     }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        // textField 클릭하면 무조건 키보드 올라오게
         textField.becomeFirstResponder()
     }
-    
 }
 
 // MARK: UITableViewDelegate
-
 extension CheckRoutineVC: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 95
     }
-    
-    
 }
 
-
 // MARK: UITableViewDataSource
-
 extension CheckRoutineVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if let data = routineList {
             return data.count
         } else {
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CheckRoutineCell.identifier, for: indexPath) as? CheckRoutineCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CheckRoutineCell.identifier, for: indexPath)
+                as? CheckRoutineCell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
         guard let data = routineList else {
@@ -208,8 +184,5 @@ extension CheckRoutineVC: UITableViewDataSource {
         cell.configure(data: data[indexPath.row])
         cell.lineView.isHidden = indexPath.row == (data.count-1)
         return cell
-        
     }
-    
-    
 }
