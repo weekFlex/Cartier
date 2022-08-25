@@ -14,6 +14,7 @@ class ViewCategoryVC: UIViewController {
     let didDismissCreateCategoryVC: Notification.Name = Notification.Name("DidDismissCreateCategoryVC")
     var hideViewDelegate: HideViewProtocol?
     var saveCategoryDelegate: SaveCategoryProtocol?
+    var userType: UserType = .existingUser
     
     // View Model
     private var categoryListViewModel : CategoryListViewModel?
@@ -42,6 +43,7 @@ class ViewCategoryVC: UIViewController {
         createCategoryVC.modalTransitionStyle = .coverVertical
         createCategoryVC.modalPresentationStyle = .custom
         self.present(createCategoryVC, animated: true, completion: .none)
+        tooltipAction()
     }
     
     // MARK: Life Cycle
@@ -98,17 +100,14 @@ extension ViewCategoryVC {
     }
     
     func addTooltip() {
-        guard UserDefaults.standard.string(forKey: "Launch_VC") != nil else { return }
+        guard userType == .newUser(level: 1) else { return }
         self.view.addSubview(self.tooltipView)
-        
         tooltipView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
             $0.top.equalTo(addCategoryButton.snp.bottom).inset(-8)
             $0.width.equalTo(277.0)
             $0.height.equalTo(35.0)
         }
-        
-        UserDefaults.standard.removeObject(forKey: "Launch_VC")
     }
     
     func tooltipAction() {

@@ -25,6 +25,7 @@ class EditRoutineVC: UIViewController {
     var cellIndex: Int?
     var viewIndex: Int?
     var complete: (() -> Void)?
+    var userType: UserType = .existingUser
     
     // View Model
     private var editRouineViewModel : EditRoutineViewModel!
@@ -290,6 +291,7 @@ extension EditRoutineVC: SaveTimeProtocol, HideViewProtocol, SaveCategoryProtoco
         guard let viewCategoryVC = self.storyboard?.instantiateViewController(identifier: "ViewCategoryVC") as? ViewCategoryVC else { return }
         viewCategoryVC.modalTransitionStyle = .coverVertical
         viewCategoryVC.modalPresentationStyle = .custom
+        viewCategoryVC.userType = userType
         viewCategoryVC.hideViewDelegate = self
         viewCategoryVC.saveCategoryDelegate = self
         self.present(viewCategoryVC, animated: true, completion: .none)

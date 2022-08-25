@@ -108,6 +108,7 @@ class SelectToDoVC: UIViewController {
         editRoutineVC.complete = {
             self.getTask()
         }
+        editRoutineVC.userType = userType
         self.present(editRoutineVC, animated: true)
     }
     
