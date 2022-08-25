@@ -58,7 +58,18 @@ class MyRoutineListVC: UIViewController {
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        switch userType {
+        case .newUser(let level) where level == 2:
+            self.navigationController?.viewControllers.forEach {
+                if let vc = $0 as? MainHomeVC {
+                    vc.userType = .existingUser
+                    self.navigationController?.popToViewController(vc, animated: true)
+                    return
+                }
+            }
+        default:
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     // MARK: - Life Cycle
