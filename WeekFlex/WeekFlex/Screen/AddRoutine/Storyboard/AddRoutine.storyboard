@@ -509,8 +509,14 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="duX-xj-s7F" secondAttribute="height" multiplier="1:1" id="z68-RP-0jN"/>
                                         </constraints>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="icon32BackBlack"/>
+                                        <state key="normal" image="icon32BackBlack">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" image="icon32BackBlack">
+                                            <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="backButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="I9t-dJ-tsr"/>
                                         </connections>
@@ -522,6 +528,7 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="icon32CheckInactive"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="icon32CheckInactive"/>
                                         <connections>
                                             <action selector="checkButtonDidTap:" destination="LaX-Bm-Gag" eventType="touchUpInside" id="vqT-Oa-WQ7"/>
                                         </connections>
