@@ -7,8 +7,21 @@
 
 import AuthenticationServices
 import UIKit
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
+import GoogleSignIn
 
 class LoginVC: UIViewController {
+    
+    //MARK: Variable
+    var accessToken: String?
+    var code: String = ""
+    var email: String = ""
+    var name: String = ""
+    var signupType: String = ""
+    
+    
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
@@ -17,7 +30,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var rightLineView: UIView!
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var loginStackView: UIStackView!
-
+    
     @IBOutlet weak var kakaoButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var appleButton: UIButton!
@@ -34,9 +47,12 @@ class LoginVC: UIViewController {
         [kakaoButton, googleButton, appleButton].forEach {
             $0.setTitle("", for: .normal)
         }
+
         startAnimation()
         setFirstLaunch()
-        
+
+        startAnimation()
+        setLayout()
     }
     
     func setFirstLaunch() {
@@ -52,10 +68,10 @@ extension LoginVC {
     // MARK: - View Layout
     
     func setLayout() {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
-        button.addTarget(self, action: #selector(handleAppleSignIn), for: .touchUpInside)
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        loginStackView.addArrangedSubview(button)
+        appleButton.addTarget(self, action: #selector(handleAppleSignIn), for: .touchUpInside)
+        kakaoButton.addTarget(self, action: #selector(handleKakaoSignIn), for: .touchUpInside)
+        googleButton.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
+        
     }
     
     func startAnimation() {
@@ -103,8 +119,11 @@ extension LoginVC {
     
     // Apple Login Button 눌렸을 때 액션
     @objc func handleAppleSignIn() {
+        print("애플로그인 눌림")
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
+        //이름, 이메일 받아옴
         request.requestedScopes = [.fullName, .email]
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
@@ -112,6 +131,158 @@ extension LoginVC {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
+    
+    
+    // Kakao Login Buttoon 눌렸을 때 액션
+    @objc func handleKakaoSignIn(){
+        print("카톡 로그인 눌림")
+        //test용 연결끊기
+        UserApi.shared.unlink {(error) in
+            if let error = error {
+                print(error)
+            }
+            else {
+                print("unlink() success.")
+            }
+        }
+        //카카오톡 설치되어있는지 확인
+        if UserApi.isKakaoTalkLoginAvailable() {
+            
+            //카톡 로그인. api 호출 결과 클로저로 전달
+            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("loginWithKakaoTalk() success.")
+                    self.signupType = "KAKAO"
+                    
+                    // TODO: SNSRegisterScene으로 넘어가기.
+                    _ = oauthToken
+                    
+                    //사용자 정보 불러옴
+                    UserApi.shared.me { [self] user, error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            //닉네임(이름), 토큰, 이메일 받아옴
+                            guard let token = oauthToken?.accessToken,
+                                  let email = user?.kakaoAccount?.email,
+                                  let name = user?.kakaoAccount?.profile?.nickname else{
+                                      print("token/email/name is nil")
+                                      return
+                                  }
+                            
+                            self.email = email
+                            self.accessToken = token
+                            self.name = name
+                            
+                            login()
+                        }
+                    }
+                }
+            }
+        } else {
+            // 카톡 없을때 계정으로 로그인
+            UserApi.shared.loginWithKakaoAccount { oauthToken, error in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("loginWithKakaoAccount() success.")
+                    
+                    // do something
+                    _ = oauthToken
+                    
+                    UserApi.shared.me { [self] user, error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            //닉네임(이름), 토큰, 이메일 받아옴
+                            guard let token = oauthToken?.accessToken,
+                                  let email = user?.kakaoAccount?.email,
+                                  let name = user?.kakaoAccount?.profile?.nickname else{
+                                      print("token/email/name is nil")
+                                      return
+                                  }
+                            
+                            self.email = email
+                            self.accessToken = token
+                            self.name = name
+                            
+                            login()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Google Login 눌렸을때 액션
+    @objc func handleGoogleSignIn() {
+        print("구글로그인 눌림")
+        GIDSignIn.sharedInstance.signOut()
+        
+        let config = GIDConfiguration.init(clientID: Storage().clientID)
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+            
+            guard error == nil else { return }
+            guard let user = user else { return }
+            
+            //토큰 받아오기
+            user.authentication.do { authentication, error in
+                guard error == nil else { return }
+                guard let authentication = authentication else { return }
+                print("토큰 겟")
+                self.accessToken = authentication.idToken
+                self.email = user.profile?.email ?? ""
+                self.name = user.profile?.name ?? ""
+                self.signupType = "GOOGLE"
+                self.login()
+                // Send ID token to backend (example below).
+            }
+            
+            
+        }
+    }
+    
+    func login(){
+        
+        print("로그인===========")
+        print(accessToken)
+        print(email)
+        print(code)
+        print(name)
+        print(signupType)
+        
+        
+        if NetworkState.isConnected() {
+            if let token = self.accessToken {
+                APIService.shared.socialLogin(token, code, email, name, signupType) { result in
+                    switch result {
+                    case .success(let data):
+                        print("회원가입 성공")
+                        //토큰 저장
+                        UserDefaults.standard.set(data.token, forKey: "UserToken")
+                        print(">>? ",data.token)
+                        //로그인 성공하면 메인화면으로 이동
+                        let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
+                        guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
+                        nextController.modalPresentationStyle = .fullScreen
+                        self.present(nextController, animated: true,completion: nil)
+                        
+                    case .failure(let error):
+                        print(error)
+                        
+                    }
+                }
+                
+                
+            }
+        } else {
+            print("네트워크 미연결")
+        }
+    }
+    
 }
 
 
@@ -126,23 +297,25 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
             // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            let access_token = appleIDCredential.identityToken
             
-            let authorization_code = appleIDCredential.authorizationCode
-            
-            // 디버깅용 프린팅
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            
-            if let access_token = access_token,
-               let authorization_code = authorization_code {
-                print("token : \(String(decoding: access_token, as: UTF8.self))")
-                print("authorization_code : \(String(decoding: authorization_code, as: UTF8.self))")
+            if let access_token = appleIDCredential.identityToken,
+               let authorization_code = appleIDCredential.authorizationCode,
+               let email = appleIDCredential.email,
+               let familyName = appleIDCredential.fullName?.familyName,
+               let givenName = appleIDCredential.fullName?.givenName{
+                
+                //정보 저장
+                self.signupType = "APPLE"
+                self.name = familyName + givenName
+                self.email = email
+                self.accessToken = String(decoding: access_token, as: UTF8.self)
+                self.code = (String(decoding: authorization_code, as: UTF8.self))
+                
             }
+            
+            //로그인
+            login()
+            
             
         default:
             break
@@ -156,6 +329,8 @@ extension LoginVC: ASAuthorizationControllerDelegate {
 }
 
 extension LoginVC: ASAuthorizationControllerPresentationContextProviding {
+    
+    //애플로그인 화면
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }

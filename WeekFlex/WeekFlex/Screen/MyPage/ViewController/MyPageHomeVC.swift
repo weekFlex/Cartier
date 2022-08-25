@@ -54,7 +54,6 @@ class MyPageHomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setInfo()
-        logoutButton.point(inside: CGPoint(x: logoutButton.frame.minX, y: 0), with: .none)
     }
     
     func setInfo(){
@@ -88,11 +87,3 @@ class MyPageHomeVC: UIViewController{
     }
     
 }
-//extension UIButton {
-//
-//  open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-//    let margin: CGFloat = 500
-//    let hitArea = self.bounds.insetBy(dx: -margin, dy: -margin)
-//    return hitArea.contains(point)
-//  }
-//}

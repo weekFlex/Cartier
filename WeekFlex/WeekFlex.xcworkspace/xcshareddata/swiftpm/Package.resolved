@@ -2,21 +2,30 @@
   "object": {
     "pins": [
       {
-        "package": "EasyTipView",
-        "repositoryURL": "https://github.com/teodorpatras/EasyTipView",
-        "state": {
-          "branch": null,
-          "revision": "1cba0e75f745da03773cd7092480c5fa8cde4a72",
-          "version": "2.1.0"
-        }
-      },
-      {
         "package": "SnapKit",
         "repositoryURL": "https://github.com/SnapKit/SnapKit",
         "state": {
           "branch": null,
           "revision": "f222cbdf325885926566172f6f5f06af95473158",
           "version": "5.6.0"
+        }
+      },
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "354dda32d89fc8cd4f5c46487f64957d355f53d8",
+          "version": "5.6.1"
+        }
+      },
+      {
+        "package": "KakaoOpenSDK",
+        "repositoryURL": "https://github.com/kakao/kakao-ios-sdk",
+        "state": {
+          "branch": null,
+          "revision": "9a9f396e637454f55cc6ae7a08e2da6b6b64ca2f",
+          "version": "2.9.1"
         }
       }
     ]

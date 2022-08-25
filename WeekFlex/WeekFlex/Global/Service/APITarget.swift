@@ -29,7 +29,8 @@ enum APITarget {
     case statistics(token: String, date: String) // 회고 관련 통계 가져오기
     case writeRetrospection(token: String, content: String, emotionMascot: Int, startDate: String, title: String) // 회고 작성
     case createLastStars(token: String, stars: [Int], weekStartDate: String) //지난주 별 보내기
-    case deleteAccount(token: String, details: String, withdrawalType: String)
+    case deleteAccount(token: String, details: String, withdrawalType: String) // 탈퇴
+    case socialLogin(token: String, code: String, email: String, name: String, signupType: String ) //소셜 로그인
 }
 
 // MARK: TargetType Protocol 구현
@@ -72,11 +73,14 @@ extension APITarget: TargetType {
         case .statistics:
             return "api/v1/retrospection/statistics"
         case .writeRetrospection:
-            return "/api/v1/retrospection"
+            return "api/v1/retrospection"
         case .createLastStars:
-            return "/api/v1/retrospection/previous/week"
+            return "api/v1/retrospection/previous/week"
         case .deleteAccount:
             return "api/v1/withdrawal"
+        
+        case .socialLogin:
+            return "api/v1/users/socialLogin"
         }
     }
     
@@ -89,7 +93,7 @@ extension APITarget: TargetType {
         case .getTask, .getCategory, .getWeekly, .getRoutine, .getUserProfile, .getRetrospection, .statistics:
             return .get
             
-        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine, .writeRetrospection, .createLastStars, .deleteAccount:
+        case .checkTodo, .createCategory, .createTodo, .createTask, .registerRoutine, .makeRoutine, .writeRetrospection, .createLastStars, .deleteAccount, .socialLogin:
             return .post
             
         case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
@@ -166,6 +170,9 @@ extension APITarget: TargetType {
             
         case .deleteAccount(_, let details, let withdrawalType):
             return .requestParameters(parameters: ["details": details, "withdrawalType": withdrawalType], encoding: JSONEncoding.default)
+            
+        case .socialLogin(let token, let code, let email, let name, let signupType):
+            return .requestParameters(parameters: ["accessToken": token, "code": code, "email":email, "name": name, "signupType": signupType], encoding: JSONEncoding.default)
         }
     }
     
@@ -179,7 +186,7 @@ extension APITarget: TargetType {
         // headers - HTTP header
         
         switch self {
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _), .deleteAccount(let token,_,_):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _), .deleteAccount(let token,_,_), .socialLogin(let token, _, _, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }
