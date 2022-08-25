@@ -16,8 +16,11 @@ class CheckRoutineVC: UIViewController {
     var routineEditEnable: Bool = false
     private var routineNameEditButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "icon24Edit"), for: .normal)
-        button.addTarget(self, action: #selector(routineNameEditButtonDidTap), for: .touchUpInside)
+        button.setImage(UIImage(named: "icon24Edit"),
+                        for: .normal)
+        button.addTarget(self,
+                         action: #selector(routineNameEditButtonDidTap),
+                         for: .touchUpInside)
         return button
     }()
     
@@ -132,7 +135,7 @@ extension CheckRoutineVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        let textFieldState: Bool = textField.text?.count == 0 || textField.text == nil
+        let textFieldState: Bool = !(textField.text?.count == 0 || textField.text == nil)
         saveButton.isEnabled = textFieldState
         
         if let count = textField.text?.count,
