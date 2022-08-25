@@ -122,7 +122,7 @@
 		9EFE6AFF26A7370500064CAB /* ViewCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */; };
 		9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */; };
 		D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */; };
-		D203ABE8283641E1008FCB62 /* EasyTipView in Frameworks */ = {isa = PBXBuildFile; productRef = D203ABE7283641E1008FCB62 /* EasyTipView */; };
+		D203ABE8283641E1008FCB62 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D203ABEA28364BEB008FCB62 /* MyTopTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203ABE928364BEB008FCB62 /* MyTopTipView.swift */; };
 		D203ABED28364CA9008FCB62 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D203ABEC28364CA9008FCB62 /* SnapKit */; };
 		D2E46F9F28A0F0E8001A883A /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E46F9E28A0F0E8001A883A /* Enum.swift */; };
@@ -260,7 +260,7 @@
 			files = (
 				D203ABED28364CA9008FCB62 /* SnapKit in Frameworks */,
 				D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */,
-				D203ABE8283641E1008FCB62 /* EasyTipView in Frameworks */,
+				D203ABE8283641E1008FCB62 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,7 +862,6 @@
 			);
 			name = WeekFlex;
 			packageProductDependencies = (
-				D203ABE7283641E1008FCB62 /* EasyTipView */,
 				D203ABEC28364CA9008FCB62 /* SnapKit */,
 			);
 			productName = WeekFlex;
@@ -893,7 +892,6 @@
 			);
 			mainGroup = 9EC0DAEB25EEB9D1007D04D0;
 			packageReferences = (
-				D203ABE6283641E1008FCB62 /* XCRemoteSwiftPackageReference "EasyTipView" */,
 				D203ABEB28364CA9008FCB62 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				0E4B0DA52810863400013B58 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
@@ -1241,7 +1239,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dev.wf;
+				PRODUCT_BUNDLE_IDENTIFIER = "--com.WeekFlex";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1265,7 +1263,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dev.wf;
+				PRODUCT_BUNDLE_IDENTIFIER = "--com.WeekFlex";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1305,7 +1303,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-    D203ABEB28364CA9008FCB62 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		D203ABEB28364CA9008FCB62 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
