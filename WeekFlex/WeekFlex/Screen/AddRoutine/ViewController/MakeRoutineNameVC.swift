@@ -75,11 +75,9 @@ extension MakeRoutineNameVC {
     // MARK: Function
     
     func setView() {
-        
         titleLabel.setLabel(text: "루틴 추가하기", color: .black, font: .appleMedium(size: 18))
         explainLabel.setLabel(text: "루틴 이름을 입력해주세요", color: .black, font: .appleBold(size: 20))
-        
-//        checkButton.isEnabled = false
+        checkButton.isEnabled = false
     }
     
     func setTextField() {
@@ -99,57 +97,37 @@ extension MakeRoutineNameVC {
         
         if textField.text?.count == 0 || textField.text == nil {
             // Text가 존재하지 않을 때 버튼 비활성화
-            
             explainLabel.text = "ex. English Master"
             checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
-//            checkButton.isEnabled = false
+            checkButton.isEnabled = false
         } else {
-            // Text가 존재할 때 버튼 활성화
-//            checkButton.isEnabled = true
-
-            if let routineNameArray = routineNameArray {
-                if routineNameArray.contains(textField.text!) {
-                    // 이미 있는 루틴 이름이라면
-
-                    explainLabel.text = "이미 존재하는 루틴 이름이에요 ;ㅅ;"
-                    checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
-//                    checkButton.isEnabled = false
-                } else {
-                    // 루틴 이름에 존재하지 않는다면
-                    
-                    explainLabel.text = "멋진 이름이에요! *-*"
-                    checkButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
-//                    checkButton.isEnabled = true
-                    
-                }
+            guard let routineNameArray = routineNameArray else { return }
+            if routineNameArray.contains(textField.text!) {
+                explainLabel.text = "이미 존재하는 루틴 이름이에요 ;ㅅ;"
+                checkButton.setImage(UIImage(named: "icon32CheckInactive"), for: .normal)
+                checkButton.isEnabled = false
+            } else {
+                explainLabel.text = "멋진 이름이에요! *-*"
+                checkButton.setImage(UIImage(named: "icon32CheckBlack"), for: .normal)
+                checkButton.isEnabled = true
             }
-            
         }
         
         if let count = textField.text?.count {
             if count > 25 {
-                // 루틴 이름이 최대인 25글자를 넘는다면?
-                
                 textField.deleteBackward()
-                // 그 뒤에 글자들은 쳐져도 삭제된다
             }
         }
-        
-        
     }
     
 }
 
 // MARK: UITextFieldDelegate
-
 extension MakeRoutineNameVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 리턴 키 클릭 시
-        
         textField.endEditing(true)
         return true
-        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
