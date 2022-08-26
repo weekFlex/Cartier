@@ -35,15 +35,31 @@ class LoginVC: UIViewController {
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var appleButton: UIButton!
     
+    @IBAction func kakaoButtonDidTap(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard.init(name: "TabBar", bundle: nil)
+        guard let tabBarVC = storyboard.instantiateViewController(identifier: "TabBar") as? TabBarVC else { return }
+        UIApplication.shared.windows.first?.replaceRootViewController(tabBarVC, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         [kakaoButton, googleButton, appleButton].forEach {
             $0.setTitle("", for: .normal)
         }
-        //테스트용 회원탈퇴!
-        
+
+        startAnimation()
+        setFirstLaunch()
+
         startAnimation()
         setLayout()
+    }
+    
+    func setFirstLaunch() {
+        UserDefaults.standard.set("launch", forKey: "Launch_MR")
+        UserDefaults.standard.set("launch", forKey: "Launch_STD")
+        UserDefaults.standard.set("launch", forKey: "Launch_VC")
+        UserDefaults.standard.set(false, forKey: "firstRoutine")
     }
 }
 

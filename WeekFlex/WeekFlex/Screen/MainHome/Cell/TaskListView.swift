@@ -16,7 +16,6 @@ protocol TaskListCellDelegate: AnyObject {
     func didTabMeatBall(cellIndex: Int, viewIndex:Int, todoId: Int)
 }
 
-
 class TaskListView: UIView {
     
     //MARK: Variable
