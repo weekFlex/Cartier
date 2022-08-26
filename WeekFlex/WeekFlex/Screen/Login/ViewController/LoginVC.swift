@@ -38,7 +38,7 @@ class LoginVC: UIViewController {
     @IBAction func kakaoButtonDidTap(_ sender: UIButton) {
         
         let storyboard = UIStoryboard.init(name: "TabBar", bundle: nil)
-        guard let tabBarVC = storyboard.instantiateViewController(identifier: "TabBarVC") as? TabBarVC else { return }
+        guard let tabBarVC = storyboard.instantiateViewController(identifier: "TabBar") as? TabBarVC else { return }
         UIApplication.shared.windows.first?.replaceRootViewController(tabBarVC, animated: true, completion: nil)
     }
     

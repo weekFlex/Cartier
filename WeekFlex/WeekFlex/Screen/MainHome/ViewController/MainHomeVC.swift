@@ -17,7 +17,7 @@ class MainHomeVC: UIViewController {
     //MARK: Variable
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
-    var userType: UserType = .newUser(level: 1) {
+    var userType: UserType = .existingUser {
         didSet {
             setUserType()
         }
