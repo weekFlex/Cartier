@@ -11,15 +11,11 @@ import UIKit
 class ReviewHomeVC: UIViewController {
     
     // MARK: Variable Part
-    
-    var reviewViewModel: ReviewCollectionViewCellViewModel = ReviewCollectionViewCellViewModel()
     var retrospectionData: [RetrospectionData] = []
     var monthlyData: [[RetrospectionData]] = []
     var currentMonth: Int = Calendar.current.component(.month, from: Date())
     var currentYear: Int = Calendar.current.component(.year, from: Date())
     var currentIndex: Int = 0
-    var nextIndex: Int = 0
-    var currentCell: Int = 0
     
     // MARK: IBOutlet
     @IBOutlet weak var month: UILabel!
@@ -32,11 +28,10 @@ class ReviewHomeVC: UIViewController {
         if currentMonth == 1 {
             currentYear -= 1
             currentMonth = 12
-        }else{
+        } else {
             currentMonth -= 1
         }
         currentIndex -= 1
-        
         setLayout()
         reviewList.reloadData()
     }
@@ -44,7 +39,7 @@ class ReviewHomeVC: UIViewController {
         if currentMonth == 12 {
             currentYear += 1
             currentMonth = 1
-        }else{
+        } else {
             currentMonth += 1
         }
         currentIndex += 1
@@ -61,30 +56,32 @@ class ReviewHomeVC: UIViewController {
     
 }
 
+// MARK: - CollectionViewDelegate
 extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if monthlyData.isEmpty { return 0 }
-        else {return monthlyData[currentIndex].count }
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = reviewList.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath) as! ReviewCell
         let data = monthlyData[currentIndex]
         let item = data[indexPath.row]
         cell.configure(with: item)
-        
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = reviewList.frame.width
-        
         return CGSize(width: width, height: 160)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let dayStoryboard = UIStoryboard.init(name: "Retrospection_m", bundle: nil)
-        guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else{ return }
+        guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else { return }
         let data = monthlyData[currentIndex][indexPath.row]
         popupVC.startDate = data.startDate
         
@@ -111,11 +108,7 @@ extension ReviewHomeVC {
                     switch result {
                     case .success(let data):
                         retrospectionData = data
-                        
                         saveMonthly(data: data)
-                        
-                        print(retrospectionData)
-                        
                         setLayout()
                         reviewList.reloadData()
                     // 데이터 전달 후 다시 로드
