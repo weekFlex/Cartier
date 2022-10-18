@@ -147,20 +147,22 @@ extension ReviewHomeVC {
 
     }
     
-    func saveMonthly(data: [RetrospectionData]){
-        var temp:[RetrospectionData] = []
-        var t = String(data[0].startDate.dropLast(2))
-        for i in data {
-            if t == String(i.startDate.dropLast(2)) {
-                temp.append(i)
-            }else{
+    func saveMonthly(data: [RetrospectionData]) {
+        var temp: [RetrospectionData] = []
+        guard data.count > 0,
+              data[0].startDate.count >= 2 else { return }
+        var standardMonth = String(data[0].startDate.dropLast(2))
+        for day in data {
+            let dayMonth = String(day.startDate.dropLast(2))
+            if dayMonth == standardMonth {
+                temp.append(day)
+            } else {
                 monthlyData.append(temp)
-                temp = [i]
-                t = String(i.startDate.dropLast(2))
+                temp = [day]
+                standardMonth = String(day.startDate.dropLast(2))
             }
         }
         monthlyData.append(temp)
         currentIndex = monthlyData.count - 1
-        print("monthlyData: \n",monthlyData)
     }
 }
