@@ -43,6 +43,12 @@ class ReviewEmptyView: UIView {
         setupLayout()
     }
     
+    init(frame: CGRect, emptyImage: String, title: String) {
+        super.init(frame: frame)
+        setupLayout()
+        setupEmptyInfo(image: emptyImage, title: title)
+    }
+    
     func setupLayout() {
         backgroundColor = .clear
         addSubview(stackView)
@@ -56,4 +62,8 @@ class ReviewEmptyView: UIView {
         }
     }
     
+    func setupEmptyInfo(image: String, title: String) {
+        titleLabel.text = title
+        emptyImage.image = UIImage(named: image)
+    }
 }
