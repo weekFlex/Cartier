@@ -14,7 +14,7 @@ struct APIService {
     static let shared = APIService()
     // 싱글톤객체로 생성
     
-    let provider = MoyaProvider<APITarget>()
+    let provider = MoyaProvider<APITarget>(plugins: [MoyaLoggingPlugin()])
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
     func getTask(_ token: String, completion: @escaping (NetworkResult<[TaskData]>)->(Void)) {
