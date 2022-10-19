@@ -124,7 +124,7 @@ extension APITarget: TargetType {
             return .requestPlain
         
         case .bookmarkTask(_, let taskId):
-            return .requestParameters(parameters: ["taskId": taskId], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["taskId": taskId], encoding: URLEncoding.queryString)
         
         case .createTask(_, let categoryId, let name):
             return .requestParameters(parameters: ["categoryId": categoryId, "name": name], encoding: JSONEncoding.default)
