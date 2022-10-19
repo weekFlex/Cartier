@@ -413,7 +413,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
             cell.timeLabel.text = ""
-            
+            cell.bookmarkDelegate = self
             if searchText != nil {
                 // 검색중이라면?
                 
@@ -687,4 +687,24 @@ extension SelectToDoVC: SelectedItemViewDelegate {
         selectedViewModel.remove(at: value)
     }
     
+}
+
+extension SelectToDoVC: TodoBookmarkDelegate {
+    func bookmarkRegister(id: Int) {
+        if NetworkState.isConnected() {
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                APIService.shared.bookmarkTask(token: token, taskId: id) { [self] result in
+                    switch result {
+                    case .success(let isBookmarked):
+                        print("등록완료")
+                    case .failure(let error):
+                        print("\(error) 다시 시도하세요")
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            
+        }
+    }
 }
