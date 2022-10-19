@@ -5,21 +5,21 @@
 //  Created by dohan on 2021/06/06.
 //
 
-import Foundation
 import UIKit
+import SnapKit
 
 class ReviewHomeVC: UIViewController {
     
     // MARK: Variable Part
-    
-    var reviewViewModel: ReviewCollectionViewCellViewModel = ReviewCollectionViewCellViewModel()
     var retrospectionData: [RetrospectionData] = []
     var monthlyData: [[RetrospectionData]] = []
     var currentMonth: Int = Calendar.current.component(.month, from: Date())
     var currentYear: Int = Calendar.current.component(.year, from: Date())
     var currentIndex: Int = 0
-    var nextIndex: Int = 0
-    var currentCell: Int = 0
+    lazy var emptyView: UIView = {
+        let view = ReviewEmptyView(frame: .zero)
+        return view
+    }()
     
     // MARK: IBOutlet
     @IBOutlet weak var month: UILabel!
@@ -32,11 +32,10 @@ class ReviewHomeVC: UIViewController {
         if currentMonth == 1 {
             currentYear -= 1
             currentMonth = 12
-        }else{
+        } else {
             currentMonth -= 1
         }
         currentIndex -= 1
-        
         setLayout()
         reviewList.reloadData()
     }
@@ -44,7 +43,7 @@ class ReviewHomeVC: UIViewController {
         if currentMonth == 12 {
             currentYear += 1
             currentMonth = 1
-        }else{
+        } else {
             currentMonth += 1
         }
         currentIndex += 1
@@ -53,38 +52,48 @@ class ReviewHomeVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjksXCJlbWFpbFwiOlwiZ2hscmhAZ21haWwuY29tXCJ9In0.SnNSMriM4iTnpo4vzqOcpmN9xswiu_Rr7jgYkYhxjA4", forKey: "UserToken")
         getRetrospection()
-        reviewList.register(UINib(nibName: "ReviewCell", bundle: nil), forCellWithReuseIdentifier: "reviewCell")
+        setEmptyView()
+        reviewList.register(UINib(nibName: "ReviewCell", bundle: nil),
+                            forCellWithReuseIdentifier: "reviewCell")
     }
-    
-    
+    func setEmptyView() {
+        view.addSubview(emptyView)
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(month.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
 }
 
+// MARK: - CollectionViewDelegate
 extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if monthlyData.isEmpty { return 0 }
-        else {return monthlyData[currentIndex].count }
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        reviewList.isHidden = monthlyData.isEmpty
+        return monthlyData.isEmpty ? 0 : monthlyData[currentIndex].count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = reviewList.dequeueReusableCell(withReuseIdentifier: "reviewCell", for: indexPath) as! ReviewCell
         let data = monthlyData[currentIndex]
         let item = data[indexPath.row]
         cell.configure(with: item)
-        
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = reviewList.frame.width
-        
         return CGSize(width: width, height: 160)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let dayStoryboard = UIStoryboard.init(name: "Retrospection_m", bundle: nil)
-        guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else{ return }
+        guard let popupVC = dayStoryboard.instantiateViewController(withIdentifier: "DayRetrospectionVC") as? DayRetrospectionVC else { return }
         let data = monthlyData[currentIndex][indexPath.row]
         popupVC.startDate = data.startDate
         
@@ -92,18 +101,14 @@ extension ReviewHomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         if !data.content.isEmpty { popupVC.lookBackContents = data.content }
         
         popupVC.lookBackTitle = data.title
-        
-        
         self.present(popupVC, animated: true, completion: nil)
-        
     }
 }
 
+// MARK: - Server
 extension ReviewHomeVC {
-    
-    
     //회고 데이터 가져오기
-    func getRetrospection(){
+    func getRetrospection() {
         if NetworkState.isConnected() {
             // 네트워크 연결 시
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
@@ -111,11 +116,7 @@ extension ReviewHomeVC {
                     switch result {
                     case .success(let data):
                         retrospectionData = data
-                        
                         saveMonthly(data: data)
-                        
-                        print(retrospectionData)
-                        
                         setLayout()
                         reviewList.reloadData()
                     // 데이터 전달 후 다시 로드
@@ -147,20 +148,22 @@ extension ReviewHomeVC {
 
     }
     
-    func saveMonthly(data: [RetrospectionData]){
-        var temp:[RetrospectionData] = []
-        var t = String(data[0].startDate.dropLast(2))
-        for i in data {
-            if t == String(i.startDate.dropLast(2)) {
-                temp.append(i)
-            }else{
+    func saveMonthly(data: [RetrospectionData]) {
+        var temp: [RetrospectionData] = []
+        guard data.count > 0,
+              data[0].startDate.count >= 2 else { return }
+        var standardMonth = String(data[0].startDate.dropLast(2))
+        for day in data {
+            let dayMonth = String(day.startDate.dropLast(2))
+            if dayMonth == standardMonth {
+                temp.append(day)
+            } else {
                 monthlyData.append(temp)
-                temp = [i]
-                t = String(i.startDate.dropLast(2))
+                temp = [day]
+                standardMonth = String(day.startDate.dropLast(2))
             }
         }
         monthlyData.append(temp)
         currentIndex = monthlyData.count - 1
-        print("monthlyData: \n",monthlyData)
     }
 }

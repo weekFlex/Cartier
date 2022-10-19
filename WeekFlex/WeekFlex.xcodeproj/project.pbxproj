@@ -125,6 +125,7 @@
 		D203ABE8283641E1008FCB62 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D203ABEA28364BEB008FCB62 /* MyTopTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203ABE928364BEB008FCB62 /* MyTopTipView.swift */; };
 		D203ABED28364CA9008FCB62 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D203ABEC28364CA9008FCB62 /* SnapKit */; };
+		D2B8F4E128FE473700927F1E /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B8F4E028FE473600927F1E /* ReviewEmptyView.swift */; };
 		D2E46F9F28A0F0E8001A883A /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E46F9E28A0F0E8001A883A /* Enum.swift */; };
 /* End PBXBuildFile section */
 
@@ -249,6 +250,7 @@
 		9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryVC.swift; sourceTree = "<group>"; };
 		CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeekFlex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D203ABE928364BEB008FCB62 /* MyTopTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTopTipView.swift; sourceTree = "<group>"; };
+		D2B8F4E028FE473600927F1E /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
 		D2E46F9E28A0F0E8001A883A /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		E69A384642D50E1D9D0EAF1A /* Pods-WeekFlex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.release.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -371,6 +373,7 @@
 		0EC381B0266D185B00438A74 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				D2B8F4DF28FE471700927F1E /* View */,
 				0E30E47F2674926D0002EFDD /* ViewModel */,
 				0E30E474267379CD0002EFDD /* Cell */,
 				0EC381B2266D188100438A74 /* Storyboard */,
@@ -843,6 +846,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		D2B8F4DF28FE471700927F1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8F4E028FE473600927F1E /* ReviewEmptyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1064,6 +1075,7 @@
 				0ECB0709270B3C78005F766D /* MyPageHomeVC.swift in Sources */,
 				9B161F022797E98300897B53 /* SplashVC.swift in Sources */,
 				9EC2E07E2631DDBA00EF2F7E /* EditRoutineVM.swift in Sources */,
+				D2B8F4E128FE473700927F1E /* ReviewEmptyView.swift in Sources */,
 				9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */,
 				9BFABB5C26D7B0980005AA2B /* DayRetrospectionVC.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
