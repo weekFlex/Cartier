@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SelectToDoVC: UIViewController {
     
@@ -43,6 +44,13 @@ class SelectToDoVC: UIViewController {
         state: .down(height: 35.0),
         dismissActions: tooltipAction
     )
+    
+    lazy var emptyView: UIView = {
+        let view = ReviewEmptyView(frame: .zero,
+                                   emptyImage: "Character/character-132-sad-gray",
+                                   title: "할 일을 생성해주세요")
+        return view
+    }()
     
     // MARK: IBOutlet
     
@@ -191,6 +199,12 @@ extension SelectToDoVC {
         let layout = selectedCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .vertical
         
+        view.addSubview(emptyView)
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(todoCollectionView.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(50)
+        }
     }
     
     func setDelegate() {
@@ -280,7 +294,6 @@ extension SelectToDoVC {
                     
                     case .success(let data):
                         taskData = data
-                        print("추가 완료!")
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드
@@ -543,6 +556,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     for category in taskData {
                         allTask += category.tasks
                     }
+                    emptyView.isHidden = (allTask.count != 0)
                     return allTask.count
                     
                 } else {
