@@ -27,6 +27,11 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func bookmarkTask(token: String, taskId: Int, completion: @escaping (NetworkResult<BookmarkData>)->(Void)) {
+        let target: APITarget = .bookmarkTask(token: token, taskId: taskId)
+        judgeObject(target, completion: completion)
+    }
+    
     func getCategory(_ token: String, completion: @escaping (NetworkResult<[CategoryData]>)->(Void)) {
         let target: APITarget = .getCategory(token: token)
         judgeObject(target, completion: completion)
