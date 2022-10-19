@@ -347,7 +347,8 @@ extension SelectToDoVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 300, height: self.selectRoutineView.frame.height)
         }
         else if collectionView == categoryCollectionView {
-            return CGSize(width: 55, height: categoryCollectionView.frame.height)
+            let name = (indexPath.row == 0) ? "전체" : taskData[indexPath.row-1].category.name
+            return CGSize(width: name.size(withAttributes: [NSAttributedString.Key.font : UIFont.appleRegular(size: 14)]).width + 30, height: categoryCollectionView.frame.height)
         }
         else {
             return CGSize(width: collectionView.frame.width-32, height: 52)
