@@ -24,6 +24,7 @@ enum APITarget {
     case getRoutine(token: String) // 루틴 리스트 API
     case makeRoutine(token: String, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 생성하기 API
     case registerRoutine(token: String, routineID: Int) // 루틴 등록
+    case editRoutine(token: String, routineId: Int, name: String, routineTaskSaveRequests: [RoutineTaskSaveRequest]) // 루틴 수정하기
     case getUserProfile(token: String) //유저 프로필 받아오기
     case getRetrospection(token: String)    //회고 전체 받아오기
     case statistics(token: String, date: String) // 회고 관련 통계 가져오기
@@ -66,6 +67,8 @@ extension APITarget: TargetType {
             return "api/v1/todo"
         case .registerRoutine(_, let routineID):
             return "api/v1/routine/\(routineID)/register"
+        case .editRoutine(_, let routineId, _, _):
+            return "api/v1/routine/\(routineId)"
         case .getUserProfile:
             return "api/v1/users/profile"
         case .getRetrospection:
@@ -99,7 +102,7 @@ extension APITarget: TargetType {
         case .deleteTodoRoutine, .deleteTodo, .deleteRoutine:
             return .delete
             
-        case .updateTodo:
+        case .updateTodo, .editRoutine:
             return .put
         }
     }
@@ -164,6 +167,13 @@ extension APITarget: TargetType {
             let jsonData: Data = try! encoder.encode(newRoutine)
             
             return .requestData(jsonData)
+        
+        case .editRoutine(_, _, let name, let routineTaskSaveRequests):
+            let encoder: JSONEncoder = JSONEncoder()
+            let newRoutine = MakeRoutineEditData(name, routineTaskSaveRequests)
+            let jsonData: Data = try! encoder.encode(newRoutine)
+            
+            return .requestData(jsonData)
             
         case .createLastStars(_ , let stars,let weekStartDate):
             return .requestParameters(parameters: ["stars": stars, "weekStartDate": weekStartDate], encoding: JSONEncoding.default)
@@ -186,7 +196,7 @@ extension APITarget: TargetType {
         // headers - HTTP header
         
         switch self {
-        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _), .deleteAccount(let token,_,_), .socialLogin(let token, _, _, _, _):
+        case .getTask(let token), .getCategory(let token), .checkTodo(token: let token,_,_),.getRoutine(let token), .getWeekly(token: let token, _), .deleteTodoRoutine(token: let token, _), .updateTodo(let token, _, _, _, _, _), .createTodo(let token, _, _, _, _, _), .deleteTodo(token: let token, _), .deleteRoutine(let token, _),.createCategory(let token, _, _), .createTask(let token, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _), .editRoutine(let token, _, _, _), .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _), .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _), .deleteAccount(let token,_,_), .socialLogin(let token, _, _, _, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
     }
