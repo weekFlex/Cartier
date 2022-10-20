@@ -8,12 +8,17 @@
 import UIKit
 import SnapKit
 
+enum RoutineEditEnable: Equatable {
+    case edit(id: Int)
+    case new
+}
+
 class CheckRoutineVC: UIViewController {
 
     // MARK: - Variable Part
     var routineName: String?
     var routineList: [TaskListData]?
-    var routineEditEnable: Bool = false
+    var routineEditEnable: RoutineEditEnable = .new
     private var routineNameEditButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "icon24Edit"),
@@ -32,23 +37,42 @@ class CheckRoutineVC: UIViewController {
     
     // MARK: IBAction
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        switch routineEditEnable {
-        case true:
-            break
-        case false:
-            var routineTask: [RoutineTaskSaveRequest] = []
-            
-            if let routineList = routineList {
-                for i in 0...routineList.count - 1 {
-                    if let days = routineList[i].days {
-                        routineTask.append(RoutineTaskSaveRequest(days: days, taskId: routineList[i].id))
-                    }
+        
+        var routineTask: [RoutineTaskSaveRequest] = []
+        
+        if let routineList = routineList {
+            for i in 0...routineList.count - 1 {
+                if let days = routineList[i].days {
+                    routineTask.append(RoutineTaskSaveRequest(days: days, taskId: routineList[i].id))
                 }
             }
-            guard NetworkState.isConnected() else {
-                // TODO: 네트워크 미연결 팝업 띄우기
-                return
+        }
+        
+        guard NetworkState.isConnected() else {
+            // TODO: 네트워크 미연결 팝업 띄우기
+            return
+        }
+        
+        switch routineEditEnable {
+        case .edit(let id):
+            guard let name = routineNameTextField.text,
+                  let token = UserDefaults.standard.string(forKey: "UserToken") else { return }
+            APIService.shared.editRoutine(token, id, name, routineTask) { [self] result in
+                switch result {
+                case .success(_):
+                    // 루틴 수정하기 완료
+                    self.navigationController?.viewControllers.forEach {
+                        if let vc = $0 as? MyRoutineListVC {
+                            vc.userType = .existingUser
+                            self.navigationController?.popToViewController(vc, animated: true)
+                            return
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
             }
+        case .new:
             guard let name = routineNameTextField.text,
                   let token = UserDefaults.standard.string(forKey: "UserToken") else { return }
             APIService.shared.makeRoutine(token, name, routineTask) { [self] result in
@@ -60,7 +84,6 @@ class CheckRoutineVC: UIViewController {
                             vc.userType = .newUser(level: 2)
                             self.navigationController?.popToViewController(vc, animated: true)
                             return
-                            // 이전으로 돌아감
                         }
                     }
                 case .failure(let error):
@@ -113,7 +136,7 @@ extension CheckRoutineVC {
         }
         routineNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         
-        let explainLabelText: String = routineEditEnable ? "루틴을 수정하기 전 마지막으로 확인해 주세요!" : "짜잔! 마지막으로 루틴을 확인해 주세요:)"
+        let explainLabelText: String = (routineEditEnable == .new) ? "짜잔! 마지막으로 루틴을 확인해 주세요:)" : "루틴을 수정하기 전 마지막으로 확인해 주세요!"
         explainLabel.setLabel(text: explainLabelText, color: .gray4, font: .appleMedium(size: 16), letterSpacing: -0.16)
         
         taskTableView.separatorStyle = .none

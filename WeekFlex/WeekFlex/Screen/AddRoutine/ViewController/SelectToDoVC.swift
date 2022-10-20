@@ -29,7 +29,7 @@ class SelectToDoVC: UIViewController {
     
     // 모달 뒤에 뜰 회색 전체 뷰
     var modalBackgroundView: UIView!
-    var routineEditEnable: Bool = false
+    var routineEditEnable: RoutineEditEnable = .new
     
     // notification
     let didDismissCreateTodoVC: Notification.Name = Notification.Name("didDismissCreateTodoVC")
