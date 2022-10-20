@@ -125,7 +125,7 @@ class MainHomeVC: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
+        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjI5LFwiZW1haWxcIjpcIm1pbmlAa2FrYW8uY29tXCJ9In0.GtsfZkXF0R0w9Z6kr55-m6G5kaLdwQLlAjjlVGBwlKk", forKey: "UserToken")
 
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
