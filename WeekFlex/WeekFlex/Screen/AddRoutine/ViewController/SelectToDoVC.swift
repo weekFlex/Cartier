@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 class SelectToDoVC: UIViewController {
     
@@ -14,10 +15,9 @@ class SelectToDoVC: UIViewController {
     
     var routineName: String?
     var userType: UserType = .existingUser
-    var categoryData: [CategoryData] = []
-    var taskData: [TaskData] = [] // 서
-    var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
-    var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
+    var userCategoryTaskDataArrays: [TaskData] = [] // 서
+    var searchTaskArrays: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
+    var taskArrays: [TaskListData] = [] // 전체 task 저장하는 배열
     
     var selectedViewModel : [TaskListData] = []
     
@@ -293,7 +293,7 @@ extension SelectToDoVC {
                     switch result {
                     
                     case .success(let data):
-                        taskData = data
+                        userCategoryTaskDataArrays = data
                         categoryCollectionView.reloadData()
                         todoCollectionView.reloadData()
                         // 데이터 전달 후 다시 로드
@@ -347,7 +347,7 @@ extension SelectToDoVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 300, height: self.selectRoutineView.frame.height)
         }
         else if collectionView == categoryCollectionView {
-            let name = (indexPath.row == 0) ? "전체" : taskData[indexPath.row-1].category.name
+            let name = (indexPath.row == 0) ? "전체" : userCategoryTaskDataArrays[indexPath.row-1].category.name
             return CGSize(width: name.size(withAttributes: [NSAttributedString.Key.font : UIFont.appleRegular(size: 14)]).width + 30, height: categoryCollectionView.frame.height)
         }
         else {
@@ -388,40 +388,36 @@ extension SelectToDoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == selectedCollectionView {
-            // 선택한 Todo
-            
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedRoutineCell.identifier, for: indexPath) as? SelectedRoutineCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedRoutineCell.identifier,
+                                                                for: indexPath) as? SelectedRoutineCell else {
+                return UICollectionViewCell()
+            }
             cell.configure(listName: selectedViewModel[indexPath.row].name)
             return cell
-        }
-        
-        else if collectionView == categoryCollectionView {
+        } else if collectionView == categoryCollectionView {
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
-            if indexPath.row == 0 {
-                cell.configure(name: "전체", color: 0)
-            } else {
-                cell.configure(name: taskData[indexPath.row-1].category.name, color: taskData[indexPath.row-1].category.color)
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier,
+                                                                for: indexPath) as? CategoryCell else {
+                return UICollectionViewCell()
             }
+            let name = (indexPath.row == 0) ? "전체" : userCategoryTaskDataArrays[indexPath.row-1].category.name
+            let color = (indexPath.row == 0) ? 0 : userCategoryTaskDataArrays[indexPath.row-1].category.color
+            cell.configure(name: name, color: color)
             
             return cell
-            
-            
-            
-        }
-        else {
-            
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier, for: indexPath) as? RoutineCell else { return UICollectionViewCell() }
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoutineCell.identifier,
+                                                                for: indexPath) as? RoutineCell else {
+                return UICollectionViewCell()
+            }
             cell.timeLabel.text = ""
-            
+            cell.bookmarkDelegate = self
             if searchText != nil {
                 // 검색중이라면?
-                
-                cell.configure(data: searchTask[indexPath.row])
-                
+                cell.configure(data: searchTaskArrays[indexPath.row])
                 if selectedViewModel.count > 0 {
                     for i in 0...selectedViewModel.count-1 {
-                        if searchTask[indexPath.row].name == selectedViewModel[i].name {
+                        if searchTaskArrays[indexPath.row].name == selectedViewModel[i].name {
                             // 만약에 내가 선택한 루틴이라면?
                             
                             if let days = selectedViewModel[i].days?.map({ $0.name }).joined(separator: ", ") {
@@ -432,25 +428,20 @@ extension SelectToDoVC: UICollectionViewDataSource {
                                     cell.timeLabel.text = "\(days)"
                                 }
                             }
-                            
                             cell.selected()
                             // 배경 컬러 주기
                             break
                         }
                     }
                 }
-                
-            } else {
-                // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
+            } else { // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
                 
                 if categoryIndex == 0 {
                     // 전체 카테고리라면?
-                    
-                    cell.configure(data: allTask[indexPath.row])
-                    
+                    cell.configure(data: taskArrays[indexPath.row])
                     if selectedViewModel.count > 0 {
                         for i in 0...selectedViewModel.count-1 {
-                            if allTask[indexPath.row].name == selectedViewModel[i].name {
+                            if taskArrays[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 
                                 if let days = selectedViewModel[i].days?.map({ $0.name }).joined(separator: ", ") {
@@ -461,8 +452,6 @@ extension SelectToDoVC: UICollectionViewDataSource {
                                         cell.timeLabel.text = "\(days)"
                                     }
                                 }
-                                
-                                
                                 cell.selected()
                                 // 배경 컬러주기
                                 break
@@ -473,11 +462,11 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 } else {
                     // 특정 카테고리를 보고있다면?
                     
-                    cell.configure(data: taskData[categoryIndex-1].tasks[indexPath.row])
+                    cell.configure(data: userCategoryTaskDataArrays[categoryIndex-1].tasks[indexPath.row])
                     
                     if selectedViewModel.count > 0 {
                         for i in 0...selectedViewModel.count-1 {
-                            if taskData[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel[i].name {
+                            if userCategoryTaskDataArrays[categoryIndex-1].tasks[indexPath.row].name == selectedViewModel[i].name {
                                 // 만약에 내가 선택한 루틴이라면?
                                 
                                 if let days = selectedViewModel[i].days?.map({ $0.name }).joined(separator: ", ") {
@@ -529,40 +518,46 @@ extension SelectToDoVC: UICollectionViewDataSource {
         else if collectionView == categoryCollectionView {
             // 카테고리 CollectionView (사용자 카테고리 + 전체)
             
-            return taskData.count+1
-        }
-        
-        else {
+            return userCategoryTaskDataArrays.count + 1
+        } else {
             // Task CollectionView
-            
-            if searchText != nil {
-                // 검색중이라면?
-                
-                searchTask = []
-                
-                for category in taskData {
-                    searchTask += category.tasks.filter { $0.name.contains(searchText!) == true }
+            switch searchText {
+            case let .some(text): // 검색 중
+                searchTaskArrays = []
+                for category in userCategoryTaskDataArrays {
+                    searchTaskArrays += category.tasks.filter { $0.name.contains(text) == true }
                 }
-                return searchTask.count
-                
-            } else {
-                // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
-                
-                if categoryIndex == 0 {
-                    // 전체 카테고리라면?
-                    
-                    allTask = []
-                    // 전체 Task 갯수
-                    
-                    for category in taskData {
-                        allTask += category.tasks
+                searchTaskArrays = searchTaskArrays.sorted { ($0.isBookmarked ?? false) && !($1.isBookmarked ?? false) }
+                searchTaskArrays = searchTaskArrays.sorted { (first, second) -> Bool in
+                    let result1 = selectedViewModel.filter { $0.id == first.id }.first != nil
+                    let result2 = selectedViewModel.filter { $0.id == second.id }.first != nil
+                    return result1 && !result2
+                }
+                return searchTaskArrays.count
+
+            default: // 검색중이 아니라면 ==> 카테고리를 선택해서 보고있다면
+                switch categoryIndex {
+                case 0: // 전체 카테고리라면?
+                    taskArrays = []
+                    for category in userCategoryTaskDataArrays {
+                        taskArrays += category.tasks
                     }
-                    emptyView.isHidden = (allTask.count != 0)
-                    return allTask.count
-                    
-                } else {
-                    // 특장 카테고리라면?
-                    return taskData[categoryIndex-1].tasks.count
+                    taskArrays = taskArrays.sorted { ($0.isBookmarked ?? false) && !($1.isBookmarked ?? false) }
+                    taskArrays = taskArrays.sorted { (first, second) -> Bool in
+                        let result1 = selectedViewModel.filter { $0.id == first.id }.first != nil
+                        let result2 = selectedViewModel.filter { $0.id == second.id }.first != nil
+                        return result1 && !result2
+                    }
+                    emptyView.isHidden = (taskArrays.count != 0)
+                    return taskArrays.count
+                default: // 특장 카테고리라면?
+                    userCategoryTaskDataArrays[categoryIndex-1].tasks = userCategoryTaskDataArrays[categoryIndex-1].tasks.sorted { ($0.isBookmarked ?? false) && !($1.isBookmarked ?? false) }
+                    userCategoryTaskDataArrays[categoryIndex-1].tasks = userCategoryTaskDataArrays[categoryIndex-1].tasks.sorted { (first, second) -> Bool in
+                        let result1 = selectedViewModel.filter { $0.id == first.id }.first != nil
+                        let result2 = selectedViewModel.filter { $0.id == second.id }.first != nil
+                        return result1 && !result2
+                    }
+                    return userCategoryTaskDataArrays[categoryIndex-1].tasks.count
                 }
             }
         }
@@ -687,4 +682,31 @@ extension SelectToDoVC: SelectedItemViewDelegate {
         selectedViewModel.remove(at: value)
     }
     
+}
+
+extension SelectToDoVC: TodoBookmarkDelegate {
+    func bookmarkRegister(id: Int) {
+        if NetworkState.isConnected() {
+            if let token = UserDefaults.standard.string(forKey: "UserToken") {
+                APIService.shared.bookmarkTask(token: token, taskId: id) { [self] result in
+                    switch result {
+                    case .success(let data):
+                        guard let index = userCategoryTaskDataArrays.indices.filter({
+                            userCategoryTaskDataArrays[$0].tasks.contains { $0.id == id }
+                        }).first,
+                              let taskIndex = userCategoryTaskDataArrays[index].tasks.indices.filter({
+                                  userCategoryTaskDataArrays[index].tasks[$0].id == id
+                              }).first else { return }
+                        userCategoryTaskDataArrays[index].tasks[taskIndex].isBookmarked = data.isBookmarked
+                        todoCollectionView.reloadData()
+                    case .failure(let error):
+                        print("\(error) 다시 시도하세요")
+                    }
+                }
+            }
+        } else {
+            // 네트워크 미연결 팝업 띄우기
+            
+        }
+    }
 }
