@@ -9,7 +9,7 @@ import Foundation
 
 struct TaskData: Codable {
     let category: CategoryData
-    let tasks: [TaskListData]
+    var tasks: [TaskListData]
 }
 
 // MARK: - Task
@@ -18,7 +18,7 @@ struct TaskListData: Codable {
     let categoryColor: Int
     var days: [Day]? // 처음에는 없지만, 이후 수정뷰에서 추가됨
     let id: Int
-    let isBookmarked: Bool?
+    var isBookmarked: Bool?
     let name: String
 }
 
