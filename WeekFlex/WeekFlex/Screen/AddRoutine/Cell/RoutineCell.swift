@@ -44,11 +44,12 @@ class RoutineCell: UICollectionViewCell {
         routineNameLabel.text = data.name
         contentView.backgroundColor = .clear
         guard let bookmark = data.isBookmarked else {
-            bookmarkButton.setImage(UIImage(named: "icon16BookmarkInactive"), for: .normal)
+            bookmarkButton.setImage(UIImage(named: "icon16BookmarkInactive")?.withRenderingMode(.alwaysOriginal),
+                                    for: .normal)
             return
         }
         let image = bookmark ? "icon16BookmarkActive" : "icon16BookmarkInactive"
-        bookmarkButton.setImage(UIImage(named: image), for: .normal)
+        bookmarkButton.setImage(UIImage(named: image)?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
     func selected() {
