@@ -13,12 +13,6 @@ class RoutineCell: UICollectionViewCell {
     
     static let identifier = "RoutineCell"
     var routine: TaskListData?
-    var bookmark: Bool = false {
-        didSet {
-            let image = bookmark ? "icon16BookmarkActive" : "icon16BookmarkInactive"
-            bookmarkButton.setImage(UIImage(named: image), for: .normal)
-        }
-    }
     var bookmarkDelegate: TodoBookmarkDelegate?
     // MARK: IBOutlet
     
@@ -42,18 +36,19 @@ class RoutineCell: UICollectionViewCell {
         timeLabel?.textColor = UIColor.gray3
         timeLabel.text = ""
         bookmarkButton.setTitle("", for: .normal)
-        bookmarkButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16)
+//        bookmarkButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16)
     }
     
     func configure(data: TaskListData) {
-        
         routine = data
-        
         routineNameLabel.text = data.name
-        bookmark = data.isBookmarked ?? false
-        
         contentView.backgroundColor = .clear
-        
+        guard let bookmark = data.isBookmarked else {
+            bookmarkButton.setImage(UIImage(named: "icon16BookmarkInactive"), for: .normal)
+            return
+        }
+        let image = bookmark ? "icon16BookmarkActive" : "icon16BookmarkInactive"
+        bookmarkButton.setImage(UIImage(named: image), for: .normal)
     }
     
     func selected() {
