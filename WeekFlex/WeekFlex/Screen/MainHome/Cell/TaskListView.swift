@@ -22,11 +22,11 @@ class TaskListView: UIView {
     //MARK: Variable
     
     private let xibName = "TaskListView"
+    weak var delegate: TaskListCellDelegate?
+    let bag = DisposeBag()
     var todoId = 0      // todoId
     var cellIndex = 0   //이 view가 속한 cell의 index (routine)
     var viewIndex = 0   //이 view의 index (todos)
-    weak var delegate: TaskListCellDelegate?
-    let bag = DisposeBag()
     var category = 0
     var isDone: Bool = false {
         didSet{
@@ -41,7 +41,6 @@ class TaskListView: UIView {
     //MARK: IBOutlet
     
     @IBOutlet weak var taskTitle: UILabel!
-    
     @IBOutlet weak var star: UIButton!
     @IBOutlet weak var meatBalls: UIButton!
     
@@ -50,12 +49,14 @@ class TaskListView: UIView {
     
     //MARK: IBAction
     @IBAction func starTabbed(_ sender: Any) {
+        print("별눌림")
         isDone = !isDone
         self.delegate?.didTabStar(cellIndex: cellIndex, viewIndex: viewIndex, isDone: isDone)
         
     }
     
     @IBAction func meatBallTabbed(_ sender: Any) {
+        print("미트볼눌림?")
         self.delegate?.didTabMeatBall(cellIndex: self.cellIndex, viewIndex: self.viewIndex, todoId: self.todoId )
     }
     
@@ -96,12 +97,12 @@ class TaskListView: UIView {
     }
     
     func starTapped(){
-        star.rx.tap.asDriver().debounce(.seconds(2)).drive(onNext: { [self] in
+        star.rx.tap.asDriver().debounce(.seconds(1)).drive(onNext: { [self] in
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ [self] result in
+                APIService.shared.checkTodo(token, todoId: todoId, done: isDone){ result in
                     switch result {
-                    
-                    case .success(let _):
+                        
+                    case .success(_):
                         print("체크완료")
                     // 데이터 전달 후 다시 로드
                     case .failure(let error):

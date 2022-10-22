@@ -19,7 +19,7 @@ class SplashVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         let animationView = AnimationView(name: "Splash")
-        
+        UserDefaults.standard.removeObject(forKey: "UserToken")
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         animationView.contentMode = .scaleAspectFill
         view.addSubview(animationView)
@@ -37,6 +37,7 @@ class SplashVC: UIViewController {
                     UIApplication.shared.windows.first?.replaceRootViewController(nextController, animated: true, completion: nil)
                 } else{
                     //로그인 페이지
+                    print("없음!")
                     guard let loginTab = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else {
                         return
                     }

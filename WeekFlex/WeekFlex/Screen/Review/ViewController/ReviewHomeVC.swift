@@ -110,14 +110,18 @@ extension ReviewHomeVC {
                     switch result {
                     case .success(let data):
                         retrospectionData = data
+                        print("회고데이타~",data)
+//                        if data[0] != nil {
+//                            saveMonthly(data: data)
+//                        }
+                    
                         
-                        saveMonthly(data: data)
                         
                         print(retrospectionData)
                         
                         setLayout()
                         reviewList.reloadData()
-                    // 데이터 전달 후 다시 로드
+                        // 데이터 전달 후 다시 로드
                     case .failure(let error):
                         print(error)
                         print("오류!!")
@@ -143,11 +147,12 @@ extension ReviewHomeVC {
         //데이터 없는 경우 버튼 비활성화
         nextButton.isEnabled = currentIndex == monthlyData.count - 1 ? false : true
         prevButton.isEnabled = currentIndex == 0 ? false : true
-
+        
     }
     
     func saveMonthly(data: [RetrospectionData]){
         var temp:[RetrospectionData] = []
+        
         var t = String(data[0].startDate.dropLast(2))
         for i in data {
             if t == String(i.startDate.dropLast(2)) {
@@ -158,6 +163,8 @@ extension ReviewHomeVC {
                 t = String(i.startDate.dropLast(2))
             }
         }
+        
+        
         monthlyData.append(temp)
         currentIndex = monthlyData.count - 1
         print("monthlyData: \n",monthlyData)

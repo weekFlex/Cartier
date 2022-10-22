@@ -247,6 +247,7 @@ extension LoginVC {
                         print("회원가입 성공")
                         //토큰 저장
                         UserDefaults.standard.set(data.token, forKey: "UserToken")
+                        UserDefaults.standard.set(self.signupType, forKey: "SignupType")
                         print(">>token? ",data.token)
                         //로그인 성공하면 메인화면으로 이동
                         let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
@@ -259,7 +260,6 @@ extension LoginVC {
                         
                     }
                 }
-                
                 
             }
         } else {
@@ -296,7 +296,7 @@ extension LoginVC: ASAuthorizationControllerDelegate {
                 self.code = (String(decoding: authorization_code, as: UTF8.self))
                 
             }
-            
+            print(accessToken)
             //로그인
             login()
             
@@ -309,6 +309,7 @@ extension LoginVC: ASAuthorizationControllerDelegate {
     // Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
+        print("Apple login error")
     }
 }
 

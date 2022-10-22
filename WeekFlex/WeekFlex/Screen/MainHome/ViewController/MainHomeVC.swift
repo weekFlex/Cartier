@@ -116,6 +116,8 @@ class MainHomeVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
         
+//        UserDefaults.standard.set("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjIsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.Zoj0hOc0BmIQxhfYVKAUHTuL0bVzhqkt7ebWsIb3mUs", forKey: "UserToken")
+//        UserDefaults.standard.set("KAKAO", forKey: "SignupType")
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -248,6 +250,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 view.viewIndex = i
                 view.delegate = self
                 view.configure(with: todo )
+                
                 view.frame = cell.bounds
                 if(todo.startTime == nil){
                     view.heightAnchor.constraint(equalToConstant: 29).isActive = true
