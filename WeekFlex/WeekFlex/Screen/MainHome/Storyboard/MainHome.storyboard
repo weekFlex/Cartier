@@ -72,7 +72,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-AW-H8I">
                                 <rect key="frame" x="0.0" y="241" width="414" height="432"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="character132SadGray" translatesAutoresizingMaskIntoConstraints="NO" id="riI-ki-yvm">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Character/character132SadGray" translatesAutoresizingMaskIntoConstraints="NO" id="riI-ki-yvm">
                                         <rect key="frame" x="141" y="148" width="132" height="132"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="132" id="1tq-Fh-TAq"/>
@@ -414,7 +414,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="character132SadGray" width="132" height="132"/>
+        <image name="Character/character132SadGray" width="132" height="132"/>
         <image name="icon-24-star-n" width="24" height="24"/>
         <image name="icon24DeleteBlack" width="72" height="72"/>
         <image name="icon24Edit" width="24" height="24"/>

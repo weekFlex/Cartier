@@ -14,17 +14,17 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.2)
-  - KakaoSDKAuth (2.11.0):
-    - KakaoSDKCommon (= 2.11.0)
-  - KakaoSDKCommon (2.11.0):
-    - KakaoSDKCommon/Common (= 2.11.0)
-    - KakaoSDKCommon/Network (= 2.11.0)
-  - KakaoSDKCommon/Common (2.11.0)
-  - KakaoSDKCommon/Network (2.11.0):
+  - KakaoSDKAuth (2.11.2):
+    - KakaoSDKCommon (= 2.11.2)
+  - KakaoSDKCommon (2.11.2):
+    - KakaoSDKCommon/Common (= 2.11.2)
+    - KakaoSDKCommon/Network (= 2.11.2)
+  - KakaoSDKCommon/Common (2.11.2)
+  - KakaoSDKCommon/Network (2.11.2):
     - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.11.0)
-  - KakaoSDKUser (2.11.0):
-    - KakaoSDKAuth (= 2.11.0)
+    - KakaoSDKCommon/Common (= 2.11.2)
+  - KakaoSDKUser (2.11.2):
+    - KakaoSDKAuth (= 2.11.2)
   - lottie-ios (3.4.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
@@ -40,9 +40,9 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - GoogleSignIn
-  - KakaoSDKAuth
-  - KakaoSDKCommon
-  - KakaoSDKUser
+  - KakaoSDKAuth (= 2.11.2)
+  - KakaoSDKCommon (= 2.11.2)
+  - KakaoSDKUser (= 2.11.2)
   - lottie-ios
   - Moya (~> 14.0)
   - RxCocoa
@@ -70,15 +70,15 @@ SPEC CHECKSUMS:
   GoogleSignIn: 3c68388ac221f379676e8f1cb115df3aaf73b93f
   GTMAppAuth: 4d8f864896f3646f0c33baf38a28362f4c601e15
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  KakaoSDKAuth: b9470887e42b869725b391f4af34c4aaec42ea46
-  KakaoSDKCommon: 0f59f2c1aead6012d92758e8ca46b63ea11c408b
-  KakaoSDKUser: 5dbefe494c50dfdc87e4072710e503d39b41a609
+  KakaoSDKAuth: 98f90fb67b2c2015cc94066a4489d54bb2f2a68e
+  KakaoSDKCommon: 83fef177bcad9a8f9cb728f92e04a464882d3a82
+  KakaoSDKUser: bf7b02e23257199995cdd03d59feb716416d14d6
   lottie-ios: 69495122151a378fdc7d1bb4c5930347e37baf1f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 12c44cd11110f78533f0d945418c3d9b3e94aff1
+PODFILE CHECKSUM: 7eecd11dda43ecbb7b3bbbd3fb2130d99a4d89c5
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.10.1

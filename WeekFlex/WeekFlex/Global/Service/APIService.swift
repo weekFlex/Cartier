@@ -129,8 +129,8 @@ struct APIService {
         
     }
     
-    func deleteAccount(_ token:String, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
-        let target: APITarget = .deleteAccount(token: token, details: details, withdrawalType: withdrawalType)
+    func deleteAccount(_ token:String, _ code:String?, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
+        let target: APITarget = .deleteAccount(token: token, code: code, details: details, withdrawalType: withdrawalType)
         judgeSimpleObject(target, completion: completion)
     }
 

@@ -15,6 +15,7 @@
 		0E30E47B26737B380002EFDD /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E47926737B380002EFDD /* ReviewCell.swift */; };
 		0E30E47C26737B380002EFDD /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E30E47A26737B380002EFDD /* ReviewCell.xib */; };
 		0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */; };
+		0E4231D028FC22D1006021D4 /* AuthKey_64KB9UKK3J.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 0E4231CF28FC22D1006021D4 /* AuthKey_64KB9UKK3J.p8 */; };
 		0E7952D6260A65F500345659 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952D5260A65F500345659 /* UIView+Extension.swift */; };
 		0E7952EF2610B4A500345659 /* MainRoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */; };
 		0E7953312613B4E100345659 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7953302613B4E100345659 /* MainHomeViewModel.swift */; };
@@ -140,6 +141,7 @@
 		0E30E47926737B380002EFDD /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		0E30E47A26737B380002EFDD /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModel.swift; sourceTree = "<group>"; };
+		0E4231CF28FC22D1006021D4 /* AuthKey_64KB9UKK3J.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_64KB9UKK3J.p8; sourceTree = "<group>"; };
 		0E7952D5260A65F500345659 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		0E7952EE2610B4A500345659 /* MainRoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoutineListViewModel.swift; sourceTree = "<group>"; };
 		0E7953302613B4E100345659 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -302,6 +304,14 @@
 				0E30E480267492B00002EFDD /* ReviewCellViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E4231CE28FC2255006021D4 /* KeyFile */ = {
+			isa = PBXGroup;
+			children = (
+				0E4231CF28FC22D1006021D4 /* AuthKey_64KB9UKK3J.p8 */,
+			);
+			path = KeyFile;
 			sourceTree = "<group>";
 		};
 		0E7953072611CF2400345659 /* Recovered References */ = {
@@ -732,6 +742,7 @@
 		9EC0DB0C25EEB9F7007D04D0 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0E4231CE28FC2255006021D4 /* KeyFile */,
 				9E5FD6C926073958008EB927 /* Font */,
 				9EC0DB0025EEB9D4007D04D0 /* Assets.xcassets */,
 				9EC0DB0D25EEB9FC007D04D0 /* Delegate */,
@@ -930,6 +941,7 @@
 				9BC81AA025FA80CB001B1D83 /* AddRoutine.storyboard in Resources */,
 				9E5FD6FA26073996008EB927 /* Metropolis-Light.otf in Resources */,
 				9E5FD6F726073996008EB927 /* Metropolis-ThinItalic.otf in Resources */,
+				0E4231D028FC22D1006021D4 /* AuthKey_64KB9UKK3J.p8 in Resources */,
 				9E5FD6F526073996008EB927 /* Metropolis-Medium.otf in Resources */,
 				9B161F042797EA1A00897B53 /* Splash.json in Resources */,
 				9E5FD6F326073996008EB927 /* Metropolis-Black.otf in Resources */,
@@ -1252,14 +1264,14 @@
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DUQE66MABG;
+				DEVELOPMENT_TEAM = 87NJWJY5W4;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "--com.WeekFlex";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.wf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1276,14 +1288,14 @@
 				CODE_SIGN_ENTITLEMENTS = WeekFlex/WeekFlex.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DUQE66MABG;
+				DEVELOPMENT_TEAM = 87NJWJY5W4;
 				INFOPLIST_FILE = WeekFlex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "--com.WeekFlex";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.wf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

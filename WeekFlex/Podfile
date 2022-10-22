@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+# platform :ios, '14.0'
 use_frameworks!
 
 target 'WeekFlex' do
@@ -7,7 +7,7 @@ target 'WeekFlex' do
   
 
   # Pods for WeekFlex
-  pod "RxSwift"
+  pod "RxSwift" 
   pod "RxCocoa"
   pod 'Moya', '~> 14.0'
   pod "Alamofire"

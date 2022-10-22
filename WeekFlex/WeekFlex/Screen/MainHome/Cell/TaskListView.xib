@@ -30,7 +30,7 @@
                     </constraints>
                     <state key="normal" image="icon16More"/>
                     <connections>
-                        <action selector="meatBallTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xpe-kc-pW7"/>
+                        <action selector="meatBallTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="a6c-E8-uky"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQZ-VT-8pm">
@@ -41,7 +41,7 @@
                     </constraints>
                     <state key="normal" image="icon-24-star-n0"/>
                     <connections>
-                        <action selector="starTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="oKD-Uy-7jt"/>
+                        <action selector="starTabbed:" destination="iN0-l3-epB" eventType="touchUpInside" id="lOE-x7-LQs"/>
                     </connections>
                 </button>
             </subviews>
