@@ -85,16 +85,22 @@ class DeleteReasonVC: UIViewController, ASAuthorizationControllerDelegate, ASAut
                 """, message: nil, preferredStyle: .actionSheet )
         
         let actionDelete = UIAlertAction(title: "탈퇴하기" , style: .destructive, handler: {action in
+            if UserDefaults.standard.string(forKey: "SignupType") == "APPLE" {
+                
+                let appleIDProvider = ASAuthorizationAppleIDProvider()
+                let request = appleIDProvider.createRequest()
+                //이름, 이메일 받아옴
+                request.requestedScopes = [.fullName, .email]
+                
+                let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                authorizationController.delegate = self
+                authorizationController.presentationContextProvider = self
+                authorizationController.performRequests()
+                
+            }else{
+                self.revoke()
+            }
             
-            let appleIDProvider = ASAuthorizationAppleIDProvider()
-            let request = appleIDProvider.createRequest()
-            //이름, 이메일 받아옴
-            request.requestedScopes = [.fullName, .email]
-            
-            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-            authorizationController.delegate = self
-            authorizationController.presentationContextProvider = self
-            authorizationController.performRequests()
             
         })
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)

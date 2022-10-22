@@ -10,15 +10,18 @@ import UIKit
 import RxSwift
 import RxCocoa
 import CoreData
+import SnapKit
 
 class MainHomeVC: UIViewController {
     
     //MARK: Variable
-    
     var weeklyData: [DailyData] = []
     var mainViewModel: MainHomeViewModel = MainHomeViewModel()
-    
-    
+    var userType: UserType = .existingUser {
+        didSet {
+            setUserType()
+        }
+    }
     var weekDate: [String] = [String](repeating: "", count: 7)
     var currentDay: Int = 0 {   //클릭된 현재 날짜인덱스 ( 0-6 )
         didSet {
@@ -50,6 +53,16 @@ class MainHomeVC: UIViewController {
     
     // 모달 뒤에 뜰 회색 전체 뷰
     var modalBackgroundView: UIView!
+    
+    private lazy var tooltipView = MyTopTipView(
+        viewColor: UIColor.black,
+        tipStartX: 10.0,
+        tipWidth: 14.0,
+        tipHeight: 9.0,
+        text: "할 일을 완료하면 별을 터치해주세요!",
+        state: .up,
+        dismissActions: tooltipDeleteAction
+    )
     
     //MARK: IBOutlet
     
@@ -101,13 +114,10 @@ class MainHomeVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         let myRoutineStoryboard = UIStoryboard.init(name: "MyRoutine", bundle: nil)
         guard let myRoutineVC = myRoutineStoryboard.instantiateViewController(identifier: "MyRoutineListVC") as? MyRoutineListVC else { return }
+        myRoutineVC.userType = userType
         self.navigationController?.pushViewController(myRoutineVC, animated: true)
         clearPage()
     }
-    
-    
-    
-    
     
     //MARK: Life Cycle
     
@@ -118,6 +128,8 @@ class MainHomeVC: UIViewController {
         
 //        UserDefaults.standard.set("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjIsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.Zoj0hOc0BmIQxhfYVKAUHTuL0bVzhqkt7ebWsIb3mUs", forKey: "UserToken")
 //        UserDefaults.standard.set("KAKAO", forKey: "SignupType")
+//        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJlbWFpbFwiOlwiYmx1YXllckBrYWthby5jb21cIn0ifQ.lUI3kqErd8fd6AKEM5iFZC3CFSaKKiDMzbIqmFTBlXk", forKey: "UserToken")
+
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -125,6 +137,7 @@ class MainHomeVC: UIViewController {
         getRoutines()
         setDate()
         saveLastWeek()
+        setUserType()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -304,10 +317,10 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
 
 extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     
-    
     func didTabStar(cellIndex: Int, viewIndex: Int, isDone: Bool) {
         weeklyData[currentDay].items[cellIndex].todos[viewIndex].done = isDone
         calendarCollectionView.reloadData()
+        tooltipDeleteAction()
     }
     
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
@@ -583,6 +596,33 @@ extension MainHomeVC {
         tableView.reloadData() // 리로드
     }
     
+    func setUserType() {
+        switch userType {
+        case .newUser(let level) where level == 1:
+            getRoutineBtnDidtap(self)
+        case .newUser(let level) where level == 2:
+            let sender = self.tooltipView
+            self.view.addSubview(sender)
+            sender.snp.makeConstraints {
+                $0.leading.equalTo(tableView.snp.leading).inset(7)
+                $0.top.equalTo(tableView.snp.top).inset(85)
+                $0.width.equalTo(238.0)
+                $0.height.equalTo(35.0)
+            }
+            userType = .existingUser
+        default:
+            break
+        }
+    }
+    
+    func tooltipDeleteAction() {
+        UIView.transition(with: self.view,
+                          duration: 0.25,
+                          options: [.transitionCrossDissolve],
+                          animations: { self.tooltipView.removeFromSuperview() },
+                          completion: { _ in
+        })
+    }
 }
 
 class CheckLastSave {

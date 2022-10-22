@@ -17,6 +17,16 @@ struct MakeRoutineData: Codable {
     }
 }
 
+struct MakeRoutineEditData: Codable {
+    let name: String
+    let routineTaskUpdateRequests: [RoutineTaskSaveRequest]
+    
+    init(_ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest]) {
+        self.name = name
+        self.routineTaskUpdateRequests = routineTaskSaveRequests
+    }
+}
+
 // MARK: - RoutineTaskSaveRequest
 struct RoutineTaskSaveRequest: Codable {
     let days: [Day]

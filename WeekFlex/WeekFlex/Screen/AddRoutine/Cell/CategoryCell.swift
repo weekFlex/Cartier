@@ -36,7 +36,6 @@ class CategoryCell: UICollectionViewCell {
     func configure(name: String, color: Int) {
         nameLabel.text = name
         colorImage.image = UIImage(named: "icon-24-star-n\(color)")
-        // 컬러 별 이미지가 미존재해서 일단 한 이미지로 박아둠 (추후 수정해야함)
     }
     
 }

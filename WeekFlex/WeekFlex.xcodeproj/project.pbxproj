@@ -123,6 +123,13 @@
 		9EFE6AFF26A7370500064CAB /* ViewCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */; };
 		9EFE6B0126A7371300064CAB /* CreateCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */; };
 		D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */; };
+		D203ABE8283641E1008FCB62 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		D203ABEA28364BEB008FCB62 /* MyTopTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203ABE928364BEB008FCB62 /* MyTopTipView.swift */; };
+		D203ABED28364CA9008FCB62 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D203ABEC28364CA9008FCB62 /* SnapKit */; };
+		D2B8F4E128FE473700927F1E /* ReviewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B8F4E028FE473600927F1E /* ReviewEmptyView.swift */; };
+		D2B8F53028FFD15400927F1E /* BookmarkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B8F52F28FFD15400927F1E /* BookmarkData.swift */; };
+		D2B8F53228FFF03C00927F1E /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B8F53128FFF03C00927F1E /* MoyaLoggingPlugin.swift */; };
+		D2E46F9F28A0F0E8001A883A /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E46F9E28A0F0E8001A883A /* Enum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,6 +253,11 @@
 		9EFE6AFE26A7370500064CAB /* ViewCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCategoryVC.swift; sourceTree = "<group>"; };
 		9EFE6B0026A7371300064CAB /* CreateCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryVC.swift; sourceTree = "<group>"; };
 		CECC27CC3F70764AB88A16B0 /* Pods_WeekFlex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeekFlex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D203ABE928364BEB008FCB62 /* MyTopTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTopTipView.swift; sourceTree = "<group>"; };
+		D2B8F4E028FE473600927F1E /* ReviewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEmptyView.swift; sourceTree = "<group>"; };
+		D2B8F52F28FFD15400927F1E /* BookmarkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkData.swift; sourceTree = "<group>"; };
+		D2B8F53128FFF03C00927F1E /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
+		D2E46F9E28A0F0E8001A883A /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		E69A384642D50E1D9D0EAF1A /* Pods-WeekFlex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeekFlex.release.xcconfig"; path = "Target Support Files/Pods-WeekFlex/Pods-WeekFlex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,7 +266,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D203ABED28364CA9008FCB62 /* SnapKit in Frameworks */,
 				D1D3DB72D1F06283179933DC /* Pods_WeekFlex.framework in Frameworks */,
+				D203ABE8283641E1008FCB62 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +387,7 @@
 		0EC381B0266D185B00438A74 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				D2B8F4DF28FE471700927F1E /* View */,
 				0E30E47F2674926D0002EFDD /* ViewModel */,
 				0E30E474267379CD0002EFDD /* Cell */,
 				0EC381B2266D188100438A74 /* Storyboard */,
@@ -531,6 +546,7 @@
 				9BE0BFF12684D5D100E2FEDC /* NetworkResult.swift */,
 				9BE0BFF42684D60000E2FEDC /* APITarget.swift */,
 				9BE0BFFF2684E19F00E2FEDC /* APIService.swift */,
+				D2B8F53128FFF03C00927F1E /* MoyaLoggingPlugin.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -550,8 +566,10 @@
 				0ECB070B270CD900005F766D /* ProfileData.swift */,
 				0ECB070E2713F0DE005F766D /* RetrospectionData.swift */,
 				9B7EA067270DCBBF00C07401 /* AchievementData.swift */,
+				D203ABE928364BEB008FCB62 /* MyTopTipView.swift */,
 				0EB4A5122839324000CE4E70 /* TokenData.swift */,
 				0EB4A4FD282EC3F900CE4E70 /* Storage.swift */,
+				D2B8F52F28FFD15400927F1E /* BookmarkData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -649,6 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				9E5FF5A8269A14D8000EAF7B /* Protocol.swift */,
+				D2E46F9E28A0F0E8001A883A /* Enum.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -844,6 +863,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		D2B8F4DF28FE471700927F1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2B8F4E028FE473600927F1E /* ReviewEmptyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -863,6 +890,7 @@
 			);
 			name = WeekFlex;
 			packageProductDependencies = (
+				D203ABEC28364CA9008FCB62 /* SnapKit */,
 			);
 			productName = WeekFlex;
 			productReference = 9EC0DAF425EEB9D1007D04D0 /* WeekFlex.app */;
@@ -892,6 +920,7 @@
 			);
 			mainGroup = 9EC0DAEB25EEB9D1007D04D0;
 			packageReferences = (
+				D203ABEB28364CA9008FCB62 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				0E4B0DA52810863400013B58 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 9EC0DAF525EEB9D1007D04D0 /* Products */;
@@ -1000,8 +1029,10 @@
 				9EC0DB1125EEBA5E007D04D0 /* UILabel+Extension.swift in Sources */,
 				9E5FD7072607979C008EB927 /* MyRoutineListItemTableViewCell.swift in Sources */,
 				9EC2E0822631E45100EF2F7E /* WeekCollectionViewCell.swift in Sources */,
+				D2B8F53228FFF03C00927F1E /* MoyaLoggingPlugin.swift in Sources */,
 				0EAD6A1925F2A107001BD490 /* MainHomeVC.swift in Sources */,
 				9B7EA068270DCBBF00C07401 /* AchievementData.swift in Sources */,
+				D2E46F9F28A0F0E8001A883A /* Enum.swift in Sources */,
 				0E26216426014B23007D28F0 /* TaskListView.swift in Sources */,
 				0E26212225F8CB14007D28F0 /* TableViewCell.swift in Sources */,
 				0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */,
@@ -1039,6 +1070,7 @@
 				9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */,
 				9B291630279F037A00D643A1 /* UIWindow+Extension.swift in Sources */,
 				9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */,
+				D203ABEA28364BEB008FCB62 /* MyTopTipView.swift in Sources */,
 				9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */,
 				9E0FFB9926A8366300EB0428 /* CategoryVM.swift in Sources */,
 				0E30E481267492B00002EFDD /* ReviewCellViewModel.swift in Sources */,
@@ -1049,6 +1081,7 @@
 				9BB52E7C25F0C2F6001C63E5 /* UIFont+Extension.swift in Sources */,
 				9E57244F26A9D8BA0084C3BD /* CreateTodoResponseData.swift in Sources */,
 				0EC381B7266D18C700438A74 /* ReviewHomeVC.swift in Sources */,
+				D2B8F53028FFD15400927F1E /* BookmarkData.swift in Sources */,
 				9B56E8772609D7B600EC9969 /* SelectedRoutineCell.swift in Sources */,
 				9ED56E4F26A355A800E1DEBF /* RoutineService.swift in Sources */,
 				0ECB070C270CD900005F766D /* ProfileData.swift in Sources */,
@@ -1062,6 +1095,7 @@
 				0ECB0709270B3C78005F766D /* MyPageHomeVC.swift in Sources */,
 				9B161F022797E98300897B53 /* SplashVC.swift in Sources */,
 				9EC2E07E2631DDBA00EF2F7E /* EditRoutineVM.swift in Sources */,
+				D2B8F4E128FE473700927F1E /* ReviewEmptyView.swift in Sources */,
 				9B566DA02711699900243304 /* SelectCharacterVC.swift in Sources */,
 				9BFABB5C26D7B0980005AA2B /* DayRetrospectionVC.swift in Sources */,
 				9B56E87A2609D90800EC9969 /* SelectedCollectionViewCellViewModel.swift in Sources */,
@@ -1301,7 +1335,23 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		D203ABEB28364CA9008FCB62 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D203ABEC28364CA9008FCB62 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D203ABEB28364CA9008FCB62 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9EC0DAEC25EEB9D1007D04D0 /* Project object */;
 }
