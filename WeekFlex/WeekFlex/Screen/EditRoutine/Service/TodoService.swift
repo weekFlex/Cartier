@@ -33,6 +33,23 @@ class TodoService {
             }
         }
     }
+
+    func updateTask(token: String, categoryId: Int, name: String, taskId: Int,
+                    completion: @escaping (Bool) -> ()) {
+        APIService.shared.updateTask(token: token,
+                                     categoryId: categoryId,
+                                     name: name,
+                                     taskId: taskId) { result in
+            switch result {
+            case .success(let data):
+                print("결과 \(data)")
+                completion(true)
+            case .failure(_):
+                completion(false)
+            }
+        }
+
+    }
     
     func updateTodo(token: String, days: [String], endTime: String?, startTime: String?, name: String, todoId: Int, completion: @escaping (Bool) -> ()) {
         APIService.shared.updateTodo(token, days: days, endTime: endTime, startTime: startTime, name: name, todoId: todoId) { result in

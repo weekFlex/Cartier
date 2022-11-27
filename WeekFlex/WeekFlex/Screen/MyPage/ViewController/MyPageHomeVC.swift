@@ -17,8 +17,18 @@ class MyPageHomeVC: UIViewController{
     @IBOutlet weak var via: UILabel!
     
     @IBAction func categorySetting(_ sender: Any) {
+        let categoryStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let nextVC = categoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryVC")
+                as? ManageCategoryVC else { return }
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     @IBAction func taskSetting(_ sender: Any) {
+        let routineStoryboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+        guard let nextVC = routineStoryboard.instantiateViewController(withIdentifier: "SelectToDoVC") as?
+                SelectToDoVC else { return }
+        nextVC.routineName = "할 일 관리"
+        nextVC.taskCase = .editing
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     @IBAction func logout(_ sender: Any) {
         let actionSheetController = UIAlertController(title: "로그아웃",

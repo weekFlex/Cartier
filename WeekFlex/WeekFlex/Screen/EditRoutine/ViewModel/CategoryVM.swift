@@ -29,6 +29,10 @@ struct CategoryViewModel {
     var title: String {
         return category.name
     }
+
+    var categoryColor: Int {
+        return category.color
+    }
     
     var categoryColorImageName: String {
         return "icon-24-star-n\(category.color)"

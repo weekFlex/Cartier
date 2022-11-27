@@ -9,12 +9,22 @@ import UIKit
 import SnapKit
 import SwiftUI
 
+enum TaskManage {
+    case making
+    case editing
+}
+
 class SelectToDoVC: UIViewController {
     
     // MARK: Variable Part
     
     var routineName: String?
     var userType: UserType = .existingUser
+    var taskCase: TaskManage = .making
+    var categoryData: [CategoryData] = []
+    var taskData: [TaskData] = [] // 서
+    var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
+    var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
     var userCategoryTaskDataArrays: [TaskData] = [] // 서
     var searchTaskArrays: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
     var taskArrays: [TaskListData] = [] // 전체 task 저장하는 배열
@@ -131,12 +141,30 @@ class SelectToDoVC: UIViewController {
         setDelegate()
         getTask()
         setUserType()
+        setCase()
+        
         // Do any additional setup after loading the view.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // 뷰 클릭 시 키보드 내리기
         view.endEditing(true)
+    }
+
+    func setCase() {
+        switch taskCase {
+        case .making:
+            break
+        case .editing:
+            headerView.backgroundColor = .white
+            routineNameLabel.textColor = .black
+            emptyLabel.isHidden = true
+            nextButton.isHidden = true
+            selectRoutineView.removeFromSuperview()
+            shadowView.snp.remakeConstraints {
+                $0.top.equalTo(routineNameLabel.snp.bottom).offset(16)
+            }
+        }
     }
     
 }
@@ -148,15 +176,23 @@ extension SelectToDoVC {
     // MARK: Function
     
     func setButton() {
-        
-        backButton.setImage(UIImage(named: "icon32BackWhite"), for: .normal)
-        backButton.tintColor = .white
+
+        switch taskCase {
+        case .making:
+            backButton.setImage(UIImage(named: "icon32BackWhite"), for: .normal)
+            backButton.tintColor = .white
+            addTaskButton.makeRounded(cornerRadius: nil)
+            addTaskButton.setTitle("", for: .normal)
+        case .editing:
+            backButton.setImage(UIImage(named: "icon32BackBlack"), for: .normal)
+            backButton.tintColor = .black
+            addTaskButton.isHidden = true
+        }
+
         
         nextButton.setTitle("다음", for: .normal)
         nextButton.titleLabel?.font = UIFont.appleMedium(size: 16)
         nextButton.tintColor = UIColor.gray4
-        
-        addTaskButton.makeRounded(cornerRadius: nil)
         
     }
     
@@ -168,8 +204,14 @@ extension SelectToDoVC {
         } else {
             routineNameLabel.setLabel(text: "English Master :-)", color: .white, font: .metroBold(size: 24))
         }
-        
-        searchTextField.placeholder = "원하는 할 일을 찾을 수 있어요"
+
+        switch taskCase {
+        case .making:
+            searchTextField.placeholder = "원하는 할 일을 찾을 수 있어요"
+        case .editing:
+            searchTextField.placeholder = "할 일 검색"
+        }
+
         searchTextField.returnKeyType = .done
         searchTextField.font = UIFont.appleRegular(size: 14)
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -495,7 +537,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         
-        if collectionView == selectedCollectionView {
+        if collectionView == selectedCollectionView && taskCase == .making {
             // 클릭한 루틴 보여주는 CollectionView
             
             if selectedViewModel.count != 0 {
@@ -616,7 +658,16 @@ extension SelectToDoVC: UICollectionViewDataSource {
                 
                 if let value = cells?.routine {
                     // move to editRoutinVC
-                    initEditRoutineVC(withValue: value)
+                    if categoryIndex == 0 {
+                        // 전체 카테고리라면?
+                        initEditRoutineVC(withValue: value,
+                                          taskId: allTask[indexPath.row].id)
+                    } else {
+                        initEditRoutineVC(withValue: value,
+                                          taskId: taskData[categoryIndex-1].tasks[indexPath.row].id)
+                    }
+
+
                 }
             }
         }
@@ -636,13 +687,22 @@ extension SelectToDoVC: SaveTaskListProtocol, HideViewProtocol {
         selectedCollectionView.reloadData()
     }
     
-    func initEditRoutineVC(withValue: TaskListData) {
+    func initEditRoutineVC(withValue: TaskListData, taskId: Int? = nil) {
         modalAppeared()
         let editRoutineStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
         guard let editRoutineVC = editRoutineStoryboard.instantiateViewController(identifier: "EditRoutineVC") as? EditRoutineVC else { return }
         editRoutineVC.modalTransitionStyle = .coverVertical
         editRoutineVC.modalPresentationStyle = .custom
-        editRoutineVC.entryNumber = 1
+        switch taskCase {
+        case .making:
+            editRoutineVC.entryNumber = 1
+        case .editing:
+            editRoutineVC.entryNumber = 5
+            editRoutineVC.taskId = taskId
+            editRoutineVC.dismissAction = {
+                self.getTask()
+            }
+        }
         editRoutineVC.taskListData = withValue
         editRoutineVC.saveTaskListDataDelegate = self
         editRoutineVC.hideViewDelegate = self
@@ -706,7 +766,6 @@ extension SelectToDoVC: TodoBookmarkDelegate {
             }
         } else {
             // 네트워크 미연결 팝업 띄우기
-            
         }
     }
 }

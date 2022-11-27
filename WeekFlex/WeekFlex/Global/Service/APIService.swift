@@ -26,6 +26,11 @@ struct APIService {
         let target: APITarget = .createTask(token: token, categoryId: categoryId, name: name)
         judgeObject(target, completion: completion)
     }
+
+    func updateTask(token: String, categoryId: Int, name: String, taskId: Int, completion: @escaping (NetworkResult<TaskListData>)->(Void)) {
+        let target: APITarget = .updateTask(token: token, categoryId: categoryId, name: name, taskId: taskId)
+        judgeObject(target, completion: completion)
+    }
     
     func bookmarkTask(token: String, taskId: Int, completion: @escaping (NetworkResult<BookmarkData>)->(Void)) {
         let target: APITarget = .bookmarkTask(token: token, taskId: taskId)
@@ -54,6 +59,16 @@ struct APIService {
         judgeObject(target, completion: completion)
     }
     
+    func updateCategory(_ token: String, color: Int, id: Int, name: String?, completion: @escaping (NetworkResult<CategoryData>)->(Void)) {
+        let target: APITarget = .updateCategory(token: token, color: color, id: id, name: name)
+        judgeObject(target, completion: completion)
+    }
+
+    func deleteCategory(_ token: String, id: Int, completion: @escaping (NetworkResult<DeleteData>)->(Void)) {
+        let target: APITarget = .deleteCategory(token: token, id: id)
+        judgeObject(target, completion: completion)
+    }
+    
     func createTodo(_ token: String, categoryId: Int, date: String, endTime: String?, startTime: String?, name: String, completion: @escaping (NetworkResult<CreateTodoResponseData>)->(Void)) {
         let target: APITarget = .createTodo(token: token, categoryId: categoryId, date: date, endTime: endTime, name: name, startTime: startTime)
         judgeObject(target, completion: completion)
@@ -75,7 +90,13 @@ struct APIService {
         let target: APITarget = .deleteTodo(token: token, todoId: todoId)
         judgeObject(target, completion: completion)
     }
-    
+
+    func deleteTask(_ token: String, taskId: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
+
+        let target: APITarget = .deleteTask(token: token, taskId: taskId)
+        judgeObject(target, completion: completion)
+    }
+
     func deleteRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
         let target: APITarget = .deleteRoutine(token: token, routineID: routineID)
         judgeObject(target, completion: completion)
