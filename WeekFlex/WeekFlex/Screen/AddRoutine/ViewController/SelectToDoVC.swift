@@ -108,6 +108,7 @@ class SelectToDoVC: UIViewController {
         // 루틴 이름을 넘겨줌
         nextVC.routineList = selectedViewModel
         nextVC.routineEditEnable = routineEditEnable
+        nextVC.userType = userType
         
         self.navigationController?.pushViewController(nextVC, animated: true)
         // navigationController를 이용해 다음 뷰로 이동
