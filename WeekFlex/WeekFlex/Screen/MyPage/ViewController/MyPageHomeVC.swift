@@ -25,13 +25,18 @@ class MyPageHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUserInfoData()
+        setTableview()
+    }
+}
+
+// MARK: - UI Function
+extension MyPageHomeVC {
+    private func setTableview() {
         myPageTableView.delegate = self
         myPageTableView.dataSource = self
         myPageTableView.separatorStyle = .none
     }
-
-    // MARK: - Network
-    func setUserInfoData() {
+    private func setUserInfoData() {
         //이름, 프로필사진, 로그인 경로, 버젼 세팅
         if NetworkState.isConnected() { // 네트워크 연결 시
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
@@ -57,6 +62,18 @@ class MyPageHomeVC: UIViewController {
             // 네트워크 미연결 팝업 띄우기
             print("네트워크 미연결")
         }
+    }
+    private func showLogoutAlert() {
+        let actionSheetController = UIAlertController(title: "로그아웃",
+                                                      message: "로그아웃 하시겠습니까?",
+                                                      preferredStyle: .alert)
+        let logout = UIAlertAction(title: "로그아웃", style: .default, handler: { action in
+            self.moveLoginView()
+        })
+        let cancel = UIAlertAction(title: "취소" , style: .cancel, handler: nil)
+        actionSheetController.addAction(cancel)
+        actionSheetController.addAction(logout)
+        present(actionSheetController, animated: true, completion: nil)
     }
 }
 
@@ -105,6 +122,30 @@ extension MyPageHomeVC: UITableViewDataSource {
         header.textLabel?.frame = header.bounds
         header.textLabel?.textAlignment = .left
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0: // 카테고리 관리
+                moveCategoryEditView()
+            case 1: // 할 일 관리
+                moveTaskEditView()
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 0: // 로그아웃
+                showLogoutAlert()
+            case 1: // 계정 탈퇴
+                moveDeleteAccountView()
+            case 2: // 1:1 문의
+                break
+            default:
+                break
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -116,5 +157,36 @@ extension MyPageHomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 24
     }
-    
+}
+
+// MARK: - Move Another ViewController
+extension MyPageHomeVC {
+    private func moveLoginView() {
+        let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
+        guard let loginVC = storyboard.instantiateViewController(identifier: "LoginVC")
+                as? LoginVC else { return }
+        UIApplication.shared.windows.first?.replaceRootViewController(loginVC, animated: true) {
+            UserDefaults.standard.removeObject(forKey: "UserToken")
+        }
+    }
+    private func moveCategoryEditView() {
+        let categoryStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
+        guard let nextVC = categoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryVC")
+                as? ManageCategoryVC else { return }
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    private func moveTaskEditView() {
+        let routineStoryboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
+        guard let nextVC = routineStoryboard.instantiateViewController(withIdentifier: "SelectToDoVC")
+                as? SelectToDoVC else { return }
+        nextVC.routineName = "할 일 관리"
+        nextVC.taskCase = .editing
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    private func moveDeleteAccountView() {
+        let deleteStoryboard = UIStoryboard.init(name: "DeleteAccount", bundle: nil)
+        guard let nextVC = deleteStoryboard.instantiateViewController(withIdentifier: "DeleteAccount")
+                as? DeleteAccountVC else { return }
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
