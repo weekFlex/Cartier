@@ -9,67 +9,31 @@ import Foundation
 import UIKit
 
 
-class MyPageHomeVC: UIViewController{
-    
+class MyPageHomeVC: UIViewController {
+
+    // MARK: - Property
+    let sectionHeader: [String] = ["관리", "기타"]
+    let settingArr: [String] = ["카테고리 관리", "할 일 관리"]
+    let etcArr: [String] = ["로그아웃", "계정 탈퇴", "1:1 문의", "버전"]
+
+    // MARK: - @IBOutlet
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var via: UILabel!
-    
-    @IBAction func categorySetting(_ sender: Any) {
-        let categoryStoryboard = UIStoryboard.init(name: "EditRoutine", bundle: nil)
-        guard let nextVC = categoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryVC")
-                as? ManageCategoryVC else { return }
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-    @IBAction func taskSetting(_ sender: Any) {
-        let routineStoryboard = UIStoryboard.init(name: "AddRoutine", bundle: nil)
-        guard let nextVC = routineStoryboard.instantiateViewController(withIdentifier: "SelectToDoVC") as?
-                SelectToDoVC else { return }
-        nextVC.routineName = "할 일 관리"
-        nextVC.taskCase = .editing
-        self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-    @IBAction func logout(_ sender: Any) {
-        let actionSheetController = UIAlertController(title: "로그아웃",
-                                                      message: "로그아웃 하시겠습니까?",
-                                                      preferredStyle: .alert)
-        
-        let logout = UIAlertAction(title: "로그아웃", style: .default, handler: {action in
-            UserDefaults.standard.removeObject(forKey: "UserToken")
-            
-            let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
-            guard let loginVC = storyboard.instantiateViewController(identifier: "LoginVC") as? LoginVC else { return }
-            UIApplication.shared.windows.first?.replaceRootViewController(loginVC, animated: true, completion: nil)
-        })
-        
-        let cancel = UIAlertAction(title: "취소" , style: .cancel, handler: nil)
+    @IBOutlet weak var myPageTableView: UITableView!
 
-        actionSheetController.addAction(cancel)
-        actionSheetController.addAction(logout)
-        
-        self.present(actionSheetController, animated: true, completion: nil)
-        
-    }
-    @IBAction func deleteAccount(_ sender: Any) {
-        let deleteStoryboard = UIStoryboard.init(name: "DeleteAccount", bundle: nil)
-        guard let nextVC = deleteStoryboard.instantiateViewController(withIdentifier: "DeleteAccount") as? DeleteAccountVC else { return }
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-    }
-    @IBAction func contact(_ sender: Any) {
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setInfo()
+        setUserInfoData()
+        myPageTableView.delegate = self
+        myPageTableView.dataSource = self
+        myPageTableView.separatorStyle = .none
     }
-    
-    func setInfo(){
-        //이름, 프로필사진, 로그인 경로,버젼 세팅
-        if NetworkState.isConnected() {
-            // 네트워크 연결 시
+
+    // MARK: - Network
+    func setUserInfoData() {
+        //이름, 프로필사진, 로그인 경로, 버젼 세팅
+        if NetworkState.isConnected() { // 네트워크 연결 시
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 APIService.shared.getUserProfile(token) { [self] result in
                     switch result {
@@ -86,7 +50,6 @@ class MyPageHomeVC: UIViewController{
                     // 데이터 전달 후 다시 로드
                     case .failure(let error):
                         print(error)
-                        
                     }
                 }
             }
@@ -94,6 +57,64 @@ class MyPageHomeVC: UIViewController{
             // 네트워크 미연결 팝업 띄우기
             print("네트워크 미연결")
         }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension MyPageHomeVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return settingArr.count
+        case 1:
+            return etcArr.count
+        default:
+            return 0
+        }
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageCell.identifier) as? MyPageCell else
+        {
+            return UITableViewCell()
+        }
+        switch indexPath.section {
+        case 0:
+            cell.setLayout(title: settingArr[indexPath.row])
+        case 1 where indexPath.row == 3:
+            cell.setLayout(title: etcArr[indexPath.row], version: "v1.0")
+        default:
+            cell.setLayout(title: etcArr[indexPath.row])
+        }
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionHeader.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionHeader[section]
+    }
+
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = .gray3
+        header.textLabel?.font = .appleBold(size: 14)
+        header.textLabel?.frame = header.bounds
+        header.textLabel?.textAlignment = .left
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension MyPageHomeVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 48
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 24
     }
     
 }

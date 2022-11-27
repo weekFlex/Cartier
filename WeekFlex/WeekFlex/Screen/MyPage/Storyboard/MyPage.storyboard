@@ -56,175 +56,39 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="gXu-iQ-088">
-                                <rect key="frame" x="24" y="239.66666666666663" width="342" height="97"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1h-x5-9Yx">
-                                        <rect key="frame" x="0.0" y="0.0" width="342" height="17"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="14"/>
-                                        <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZx-sc-ENM">
-                                        <rect key="frame" x="0.0" y="41.000000000000028" width="342" height="16"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAi-63-HTL">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="16"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfR-9Y-mZn">
-                                                <rect key="frame" x="326" y="0.0" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="16" id="XHC-14-SEK"/>
-                                                    <constraint firstAttribute="height" constant="16" id="dQy-28-TvY"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="icon16Right"/>
-                                                <connections>
-                                                    <action selector="categorySetting:" destination="ihN-B3-ijy" eventType="touchUpInside" id="0po-Cd-Q1T"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3W-Tw-1er">
-                                        <rect key="frame" x="0.0" y="81.000000000000028" width="342" height="16"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할 일 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjw-ui-jkJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="16"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYp-4O-UuL">
-                                                <rect key="frame" x="326" y="0.0" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="23h-9i-yyR"/>
-                                                    <constraint firstAttribute="width" constant="16" id="q6u-gP-RMP"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="icon16Right"/>
-                                                <connections>
-                                                    <action selector="taskSetting:" destination="ihN-B3-ijy" eventType="touchUpInside" id="BfK-fV-owr"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="bCl-vC-0tP">
-                                <rect key="frame" x="24" y="384.66666666666669" width="342" height="180.33333333333331"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기타" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5L-Wz-40X">
-                                        <rect key="frame" x="0.0" y="0.0" width="342" height="17"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="14"/>
-                                        <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gl9-Bf-epZ">
-                                        <rect key="frame" x="0.0" y="41" width="342" height="16"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그아웃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8n-zW-fhT">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="16"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vX-3r-k7y">
-                                                <rect key="frame" x="326" y="0.0" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="D9j-3j-1sW"/>
-                                                    <constraint firstAttribute="width" constant="16" id="Kag-1g-nZa"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="icon16Right"/>
-                                                <connections>
-                                                    <action selector="logout:" destination="ihN-B3-ijy" eventType="touchUpInside" id="O6P-NX-DpT"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7V-D3-f2f">
-                                        <rect key="frame" x="0.0" y="81" width="342" height="16"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계정 탈퇴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4O1-Uo-UT9">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="16"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVN-pA-ADu">
-                                                <rect key="frame" x="326" y="0.0" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="OtU-Bp-P3L"/>
-                                                    <constraint firstAttribute="width" constant="16" id="SHw-SK-uNI"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="icon16Right"/>
-                                                <connections>
-                                                    <action selector="deleteAccount:" destination="ihN-B3-ijy" eventType="touchUpInside" id="1fT-K9-gfI"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNo-Ka-mwa">
-                                        <rect key="frame" x="0.0" y="121" width="342" height="16"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:1 문의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9o-SW-O2r">
-                                                <rect key="frame" x="0.0" y="0.0" width="326" height="16"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6z-Tc-ie6">
-                                                <rect key="frame" x="326" y="0.0" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="EkO-Pb-TfE"/>
-                                                    <constraint firstAttribute="width" constant="16" id="QVY-gD-jWA"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="icon16Right"/>
-                                                <connections>
-                                                    <action selector="contact:" destination="ihN-B3-ijy" eventType="touchUpInside" id="Gon-j4-jCf"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvs-zO-HGr">
-                                        <rect key="frame" x="0.0" y="160.99999999999994" width="342" height="19.333333333333343"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="버전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZH-eA-Zli">
-                                                <rect key="frame" x="0.0" y="0.0" width="310.33333333333331" height="19.333333333333332"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="v.1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oU2-Ky-Adz">
-                                                <rect key="frame" x="310.33333333333331" y="0.0" width="31.666666666666686" height="19.333333333333332"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                                <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tKC-JH-P1L">
+                                <rect key="frame" x="2" y="231.66666666666669" width="386" height="602.33333333333326"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyPageCell" id="yJG-ar-16n" customClass="MyPageCell" customModule="WeekFlex" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="386" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yJG-ar-16n" id="HhY-gb-Cbz">
+                                            <rect key="frame" x="0.0" y="0.0" width="386" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4l9-9v-wJU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="l3f-cG-PEv" firstAttribute="leading" secondItem="4l9-9v-wJU" secondAttribute="leading" constant="24" id="4mm-0w-Lpg"/>
                             <constraint firstItem="2Qh-ZS-KKq" firstAttribute="top" secondItem="4l9-9v-wJU" secondAttribute="top" constant="30" id="5O1-kL-P5W"/>
+                            <constraint firstItem="tKC-JH-P1L" firstAttribute="leading" secondItem="4l9-9v-wJU" secondAttribute="leading" constant="2" id="DgQ-8s-UQQ"/>
                             <constraint firstItem="2Qh-ZS-KKq" firstAttribute="centerX" secondItem="3Y1-bH-kfn" secondAttribute="centerX" id="Elb-wS-hYq"/>
                             <constraint firstItem="l3f-cG-PEv" firstAttribute="top" secondItem="2Qh-ZS-KKq" secondAttribute="bottom" constant="40" id="OMd-9O-QiQ"/>
-                            <constraint firstItem="gXu-iQ-088" firstAttribute="top" secondItem="l3f-cG-PEv" secondAttribute="bottom" constant="48" id="Vrp-zq-hmA"/>
+                            <constraint firstItem="4l9-9v-wJU" firstAttribute="trailing" secondItem="tKC-JH-P1L" secondAttribute="trailing" constant="2" id="T0f-i7-tct"/>
                             <constraint firstItem="4l9-9v-wJU" firstAttribute="trailing" secondItem="l3f-cG-PEv" secondAttribute="trailing" id="Z8b-hk-Zwt"/>
-                            <constraint firstItem="bCl-vC-0tP" firstAttribute="top" secondItem="gXu-iQ-088" secondAttribute="bottom" constant="48" id="ZDg-hX-DId"/>
-                            <constraint firstItem="4l9-9v-wJU" firstAttribute="trailing" secondItem="gXu-iQ-088" secondAttribute="trailing" constant="24" id="bnu-FE-na8"/>
-                            <constraint firstItem="gXu-iQ-088" firstAttribute="leading" secondItem="4l9-9v-wJU" secondAttribute="leading" constant="24" id="cYV-2G-8fH"/>
-                            <constraint firstItem="4l9-9v-wJU" firstAttribute="trailing" secondItem="bCl-vC-0tP" secondAttribute="trailing" constant="24" id="dQq-V5-0hK"/>
-                            <constraint firstItem="bCl-vC-0tP" firstAttribute="leading" secondItem="4l9-9v-wJU" secondAttribute="leading" constant="24" id="qi2-4m-sVz"/>
+                            <constraint firstAttribute="bottom" secondItem="tKC-JH-P1L" secondAttribute="bottom" constant="10" id="Zkh-rS-Tef"/>
+                            <constraint firstItem="tKC-JH-P1L" firstAttribute="top" secondItem="l3f-cG-PEv" secondAttribute="bottom" constant="40" id="obo-4a-rst"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="마이 페이지" id="twL-Mn-rLG"/>
                     <connections>
-                        <outlet property="logoutButton" destination="9vX-3r-k7y" id="xHl-sP-Sgb"/>
+                        <outlet property="myPageTableView" destination="tKC-JH-P1L" id="WTG-8t-HuR"/>
                         <outlet property="name" destination="GU6-5k-bz8" id="epp-u9-r8t"/>
                         <outlet property="profilePic" destination="bVi-VS-MUf" id="f2M-Wz-fyG"/>
                         <outlet property="via" destination="F7z-tN-QQx" id="ATL-Zm-ZaB"/>
@@ -256,7 +120,6 @@
     </scenes>
     <resources>
         <image name="icon-32-myPage-disable" width="32" height="32"/>
-        <image name="icon16Right" width="16" height="16"/>
         <image name="img-56-profile" width="56" height="56"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
