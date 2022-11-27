@@ -21,7 +21,6 @@ class SelectToDoVC: UIViewController {
     var routineName: String?
     var userType: UserType = .existingUser
     var taskCase: TaskManage = .making
-    var categoryData: [CategoryData] = []
     var taskData: [TaskData] = [] // 서
     var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
     var allTask: [TaskListData] = [] // 전체 task 저장하는 배열

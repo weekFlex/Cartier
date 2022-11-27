@@ -224,7 +224,7 @@ extension APITarget: TargetType {
         .updateCategory(let token, _, _, _), .registerRoutine(let token, _), .makeRoutine(let token, _, _),
         .getUserProfile(let token), .getRetrospection(let token), .statistics(let token, _),
         .writeRetrospection(let token, _, _, _, _), .createLastStars(let token, _, _),
-        .deleteAccount(let token,_,_), .socialLogin(let token, _, _, _, _), .deleteTask(let token, _),
+        .deleteAccount(let token,_,_,_), .socialLogin(let token, _, _, _, _), .deleteTask(let token, _),
         .editRoutine(let token, _, _, _), .bookmarkTask(let token, _), .deleteCategory(let token, _):
             return ["Content-Type" : "application/json", "x-access-token" : token]
         }
