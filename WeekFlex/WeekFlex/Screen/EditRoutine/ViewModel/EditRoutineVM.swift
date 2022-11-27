@@ -55,7 +55,8 @@ extension EditRoutineViewModel {
     }
     
     var startTimeHour: String {
-        let hour = Int(self.todo.startTime!.split(separator: ":")[0])!
+        guard let startTime = self.todo.startTime else { return "12" }
+        let hour = Int(startTime.split(separator: ":")[0])!
         switch hour {
         case 0, 12:
             return "12"
@@ -71,7 +72,8 @@ extension EditRoutineViewModel {
     var startTimeMeridiem: String {
         //0시~11시 AM
         //12시~23시 PM
-        if Int(self.todo.startTime!.split(separator: ":")[0])! < 12 {
+        guard let startTime = self.todo.startTime else { return "오전" }
+        if Int(startTime.split(separator: ":")[0])! < 12 {
             return "오전"
         } else {
             return "오후"
