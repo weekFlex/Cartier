@@ -14,7 +14,7 @@ struct APIService {
     static let shared = APIService()
     // 싱글톤객체로 생성
     
-    let provider = MoyaProvider<APITarget>()
+    let provider = MoyaProvider<APITarget>(plugins: [MoyaLoggingPlugin()])
     // MoyaProvider(->요청 보내는 클래스) 인스턴스 생성
     
     func getTask(_ token: String, completion: @escaping (NetworkResult<[TaskData]>)->(Void)) {
@@ -29,6 +29,11 @@ struct APIService {
 
     func updateTask(token: String, categoryId: Int, name: String, taskId: Int, completion: @escaping (NetworkResult<TaskListData>)->(Void)) {
         let target: APITarget = .updateTask(token: token, categoryId: categoryId, name: name, taskId: taskId)
+        judgeObject(target, completion: completion)
+    }
+    
+    func bookmarkTask(token: String, taskId: Int, completion: @escaping (NetworkResult<BookmarkData>)->(Void)) {
+        let target: APITarget = .bookmarkTask(token: token, taskId: taskId)
         judgeObject(target, completion: completion)
     }
     
@@ -106,6 +111,14 @@ struct APIService {
         let target: APITarget = .makeRoutine(token: token, name: name, routineTaskSaveRequests: routineTaskSaveRequests)
         judgeObject(target, completion: completion)
     }
+    
+    func editRoutine(_ token: String, _ routineId: Int, _ name: String, _ routineTaskSaveRequests: [RoutineTaskSaveRequest], completion: @escaping (NetworkResult<Routine>)->(Void)) {
+        let target: APITarget = .editRoutine(token: token,
+                                             routineId: routineId,
+                                             name: name,
+                                             routineTaskSaveRequests: routineTaskSaveRequests)
+        judgeObject(target, completion: completion)
+    }
 
     func registerRoutine(_ token: String, routineID: Int, completion: @escaping ((NetworkResult<SimpleData>) ->(Void))) {
         let target: APITarget = .registerRoutine(token: token, routineID: routineID)
@@ -137,8 +150,8 @@ struct APIService {
         
     }
     
-    func deleteAccount(_ token:String, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
-        let target: APITarget = .deleteAccount(token: token, details: details, withdrawalType: withdrawalType)
+    func deleteAccount(_ token:String, _ code:String?, _ details: String, _ withdrawalType: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
+        let target: APITarget = .deleteAccount(token: token, code: code, details: details, withdrawalType: withdrawalType)
         judgeSimpleObject(target, completion: completion)
     }
 

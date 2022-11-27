@@ -287,7 +287,7 @@ extension MyRoutineListVC: UITableViewDelegate {
             newTab.routineName = routineVM?.title // 루틴 이름 넘겨주기
             
             newTab.selectedViewModel = routineVM!.rountineTaskList
-            newTab.routineEditEnable = true
+            newTab.routineEditEnable = .edit(id: routineVM?.ID ?? 0)
             // edit 버튼을 눌러서 왔다는 것을 알려주기 위한 bool 값
             
             self.navigationController?.pushViewController(newTab, animated: true)

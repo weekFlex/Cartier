@@ -125,7 +125,6 @@ class MainHomeVC: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.didDismissCreateTodoVC(_:)), name: didDismissCreateTodoVC, object: nil)
-        UserDefaults.standard.setValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjI5LFwiZW1haWxcIjpcIm1pbmlAa2FrYW8uY29tXCJ9In0.GtsfZkXF0R0w9Z6kr55-m6G5kaLdwQLlAjjlVGBwlKk", forKey: "UserToken")
 
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "routineCell")
         tableView.register(UINib(nibName: "TodayTaskCell", bundle: nil), forCellReuseIdentifier: "todayCell")
@@ -248,9 +247,10 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
         let num = cellData.todos.count
         
         if(indexPath.row == 0 && cellData.routineName == ""){
+            //루틴 없는 오늘의 할일
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "todayCell", for: indexPath) as? TodayTaskCell else { return UITableViewCell()}
             
-            //셀(루틴) 안에 커스텀 뷰 추가(할일들)
+            //셀 안에 커스텀 뷰 추가(할일들)
             for i in 0..<num {
                 let view = Bundle.main.loadNibNamed("TaskListView", owner: self, options: nil)?.first as! TaskListView
                 let todo = cellData.todos[i]
@@ -259,6 +259,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
                 view.viewIndex = i
                 view.delegate = self
                 view.configure(with: todo )
+                
                 view.frame = cell.bounds
                 if(todo.startTime == nil){
                     view.heightAnchor.constraint(equalToConstant: 29).isActive = true
@@ -275,6 +276,7 @@ extension MainHomeVC: UITableViewDataSource,UITableViewDelegate {
             
             return cell
         }else{
+            //루틴 셀
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "routineCell", for: indexPath) as? TableViewCell else { return UITableViewCell()}
             
             cell.title.text = "\(cellData.routineName)"
@@ -320,7 +322,7 @@ extension MainHomeVC: TaskListCellDelegate, EditPopUpDelegate {
     func didTabMeatBall(cellIndex: Int, viewIndex: Int, todoId: Int) {
         //todo 더보기 누르면
         //모달 화면 띄우기
-        
+        print("didTabMeatBall")
         showDim(true)
         guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "EditPopUpVC") as? EditPopUpVC else { return }
         popupVC.taskTitle = weeklyData[currentDay].items[cellIndex].todos[viewIndex].name
@@ -432,6 +434,7 @@ extension MainHomeVC {
         let date = dateFormat.string(from:Date())
         if NetworkState.isConnected() {
             // 네트워크 연결 시
+            print("getroutines 네트워크연결")
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
                 APIService.shared.getWeekly(token,date: date) { [self] result in
                     switch result {

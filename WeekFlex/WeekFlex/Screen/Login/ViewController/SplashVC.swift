@@ -19,7 +19,7 @@ class SplashVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         let animationView = AnimationView(name: "Splash")
-        
+        UserDefaults.standard.removeObject(forKey: "UserToken")
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         animationView.contentMode = .scaleAspectFill
         view.addSubview(animationView)
@@ -29,10 +29,22 @@ class SplashVC: UIViewController {
                            completion: { (finished) in
             if finished {
                 // 끝
-                guard let loginTab = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else {
-                    return
+                //로그인 분기처리
+                if (UserDefaults.standard.string(forKey: "UserToken") != nil) {
+                    //로그인 했었으면 바로 메인페이지
+                    let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
+                    guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
+                    UIApplication.shared.windows.first?.replaceRootViewController(nextController, animated: true, completion: nil)
+                } else{
+                    //로그인 페이지
+                    print("없음!")
+                    guard let loginTab = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else {
+                        return
+                    }
+                    UIApplication.shared.windows.first?.replaceRootViewController(loginTab, animated: true, completion: nil)
                 }
-                UIApplication.shared.windows.first?.replaceRootViewController(loginTab, animated: true, completion: nil)
+                
+                
                 
                 
             } else {
