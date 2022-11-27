@@ -35,13 +35,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var appleButton: UIButton!
     
-    @IBAction func kakaoButtonDidTap(_ sender: UIButton) {
-        
-        let storyboard = UIStoryboard.init(name: "TabBar", bundle: nil)
-        guard let tabBarVC = storyboard.instantiateViewController(identifier: "TabBar") as? TabBarVC else { return }
-        UIApplication.shared.windows.first?.replaceRootViewController(tabBarVC, animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         [kakaoButton, googleButton, appleButton].forEach {
