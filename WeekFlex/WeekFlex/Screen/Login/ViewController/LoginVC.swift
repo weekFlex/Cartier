@@ -210,7 +210,7 @@ extension LoginVC {
     }
 
     /// 회원가입 후 로그인 API
-    func userLogin(){
+    func userLogin() {
         if NetworkState.isConnected() {
             guard let token = accessToken else { return }
             APIService.shared.socialLogin(token, code, email, name, signupType) { result in
