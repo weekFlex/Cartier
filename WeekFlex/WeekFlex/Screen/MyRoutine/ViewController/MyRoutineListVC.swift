@@ -223,7 +223,9 @@ extension MyRoutineListVC: UITableViewDataSource {
                     NotificationCenter.default.post(name: self.didDismissCreateTodoVC, object: nil, userInfo: nil) // 전 뷰에서 데이터 로드를 다시 하게 만들기 위해 Notofication post!
                     self.navigationController?.viewControllers.forEach {
                         if let vc = $0 as? MainHomeVC {
-                            vc.userType = .newUser(level: 2)
+                            if self.userType == .newUser(level: 2) {
+                                vc.userType = .newUser(level: 2)
+                            }
                             self.navigationController?.popToViewController(vc, animated: true)
                             return
                         }

@@ -19,6 +19,7 @@ class CheckRoutineVC: UIViewController {
     var routineName: String?
     var routineList: [TaskListData]?
     var routineEditEnable: RoutineEditEnable = .new
+    var userType: UserType = .existingUser
     private var routineNameEditButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "icon24Edit"),
@@ -81,7 +82,9 @@ class CheckRoutineVC: UIViewController {
                     //루틴 생성하기 완료
                     self.navigationController?.viewControllers.forEach {
                         if let vc = $0 as? MyRoutineListVC {
-                            vc.userType = .newUser(level: 2)
+                            if userType == .newUser(level: 1) {
+                                vc.userType = .newUser(level: 2)
+                            }
                             self.navigationController?.popToViewController(vc, animated: true)
                             return
                         }

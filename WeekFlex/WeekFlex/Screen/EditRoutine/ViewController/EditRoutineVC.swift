@@ -95,8 +95,7 @@ class EditRoutineVC: UIViewController {
                 editRouineViewModel?.updateStartTime(startTime: "10:00")
                 editRouineViewModel?.updateEndTime(endTime: "11:00")
             }
-            editRoutineTimeVC.editRoutineViewModel = EditRoutineViewModel(model.todo,
-                                                                          days: model.days)
+            editRoutineTimeVC.editRoutineViewModel = editRouineViewModel
             // connect delegate
             editRoutineTimeVC.saveTimeDelegate = self
             editRoutineTimeVC.hideViewDelegate = self
@@ -145,10 +144,10 @@ class EditRoutineVC: UIViewController {
             self.hideViewDelegate?.hideViewProtocol()
             self.dismiss(animated: true, completion: nil)
         case 2: // task 등록 - categoryId, name
-            editRouineViewModel?.updateName(name: routineTitle.text!)
+            guard let taskName = routineTitle.text else { return }
             guard let id = model.todo.categoryID else { return }
             if let token = UserDefaults.standard.string(forKey: "UserToken") {
-                TodoService().createTask(token: token, categoryId: id, name: model.todo.name) { result in
+                TodoService().createTask(token: token, categoryId: id, name: taskName) { result in
                     switch result {
                     case true:
                         self.dismiss(animated: true) {
