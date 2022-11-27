@@ -5,9 +5,8 @@
 //  Created by dohan on 2021/10/04.
 //
 
-import Foundation
 import UIKit
-
+import MessageUI
 
 class MyPageHomeVC: UIViewController {
 
@@ -52,7 +51,7 @@ extension MyPageHomeVC {
                         default:
                             via.text = "로그인 정보 없음"
                         }
-                    // 데이터 전달 후 다시 로드
+                        // 데이터 전달 후 다시 로드
                     case .failure(let error):
                         print(error)
                     }
@@ -74,6 +73,20 @@ extension MyPageHomeVC {
         actionSheetController.addAction(cancel)
         actionSheetController.addAction(logout)
         present(actionSheetController, animated: true, completion: nil)
+    }
+    func openSendMail() {
+        let compseVC = MFMailComposeViewController()
+        compseVC.mailComposeDelegate = self
+        compseVC.setToRecipients(["weekflex@gmail.com"])
+        compseVC.setSubject("‘WeekFlex’ 1:1 문의하기")
+        compseVC.setMessageBody("문의 내용:", isHTML: false)
+        present(compseVC, animated: true, completion: nil)
+    }
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertController(title: "메일 전송 실패", message: "아이폰 - Mail 설정을 확인해주세요.\n(문의 이메일 주소: weekflex@gmail.com)", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        sendMailErrorAlert.addAction(confirmAction)
+        present(sendMailErrorAlert, animated: true, completion: nil)
     }
 }
 
@@ -140,7 +153,7 @@ extension MyPageHomeVC: UITableViewDataSource {
             case 1: // 계정 탈퇴
                 moveDeleteAccountView()
             case 2: // 1:1 문의
-                break
+                MFMailComposeViewController.canSendMail() ? self.openSendMail() : self.showSendMailErrorAlert()
             default:
                 break
             }
@@ -188,5 +201,13 @@ extension MyPageHomeVC {
         guard let nextVC = deleteStoryboard.instantiateViewController(withIdentifier: "DeleteAccount")
                 as? DeleteAccountVC else { return }
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+extension MyPageHomeVC: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
