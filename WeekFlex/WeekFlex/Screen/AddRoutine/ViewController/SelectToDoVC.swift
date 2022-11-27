@@ -21,10 +21,9 @@ class SelectToDoVC: UIViewController {
     var routineName: String?
     var userType: UserType = .existingUser
     var taskCase: TaskManage = .making
-    var taskData: [TaskData] = [] // 서
     var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
     var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
-    var userCategoryTaskDataArrays: [TaskData] = [] // 서
+    var userCategoryTaskDataArrays: [TaskData] = [] // 카테고리와 카테고리에 맞는 task 연결
     var searchTaskArrays: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
     var taskArrays: [TaskListData] = [] // 전체 task 저장하는 배열
     
@@ -663,7 +662,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                                           taskId: allTask[indexPath.row].id)
                     } else {
                         initEditRoutineVC(withValue: value,
-                                          taskId: taskData[categoryIndex-1].tasks[indexPath.row].id)
+                                          taskId: userCategoryTaskDataArrays[categoryIndex-1].tasks[indexPath.row].id)
                     }
 
 
