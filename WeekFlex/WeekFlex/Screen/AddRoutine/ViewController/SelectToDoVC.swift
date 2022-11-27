@@ -22,7 +22,7 @@ class SelectToDoVC: UIViewController {
     var userType: UserType = .existingUser
     var taskCase: TaskManage = .making
     var searchTask: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
-    var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
+//    var allTask: [TaskListData] = [] // 전체 task 저장하는 배열
     var userCategoryTaskDataArrays: [TaskData] = [] // 카테고리와 카테고리에 맞는 task 연결
     var searchTaskArrays: [TaskListData] = [] // 검색어에 맞는 task 저장하는 배열
     var taskArrays: [TaskListData] = [] // 전체 task 저장하는 배열
@@ -659,7 +659,7 @@ extension SelectToDoVC: UICollectionViewDataSource {
                     if categoryIndex == 0 {
                         // 전체 카테고리라면?
                         initEditRoutineVC(withValue: value,
-                                          taskId: allTask[indexPath.row].id)
+                                          taskId: taskArrays[indexPath.row].id)
                     } else {
                         initEditRoutineVC(withValue: value,
                                           taskId: userCategoryTaskDataArrays[categoryIndex-1].tasks[indexPath.row].id)
