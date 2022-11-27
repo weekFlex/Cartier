@@ -142,6 +142,7 @@ extension LoginVC {
                             self.email = email
                             self.accessToken = token
                             self.name = name
+                            self.signupType = "KAKAO"
 
                             userLogin()
                         }
@@ -174,6 +175,7 @@ extension LoginVC {
                             self.email = email
                             self.accessToken = token
                             self.name = name
+                            self.signupType = "KAKAO"
 
                             userLogin()
                         }
