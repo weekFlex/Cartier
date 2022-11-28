@@ -20,4 +20,15 @@ class TabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
+    func setViewNewbie(isNewbie: Bool) {
+        guard let navigation = self.viewControllers?.first as? UINavigationController else {
+            return
+        }
+        guard let mainViewController = navigation.viewControllers.first as? MainHomeVC else {
+            return
+        }
+        mainViewController.userType = isNewbie ? .newUser(level: 1) : .existingUser
+    }
+
 }

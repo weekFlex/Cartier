@@ -216,14 +216,16 @@ extension LoginVC {
             APIService.shared.socialLogin(token, code, email, name, signupType) { result in
                 switch result {
                 case .success(let data):
-                    print("회원가입 성공")
                     UserDefaults.standard.set(data.token, forKey: "UserToken") //토큰 저장
                     UserDefaults.standard.set(self.signupType, forKey: "SignupType")
-                    print(">>token? ",data.token)
                     let nextStoryboard = UIStoryboard.init(name: "TabBar",bundle: nil)
-                    guard let nextController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar") as? TabBarVC else {return}
-                    nextController.modalPresentationStyle = .fullScreen
-                    self.present(nextController, animated: true,completion: nil) //로그인 성공하면 메인화면으로 이동
+                    guard let tabBarViewController = nextStoryboard.instantiateViewController(withIdentifier: "TabBar")
+                            as? TabBarVC else {
+                        return
+                    }
+                    tabBarViewController.modalPresentationStyle = .fullScreen
+                    tabBarViewController.setViewNewbie(isNewbie: data.isNewbie)
+                    self.present(tabBarViewController, animated: true,completion: nil) //로그인 성공하면 메인화면으로 이동
                 case .failure(let error):
                     print(error)
                 }

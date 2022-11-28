@@ -36,6 +36,7 @@
 		0ED1129826623B2800677330 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1129726623B2800677330 /* DeleteAccountVC.swift */; };
 		0EFC974826C25330003877B0 /* TodayTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC974726C25330003877B0 /* TodayTaskCell.swift */; };
 		0EFC974B26C258FB003877B0 /* TodayTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */; };
+		19AED7F62933984600BF497A /* MyPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AED7F42933984600BF497A /* MyPageCell.swift */; };
 		19CB5B41282424AC001E2368 /* DeleteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB5B40282424AC001E2368 /* DeleteData.swift */; };
 		2D282EC626A779EE00A53F8E /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC526A779EE00A53F8E /* SimpleData.swift */; };
 		2D282EC926A9FC2A00A53F8E /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D282EC826A9FC2A00A53F8E /* TabBarVC.swift */; };
@@ -164,6 +165,7 @@
 		0ED1129726623B2800677330 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		0EFC974726C25330003877B0 /* TodayTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTaskCell.swift; sourceTree = "<group>"; };
 		0EFC974A26C258FB003877B0 /* TodayTaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayTaskCell.xib; sourceTree = "<group>"; };
+		19AED7F42933984600BF497A /* MyPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCell.swift; sourceTree = "<group>"; };
 		19CB5B40282424AC001E2368 /* DeleteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteData.swift; sourceTree = "<group>"; };
 		2D282EC526A779EE00A53F8E /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
 		2D282EC826A9FC2A00A53F8E /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 		0ED11289265FD4B200677330 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				19AED7F82933984C00BF497A /* Cell */,
 				0ED1129626623B0E00677330 /* ViewController */,
 				0ED1128A265FD4BC00677330 /* Storyboard */,
 			);
@@ -439,6 +442,14 @@
 				0ECB0708270B3C78005F766D /* MyPageHomeVC.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		19AED7F82933984C00BF497A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				19AED7F42933984600BF497A /* MyPageCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		2D282EC726A9FB8200A53F8E /* Tabbar */ = {
@@ -1074,6 +1085,7 @@
 				9EC2E07A2631DDAA00EF2F7E /* EditRoutineVC.swift in Sources */,
 				9E65113F2698AFFD00C60D15 /* ToDo.swift in Sources */,
 				9B291630279F037A00D643A1 /* UIWindow+Extension.swift in Sources */,
+				19AED7F62933984600BF497A /* MyPageCell.swift in Sources */,
 				9BFABB5726D7A68C0005AA2B /* WeekStarCell.swift in Sources */,
 				D203ABEA28364BEB008FCB62 /* MyTopTipView.swift in Sources */,
 				9BE0BFF22684D5D100E2FEDC /* NetworkResult.swift in Sources */,
