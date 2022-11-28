@@ -10,4 +10,5 @@ import Foundation
 
 struct TokenData: Codable {
     let token: String
+    let isNewbie: Bool
 }
